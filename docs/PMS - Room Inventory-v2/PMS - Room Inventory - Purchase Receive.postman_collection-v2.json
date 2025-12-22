@@ -1,0 +1,607 @@
+{
+	"info": {
+		"_postman_id": "d975d316-c228-41dc-8113-871f23b1ab8d",
+		"name": "PMS - Room Inventory - Purchase Receive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Inventory - PO-Receive - get by PO/Property",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/purchase_receive?LoginID=LDT001&Token=123&PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"purchase_receive"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "POID",
+							"value": "POIT202303021910476",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive - get all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/purchase_receive/all?Status=Active&LoginID=LDT001&Token=123&POID=POID20230226AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"purchase_receive",
+						"all"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "Active"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "One of PropertyID and POID required",
+							"disabled": true
+						},
+						{
+							"key": "POID",
+							"value": "POID20230226AA00001",
+							"description": "One of PropertyID and POID required"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive - get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/purchase_receive/{{PRID}}?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"purchase_receive",
+						"{{PRID}}"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive - add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"POID\": \"POID20230226AA00002\", \r\n    \"ReceivedDate\": \"2023-03-02 12:34:01\",\r\n    \"ReceivedBy\": \"My name is Fahad\",\r\n    \"Remarks\": \"blah blah blah\",\r\n    \"PropertyID\": \"HOTL20230223AA00001\", // can be null, use POID to get the property \r\n    \"ReceivedItems\" : [\r\n        {\r\n            \"POItemID\": \"POIT202302261909150\",\r\n            \"Quantity\": \"1\",\r\n            \"EntryType\": \"I\"\r\n        },\r\n        {\r\n            \"POItemID\": \"POIT202302261909151\",\r\n            \"Quantity\": \"2\",\r\n            \"EntryType\": \"I\"\r\n        }\r\n        ,\r\n        {\r\n            \"POItemID\": \"POIT202302261909152\",\r\n            \"Quantity\": \"21\",\r\n            \"EntryType\": \"I\"\r\n        }\r\n    ]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/purchase_receive",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"purchase_receive"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive - update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"POID\": \"PRCT20230223AA00001\", \r\n    \"ReceivedDate\": \"2023-03-02 12:34:01\",\r\n    \"ReceivedBy\": \"Store keeper name\",\r\n    \"Remarks\": \"blah blah blah\"\r\n    //\"PropertyID\": \"HOTL20230223AA00001\", // can be null, use POID to get the property \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/update_purchase_receive?id=PREC20230304AA00002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"update_purchase_receive"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PREC20230304AA00002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/delete_purchase_receive/{{PRID}}?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"delete_purchase_receive",
+						"{{PRID}}"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive items - by P-Rec-ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/received_items?LoginID=LDT001&Token=123&PurchaseReceiveID=PREC20230304AA00002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"received_items"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PurchaseReceiveID",
+							"value": "PREC20230304AA00002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive items - all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/received_items/all?PurchaseReceiveID=PREC20230304AA00002&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"received_items",
+						"all"
+					],
+					"query": [
+						{
+							"key": "PurchaseReceiveID",
+							"value": "PREC20230304AA00002"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Inactive",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive item - by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/received_item/PRIT20230304AA00004?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"received_item",
+						"PRIT20230304AA00004"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive item - add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"POItemID\": \"POIT202302261909152\",\r\n    \"PurchaseReceiveID\": \"PRMT20230223AA00002\",\r\n    \"Quantity\": \"3\",\r\n    \"Status\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/received_item",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"received_item"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive item - update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"POItemID\": \"PRCT20230223AA00001\",\r\n    //\"PurchaseReceiveID\": \"PRMT20230223AA00002\",\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Quantity\": \"6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/update_received_item?ReceivedItemID=PRIT20230304AA00010",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"update_received_item"
+					],
+					"query": [
+						{
+							"key": "ReceivedItemID",
+							"value": "PRIT20230304AA00010"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - PO-Receive item- delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/delete_received_item/PRIT20230304AA00010?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"delete_received_item",
+						"PRIT20230304AA00010"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PRID",
+			"value": "PREC20230304AA00002",
+			"type": "string"
+		},
+		{
+			"key": "PRItemID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "POID",
+			"value": "POID20230226AA00001",
+			"type": "string"
+		}
+	]
+}

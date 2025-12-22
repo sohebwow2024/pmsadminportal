@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "5c300528-624d-4ef6-81ab-a76f5fe717b4",
+		"name": "PMS - Room Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Inventory - Category list(Active)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/category?PropertyID= HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"category"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": " HOTL20230223AA00001"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Category list All/ Status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/categoryall?PropertyID=HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"categoryall"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "inactive",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Category one",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/category/PRCT20230223AA00002?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"category",
+						"PRCT20230223AA00002"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "inactive",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Category add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\t\"CategoryName\":\"Refreshment\",\r\n\t\"PropertyID\":\"HOTL20230223AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/category",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Category update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\t\"CategoryName\":\"Refreshment 2\",\r\n\t\"CategoryID\":\"PRCT20230223AA00002\",\r\n    \"Event\":\"update\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/update_category",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"update_category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Category delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/delete_category/PRCT20230223AA00002?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"delete_category",
+						"PRCT20230223AA00002"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Product list(Active)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product?PropertyID=HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Product list all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product_all?PropertyID=HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product_all"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Product add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\t\"CategoryID\":\"PRCT20230223AA00001\",\r\n    \"ProductName\":\"Lux (Soap)\",\r\n    \"ProductCode\":\"898767Aert\",\r\n    \"PurchasePrice\":\"20\",\r\n    \"SellingPrice\":\"25\",\r\n\t\"PropertyID\":\"HOTL20230223AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Product update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\t\"ProductID\": \"PRMT20230223AA00002\",\r\n    \"ProductCode\": \"898767Aert\",\r\n    \"ProductName\": \"Lux (Soap)\",\r\n    \"PurchasePrice\": 15.000,\r\n    \"SellingPrice\": 25.000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/update_product",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"update_product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Product delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/delete_product/PRMT20230223AA00002?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"delete_product",
+						"PRMT20230223AA00002"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

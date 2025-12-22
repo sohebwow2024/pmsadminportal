@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "616a2f4d-de5c-4959-8fa6-adb22f708d56",
+		"name": "PMS-CheckOut",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/getdata/bookingdata/checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Seckey\":\"abc\",\r\n    \"Event\":\"insert\",\r\n    \"BookingID\":\"BKID20230220AA00001\",\r\n    \"RoomAllocationID\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/checkout",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

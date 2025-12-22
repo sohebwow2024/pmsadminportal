@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "920c34aa-d96f-4c53-9e02-b7cd049d8a73",
+		"name": "PMS-Extra Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Service Master - Get all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/master/extraservice/all",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"master",
+						"extraservice",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Master - Get all {status}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/master/extraservice/all/Active",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"master",
+						"extraservice",
+						"all",
+						"Active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Master - Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ServiceDesc\" : \"Description\",\r\n    \"ServiceName\" : \"TEST 2 Service\",\r\n    \"ServiceCharge\" : \"251.00\",\r\n    \"ServiceTax\" : \"5\",\r\n    \"ServiceType\" : \"Night\",\r\n    \"TaxName\" : \"GST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/master/extraservice",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"master",
+						"extraservice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Master - update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ServiceDesc\" : \"Description\",\r\n    \"ServiceName\" : \"Test Service 1\",\r\n    \"ServiceCharge\" : \"200.00\",\r\n    \"ServiceTax\" : \"5\",\r\n    \"ServiceType\" : \"Person\",\r\n    \"TaxName\" : \"GST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/master/extraservice/SMID20230211AA00002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"master",
+						"extraservice",
+						"SMID20230211AA00002"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Master - delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/master/extraservice/SMID20230210AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"master",
+						"extraservice",
+						"SMID20230210AA00001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add-on Service - Get all in a Booking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/extraservice/GetByBookingId?LoginID=LDT001&Token=123&BookingID=BKID20230220AA00001",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extraservice",
+						"GetByBookingId"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "BookingID",
+							"value": "BKID20230220AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add-on Service - Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"BookingID\" : \"BKID20230220AA00001\",\r\n\r\n    \"ServiceID\" : \"SMID20230210AA00001\",\r\n    \"ServiceCharge\" : \"250.000\",\r\n    \"Discount\" : \"2\",\r\n    \"DiscountType\" : \"p\",\r\n    \"TaxAmount\" : \"12.500\",\r\n    \"TotalAmount\" : \"262.500\",\r\n    \"ReferenceText\" : \"addon service\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/extraservice/save",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extraservice",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add-on Service - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/extraservice/delete?LoginID=LDT001&Token=123&ExtraServiceID=ESID20230221AA00001",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extraservice",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "ExtraServiceID",
+							"value": "ESID20230221AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

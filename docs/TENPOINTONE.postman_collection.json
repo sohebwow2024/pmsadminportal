@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "9e644b1e-1079-4d9c-8dac-fbb57037f458",
+		"name": "TENPOINTONE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17026829"
+	},
+	"item": [
+		{
+			"name": "APPEND AUTH KEY",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"link\": \"https://api.unmarshal.com/v1/matic/address/0x989923d33bE0612680064Dc7223a9f292C89A538/assets?auth_key=\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dass_local}}/linkrequest",
+					"host": [
+						"{{dass_local}}"
+					],
+					"path": [
+						"linkrequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HOSTING TEST PATH",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dass_hosted}}/",
+					"host": [
+						"{{dass_hosted}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

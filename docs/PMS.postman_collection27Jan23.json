@@ -1,0 +1,6785 @@
+{
+	"info": {
+		"_postman_id": "cd41fae0-a61d-4f6d-a4f1-88440446d54b",
+		"name": "PMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "LoginAuthentication SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Fahad\",\r\n    \"Password\": \"1235\",\r\n    \"Event\": \"selectone\",\r\n    \"Seckey\": \"abc\",\r\n    \"Token\": \"ySnj5TYA20gSeW21wPTGTb7VgK5cSuEO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TokenAuthentication SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT0202301210000003\",\r\n    \"Token\": \"ki4OF8n/2ki7fW2KWDt1RbGxAZ7tdj6z\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"selectone\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/tokenauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"tokenauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"insert\",\r\n    \"Validity\": \"2022-12-08T15:34:01.163\",\r\n    \"Expiry\": \"2022-12-08T15:34:01.163\"\r\n}\r\n//LoginID for which token needs to be created",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/tokenauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"tokenauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\" , \"Validity\" : \"2022-12-08T15:34:01.163\" , \"Expiry\" : \"2022-12-08T15:34:01.163\" , \"StatusID\" : \"SDT0001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/tokenauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"tokenauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\" , \"TokenID\" : \"TKID0001\" }\r\n//LoginID for which token needs to be deleted",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/tokenauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"tokenauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"select\"\r\n}\r\n//LoginID for which token needs to be deleted",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/tokenauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"tokenauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"selectone\",\r\n    \"UserID\": \"UDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userdetails list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userdetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\" , \"FirstName\" : \"Test\" , \"LastName\" : \"xyz\" , \"Gender\" : \"M\" , \"Age\" : \"40\" , \"Email\": \"test@wowinfobiz.com\", \"PhoneNumber\": 9865324598}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userdetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\" , \"FirstName\" : \"Test\" , \"LastName\" : \"xyz\" , \"Gender\" : \"M\" , \"Age\" : \"40\" , \"Email\": \"test@wowinfobiz.com\", \"PhoneNumber\": 9865324598 , \"UserID\": \"UDT001\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\" , \"UserID\": \"UDT002\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userrole SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"selectone\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userrole",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userrole"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userrole List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44329/api/getdata/userdata/userrole",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44329",
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userrole"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userrole Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\" , \"Role\": \"Admin\", \"RoleType\": \"Booking\", \"RoleName\": \"A\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userrole",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userrole"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userrole Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\" , \"Role\": \"Admin\", \"RoleType\": \"Booking\", \"RoleName\": \"A\" , \"UserRoleID\": \"URO001\" , \"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userrole",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userrole"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userrole Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\" , \"UserRoleID\": \"URO002\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/userdata/userrole",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"userdata",
+						"userrole"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginDetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Momin\",\r\n    \"Password\": \"123\",\r\n    \"UserID\":\"UDT0202211280000003\",\r\n    \"UserRole\": \"Basic\",\r\n    \"UserRoleType\": \"Laundry\",\r\n    \"Status\":\"Active\",\r\n\r\n    \"Event\": \"insert\",\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginDetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\":\"Fahad\",\r\n    \"Password\": \"1235\",\r\n    \"UserRole\": \"Admin\",\r\n    \"UserLoginID\":\"LDT0202301210000003\",\r\n    \"UserRoleType\": \"Laundry\",\r\n    \"Status\": \"Active\",\r\n\r\n    \"LoginID\":\"UDT001\",\r\n    \"Event\": \"update\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\"\r\n    \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginDetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginDetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserLoginID\": \"test\",\r\n    \r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"delete\"\r\n}\r\n//Enter LoginID which you want to be deleted in DeleteLoginID",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countrydetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/countrydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"countrydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countrydetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\", \"CountryID\": \"COD001\" , \"CountryName\": \"India\" , \"CountryDesc\": \"Primary Country\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/countrydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"countrydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countrydetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\", \"CountryName\": \"India\" , \"CountryDesc\": \"Primary Country\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/countrydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"countrydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countrydetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"selectone\", \"CountryID\": \"COD001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/countrydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"countrydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countrydetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\", \"CountryID\": \"COD002\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/countrydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"countrydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"CountryID\": \"COD001\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"CountryID\": \"COD001\" , \"Event\" : \"update\" ,\"StateID\": \"STD003\", \"StateName\": \"Madhya Pradesh\", \"Region\": \"West\", \"StateDesc\": \"State of National Parks\",\"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"insert\" , \"StateName\": \"Madhya Pradesh\", \"Region\": \"West\", \"StateDesc\": \"State of National Parks\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"CountryID\": \"COD001\" , \"Event\" : \"selectone\" ,  \"StateID\": \"STD003\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails SelectAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectall\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statedetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"CountryID\": \"COD001\" , \"Event\" : \"selectone\" ,  \"StateID\": \"STD004\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/statedetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"statedetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"StateID\": \"STD001\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails SelectAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectall\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"StateID\": \"STD001\" , \"Event\" : \"selectone\",\"DistrictID\": \"DDT001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\"DistrictID\": \"DDT001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\"DistrictID\": \"DDT001\" , \"DistrictName\": \"Mumbai\",\"DistrictDesc\": \"Mumbai\",\"StateID\": \"STD001\",\"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "districtdetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\"DistrictName\": \"Mumbai\",\"DistrictDesc\": \"Mumbai\",\"StateID\": \"STD001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/districtdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"districtdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"DistrictID\": \"DDT001\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" ,\"Event\" : \"delete\" , \"CityID\" : \"CDT006\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"DistrictID\": \"DDT001\" ,\"Event\" : \"selectone\" , \"CityID\" : \"CDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"DistrictID\": \"DDT001\" ,\"Event\" : \"update\" , \"CityID\" : \"CDT001\" , \"CityName\" : \"Mumbai\" , \"CityDesc\" : \"Tech City\" , \"Pincode\" : 420235 , \"StatusID\" : \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"DistrictID\": \"DDT001\" ,\"Event\" : \"insert\" , \"CityName\" : \"Mumbai\" , \"CityDesc\" : \"Tech City\" , \"Pincode\" : 420235 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "citydetails SelectAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"selectall\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/regiondata/citydetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"regiondata",
+						"citydetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bookingsource List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bookingsource",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bookingsource"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bookingsource Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"update\" ,\"BookingSourceID\": \"BSD001\" , \"BookingSource\": \"Direct\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bookingsource",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bookingsource"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bookingsource Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"insert\" , \"BookingSource\": \"Direct\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bookingsource",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bookingsource"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bookingsource Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"delete\" , \"BookingSourceID\": \"BSD001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bookingsource",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bookingsource"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bookingsource SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"selectone\" , \"BookingSourceID\": \"BSD001\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bookingsource",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bookingsource"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"BookingSourceID\": \"BSD001\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/sourcetype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"BookingSourceID\": \"BSD001\",\"Event\" : \"update\",\r\n\"SourceTypeID\": \"SRD001\",\"SourceType\": \"Walk-In\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/sourcetype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"BookingSourceID\": \"BSD001\",\"Event\" : \"insert\", \"SourceType\": \"Walk-In\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/sourcetype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"delete\", \"SourceTypeID\": \"SRD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/sourcetype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"selectone\",\r\n    \"SourceTypeID\": \"SRD0202211240000056\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/sourcetype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sourcetype SelectAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"selectall\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "a/sourcetype",
+					"host": [
+						"a"
+					],
+					"path": [
+						"sourcetype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomviewdetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\":\"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomviewdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomviewdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomviewdetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\":\"update\",\"RoomViewID\": \"RVD001\",\"RoomView\": \"City View\",\"RoomViewDesc\": \"City View\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomviewdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomviewdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomviewdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\":\"delete\",\"RoomViewID\": \"RVD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomviewdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomviewdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomviewdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\":\"delete\",\"RoomViewID\": \"RVD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomviewdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomviewdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomviewdetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\":\"insert\",\"RoomView\": \"City View\",\"RoomViewDesc\": \"City View\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomviewdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomviewdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymenttype List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymenttype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymenttype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymenttype Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\",\"PaymentTypeID\": \"PTI001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymenttype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymenttype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymenttype SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"selectone\",\"PaymentTypeID\": \"PTI001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymenttype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymenttype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymenttype Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\",\"PaymentTypeID\": \"PTI001\",\r\n\"PaymentType\": \"Prepaid\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymenttype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymenttype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymenttype Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\",\"PaymentType\": \"Prepaid\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymenttype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymenttype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"PaymentTypeID\": \"PTI001\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"PaymentModeID\": \"PTI001\" , \"Event\" : \"selectone\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"PaymentModeID\": \"PMD001\" , \"Event\" : \"update\",\r\n\"PaymentMode\": \"Bank Transfer\",\"StatusID\": \"SDT001\",\"PaymentTypeID\": \"PTI001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"insert\",\r\n\"PaymentMode\": \"Bank Transfer\",\"PaymentTypeID\": \"PTI001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\" : \"insert\",\r\n\"PaymentModeID\": \"PMD040\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paymentmode SelectAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"PaymentModeID\": \"PTI001\" , \"Event\" : \"selectone\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/paymentmode",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"paymentmode"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bedtype List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bedtype Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\" , \"BedTypeID\": \"BEDT20221008AA00001\",\r\n\"BedType\": \"Single\",\"BedTypeDesc\": \"Single Size Bed\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bedtype Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\" , \r\n\"BedType\": \"Single\",\"BedTypeDesc\": \"Single Size Bed\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bedtype Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\" , \r\n\"BedTypeID\": \"BEDT20221008AA00001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bedtype SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\" , \r\n\"BedTypeID\": \"BEDT20221008AA00001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/bedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"bedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extrabedtype List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/extrabedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"extrabedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extrabedtype Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\",\r\n\"ExtraBedTypeID\": \"EBD001\",\"ExtraBedType\": \"Matress\",\"ExtraBedTypeDesc\": \"Cotton Matress\",\"StatusID\": \"SDT001\",\r\n\"ExtraBedCharges\" : \"200\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/extrabedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"extrabedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extrabedtype SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"selectone\",\"ExtraBedTypeID\": \"EBD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/extrabedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"extrabedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extrabedtype Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\",\"ExtraBedTypeID\": \"EBD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/extrabedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"extrabedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extrabedtype Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\",\r\n\"ExtraBedType\": \"Matress\",\"ExtraBedTypeDesc\": \"Cotton Matress\" , \"ExtraBedCharges\" : \"100\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/extrabedtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"extrabedtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomtype List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomtype Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\"RoomTypeID\": \"RTD001\",\r\n\"RoomType\": \"Single Room\", \"RoomTypeDesc\": \"Single Room\",\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomtype Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\r\n\"RoomType\": \"Single Room\", \"RoomTypeDesc\": \"Single Room\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomtype Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\"RoomTypeID\": \"RTD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomtype SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\"RoomTypeID\": \"RTD001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomtype",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomtype"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomdetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomdetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"RoomViewID\": \"RVD002\",\r\n            \"BedTypeID\": \"BEDT20221008AA00004\",\r\n            \"ExtraBedTypeID\": \"EBD001\",\r\n            \"Amenities\": \"AC, Bathtub\",\r\n            \"Location\": null,\r\n            \"RoomRate\": 3000.0,\r\n            \"CGST_P\": 9.0,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 540.0,\r\n            \"TotalAmount\": 3540.0,\r\n            \"RoomDesc\": \"Executive Suite Room\",\r\n            \"RoomDisplayName\": \"Executive Suite Room\",\r\n            \"RoomSize\": \"30sqm\",\r\n            \"AdultBase\": 2,\r\n            \"AdultMax\": 2,\r\n            \"InfantMax\": 1,\r\n            \"ChildBase\": 0,\r\n            \"ChildMax\": 0,\r\n            \"GuestMax\": 2,\r\n            \"ExtraAdultPrice\": 350.0,\r\n            \"ExtraChildPrice\": 250.0,\r\n            \"RoomStatusID\": \"SDT008\",\r\n            \"CompanyID\": \"COM001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomdetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\r\n\"RoomID\": \"RDTI20221128AA00006\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"RoomViewID\": \"RVD002\",\r\n            \"BedTypeID\": \"BEDT20221008AA00004\",\r\n            \"ExtraBedTypeID\": \"EBD001\",\r\n            \"Amenities\": \"AC, Bathtub\",\r\n            \"Location\": null,\r\n            \"RoomRate\": 3000.0,\r\n            \"CGST_P\": 10,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 540.0,\r\n            \"TotalAmount\": 3540.0,\r\n            \"StatusID\": \"SDT001\",\r\n            \"RoomDesc\": \"Executive Suite Room\",\r\n            \"RoomDisplayName\": \"Executive Suite Room\",\r\n            \"RoomSize\": \"30sqm\",\r\n            \"AdultBase\": 2,\r\n            \"AdultMax\": 2,\r\n            \"InfantMax\": 1,\r\n            \"ChildBase\": 0,\r\n            \"ChildMax\": 0,\r\n            \"GuestMax\": 2,\r\n            \"ExtraAdultPrice\": 350.0,\r\n            \"ExtraChildPrice\": 250.0,\r\n            \"RoomStatusID\": \"SDT001\",\r\n            \"CompanyID\": \"COM001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\"RoomID\": \"RDTI20221128AA00006\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\"RoomID\": \"RDTI20221128AA00006\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomstatus List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomstatus",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomstatus"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomstatus Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\r\n\"Status\": \"Blocked1\",\"StatusDescription\": \"Status is Blocked\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomstatus",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomstatus"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomstatus Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\r\n\"StatusID\": \"SDT011\",\"Status\": \"Blocked123\",\"StatusDescription\": \"Status is Blocked\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomstatus",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomstatus"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomstatus SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\r\n\"StatusID\": \"SDT011\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomstatus",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomstatus"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status SelectAll - Not required to be added in roomstatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectall\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomstatus",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomstatus"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floordetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pms.microhind.com/api/getdata/bookingdata/floordetails",
+					"protocol": "https",
+					"host": [
+						"pms",
+						"microhind",
+						"com"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"floordetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floordetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"insert\",\r\n    \r\n    \"PropertyID\": \"PRT001\",\r\n    \"FloorNo\": 2,\r\n    \"FloorDesc\": \"Second Floor\",\r\n    \"RoomID\": \"RDT004\",\r\n    \"RoomNo\": \"205\",\r\n    \"RoomTypeID\": \"RTD004\",\r\n    \"Description\": \"Queen Bed Room\",\r\n    \"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/rateinventory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"rateinventory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floordetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\r\n\"FloorID\": \"FMSI20221128AA00021\",\r\n\"PropertyID\": \"PRT001\",\r\n            \"FloorNo\": 2,\r\n            \"FloorDesc\": \"Second Floor\",\r\n            \"RoomID\": \"RDT004\",\r\n            \"RoomNo\": \"205\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"Description\": \"Queen Bed Room\",\r\n            \"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/floordetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"floordetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floordetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\r\n\"FloorID\": \"FMSI20221128AA00021\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/floordetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"floordetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "floordetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\r\n\"FloorID\": \"FMS001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/floordetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"floordetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guestdetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"SearchPhrase\" : null , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/guestdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"guestdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guestdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\" , \"GuestID\": \"GDID20221025AA00001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/guestdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"guestdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guestdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"SearchPhrase\" : \"abc\" , \"GuestID\": \"GDID20221025AA00001\" , \"Event\" : \"delete\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/guestdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"guestdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guest Details Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Name\" : \"Suleman\" ,\"LastName\" : \"Shaikh\",\"PrefixN\" : \"91\",\r\n\"MobileNumber\" : \"9874569874\",\"Type\" : \"Normal User\",\"Email\" : \"abc@gmail.com\",\"DOB\" : \"2000-10-08\",\"Address\" : \"kalyan\",\"CityID\" : \"CDT001\",\"FloorID\" : null,\"SpecialNote\" : \"Couple\" , \"Event\" : \"insert\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/guestdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"guestdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guest Details Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Name\" : \"Suleman\" ,\"LastName\" : \"Shaikh\",\"PrefixN\" : \"91\",\r\n\"MobileNumber\" : \"9874569874\",\"Type\" : \"Normal User\",\"Email\" : \"abc@gmail.com\",\"DOB\" : \"2000-10-08\",\"Address\" : \"kalyan\",\"CityID\" : \"CDT001\",\"FloorID\" : null,\"SpecialNote\" : \"Couple\" , \"Event\" : \"update\" , \"GuestID\": \"GDID20221025AA00001\" , \"StatusID\" : \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/guestdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"guestdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mealdetails List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/mealdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"mealdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mealdetails Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"update\",\r\n\"MealID\": \"MLD001\",\"MealType\": \"EP\",\"MealDesc\": \"EP (Only Room)\",\"MealDisplayName\": \"Room Only\",\r\n            \"MealName\": \"EP (Only Room)\",\"Price\": 0.0,\"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/mealdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"mealdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mealdetails Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"insert\",\"MealType\": \"EP\",\"MealDesc\": \"EP (Only Room)\",\"MealDisplayName\": \"Room Only\",\"MealName\": \"EP (Only Room)\",\"Price\": 0.0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/mealdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"mealdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mealdetails Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"delete\",\"MealID\": \"MLD002\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/mealdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"mealdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mealdetails SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Event\" : \"selectone\",\"MealID\": \"MLD002\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/mealdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"mealdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard Chart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\" , \"Month\" : \"2022-10-25T15:39:56.72\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/dashboardchart",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"dashboardchart"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Room Availibility",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"CheckInDate\" : \"2023-01-17T15:39:56.72\" , \"CheckOutDate\" : \"2023-01-20T15:39:56.72\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomavailability",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomavailability"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Room Number",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomnumber",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomnumber"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Room Chart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"CheckInDate\": \"2022-10-24 15:51:22.820\",\r\n    \"CheckOutDate\": \"2022-10-25 15:51:22.820\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pms.microhind.com/api/getdata/bookingdata/roomchart",
+					"protocol": "https",
+					"host": [
+						"pms",
+						"microhind",
+						"com"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomchart"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List for Assigning Room Number - by RoomAllocationID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"RoomAllocationID\": \"BKID20221128AA00175\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/allocateroomnumber",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"allocateroomnumber"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Room Number - by RoomallocationID and FloorID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"RoomAllocationID\": \"BKID20221124AA00173\",\r\n    \"Event\": \"update\",\r\n    \"FloorID\": \"FMS005\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/allocateroomnumber",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"allocateroomnumber"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Booking Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\r\n\"bookingDetails\" : [\r\n    {\"RoomID\" : \"RDT001\", \"Adult\" : \"2\", \"Children\" : \"1\",\"Infant\" : \"0\", \"MealID\" : \"MLD001\"},\r\n    {\"RoomID\" : \"RDT002\", \"Adult\" : \"2\", \"Children\" : \"2\",\"Infant\" : \"1\", \"MealID\" : \"MLD002\"}\r\n    ],\r\n\"transactionDetails\" : [{\"CheckInDate\" : \"2022-10-25T15:39:56.72\", \"CheckOutDate\" : \"2022-10-26T15:39:56.72\", \"BookingSourceID\" : \"BSD001\", \"SourceTypeID\" : \"SRD001\", \"isCompany\" : \"0\", \"PaymentTypeID\" : \"PTI001\", \"PaymentModeID\" : \"PMD001\", \"BookingCreatedBy_UserID\" : \"Krishna\", \"isFullPaid\" : \"1\"}],\r\n\"paymentDetails\" : [{\"PaymentTypeID\" : \"PTI001\", \"PaymentModeID\" : \"PMD001\", \"isFullPaid\" : \"1\", \"RoomAmount\" : \"3800\", \"Discount\" : \"0\", \"CGST\" : \"9\", \"SGST\" : \"9\", \"IGST\" : \"18\", \"TotalTax\" : \"684\", \"TotalAmount\" : \"4484\", \"PendingAmount\" : \"0\", \"RecievedAmount\" : \"4484\", \"CustID\" : \"GDID20221025AA00001\"}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/bookingdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"bookingdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Booking Details by BookingID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\r\n\"bookingDetails\" : [\r\n   {\"BookingID\":\"BKID20221128AA00173\",\"RoomAllocationID\":\"BKID20221128AA00174\",\"RoomID\" : \"RDT001\", \"Adult\" : \"2\", \"Children\" : \"1\",\"Infant\" : \"0\", \"MealID\" : \"MLD001\"},\r\n   {\"BookingID\":\"BKID20221128AA00174\",\"RoomAllocationID\":\"BKID20221128AA00175\",\"RoomID\" : \"RDT002\", \"Adult\" : \"2\", \"Children\" : \"2\",\"Infant\" : \"1\", \"MealID\" : \"MLD002\"}\r\n    ],\r\n\"transactionDetails\" : [{\"TransactionID\":\"TSID20221128AA00098\",\"CheckInDate\" : \"2022-10-25T15:39:56.72\", \"CheckOutDate\" : \"2022-10-26T15:39:56.72\", \"BookingSourceID\" : \"BSD001\", \"SourceTypeID\" : \"SRD001\", \"isCompany\" : \"0\", \"PaymentTypeID\" : \"PTI001\", \"PaymentModeID\" : \"PMD001\", \"BookingCreatedBy_UserID\" : \"Krishna\", \"isFullPaid\" : \"1\"}],\r\n\"paymentDetails\" : [{\"PaymentID\":\"PDID20221128AA00098\",\"PaymentTypeID\" : \"PTI001\", \"PaymentModeID\" : \"PMD001\", \"isFullPaid\" : \"1\", \"RoomAmount\" : \"3800\", \"Discount\" : \"0\", \"CGST\" : \"9\", \"SGST\" : \"9\", \"IGST\" : \"18\", \"TotalTax\" : \"684\", \"TotalAmount\" : \"4484\", \"PendingAmount\" : \"0\", \"RecievedAmount\" : \"4484\", \"CustID\" : \"GDID20221025AA00001\"}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/modifybookingdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"modifybookingdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Booking by BookingID - Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\":\"update\" , \"BookingID\":\"BKID20221128AA00173\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/cancelbooking",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"cancelbooking"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Booking by BookingID - List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\",\"Event\":\"select\" , \"BookingID\":\"BKID20221128AA00173\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/cancelbooking",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"cancelbooking"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\"Others\": null,\r\n\"TermID\": \"TERM20221207AA00002\",\"TermsofUse\": \"Data\",\"StandardTermsandConditions\": \"Test\",\r\n\"GeneralProvisions\": \"TestData\",\"CompanyID\": null,\"PropertyID\": null,\"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\"Others\": null,\r\n\"TermsofUse\": \"TestData\",\"StandardTermsandConditions\": \"TestData\",\r\n\"GeneralProvisions\": \"TestData\",\"CompanyID\": null,\"PropertyID\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\"TermID\": \"TERM20221206AA00002\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\"TermID\": \"TERM20221008AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Inventory List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \r\n\"FromDate\": \"2022-12-18 00:52:17.013\",\r\n\"Todate\":\"2023-01-18 00:52:17.013\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/rateinventory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"rateinventory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Inventory Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \r\n\"rateandinventory\" : [\r\n    {       \"RoomID\": \"RDTI20221025AA00005\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"ExtraAdultPrice\": 200.0,\r\n            \"ExtraChildPrice\": 50.0,\r\n            \"ExtraBedCharges\": 10.0,\r\n            \"PriceValidOnDate\": \"2022-12-18T00:52:17.013\",\r\n            \"CreatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"UpdatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"StatusID\": \"SDT001\",\r\n            \"RoomRate\": 2800.0,\r\n            \"CGST_P\": 9.0,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 504.0,\r\n            \"TotalAmount\": 3304.0\r\n    },\r\n     {      \"RoomID\": \"RDTI20221025AA00005\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"ExtraAdultPrice\": 200.0,\r\n            \"ExtraChildPrice\": 50.0,\r\n            \"ExtraBedCharges\": 100.0,\r\n            \"PriceValidOnDate\": \"2022-12-08T00:52:17.013\",\r\n            \"CreatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"UpdatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"StatusID\": \"SDT001\",\r\n            \"RoomRate\": 2800.0,\r\n            \"CGST_P\": 9.0,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 504.0,\r\n            \"TotalAmount\": 3304.0\r\n    }\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/rateinventory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"rateinventory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking Details By Booking ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"BookingID\": \"BKID20221124AA00171\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdetailsbybookingid",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdetailsbybookingid"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Booking Details By RoomAllocationID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"RoomAllocationID\": \"BKID20221124AA00172\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdetailsbyroomallocationid",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdetailsbyroomallocationid"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Details List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Not Required in Portal - HouseKeeping Details Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert\",\r\n            \"RoomCategoryID\": \"RTD001\",\r\n            \"RoomID\": \"RDT001\",\r\n            \"FloorID\": \"FMS001\",\r\n            \"CleaningStatus\": \"SDT008\",\r\n            \"RepairRequired\": \"SDT014\",\r\n            \"ClosedDueToMaintenance\": \"SDT014\",\r\n            \"RoomStatus\": \"SDT012\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Not Required in Portal - HouseKeeping Details Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"delete\",\r\n            \"HouseKeepingID\": \"HKID20221227AA00001\"            \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Details Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update\",\r\n            \"HouseKeepingID\": \"HKID20221227AA00045\",\r\n            \"RoomCategoryID\": \"RTD02022111400001\",\r\n            \"RoomID\": \"RDT004\",\r\n            \"FloorID\": \"FMSI20221213AA00045\",\r\n            \"CleaningStatus\": \"SDT007\",\r\n            \"RepairRequired\": \"SDT014\",\r\n            \"ClosedDueToMaintenance\": \"SDT014\",\r\n            \"RoomStatus\": \"SDT012\",\r\n            \"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Bundle Mark All as Dirty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update_markallasdirty\"\r\n            \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Bundle Mark All as Clean",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update_markallasclean\"\r\n            \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Bundle Mark All as Vacant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update_markallasvacant\"\r\n            \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Details SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"selectone\",\r\n\"HouseKeepingID\": \"HKID20221227AA00001\"\r\n           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Checklist Details List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping/checklist",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping",
+						"checklist"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Checklist Details SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"selectone\",\"HouseKeepingChecklistID\": \"HCID20221227AA00001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping/checklist",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping",
+						"checklist"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Checklist Details Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert\",\r\n            \"RoomTypeID\": \"RTD001\",\r\n            \"RoomType\": \"Single Room\",\r\n            \"ItemName\": \"CheckList1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping/checklist",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping",
+						"checklist"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Checklist Details Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update\",\r\n\"HouseKeepingChecklistID\": \"HCID20221227AA00006\",\r\n            \"RoomTypeID\": \"RTD001\",\r\n            \"ItemName\": \"CheckList2\",\r\n            \"StatusID\": \"SDT001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping/checklist",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping",
+						"checklist"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HouseKeeping Checklist Details Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"delete\",\r\n\"HouseKeepingChecklistID\": \"HCID20221227AA00006\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/housekeeping/checklist",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"housekeeping",
+						"checklist"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Details Select",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Details Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert\",\r\n            \"Gender\": \"Male\",\r\n            \"ClothName\": \"Shirt\",\r\n            \"WashingRate\": \"110\",\r\n            \"DryCleaningRate\": \"100\",\r\n            \"PressingRate\": \"50\"\r\n           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Details Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"delete\",\r\n \"LaundryID\": \"LDID20221227AA00001\"\r\n           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Details Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update\",\r\n \"LaundryID\": \"LDID20221227AA00001\",\r\n            \"Gender\": \"Male\",\r\n            \"ClothName\": \"Shirt\",\r\n            \"WashingRate\": \"110\",\r\n            \"DryCleaningRate\": \"100\",\r\n            \"PressingRate\": \"50\",\r\n            \"StatusID\": \"SDT001\"\r\n           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Details SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"selectone\",\r\n \"LaundryID\": \"LDID20221227AA00001\"           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Txn History",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"select\",\r\n\t\"RoomNo\":null,\r\n\t\"InvoiceNo\":null,\r\n\t\"StartDate\":null,\r\n\t\"EndDate\":null\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry/transactionhistory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry",
+						"transactionhistory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Txn DropList",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"select\",\r\n\t\"RoomNo\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pms.microhind.com/api/laundry/transaction",
+					"protocol": "https",
+					"host": [
+						"pms",
+						"microhind",
+						"com"
+					],
+					"path": [
+						"api",
+						"laundry",
+						"transaction"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Txn by RoomNo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"select\",\r\n    \"FloorID\": \"FMS006\",\r\n    \"RoomNo\": \"01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry/transaction",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry",
+						"transaction"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Txn Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert\",\r\n\"RoomNo\":\"01\",\r\n       \"laundryTransactionDetails\" : \r\n       [\r\n            { \"FloorID\": \"FMS001\",\r\n            \"RoomNo\": \"01\",\r\n            \"GuestID\": \"GDID20221025AA00001\",\r\n            \"GuestName\": \"Suleman\",\r\n            \"GuestMobileNumber\": \"9874569874\",\r\n            \"GuestEmail\": \"abc@gmail.com\",\r\n            \"Gender\": null,\r\n            \"ClothName\": null,\r\n            \"Services\": null,\r\n            \"Amount\": null,\r\n            \"Total\": null,\r\n            \"CGST\": null,\r\n            \"SGST\": null,\r\n            \"Total_inc_all_taxes\": null,\r\n            \"Discount\": null,\r\n            \"TotalDue\": null,\r\n            \"PaymentMode\": null,\r\n            \"PaymentCollectorsName\": null,\r\n            \"BillGSTNo\": null,\r\n            \"CreatedDate\": null,\r\n            \"UpdatedDate\": null \r\n            },\r\n            { \"FloorID\": \"FMS001\",\r\n            \"RoomNo\": \"01\",\r\n            \"GuestID\": \"GDID20221025AA00001\",\r\n            \"GuestName\": \"Suleman\",\r\n            \"GuestMobileNumber\": \"9874569874\",\r\n            \"GuestEmail\": \"abc@gmail.com\",\r\n            \"Gender\": null,\r\n            \"ClothName\": null,\r\n            \"Services\": null,\r\n            \"Amount\": null,\r\n            \"Total\": null,\r\n            \"CGST\": null,\r\n            \"SGST\": null,\r\n            \"Total_inc_all_taxes\": null,\r\n            \"Discount\": null,\r\n            \"TotalDue\": null,\r\n            \"PaymentMode\": null,\r\n            \"PaymentCollectorsName\": null,\r\n            \"BillGSTNo\": null,\r\n            \"CreatedDate\": null,\r\n            \"UpdatedDate\": null \r\n            }\r\n        ]\r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry/transaction",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry",
+						"transaction"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Laundry Txn Invoice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert_generateinvoice\",\r\n\"RoomNo\":\"01\",\r\n       \"laundryTransactionDetails\" : \r\n       [\r\n            { \"FloorID\": \"FMS001\",\r\n            \"RoomNo\": \"01\",\r\n            \"GuestID\": \"GDID20221025AA00001\",\r\n            \"GuestName\": \"Suleman\",\r\n            \"GuestMobileNumber\": \"9874569874\",\r\n            \"GuestEmail\": \"abc@gmail.com\",\r\n            \"Gender\": null,\r\n            \"ClothName\": null,\r\n            \"Services\": null,\r\n            \"Amount\": null,\r\n            \"Total\": null,\r\n            \"CGST\": null,\r\n            \"SGST\": null,\r\n            \"Total_inc_all_taxes\": null,\r\n            \"Discount\": null,\r\n            \"TotalDue\": null,\r\n            \"PaymentMode\": null,\r\n            \"PaymentCollectorsName\": null,\r\n            \"BillGSTNo\": null,\r\n            \"CreatedDate\": null,\r\n            \"UpdatedDate\": null \r\n            },\r\n            { \"FloorID\": \"FMS001\",\r\n            \"RoomNo\": \"01\",\r\n            \"GuestID\": \"GDID20221025AA00001\",\r\n            \"GuestName\": \"Suleman\",\r\n            \"GuestMobileNumber\": \"9874569874\",\r\n            \"GuestEmail\": \"abc@gmail.com\",\r\n            \"Gender\": null,\r\n            \"ClothName\": null,\r\n            \"Services\": null,\r\n            \"Amount\": null,\r\n            \"Total\": null,\r\n            \"CGST\": null,\r\n            \"SGST\": null,\r\n            \"Total_inc_all_taxes\": null,\r\n            \"Discount\": null,\r\n            \"TotalDue\": null,\r\n            \"PaymentMode\": null,\r\n            \"PaymentCollectorsName\": null,\r\n            \"BillGSTNo\": null,\r\n            \"CreatedDate\": null,\r\n            \"UpdatedDate\": null \r\n            }\r\n        ]\r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/laundry/transaction",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"laundry",
+						"transaction"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReviewAndRatings Select",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"select\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReviewAndRatings Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"update\",\r\n\"RatingID\": \"RRID20221227AA00001\",\r\n\"Date\": \"2022-10-08T14:39:18.073\",\r\n\"Rating\": \"5\",\r\n\"Comment\": \"Nice Test\",\r\n\"UserName\": \"Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReviewAndRatings Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"insert\",\r\n\"Date\": \"2022-10-08T14:39:18.073\",\r\n\"Rating\": \"5\",\r\n\"Comment\": \"Nice Test\",\r\n\"UserName\": \"Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReviewAndRatings SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"selectone\",\r\n\"RatingID\": \"RRID20221227AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReviewAndRatings Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\": \"delete\",\r\n\"RatingID\": \"RRID20221230AA00012\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckIN Details Select",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/checkindetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"checkindetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckOut List - pending",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\",\r\n\"RoomCheckInTime\":\"2022-12-07T21:54:54.647\",\"RoomCheckOutTime\":\"2022-12-07T21:54:54.647\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/checkout",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"checkout"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckOut Update  - pending",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/checkindetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"checkindetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckOut SelectOne - pending",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\", \"CheckOutID\" : \"COID20221207AA00001\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/reviewandratings",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"reviewandratings"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Email\": \"fahad@wowinfobiz.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/forgotpassword",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"forgotpassword"
+					]
+				},
+				"description": "Forgot Password"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"IN_Username\": \"test\",\r\n    \"Token\" : \"IBMfWq762kgwQQk5ShZTTqECTopS8EiP \",\r\n    \"IN_Password\" : \"234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/authentication/userauthentication/resetpassword",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"resetpassword"
+					]
+				},
+				"description": "Reset Password"
+			},
+			"response": []
+		},
+		{
+			"name": "Create PWD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"Username\": \"Fahad\",\r\n    \"Password\": \"1235\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pwd",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pwd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Token\": \"tokenize\",\r\n    \"Username\": \"test4\",\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/token",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Category List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID4",
+						"value": "LDT0202301210000003",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "pBIZ3Ab92kjwdH5Jmy/zRJ5aNwsITwv+",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/category",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{pms_url}}/api/inventory/product/category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/product/category",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44379",
+					"path": [
+						"api",
+						"inventory",
+						"product",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Fahad\",\r\n    \"Password\": \"1235\",\r\n    \"Event\": \"login\",\r\n    \"Seckey\": \"abc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/auth/login",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

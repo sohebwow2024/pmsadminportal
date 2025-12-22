@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "27b66d41-f2e0-4bad-b902-91e3575e9daa",
+		"name": "PMS - PaymentFolio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PaymentFolio - list all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/folio/all?LoginID=LDT001&Token=123&TransactionID=TSID20230220AA00002",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"folio",
+						"all"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "TransactionID",
+							"value": "TSID20230220AA00002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentFolio - get one",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/folio?FolioID",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"folio"
+					],
+					"query": [
+						{
+							"key": "FolioID",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentFolio - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/folio/delete?LoginID=LDT001&Token=123&FolioID=PFOL20230221AA00001",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"folio",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "FolioID",
+							"value": "PFOL20230221AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentFolio - add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"PaymentFolioID\":\"PaymentFolioID\",\r\n    \"TransactionID\":\"TSID20230220AA00002\"\r\n    ,\"PaymentType\":\"PTID20230220AA00001\"\r\n    ,\"AdditionType\":\"PMID20230220AA00001\"\r\n    ,\"ReferenceID\":\"BKID20230220AA00001\"\r\n    ,\"PaidAmount\":\"1000\"\r\n    //,\"PaymentDate\":\"PaymentDate\"\r\n    ,\"ReferenceText\":\"\"\r\n    ,\"CollectorName\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/folio/Save",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"folio",
+						"Save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

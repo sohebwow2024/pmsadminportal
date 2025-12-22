@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "989bfd46-c132-4f5c-a115-5090370812b8",
+		"name": "PMS - BlockRoom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "{{pms_url}}/api/booking/BlockRoom",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LGID20230206AA00001\",\r\n    \"Token\":\"kM/VtisI20iV4TScJEk/Q5J2W8q4ZpGU\",\r\n    \"FloorID\": \"FMSI20230406AA00016\",\r\n    \"PropertyID\": \"HOTL20230303AA00001\",\r\n    \"RoomID\": \"RDTI20230405AA00005\",\r\n    \"FromDate\": \"2023-05-15\",\r\n    \"ToDate\": \"2023-05-22\",\r\n    \"BlockReason\": \"Testing Block\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/BlockRoom",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"BlockRoom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{pms_url}}/api/booking/UnblockRoom Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"LoginID\":\"LGID20230206AA00001\",\r\n    \"Token\":\"kM/VtisI20iV4TScJEk/Q5J2W8q4ZpGU\",\r\n    \"BookingID\": \"BKID20230503AA00139\",\r\n    \"Comment\": \"Testing Unblock\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/UnblockRoom",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"UnblockRoom"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

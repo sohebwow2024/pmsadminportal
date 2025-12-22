@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "95d500c4-e164-4f77-a01b-c1768ed30a09",
+		"name": "PMS - Send Files",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "{{pms_url}}/api/booking/send/voucher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Fahad/Downloads/Hotel_Confirmation_Voucher.pdf"
+						},
+						{
+							"key": "ToEMail",
+							"value": "fahad@wowinfobiz.com",
+							"type": "text"
+						},
+						{
+							"key": "Name",
+							"value": "Fahad Momin",
+							"type": "text"
+						},
+						{
+							"key": "BookingID",
+							"value": "1234567890-",
+							"type": "text"
+						},
+						{
+							"key": "HotelName",
+							"value": "New Hotel",
+							"type": "text"
+						},
+						{
+							"key": "HotelLogo",
+							"value": "https://pms-main.vercel.app/static/media/hostynnist-logo.4a1ddd67ad1a8a4047d9.png",
+							"type": "text"
+						},
+						{
+							"key": "EmailAddress",
+							"value": "info@krafitech.com",
+							"type": "text"
+						},
+						{
+							"key": "PhoneNumber",
+							"value": "+91 9800909090",
+							"type": "text"
+						},
+						{
+							"key": "City",
+							"value": "Dehradun",
+							"type": "text"
+						},
+						{
+							"key": "Address",
+							"value": "123 Road, Garden Mention, Dehradun",
+							"type": "text"
+						},
+						{
+							"key": "Adults",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "Children",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "CheckInDate",
+							"value": "05-June-2023",
+							"type": "text"
+						},
+						{
+							"key": "CheckOutDate",
+							"value": "07-June-2023",
+							"type": "text"
+						},
+						{
+							"key": "Total",
+							"value": "₹ 4040.00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/send/voucher",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"send",
+						"voucher"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

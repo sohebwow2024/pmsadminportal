@@ -1,0 +1,545 @@
+{
+	"info": {
+		"_postman_id": "8342f16e-6807-4498-b149-60eb5ea596f5",
+		"name": "PMS - PropertyPhotos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "PropertyPhoto - Get Property Photos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo?PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "mandatory"
+						},
+						{
+							"key": "CompanyID",
+							"value": "COM001",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Get Tags",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/tags?PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"tags"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Get Room Photos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/room?RoomID=RDTI20230220AA00001&PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"room"
+					],
+					"query": [
+						{
+							"key": "Token",
+							"value": "123",
+							"disabled": true
+						},
+						{
+							"key": "RoomID",
+							"value": "RDTI20230220AA00001",
+							"description": "mandatory"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "mandatory"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Get Photo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/PHTO00000000204?CompanyID=COM001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"PHTO00000000204"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"disabled": true
+						},
+						{
+							"key": "CompanyID",
+							"value": "COM001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Upload Photo only",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "CompanyID",
+							"value": "COM001",
+							"description": "mandatory",
+							"type": "text"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"type": "text"
+						},
+						{
+							"key": "RoomID",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "File",
+							"type": "file",
+							"src": "/C:/Users/Fahad/Pictures/blockchain-bg-6.png"
+						},
+						{
+							"key": "HotelName",
+							"value": "Test Hotel",
+							"description": "mandatory",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/upload",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Add details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n//\"PhotoID\" : \"{PhotoID}\",\r\n    \"CompanyID\" : \"COM001\",\r\n    \"PropertyID\" : \"HOTL20230223AA00001\",\r\n\r\n    \"RoomID\" : \"RDTI20230220AA00001\",\r\n    \"RoomTypeID\" : \"\",\r\n    \"RoomNo\" : \"\",\r\n    \"DisplayName\" : \"Terrace Foto\",\r\n    \"FileName\" : \"property_Test_Hotel_15432023094346.png\",\r\n    \"Tags\" : \"Bathroom,Shower,\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/detail",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Add Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "CompanyID",
+							"value": "COM001",
+							"description": "mandatory",
+							"type": "text"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"type": "text"
+						},
+						{
+							"key": "RoomID",
+							"value": "RDTI20230220AA00001",
+							"type": "text"
+						},
+						{
+							"key": "File",
+							"type": "file",
+							"src": "/C:/Users/Fahad/Pictures/Picture1.png"
+						},
+						{
+							"key": "HotelName",
+							"value": "Test Hotel",
+							"description": "mandatory",
+							"type": "text"
+						},
+						{
+							"key": "RoomTypeID",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "RoomNo",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "DisplayName",
+							"value": "Bedroom Foto",
+							"type": "text"
+						},
+						{
+							"key": "Tags",
+							"value": "Bedroom,AIr Condition,TV",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/add",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"add"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Delete Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/delete/PHTO00000000204",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"delete",
+						"PHTO00000000204"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "Active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Update Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"PhotoID\": \"PHTO00000000204\",\r\n    \"PropertyID\": \"HOTL20230223AA00001\",\r\n    \"RoomID\": \"RDTI20230220AA00001\",\r\n    \"RoomNo\": \"\",\r\n    \"DisplayName\": \"Bathroom Foto\",\r\n    \"FileName\": \"room_Test_Hotel10302023113009.png\",\r\n    \"Tags\": \"Bathroom,Shower,New\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/update?PhotoID=PHTO00000000204",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"update"
+					],
+					"query": [
+						{
+							"key": "PhotoID",
+							"value": "PHTO00000000204"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Inactivate Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/inactive?PhotoID=PHTO00000000204",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"inactive"
+					],
+					"query": [
+						{
+							"key": "PhotoID",
+							"value": "PHTO00000000204"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PropertyPhoto - Activate Photo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/property/photo/activate?PhotoID=PHTO00000000204",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"photo",
+						"activate"
+					],
+					"query": [
+						{
+							"key": "PhotoID",
+							"value": "PHTO00000000204"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

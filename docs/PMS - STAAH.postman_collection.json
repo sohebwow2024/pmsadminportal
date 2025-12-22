@@ -1,0 +1,714 @@
+{
+	"info": {
+		"_postman_id": "7bcecb9a-88a5-4a19-821c-0e52dcf25678",
+		"name": "PMS - STAAH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/common",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"common"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Property/AddProperty?hotelId=",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Property/AddProperty?hotelId=HOTELID",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Property",
+						"AddProperty"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTELID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Property/GetPropertyList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Property/GetPropertyList",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Property",
+						"GetPropertyList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/GetList?hotelid=HOTL20230223AA00001",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/GetList?hotelid=HOTL20230223AA00001",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"GetList"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/Add?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/Add?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"Add"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230308AA00009"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/Update?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/Update?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00008",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"Update"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230308AA00008"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/Activate?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/Activate?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"Activate"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230308AA00009"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/Deactivate?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/Deactivate?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"Deactivate"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230308AA00009"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RoomType/Deactivate?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RoomType/Delete?hotelId=HOTL20230223AA00001&roomid=RDTI20230308AA00009",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RoomType",
+						"Delete"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230308AA00009"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/GetList?hotelid=HOTL20230223AA00001",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/GetList?hotelid=HOTL20230223AA00001",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"GetList"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/SyncAll?hotelid=HOTL20230223AA00001",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/SyncAll?hotelid=HOTL20230223AA00001",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"SyncAll"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/Add?hotelid=HOTL20230223AA00001",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/Add?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"Add"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "rateid",
+							"value": "MLID20230315AA00006"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/Update?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/Update?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"Update"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "rateid",
+							"value": "MLID20230315AA00006"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/Activate?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/Activate?hotelid=HOTL20230223AA00001&rateid=MAP",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"Activate"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "rateid",
+							"value": "MAP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/Deactivate?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/Deactivate?hotelid=HOTL20230223AA00001&rateid=MAP",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"Deactivate"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "rateid",
+							"value": "MAP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/RatePlan/Delete?hotelid=HOTL20230223AA00001&rateid=MLID20230315AA00006",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/RatePlan/Delete?hotelid=HOTL20230223AA00001&rateid=MAP",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"RatePlan",
+						"Delete"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "rateid",
+							"value": "MAP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Rates/RateAvailibilityAll?hotelid=HOTL20230223AA00001&checkInDate=2023-03-31&checkOutDate=2023-04-02",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Rates/RateAvailibilityAll?hotelid=HOTL20230223AA00001&checkInDate=2023-03-31&checkOutDate=2023-04-02",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Rates",
+						"RateAvailibilityAll"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2023-03-31"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2023-04-02"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Rates/RateAvailibility?hotelid=HOTL20230223AA00001&roomid=RDTI20230220AA00002&checkInDate=2023-03-31&checkOutDate=2023-04-02",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "default"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Rates/RateAvailibility?hotelid=HOTL20230223AA00001&roomid=RDTI20230220AA00002&checkInDate=2023-03-31&checkOutDate=2023-04-02",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Rates",
+						"RateAvailibility"
+					],
+					"query": [
+						{
+							"key": "hotelid",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "roomid",
+							"value": "RDTI20230220AA00002"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2023-03-31"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2023-04-02"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Reservations/AddReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"hotelid\": \"HOTL20230223AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Reservations/AddReservation",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Reservations",
+						"AddReservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/Reservations/Reservation_notif",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"hotelid\": \"string\",\r\n  \"reservation_notif\": {\r\n    \"reservation_notif_id\": [\r\n      \"string\"\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.staah.hostynnist.com/api/Reservations/Reservation_notif",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"staah",
+						"hostynnist",
+						"com"
+					],
+					"path": [
+						"api",
+						"Reservations",
+						"Reservation_notif"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/booking/GetReservationFromSTAAH",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "default"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/booking/GetReservationFromSTAAH",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"GetReservationFromSTAAH"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/booking/GetReservationFromSTAAH/{reservation_id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "default"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/booking/GetReservationFromSTAAH/1",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"GetReservationFromSTAAH",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

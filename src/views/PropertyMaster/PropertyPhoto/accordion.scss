@@ -1,0 +1,87 @@
+.accordion-button.collapsed {
+ background-color: white !important;
+    color: #7367f0 !important;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.accordion-button {
+    background-color: #7367f0 !important;
+    color: white !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+.accordion-button:not(.collapsed)::after{
+    //background-color: white;
+    border-radius: 50%;
+    mix-blend-mode: plus-lighter;
+
+}
+.accordion-button::after{
+    scale: 1.5;
+}
+.modal-dialog.transparent .modal-content{
+    --bs-bg-opacity: 1;
+    background-color: transparent !important;
+}
+.modal-dialog.transparent .carousel-caption{
+    position: initial;
+    padding: 0;
+}
+.modal-dialog.transparent .carousel-caption h3{
+    display: inline-block;
+}
+
+.modal-dialog.transparent .carousel-caption p{
+    display: inline-block;
+
+}
+
+.modal-dialog.transparent .modal-content{
+    box-shadow: none;
+}
+
+.modal-dialog.transparent {
+    max-width: none !important;
+    margin: auto !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+.modal-dialog.transparent .modal-body{
+    padding: 0 !important;
+}
+.modal-dialog.transparent .modal-header .btn-close {
+    position: absolute;
+    right: 15px;
+    transform: none !important;
+    padding: 7.5px;
+    background-color: #ffffff55;
+    top: 10px;
+    z-index: 100;
+
+}
+
+.modal-dialog.transparent .carousel-control-prev, .modal-dialog.transparent .carousel-control-next {
+    top: 50%;
+    bottom: unset;
+    transform: translateY(-50%);
+    padding: 10px;
+    width: unset;
+}
+
+.modal-dialog.transparent .carousel-indicators{
+    bottom: -5%;
+    margin-bottom: 5px !important;
+}
+
+.modal-dialog.transparent .carousel-indicators [data-bs-target]{
+    height: 6px;
+    width: 10px;
+    border-radius: 50px;
+    border: 0 !important;
+    transition: all 0.6s ease
+}
+.modal-dialog.transparent .carousel-indicators .active {
+    width: 30px;
+
+}

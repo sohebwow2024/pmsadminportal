@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "beb910bc-d07b-459e-9e7f-e976da2e87d8",
+		"name": "PMS - Property",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Propery - Get Active by companyID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/hotel?CompanyID=COM002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"hotel"
+					],
+					"query": [
+						{
+							"key": "CompanyID",
+							"value": "COM002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Propery - Get All properties by companyID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LGID20230206AA00001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "iaudkrkb20jb7YXKe3mfS7mef+OfN4JG",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.hostynnist.com:5503/api/property/hotel/all?CompanyID=COM001",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hostynnist",
+						"com"
+					],
+					"port": "5503",
+					"path": [
+						"api",
+						"property",
+						"hotel",
+						"all"
+					],
+					"query": [
+						{
+							"key": "CompanyID",
+							"value": "COM001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Propery - Get Property by PropertyID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/property/hotel?id=PRT002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"property",
+						"hotel"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PRT002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Property - Insert test-only",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LGID20230206AA00001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "iaudkrkb20jb7YXKe3mfS7mef+OfN4JG",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"PropertyID\" : \"PropertyID\",\r\n    \"CompanyID\" : \"COM001\"\r\n    ,\"HotelName\" : \"Roomquet Comfort Inn\"\r\n    ,\"HotelType\" : \"Hotel\"\r\n    ,\"HotelTypeCode\" : \"1\"\r\n    ,\"PropertyDesc\" : \"Roomquet Comfort Inn\"\r\n    ,\"FloorCount\" : \"1\"\r\n    ,\"AddressLine\" : \"17 Lal Bahadur Shastri Marg, Near Vishal mega mart Civil Lines, Civil Lines, Allahabad, India, 211001\"\r\n    ,\"CityID\" : null\r\n    ,\"CityName\" : \"Uttar Pradesh\"\r\n    ,\"CountryCode\" : \"IN\"\r\n    ,\"CountryName\" : \"India\"\r\n    ,\"PostalCode\" : \"211001\"\r\n    ,\"Longitude\" : \"19.10595234827672\"\r\n    ,\"Latitude\" : \"72.8760079465061\"\r\n    ,\"TimeZone\" : \"Asia/Kolkata\"\r\n    ,\"LanguageCode\" : \"en\"\r\n    ,\"CurrencyCode\" : \"INR\"\r\n    ,\"PropertyLicenseNumber\" : \"1234567890\"\r\n    ,\"LogoFile\" : \"logo.jpg\"\r\n    ,\"WebSIte\" : \"\"\r\n    ,\"BankName\" : \"\"\r\n    ,\"AccountNumber\" : \"\"\r\n    ,\"Branch\" : \"\"\r\n    ,\"IFSC\" : \"\"\r\n    ,\"GSTNumber\" : \"\"\r\n    ,\"ContactPersonName\" : \"\"\r\n    ,\"Surname\" : \"\"\r\n    ,\"PhoneNumber\" : \"\"\r\n    ,\"Email\" : \"\"\r\n    //,\"Status\" : \"Status\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.hostynnist.com:5503/api/property/hotel",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hostynnist",
+						"com"
+					],
+					"port": "5503",
+					"path": [
+						"api",
+						"property",
+						"hotel"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

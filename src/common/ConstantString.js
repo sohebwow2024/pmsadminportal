@@ -1,0 +1,1 @@
+export const RAZOR_KEY = "rzp_test_g0MjxgKjjhWsR4"; //Razor Pay key

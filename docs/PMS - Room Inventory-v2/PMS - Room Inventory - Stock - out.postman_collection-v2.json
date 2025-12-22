@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "7dbbdd32-bb9f-4565-b150-063963469964",
+		"name": "PMS - Room Inventory - Stock / out",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Inventory - Stock by product",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/stock?ProductID=PRMT20230223AA00001&PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "ProductID",
+							"value": "PRMT20230223AA00001"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "Required"
+						},
+						{
+							"key": "StockHistoryDate",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Stock by property",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/stock?PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "required"
+						},
+						{
+							"key": "StockHistoryDate",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Stock History by Dates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/stock_history?PropertyID=HOTL20230223AA00001&FromDate=2023-03-01&ToDate=2023-03-02&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"stock_history"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "FromDate",
+							"value": "2023-03-01"
+						},
+						{
+							"key": "ToDate",
+							"value": "2023-03-02"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Stock History by a Month of year",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/stock_history?PropertyID=HOTL20230223AA00001&Month=March&Year=2023&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"stock_history"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "Month",
+							"value": "March"
+						},
+						{
+							"key": "Year",
+							"value": "2023"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Stock Calc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/stock/calc?PropertyID=HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"stock",
+						"calc"
+					],
+					"query": [
+						{
+							"key": "ProductID",
+							"value": "PRMT20230223AA00001",
+							"disabled": true
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						},
+						{
+							"key": "StockHistoryDate",
+							"value": "2023-03-06",
+							"disabled": true
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Out - List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/out_products?LoginID=LDT001&Token=123&PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"out_products"
+					],
+					"query": [
+						{
+							"key": "ProductID",
+							"value": "PRMT20230223AA00001",
+							"disabled": true
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "OutDate",
+							"value": "2023-02-02",
+							"disabled": true
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inventory - Out - create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"ProductID\": \"PRMT20230223AA00002\",\r\n    \"OutBy\": \"Me\",\r\n    \"OutQuantity\": \"0.1\",\r\n    \"Note\": \"You are ok\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/inventory/out_product",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"inventory",
+						"out_product"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

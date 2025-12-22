@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "1daa7e22-62f9-4ff2-bc07-7be9e461e7fa",
+		"name": "PMS - Extend Departure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/booking/extendcheckout/Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Event\":\"insert\",\r\n    \"RoomAllocationID\":\"BKID20221025AA00002\",\r\n    \"BookingID\":\"BKID20221025AA00001\",\r\n    \"NewDepartureDate\":\"2023-03-26\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/extendcheckout/Save",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extendcheckout",
+						"Save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/extendcheckout/GetByBookingId?LoginID={loginid}&Token={token}&bookingID={bookingId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pms_url}}/api/booking/extendcheckout/GetByBookingId?LoginID=LDT001&Token=123&bookingID=BKID20221025AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extendcheckout",
+						"GetByBookingId"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "bookingID",
+							"value": "BKID20221025AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/extendcheckout/delete?LoginID=LDT001&Token=123&ExtendDepartureID=1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{pms_url}}/api/booking/extendcheckout/delete?LoginID=LDT001&Token=123&ExtendDepartureID=1",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"extendcheckout",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "ExtendDepartureID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

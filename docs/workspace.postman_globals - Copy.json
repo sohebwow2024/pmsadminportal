@@ -1,0 +1,21 @@
+{
+	"id": "992614ee-b99b-4903-8f98-888b2de672aa",
+	"values": [
+		{
+			"key": "wlj_url",
+			"value": "https://api.welinkjobs.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "pms_url",
+			"value": "https://pms.microhind.com",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-01-27T10:03:56.659Z",
+	"_postman_exported_using": "Postman/10.8.5"
+}

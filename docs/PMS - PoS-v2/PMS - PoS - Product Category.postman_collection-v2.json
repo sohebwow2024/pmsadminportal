@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "70d8defe-d5c9-4d5d-9ecb-3c935ad6e9b2",
+		"name": "PMS - PoS - Product Category",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "POS - Product Category - get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Category - get all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category/all?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category",
+						"all"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Inactive",
+							"disabled": true
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PO - Product Category - get one",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category?LoginID=LDT001&Token=123&id=PCTG20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "id",
+							"value": "PCTG20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Category - insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\r\n    //\"ProductCategoryID\" : \"{ProductCategoryID}\",\r\n    \"ProductCategoryName\" : \"Shampoo\",\r\n    \"Description\" : \"Shampoo\",\r\n    \"PoSID\" : \"POSI20230306AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Category - update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"ProductCategoryID\": \"PCTG20230306AA00001\",\r\n    \"ProductCategoryName\": \"Mughlai\",\r\n    \"Description\": \"Muglai Cuisine\"\r\n    //\"PoSID\": \"POSI20230306AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category/update?id=PCTG20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PCTG20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Category - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_category/delete/PCTG20230306AA00001?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_category",
+						"delete",
+						"PCTG20230306AA00001"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

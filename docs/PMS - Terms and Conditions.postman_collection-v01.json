@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "8dba7eda-fd05-4f90-af02-7dd6f1f4ffc3",
+		"name": "PMS - Terms and Conditions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Terms and Conditions List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"select\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"update\",\"Others\": null,\r\n\"TermID\": \"TERM20221207AA00002\",\"TermsofUse\": \"Data\",\"StandardTermsandConditions\": \"Test\",\r\n\"GeneralProvisions\": \"TestData\",\"CompanyID\": null,\"PropertyID\": null,\"StatusID\": \"SDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"insert\",\"Others\": null,\r\n\"TermsofUse\": \"TestData\",\"StandardTermsandConditions\": \"TestData\",\r\n\"GeneralProvisions\": \"TestData\",\"CompanyID\": null,\"PropertyID\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"delete\",\"TermID\": \"TERM20221206AA00002\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Terms and Conditions SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \"Event\" : \"selectone\",\"TermID\": \"TERM20221008AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/generaldata/termsandconditions",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"generaldata",
+						"termsandconditions"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

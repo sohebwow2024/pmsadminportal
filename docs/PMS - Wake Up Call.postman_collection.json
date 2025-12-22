@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "89b2f6f5-2899-4986-9572-65471db7bc0c",
+		"name": "PMS - Wake Up Call",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "WakeUpCall - Get Calls",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/get?PropertyID=HOTL20230223AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"get"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001",
+							"disabled": true
+						},
+						{
+							"key": "Token",
+							"value": "123",
+							"disabled": true
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WakeUpCall - Get Call by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/one?WakeUpCallID=WUPC20230316AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"one"
+					],
+					"query": [
+						{
+							"key": "WakeUpCallID",
+							"value": "WUPC20230316AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WakeUpCall - Add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"WakeUpCallID\" : \"{WakeUpCallID}\",\r\n    \"RoomNo\" : \"702\",\r\n    \"FloorNo\" : \"7\",\r\n    \"FloorID\" : \"FMSI20230220AA00001\",\r\n    \"GuestID\" : \"GDID20230220AA00001\",\r\n    \"WakeUpDate\" : \"2013-12-16\",\r\n    \"WakeUpTime\" : \"2013-12-16 07:30\",\r\n    \"Remarks\" : \"Call 15 min before \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/add",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WakeUpCall - Update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    //\"WakeUpCallID\" : \"{WakeUpCallID}\",\r\n   // \"RoomNo\" : \"703\",\r\n    //\"FloorNo\" : \"6\",\r\n    //\"FloorID\" : \"FMSI20230220AA00001\",\r\n    //\"GuestID\" : \"GDID20230220AA00001\",\r\n    \"WakeUpDate\" : \"2013-12-16\",\r\n    \"WakeUpTime\" : \"2013-12-16 07:30\",\r\n    \"Remarks\" : \"Call 20 min before \"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/update/WUPC20230316AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"update",
+						"WUPC20230316AA00001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WakeUpCall - Delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/delete?Remarks=deleted&WakeUpCallID=WUPC20230316AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "Remarks",
+							"value": "deleted"
+						},
+						{
+							"key": "WakeUpCallID",
+							"value": "WUPC20230316AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WakeUpCall - Change Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/wakeupcall/delete?WakeUpCallID=WUPC20230316AA00001&Remarks=",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"wakeupcall",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "WakeUpCallID",
+							"value": "WUPC20230316AA00001",
+							"description": "canceled, delete, NotAnswered, completed"
+						},
+						{
+							"key": "Remarks",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

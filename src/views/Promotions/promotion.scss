@@ -1,0 +1,34 @@
+.promoCard {
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.08);
+    }
+}
+#pos_table.react-dataTable .rdt_Table  {
+    min-height: unset;
+    margin-bottom: 20px;
+
+}
+
+#pos_table .rc-input-number .rc-input-number-handler-wrap .rc-input-number-handler svg{
+    top: 1px;
+}
+.react-dataTable .rdt_Table  {
+    min-height: 65vh;
+
+}
+
+.rdt_TableHeadRow .rdt_TableCol:first-child,
+.rdt_TableRow .rdt_TableCell:first-child{
+    padding-left: 35px !important;
+}
+#LaundryTransaction .rdt_TableHeadRow .rdt_TableCol:first-child,
+#LaundryTransaction .rdt_TableRow .rdt_TableCell:first-child{
+    flex-grow: 0;
+}
+
+.rdt_TableHeadRow .rdt_TableCol:last-child,
+.rdt_TableRow .rdt_TableCell:last-child{
+    justify-content: space-evenly !important;
+    max-width: 125px !important;
+}

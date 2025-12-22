@@ -1,0 +1,18 @@
+.list-group .handle {
+    cursor: move !important;
+    background-color: rgba(34, 41, 47, 0.1);
+    padding: 0 5px;
+    margin: 5px;
+}
+.drop_here{
+    width: auto;
+    height: 10vh;
+    background: #22292f1a;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+li.list-group-item.sortable-ghost {
+    background: #e5e2e2;
+}

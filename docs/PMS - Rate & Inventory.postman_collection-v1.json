@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "e6feeb53-0ac5-4eb9-8efa-5a9fc71b3103",
+		"name": "PMS - Rate & Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Rate Inventory List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Status\":\"Active\",\r\n    \"FromDate\": \"2022-12-18\",\r\n    \"Todate\": \"2023-12-28\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/rateinventory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"rateinventory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Inventory Insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"LoginID\" : \"LDT001\" , \"Token\" : \"123\" , \"Seckey\" : \"abc\", \r\n\"rateandinventory\" : [\r\n    {       \"RoomID\": \"RDTI20221025AA00005\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"ExtraAdultPrice\": 200.0,\r\n            \"ExtraChildPrice\": 50.0,\r\n            \"ExtraBedCharges\": 10.0,\r\n            \"PriceValidOnDate\": \"2022-12-18T00:52:17.013\",\r\n            \"RoomRate\": 2800.0,\r\n            \"CGST_P\": 9.0,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 504.0,\r\n            \"TotalAmount\": 3304.0\r\n    },\r\n     {      \"RoomID\": \"RDTI20221025AA00005\",\r\n            \"RoomTypeID\": \"RTD004\",\r\n            \"ExtraAdultPrice\": 200.0,\r\n            \"ExtraChildPrice\": 50.0,\r\n            \"ExtraBedCharges\": 100.0,\r\n            \"PriceValidOnDate\": \"2022-12-08T00:52:17.013\",\r\n            \"CreatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"UpdatedDate\": \"2022-12-07T00:52:17.013\",\r\n            \"StatusID\": \"SDT001\",\r\n            \"RoomRate\": 2800.0,\r\n            \"CGST_P\": 9.0,\r\n            \"SGST_P\": 9.0,\r\n            \"IGST_P\": 18.0,\r\n            \"TotalTax\": 504.0,\r\n            \"TotalAmount\": 3304.0\r\n    }\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/rateinventory",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"rateinventory"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rate Inventory Insert range",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n\r\n    \"RoomID\": \"RDTI20221025AA00005\",\r\n    \"RoomTypeID\": \"RTD004\",\r\n    \"ExtraAdultPrice\": 200.0,\r\n    \"ExtraChildPrice\": 50.0,\r\n    \"ExtraBedCharges\": 10.0,\r\n    \"RoomRate\": 2800.0,\r\n    \"CGST_P\": 9.0,\r\n    \"SGST_P\": 9.0,\r\n    \"IGST_P\": 18.0,\r\n    \"TotalTax\": 504.0,\r\n    \"TotalAmount\": 3304.0,\r\n\r\n    \"FromDate\": \"2022-12-18\",\r\n    \"ToDate\": \"2022-12-28\",\r\n    \"Days\": \"Friday,Saturday,Sunday,Monday,Tuesday,Wednesday,Thursday\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/setdata/rateinventoryrange",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"setdata",
+						"rateinventoryrange"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

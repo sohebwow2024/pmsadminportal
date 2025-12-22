@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "c3298aa2-e845-4423-87ea-c9f586332864",
+		"name": "PMS - PoS - Master",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "POS - get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos?PropertyID=HOTL20230223AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"description": "get by property"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "CompanyID",
+							"value": "COM001",
+							"description": "get by company, if propertyID present, companyid is ignored",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - get all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos/all?LoginID=LDT001&Token=123&CompanyID=COM001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos",
+						"all"
+					],
+					"query": [
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"disabled": true
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Inactive",
+							"disabled": true
+						},
+						{
+							"key": "CompanyID",
+							"value": "COM001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PO - get one",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos?LoginID=LDT001&Token=123&id=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "id",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "New Test PoS",
+							"type": "text"
+						},
+						{
+							"key": "LogoFile",
+							"type": "file",
+							"src": "/C:/Users/Fahad/Pictures/krafitech-icon.png"
+						},
+						{
+							"key": "EmailID",
+							"value": "pos@email.com",
+							"type": "text"
+						},
+						{
+							"key": "PhoneNumber",
+							"value": "90909090902",
+							"type": "text"
+						},
+						{
+							"key": "HasTables",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "PaymentType",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "PANNo",
+							"value": "ABCDE1234F",
+							"type": "text"
+						},
+						{
+							"key": "CINNo",
+							"value": "CIN00000000003",
+							"type": "text"
+						},
+						{
+							"key": "FSSAINo",
+							"value": "FSSI00000000002",
+							"type": "text"
+						},
+						{
+							"key": "GSTNo",
+							"value": "GST00000000001",
+							"type": "text"
+						},
+						{
+							"key": "GSTRate",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "Address",
+							"value": "ABCD Road, EFG, 340090",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Changed from ipsum lorem.....",
+							"type": "text"
+						},
+						{
+							"key": "PropertyID",
+							"value": "HOTL20230223AA00001",
+							"type": "text"
+						},
+						{
+							"key": "CompanyID",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "HotelName",
+							"value": "My Test Hotel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - logo upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "File",
+							"type": "file",
+							"src": "/C:/Users/Fahad/Pictures/krafitech-logo.png"
+						},
+						{
+							"key": "PhotoID",
+							"value": "GST00000000001",
+							"type": "text"
+						},
+						{
+							"key": "CompanyID",
+							"value": "COM001",
+							"type": "text"
+						},
+						{
+							"key": "HotelName",
+							"value": "My Test Hotel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos/logo_upload",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos",
+						"logo_upload"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"PoSID \" : \"{PoSID }\",\r\n    \"Name\" : \"test PoS\",\r\n    \"LogoFile\" : \"pos_My_Test_Hotel_14562023015646.png\",\r\n    \"EmailID\" : \"pos@email.com\",\r\n    \"PhoneNumber\" : \"90909090902\",\r\n    \"HasTables\" : true,\r\n    \"PaymentType\" : \"\",\r\n    \"PANNo\" : \"ABCDE1234F\",\r\n    \"CINNo\" : \"CIN00000000003\",\r\n    \"FSSAINo\" : \"FSSI00000000002\",\r\n    \"GSTNo\" : \"GST00000000001\",\r\n    \"GSTRate\" : \"5\",\r\n    \"Address\" : \"ABCD Road, EFG, 340090\",\r\n    \"Description\" : \"Chamged from ipsum lorem.....\"\r\n    //\"PropertyID\" : \"{PropertyID }\",\r\n    //\"CompanyID\" : \"{CompanyID}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos/update?id=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos/delete/POSI20230306AA00001?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos",
+						"delete",
+						"POSI20230306AA00001"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

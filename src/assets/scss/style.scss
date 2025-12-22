@@ -1,0 +1,618 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+.earnings-card {
+  border-radius: 15px !important;
+  cursor: pointer !important;
+
+  .card {
+    border-radius: 15px !important;
+  }
+}
+
+.reload {
+  cursor: pointer !important;
+}
+
+.paper {
+  border-radius: 15px !important;
+  padding: 15px !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.paper1 {
+  border-radius: 15px !important;
+  padding: 15px !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) !important;
+  width: 49% !important;
+}
+
+.house_kping_sts_tbl th {
+  font-size: 12px !important;
+  padding: 5px !important;
+}
+
+.p_fix {
+  position: absolute !important;
+}
+
+.error_msg_lbl {
+  color: #ea5455 !important;
+}
+
+.border_red {
+  border-color: 1px solid #ea5455 !important;
+}
+
+// scrollbar webkit
+::-webkit-scrollbar:horizontal {
+  display: auto !important;
+  height: 0.4rem !important;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 50rem;
+}
+
+iframe {
+  pointer-events: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7367f0 !important;
+  border-radius: 50rem;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid;
+  border-radius: 50rem;
+  border-color: #c0c0c0 !important;
+}
+
+.floor-dropdown {
+  z-index: 99;
+}
+
+.discount-error {
+  margin-left: 80px;
+}
+
+.date-error {
+  margin-left: 115px;
+}
+
+.name-error {
+  margin-left: 120px;
+}
+
+.Amount {
+  margin-left: 5px;
+}
+
+.roomsBookedDropdown {
+  width: 120px;
+}
+
+.discountTypeDropdown {
+  width: 130px;
+}
+
+.discountField {
+  width: 135px;
+}
+
+.mealCol {
+  width: 300px;
+}
+
+.mealDropdown {
+  width: 300px;
+}
+
+.occupantsCol {
+  width: 45%;
+}
+
+.adultsDropdown {
+  width: 70px;
+}
+
+// .paymentType {
+// 	margin-left: 116px;
+// }
+.bookingSource {
+  margin-left: 116px;
+}
+
+// .mealName {
+// 	margin-left: 117px;
+// }
+// .mealType {
+// 	margin-left: 84px;
+// }
+.editMealName {
+  margin-left: 83px;
+}
+
+.editMealType {
+  margin-left: 90px;
+}
+
+.paymentTypeName {
+  margin-left: 68px;
+}
+
+.typeLabel {
+  width: 110px;
+}
+
+// .mealTypePrice {
+// 	margin-left: 52px;
+// }
+.bookingSourceName {
+  margin-left: 65px;
+}
+
+.editPaymentModeName {
+  margin-left: 66px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.75;
+}
+
+:root {
+  --main-color: rgb(104, 117, 217);
+  --main-color-hover: rgb(104, 117, 217, 0.2);
+  --track-color: #ddd;
+  --mark-color: #aaaaaa;
+}
+
+.customSlider {
+  /* max width of your slider */
+  max-width: 300px;
+  /* Optional: Only If you want to center your slider in the page */
+  margin: auto;
+}
+
+.customSlider-track {
+  /* Top value to align your track to the center of your thumb */
+  top: 8px;
+  /* thickness of the track */
+  height: 4px;
+  /* default color of your track */
+  background: var(--track-color);
+}
+
+.customSlider-track.customSlider-track-0 {
+  /* color of the track before the thumb */
+  background: var(--main-color);
+}
+
+.customSlider-thumb {
+  cursor: pointer;
+  /*color for the thumb */
+  background: var(--main-color);
+  /* shape of the thumb: circle */
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  /* remove default outline when selected */
+  outline: none;
+}
+
+.customSlider-thumb:hover {
+  box-shadow: 0 0 0 8px var(--main-color-hover);
+}
+
+.customSlider-mark {
+  cursor: pointer;
+  top: 6px;
+  width: 1.5px;
+  height: 8px;
+  background-color: var(--mark-color);
+}
+
+.customSlider-mark.customSlider-mark-before {
+  background-color: var(--main-color);
+}
+
+.customSlider-mark.customSlider-mark-active {
+  display: none;
+}
+
+.globalDropdown.dropdown-menu[data-popper-placement]:not([data-popper-placement^="top-"]) {
+  top: 4.2rem !important;
+}
+
+.globalDropdown {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.css-11mde6h-MuiPaper-root {
+  box-shadow: none !important;
+}
+
+.css-1w1rijm-MuiButtonBase-root-MuiButton-root {
+  width: 130px;
+}
+
+.MuiTable-root .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  display: none !important;
+}
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+  align-items: baseline !important;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  text-align: center !important;
+}
+
+button[data-testid="Print-iconButton"] {
+  display: none !important;
+}
+
+fieldset[aria-label="Show/Hide Table Columns"] {
+  padding-left: 20px;
+}
+
+.posCategories .nav-link {
+  background-color: #7367f0;
+  color: #fff;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+// #fca043
+// #30cfe8
+// #f3f2f7
+.posCategories .nav-link.active {
+  background-color: #808080;
+  color: #fff;
+}
+
+.posCategories .nav-link:after {
+  background: transparent !important;
+}
+
+.QuickTable {
+  border-bottom-width: 1px;
+}
+
+.QuickTable td {
+  border-bottom: transparent;
+}
+
+.tss-1akey0g-MUIDataTableHeadCell-data {
+  width: max-content;
+}
+
+.Voucherlogo {
+  width: 100px;
+  height: 100px;
+}
+
+.durationCard .card {
+  box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1) !important;
+}
+
+.durationCard {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn {
+  display: none !important;
+}
+
+.alice-carousel__dots {
+  margin: 0px 3px 20px !important;
+}
+
+.side-Notification-Card {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+// .side-Notification-Card::-webkit-scrollbar {
+// 	display: none;
+// }
+
+.topNotification {
+  background-color: transparent !important;
+}
+
+.notification-scroll {
+  overflow-y: scroll !important;
+}
+
+.notification-scroll.ps .ps__rail-x:hover,
+.notification-scroll.ps .ps__rail-y:hover,
+.notification-scroll.ps .ps__rail-x:focus,
+.notification-scroll.ps .ps__rail-y:focus,
+.notification-scroll.ps .ps__rail-x.ps--clicking,
+.notification-scroll.ps .ps__rail-y.ps--clicking {
+  opacity: 0 !important;
+}
+
+.notification-scroll .ps__thumb-y {
+  display: none !important;
+}
+
+.noti-card {
+  margin-bottom: 0.5rem !important;
+}
+
+.noti-card:hover {
+  background-color: #efefef;
+}
+
+.bookingEngineWizard .bs-stepper-header {
+  height: fit-content;
+}
+
+.Rooms-selection {
+  width: 70% !important;
+}
+
+.sliderDiv .slick-dots {
+  bottom: -15px;
+}
+
+.sliderDiv img {
+  width: 70%;
+  margin: auto;
+}
+
+// .sliderDiv {
+// 	width: 30%;
+// }
+
+.mainDiv {
+  width: 800px;
+  background-color: #fff;
+  margin: auto;
+
+  // -webkit-box-shadow: -7px -2px 12px -10px rgba(0, 0, 0, 0.75);
+  // -moz-box-shadow: -7px -2px 12px -10px rgba(0, 0, 0, 0.75);
+  // box-shadow: -7px -2px 12px -10px rgba(0, 0, 0, 0.75);
+  p {
+    margin-bottom: 5px !important;
+  }
+
+  .tableHeader {
+    border-bottom: 2px solid #000;
+  }
+
+  Table td {
+    text-align: left;
+    border-bottom: none;
+    padding-bottom: 8px !important;
+  }
+
+  Table th {
+    padding-left: 5px;
+    color: #000;
+  }
+}
+
+.voucherDiv {
+  width: 100%;
+  text-align: right;
+}
+
+// ...........................................
+// ............ Ashnab CSS Start
+// ..........................................
+
+// Poslnvoice
+
+@media print {
+  @page {
+    size: 80mm 180mm;
+    margin: 0;
+  }
+}
+
+.Remainingcount-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.NewRemainingcount-modal {
+  max-width: 800px;
+  /* Or your preferred width */
+  margin: 1.75rem auto;
+}
+
+.NewRemainingcount-modal .modal-content {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.NewRemainingcount-modal .modal-body {
+  max-height: 70vh;
+  width: 800px;
+  overflow-y: auto;
+}
+
+//   DashBoard
+.NewRemainingcount-modal .modal-title {
+  width: 100%;
+}
+
+.BookingsDetails {
+  display: flex;
+  width: 100%;
+}
+
+@media only screen and (max-width: 784px) {
+  .earnings-card .card {
+    // height: 110px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .NewRemainingcount-modal .modal-body {
+    width: 100%;
+  }
+
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .senareio-bookingsection {
+    justify-content: center !important;
+  }
+  //  BookingChart
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+  }
+
+  .date-switching-bth .switching-bth {
+    padding: 5px;
+  }
+
+  // DashBoard
+  .check-InOut-card {
+    display: flex !important;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .check-InOut-card .card {
+    width: 100% !important;
+  }
+
+  .remaining-checkout-card {
+    padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 448px) {
+  .senareio-bookingsection {
+    justify-content: center !important;
+  }
+  //  BookingChart
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+  }
+
+  .date-switching-bth .switching-bth {
+    padding: 5px;
+    margin-right: 5px !important;
+    margin-left: 7px !important;
+  }
+
+  .NewRemainingcount-modal .BookingsDetails {
+    display: contents;
+  }
+}
+
+@media only screen and (max-width: 384px) {
+  //  BookingChart
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+  }
+
+  .date-switching-bth .switching-bth {
+    padding: 5px;
+    margin-right: 3px !important;
+    margin-left: 3px !important;
+  }
+}
+
+@media only screen and (max-width: 359px) {
+  //  BookingChart
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+  }
+
+  .date-switching-bth .switching-bth {
+    padding: 3px;
+    margin-right: 2px !important;
+    margin-left: 2px !important;
+  }
+}
+
+@media only screen and (max-width: 334px) {
+  //  BookingChart
+  .date-switching-bth {
+    text-align: center !important;
+    margin-top: 10px;
+    width: 88%;
+  }
+
+  .date-switching-bth .switching-bth {
+    padding: 3px;
+    margin: 3px 3px;
+  }
+}
+
+// pms
+
+.earnings-card .card,
+.earnings-card > div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.earnings-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-card {
+  height: 180px;
+  display: flex;
+  margin-bottom: 30px;
+}
+.bottom-card {
+  height: 253px; /* 🔥 thodi zyada height */
+  display: flex;
+  justify-content: stretch;
+}
+.notifcation-container {
+  height: 200px;
+  border: 1px solid #dadada;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+}
+.add-hotl-btn Button {
+  background-color: #7367f0;
+  border: none;
+}
+.add-hotl-btn Button:hover {
+  background-color: #014787;
+}

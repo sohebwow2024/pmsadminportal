@@ -1,0 +1,70 @@
+.table {
+
+    thead th {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 1;        
+}
+
+    thead th:first-child {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    left: 0;
+    z-index: 10;
+    }
+
+    tbody th {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    left: 0;
+    z-index: 1;
+    }
+
+    tbody th:first-child {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    left: 0;
+    z-index: 2;
+    background: whitesmoke;
+    }
+
+    tbody td {
+        padding: 0;       
+    }
+
+    tbody tr {
+    text-align: center;
+    }  
+    
+    .booking-btn {
+        transition: all .3s;
+    }
+    .transparent {
+        opacity: 0;
+    }
+
+    .badgetd {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+        height: 70px;
+    }
+
+    .empty-booking {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+        height: 70px;
+    }
+
+    .empty-booking:hover > .booking-btn.d-none{
+        display: inline-block !important;
+        opacity: 1 !important;
+    }
+    
+    .roomTypeHead {
+        // height: 10rem;
+        height: fit-content;
+    }
+}

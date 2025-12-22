@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "1c0e8777-540e-4d16-aa68-136d25c337bf",
+		"name": "PMS - AdjustProperties",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "Rooms Adjustment - Get by dates",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/rooms/adjustment?FromDate=2023-03-08&Todate=2023-03-18&For=OTA",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"rooms",
+						"adjustment"
+					],
+					"query": [
+						{
+							"key": "FromDate",
+							"value": "2023-03-08"
+						},
+						{
+							"key": "Todate",
+							"value": "2023-03-18"
+						},
+						{
+							"key": "For",
+							"value": "OTA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rooms Adjustment - Insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Seckey",
+						"value": "abc",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"RoomID\": \"RDTI20230220AA00002\",\r\n        \"RoomCount\":\"124\",\r\n        \"AdjustedFor\":\"OTA\",\r\n        \"FromDate\":\"2023-03-08\",\r\n        \"ToDate\":\"2023-03-18\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/rooms/adjustment",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"rooms",
+						"adjustment"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

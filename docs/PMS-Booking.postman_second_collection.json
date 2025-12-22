@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "a524c56b-483d-4e06-9bb9-dc915f973376",
+		"name": "PMS-Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LoginAuthentication SelectOne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"Demo\",\r\n    \"Password\": \"ICy5YqxZB1uWSwcVLSNLcA==\",\r\n    \"Event\": \"selectone\",\r\n    \"Seckey\": \"abc\"\r\n    // \"Token\": \"ySnj5TYA20gSeW21wPTGTb7VgK5cSuEO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_demo}}/api/authentication/userauthentication/loginauthentication",
+					"host": [
+						"{{pms_demo}}"
+					],
+					"path": [
+						"api",
+						"authentication",
+						"userauthentication",
+						"loginauthentication"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/BookingVoucher",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/BookingVoucher?BookingId=BKID20221025AA00001&LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"BookingVoucher"
+					],
+					"query": [
+						{
+							"key": "BookingId",
+							"value": "BKID20221025AA00001"
+						},
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/UploadImage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Shaikh/Pictures/Saved Pictures/board-361516__340.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/booking/UploadImage",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"UploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/uploads/documents/img_10512023035139.jpeg",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{pms_url}}/uploads/documents/img_13152023011546.webp",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"uploads",
+						"documents",
+						"img_13152023011546.webp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/checkindetails",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"ipMCoTEN20gjQU5CVTjESYVGihEy+o1W\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"insert\",\r\n    \"ArrivalDateAndTime\": \"2023-02-11T18:30:00Z\",\r\n    \"ExpectedDateAndTime\": \"2023-02-13T06:30:00Z\",\r\n    \"VehicleNo\": \"MH04BS4321\",\r\n    \"ComingFrom\": \"Mumbai\",\r\n    \"GoingTo\": \"Mumbai\",\r\n    \"IDProofType\": \"passport\",\r\n    \"NameAsPerIDProof\": \"Test Name Guest\",\r\n    \"IDProofNumber\": \"J823929\",\r\n    \"IDProofScanCopyURL\": \"img_13412023054137.png\",\r\n    \"BookingID\": \"BKID20230212AA00238\",\r\n    \"RoomAllocationID\": \"RAID20230212AA00239\"\r\n}\r\n// {\r\n//     \"LoginID\": \"LDT001\",\r\n//     \"Token\": \"123\",\r\n//     \"Seckey\": \"abc\",\r\n//     \"Event\": \"insert\",\r\n//     \"ArrivalDateAndTime\": \"2023-02-11\",\r\n//     \"ExpectedDateAndTime\": \"2023-02-11\",\r\n//     \"VehicleNo\": \"MH04HQ2022\",\r\n//     \"ComingFrom\": \"Mumbai\",\r\n//     \"GoingTo\": \"Mumbai\",\r\n//     \"IDProofType\": \"Aadhaar\",\r\n//     \"NameAsPerIDProof\": \"Suleman\",\r\n//     \"IDProofNumber\": \"1234123412341234\",\r\n//     \"IDProofScanCopyURL\": \"img_12212023122119.webp\",\r\n//     \"BookingID\": \"BKID20230201AA00211\",\r\n//     \"RoomAllocationID\": \"BKID20230201AA00212\"\r\n// }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/checkindetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"checkindetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckIN Details Select",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LGID20230206AA00001\",\r\n    \"Token\": \"C4MEJuoL20hXqiCmhmA6TJCuLu9ikIbG\",\r\n    \"Seckey\": \"abc\",\r\n    \"BookingID\":\"BKID20230211AA00016\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_demo}}/api/checkindetails",
+					"host": [
+						"{{pms_demo}}"
+					],
+					"path": [
+						"api",
+						"checkindetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/CheckInGuestSave",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "LoginID",
+							"value": "LDT001",
+							"type": "default"
+						},
+						{
+							"key": "Token",
+							"value": "123",
+							"type": "default"
+						},
+						{
+							"key": "IDProofType",
+							"value": "Aadhaar",
+							"type": "default"
+						},
+						{
+							"key": "NameAsPerIDProof",
+							"value": "Suleman",
+							"type": "default"
+						},
+						{
+							"key": "IDProofNumber",
+							"value": "123412341234",
+							"type": "default"
+						},
+						{
+							"key": "IDProofScanCopyURL",
+							"value": "img_12242023012446.webp",
+							"type": "default"
+						},
+						{
+							"key": "BookingID",
+							"value": "BKID20230201AA00211",
+							"type": "default"
+						},
+						{
+							"key": "RoomAllocationID",
+							"value": "BKID20230201AA00212",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Shaikh/Pictures/Saved Pictures/board-361516__340.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/CheckInGuestSave",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"CheckInGuestSave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/booking/RoomAssign",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"BookingID\":\"BKID20230201AA00211\",\r\n    \"RoomAllocationID\":\"BKID20230201AA00212\",\r\n    \"FloorID\":\"FMSI20230130AA00060\",\r\n    \"RoomID\":\"RDT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_local}}/api/booking/RoomAssign",
+					"host": [
+						"{{pms_local}}"
+					],
+					"path": [
+						"api",
+						"booking",
+						"RoomAssign"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

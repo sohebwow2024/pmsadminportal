@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "90b00842-f3d6-4b78-9201-009ba8a773ce",
+		"name": "PMS-RatePlan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "roomRatePlan List",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    // \"RoomID\":\"121\",\r\n   //\"MealID\": \"123\",\r\n   //\"RoomRatePlanID\":\"RRTI20230219AA00001\",\r\n   \"Event\": \"RatePlan\"//,//\r\n   // \"Status\": \"inActive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomRatePlan add rateplan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"addRatePlan\",\r\n    \"RoomID\": \"121\",\r\n    \"MealID\":\"122\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomRatePlan all rateplans",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    //\"Status\": \"Active\",\r\n    \"Event\": \"allRatePlans\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomRatePlan remove rateplan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"removeRatePlan\",\r\n    \"RoomID\": \"123\",\r\n    \"MealID\": \"124\"\r\n    //\"RoomRatePlanID\": \"RRTI20230219AA00002\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomRatePlan room rateplans",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\": \"LDT001\",\r\n    \"Token\": \"123\",\r\n    \"Seckey\": \"abc\",\r\n    \"Event\": \"RatePlan\",\r\n    //\"RoomRatePlanID\": \"RRTI20230219AA00001\"\r\n    \"RoomID\": \"123\",\r\n    \"MealID\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/getdata/bookingdata/roomdetails",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"getdata",
+						"bookingdata",
+						"roomdetails"
+					],
+					"query": [
+						{
+							"key": "Username",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "Password",
+							"value": "123",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

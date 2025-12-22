@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "2bfe2660-6908-40ee-9555-1cefc925abe7",
+		"name": "PMS - PoS - Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "POS - Orders- Get Masters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/masters?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"masters"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders- get all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/all?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"all"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Inactive",
+							"disabled": true
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders- get one",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders?LoginID=LDT001&Token=123&OrderID=PORD20230307AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "BookingID",
+							"value": "PTBL20230306AA00001",
+							"disabled": true
+						},
+						{
+							"key": "TableID",
+							"value": "PTBL20230306AA00003",
+							"disabled": true
+						},
+						{
+							"key": "OrderID",
+							"value": "PORD20230307AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders - create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\r\n    //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n    \"POSID\" : \"PORD20230308AA00002\",\r\n    \"ServedAt\" : \"Table\",\r\n    \"POSTableID\" : \"PTBL20230306AA00002\", // 003\r\n    \"FloorID\" : null,\r\n    \"ServerName\" : \"X Y Z\",\r\n    \"Remark\" : \"Table No 004\",\r\n    \"GuestID\" : null,\r\n    \"BookingID\" : null,\r\n    \"TransactionID\" : null,\r\n    //\"Total\" : \"1800\", // calculated at backend\r\n    \"CGST\" : \"2.5\",\r\n    \"SGST\" : \"2.5\",\r\n    \"IGST\" : \"5\",\r\n    //\"Taxes\" : \"90\", //calculated at backend\r\n    \"Discount\" : \"50\",\r\n    \"DiscountType\" : \"F\",\r\n    //\"TotalDue\" : \"1840\", //calculated at backend\r\n    \"OrderDate\" : \"2023-03-07 10:31:50.723\",\r\n    \"PoSOrderItems\" : [\r\n        {\r\n            //\"PoSOrderItemID\" : \"{PoSOrderItemID}\",\r\n            \"POSProductID\" : \"PSPM20230307AA00002\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Do Pyaza (Half)\",\r\n            \"ProductCategoryName\" : \"Mughlai Cuisine\",\r\n            \"Price\" : \"500\",\r\n            \"Quantity\" : \"2\",\r\n            \"Remark\" : \"Mild Spicy\"\r\n        },\r\n        {\r\n            //\"PoSOrderItemID\" : \"{PoSOrderItemID}\",\r\n            \"POSProductID\" : \"PSPM20230306AA00001\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Manchuriyan (Half)\",\r\n            \"ProductCategoryName\" : \"Chinese Dish\",\r\n            \"Price\" : \"400\",\r\n            \"Quantity\" : \"1\",\r\n            \"Remark\" : \"Mild Spicy\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders- update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\r\n    //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n    //\"POSID\" : \"PORD20230308AA00002\",\r\n    \"ServedAt\" : \"Table2\",\r\n    \"POSTableID\" : \"PTBL20230306AA00001\", // 003\r\n    \"FloorID\" : null,\r\n    \"ServerName\" : \"X Y Z2\",\r\n    \"Remark\" : \"Table 0042\",\r\n    \"GuestID\" : null,\r\n    \"BookingID\" : null,\r\n    \"TransactionID\" : null,\r\n    //\"Total\" : \"182200\", //calculated at backend\r\n    \"CGST\" : \"2.5\",\r\n    \"SGST\" : \"2.5\",\r\n    \"IGST\" : \"5\",\r\n    //\"Taxes\" : \"90\", //calculated at backend\r\n    \"Discount\" : \"100\",\r\n    \"DiscountType\" : \"F\",\r\n    //\"TotalDue\" : \"18220\", //calculated at backend\r\n    \"OrderDate\" : \"2023-03-07 10:31:50.723\",\r\n    \"PoSOrderItems\" : [/*\r\n        {\r\n            \"PoSOrderItemID\" : \"PSIT20230307AA00001\",\r\n            \"POSProductID\" : \"PSPM20230307AA00002\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Do Pyaza (Half)\",\r\n            \"ProductCategoryName\" : \"Mughlai Cuisine\",\r\n            \"Price\" : \"500\",\r\n            \"Quantity\" : \"2\",\r\n            \"Remark\" : \"Mild Spicy\",\r\n            \"EntryType\" : \"U\"\r\n        },\r\n        {\r\n            \"PoSOrderItemID\" : \"PSIT20230307AA00002\",\r\n            \"POSProductID\" : \"PSPM20230306AA00001\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Manchuriyan (Half)\",\r\n            \"ProductCategoryName\" : \"Chinese Dish\",\r\n            \"Price\" : \"400\",\r\n            \"Quantity\" : \"1\",\r\n            \"Remark\" : \"Mild Spicy\",\r\n            \"EntryType\" : \"U\"\r\n        }\r\n        ,\r\n        {\r\n            \"PoSOrderItemID\" : \"PSIT20230307AA00004\",\r\n            \"POSProductID\" : \"PSPM20230306AA00001\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Manchuriyan (Half)\",\r\n            \"ProductCategoryName\" : \"Chinese Dish\",\r\n            \"Price\" : \"800\",\r\n            \"Quantity\" : \"1\",\r\n            \"Remark\" : \"Mild Spicy\",\r\n            \"EntryType\" : \"D\"\r\n        },\r\n        {\r\n            //\"PoSOrderItemID\" : \"{PoSOrderItemID}\",\r\n            \"POSProductID\" : \"PSPM20230306AA00001\",\r\n            //\"PoSOrderID\" : \"{PoSOrderID}\",\r\n            \"POSProductName\" : \"Chicken Manchuriyan (Half)\",\r\n            \"ProductCategoryName\" : \"Chinese Dish\",\r\n            \"Price\" : \"900\",\r\n            \"Quantity\" : \"1\",\r\n            \"Remark\" : \"Mild Spicy\"\r\n        }*/\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/update?id=PORD20230308AA00002",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PORD20230308AA00002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders - Hold",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Remark\":\"Customer need more time to arrive at restaurant\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/hold?id=PORD20230307AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"hold"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PORD20230307AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders - Cancel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Remark\":\"Customer cannot wait more..\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/cancel?id=PORD20230307AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"cancel"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PORD20230307AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders - Release",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    \"Remark\":\"Yeah, bring it on\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/release?id=PORD20230307AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"release"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PORD20230307AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Orders- delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_orders/delete/PORD20230307AA00001?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_orders",
+						"delete",
+						"PORD20230307AA00001"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

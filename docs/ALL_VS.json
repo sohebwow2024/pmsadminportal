@@ -1,0 +1,69 @@
+[
+    {
+        "name": "Dubai HQ",
+        "address": "0x8d0AefFb24bAf7e2692da6A40e0A58d2B22f62b4",
+        "network": 137,
+        "show": true
+    },
+    {
+        "name": "USA HQ",
+        "address": "0x7aAF91C4Cc85c582068752c90a15CbFd550BeCAa",
+        "network": 137,
+        "show": true
+    },
+    {
+        "name": "India HQ",
+        "address": "0x6c566d932Abe26a3c9fa03F77AC4aB848dD0981F",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x8d0AefFb24bAf7e2692da6A40e0A58d2B22f62b4",
+        "name": "Expense Ac.",
+        "address": "0x8A5Eb0Ce1F2f6F0f52CDd6B03d5Ca512ac187977",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x8d0AefFb24bAf7e2692da6A40e0A58d2B22f62b4",
+        "name": "Investments",
+        "address": "0xb2Ac948416b62E7EFd9eDaAcFE76f2df5e79466d",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x8d0AefFb24bAf7e2692da6A40e0A58d2B22f62b4",
+        "name": "Trading",
+        "address": "0x62ebaC1059515dB4EDEaf4274C17E3D081f6D420",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x7aAF91C4Cc85c582068752c90a15CbFd550BeCAa",
+        "name": "US.Trading",
+        "address": "0x627D5b25240775bc6b562CdE1051859b6Ab391b1",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x7aAF91C4Cc85c582068752c90a15CbFd550BeCAa",
+        "name": "US.Investments",
+        "address": "0x6f599FF053dC9b973dd9c4d2cb07Eb3806BdaEbB",
+        "network": 137,
+        "show": true
+    },
+    {
+        "vault": "0x6c566d932Abe26a3c9fa03F77AC4aB848dD0981F",
+        "name": "Procurements",
+        "address": "0x63b5f19887CfE9C4BB5012CccFe5b68130b71C1C",
+        "network": 137,
+        "show": true
+    },
+    {
+        "address": "0x4120Dc6570a97d1f3a3A600DBb9c175F736b3b75",
+        "name": "CSR Ac.",
+        "vault": "0x6c566d932Abe26a3c9fa03F77AC4aB848dD0981F",
+        "network": 137,
+        "show": true
+    }
+]

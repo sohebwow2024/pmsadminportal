@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "8182a811-fab3-4842-957e-1c6774e994f4",
+		"name": "PMS - PoS - Product Master",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24431172"
+	},
+	"item": [
+		{
+			"name": "POS - Product Master - get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Master - get all/status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product/all?LoginID=LDT001&Token=123&PoSID=POSI20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product",
+						"all"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Inactive",
+							"disabled": true
+						},
+						{
+							"key": "PoSID",
+							"value": "POSI20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PO - Product Master - get one",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product?LoginID=LDT001&Token=123&id=PSPM20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "id",
+							"value": "PSPM20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Master - insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n\r\n    //\"POSProductID\" : \"{POSProductID}\",\r\n    \"POSProductName\" : \"Chicken Do Pyaza (Half)\",\r\n    \"ProductCategoryID\" : \"PCTG20230306AA00002\",\r\n    \"Price\" : 500,\r\n    \"Unit\" : \"Bowl\",\r\n    \"Quantity\" : \"0.5\",\r\n    \"Description\" : \"Chicken do pyaza is a popular Indian dish that consists of tender chicken pieces cooked with a generous amount of onions and spices. \\\"Do pyaza\\\" literally means \\\"two onions\\\", referring to the fact that this dish includes both sliced onions and fried onions\",\r\n    \"PoSID\" : \"POSI20230306AA00001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product"
+					],
+					"query": [
+						{
+							"key": "Status",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Master - update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"POSProductID\" : \"PSPM20230306AA00001\",\r\n    \"POSProductName\" : \"Chicken Manchurian (Half)\",\r\n    \"ProductCategoryID\" : \"PCTG20230306AA00002\",\r\n    \"Price\" : \"400\",\r\n    \"Unit\" : \"Bowl\",\r\n    \"Quantity\" : \"0.5\",\r\n    \"Description\" : \"Chicken Manchurian is a popular Indo-Chinese dish made with marinated and deep-fried chicken that is then cooked in a tangy, spicy sauce. It is believed to have originated in the Chinese community in Kolkata, India, and has since become a favorite among Indian cuisine lovers.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product/update?id=PSPM20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PSPM20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Master - unavailable",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"LoginID\":\"LDT001\",\r\n    \"Token\":\"123\",\r\n    //\"POSProductID\" : \"PSPM20230306AA00001\",\r\n    \"Status\" : \"Not Available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product/status?id=PSPM20230306AA00001",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product",
+						"status"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "PSPM20230306AA00001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POS - Product Master - delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "LoginID",
+						"value": "LDT001",
+						"type": "text"
+					},
+					{
+						"key": "Token",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{pms_url}}/api/pos_product/delete/PSPM20230306AA00001?LoginID=LDT001&Token=123",
+					"host": [
+						"{{pms_url}}"
+					],
+					"path": [
+						"api",
+						"pos_product",
+						"delete",
+						"PSPM20230306AA00001"
+					],
+					"query": [
+						{
+							"key": "LoginID",
+							"value": "LDT001"
+						},
+						{
+							"key": "Token",
+							"value": "123"
+						},
+						{
+							"key": "Status",
+							"value": "Active",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
