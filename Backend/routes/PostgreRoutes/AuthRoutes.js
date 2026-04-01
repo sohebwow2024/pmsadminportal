@@ -4,6 +4,7 @@ import pool from "../../db/postgres.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
+console.log("test");
 
 router.post("/register", async (req, res) => {
   console.log("BODY:", req.body);
