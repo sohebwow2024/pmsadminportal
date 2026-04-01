@@ -41,8 +41,7 @@ const ProductMaster = () => {
       dates: "22/08/2022",
       applicability: "All Users",
       room: "100",
-      user: "50",
-      action: "btns",
+      disAmount: "10%",
     },
     {
       name: "Users",
@@ -50,62 +49,56 @@ const ProductMaster = () => {
       details: "Standard package details",
       dates: "15/10/2023",
       applicability: "selected",
-      room: "500",
-      user: "200",
-      action: "btns",
+      room: "100",
+      disAmount: "15%",
     },
   ];
 
-  const hotelTable = [	
+  const hotelTable = [
     {
-      name: "Client",
+      name: "Subscription Pay Id",
       sortable: true,
-      minWidth: "80px",
+      minWidth: "220px",
       cell: (row) => <span>{row.name}</span>,
     },
     {
-      name: "Plan",
+      name: "Subscription Id",
       sortable: true,
-      minWidth: "50px",
+      minWidth: "150px",
       cell: (row) => <span>{row.type}</span>,
     },
     {
-      name: "Price",
+      name: "Mode",
       sortable: true,
-      minWidth: "180px",
+      minWidth: "250px",
       cell: (row) => <span>{row.details}</span>,
     },
     {
-      name: "Billing",
+      name: "Amount",
       sortable: true,
-      minWidth: "50px",
+      // minWidth: "50px",
       cell: (row) => <span>{row.dates}</span>,
     },
     {
-      name: "Start Date",
+      name: "Time",
       sortable: true,
-      minWidth: "80px",
+      // minWidth: "250px",
       cell: (row) => <span>{row.applicability}</span>,
     },
     {
       // name: 'Discount Amount',
-      name: "Expiry Date",
+      name: "Product Id",
       sortable: true,
-      minWidth: "50px",
+      // minWidth: "250px",
       cell: (row) => <span>{row.room}</span>,
     },
     {
-      name: "Payment Status",
+      name: "Discount Amount",
       sortable: true,
-      minWidth: "50px",
-      cell: (row) => <span>{row.user}</span>,
+      minWidth: "180px",
+      cell: (row) => <span>{row.disAmount}</span>,
     },
-    {
-      name: "Subscription Status",
-      sortable: true,
-      minWidth: "150px",
-      cell: (row) => <span>{row.user}</span>,
-    },
+
     // {
     //   name: "Actions",
     //   center: true,
@@ -134,8 +127,8 @@ const ProductMaster = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>All Subscription</h2>
-            <div className="d-flex gap-1 mt-2">
+            <h2>Subscription Payment</h2>
+            {/* <div className="d-flex gap-1 mt-2">
               <button
                 className={`btn rounded-pill px-1 ${activeTab === "active" ? "btn-primary" : "btn-white shadow-sm fw-medium"
                 }`}
@@ -159,7 +152,7 @@ const ProductMaster = () => {
               >
                 Expired (0)
               </button>
-            </div>
+            </div> */}
           </CardTitle>
         </CardHeader>
 

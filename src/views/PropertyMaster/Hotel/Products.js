@@ -71,7 +71,7 @@ const Products = () => {
     // },
     {
       name: "PMS",
-      type: "Basic",
+      type: "020341",
       details: "Basic package details",
       dates: "22/08/2022",
       applicability: "All Users",
@@ -81,7 +81,7 @@ const Products = () => {
     },
     {
       name: "LLM",
-      type: "Standard",
+      type: "382401",
       details: "Standard package details",
       dates: "15/10/2023",
       applicability: "selected",
