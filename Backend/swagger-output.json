@@ -40,10 +40,10 @@
                   "product_name": {
                     "example": "any"
                   },
-                  "category": {
+                  "category_id": {
                     "example": "any"
                   },
-                  "industry_category": {
+                  "industry_category_id": {
                     "example": "any"
                   },
                   "description": {
@@ -81,9 +81,6 @@
     },
     "/api/products/productDetailById/{id}": {
       "get": {
-        "tags": [
-          "Products"
-        ],
         "description": "",
         "parameters": [
           {
@@ -150,7 +147,13 @@
                   "category": {
                     "example": "any"
                   },
+                  "category_id": {
+                    "example": "any"
+                  },
                   "industry_category": {
+                    "example": "any"
+                  },
+                  "industry_category_id": {
                     "example": "any"
                   },
                   "description": {
@@ -777,6 +780,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -815,7 +821,50 @@
         }
       }
     },
+    "/api/plans/getAllPromoCode": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/plans/promoCode/{id}": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Plans"
@@ -1040,6 +1089,99 @@
         }
       }
     },
+    "/api/clients/countries": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clients/states": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clients/cities": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clients/pincode": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pincode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/clients/clients": {
       "post": {
         "tags": [
@@ -1221,6 +1363,29 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/clients/clientsDetailsById/{id}": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
