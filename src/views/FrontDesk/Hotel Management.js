@@ -66,13 +66,13 @@ const HotelManagement = () => {
     {
       name: "Client Name",
       sortable: true,
-      width: "17rem",
+      width: "15rem",
       selector: (row) => row.hotel,
     },
     {
       name: "Category",
       sortable: true,
-      selector: (row) => row.city,
+      selector: (row) => row.category,
     },
     {
       name: "Phone",
@@ -171,7 +171,7 @@ const HotelManagement = () => {
     {
       // id: 12222000372122,
       hotel: "Adani Cement",
-      city: "Mumbai",
+      category: "Logistics",
       phone: "+919677734223",
       rooms: "150",
       active: "12",
@@ -181,7 +181,7 @@ const HotelManagement = () => {
     {
       // id: 12222000372111,
       hotel: "WowInfobiz",
-      city: "Delhi",
+      category: "Tecnology",
       phone: "+918222245634",
       rooms: "75",
       active: "8",

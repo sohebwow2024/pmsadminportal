@@ -23,7 +23,7 @@ import { selectThemeColors } from "@utils";
 
 import axios from "../../API/axios";
 import { useSelector } from "react-redux";
-import Hotel from "../FrontDesk/Hotel.css"
+import Hotel from "../FrontDesk/Hotel.css";
 
 const defaultValues = {
   name: "",
@@ -75,7 +75,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
       };
       const res = await axios.post(
         `https://restcountries.com/v3.1/all?fields=name,flags`,
-        countryListBody
+        countryListBody,
       );
       console.log("res-country", res);
       setCountryList(res?.data[0]);
@@ -87,8 +87,8 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
   const countryOptions =
     countryList?.length && countryList[0]?.countryName
       ? countryList?.map(function (country) {
-        return { value: country.countryID, label: country.countryName };
-      })
+          return { value: country.countryID, label: country.countryName };
+        })
       : [{ value: "reload", label: "Error loading, click to reload again" }];
 
   const handleCountryDetailsList = (value) => {
@@ -125,8 +125,8 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
   const stateOptions =
     stateList?.length && stateList[0]?.stateName
       ? stateList?.map(function (state) {
-        return { value: state.stateID, label: state.stateName };
-      })
+          return { value: state.stateID, label: state.stateName };
+        })
       : [{ value: "reload", label: "Error loading, click to reload again" }];
 
   const handleStateDetailsList = (value) => {
@@ -191,8 +191,8 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
   const cityOptions =
     cityList?.length && cityList[0]?.cityName
       ? cityList?.map(function (city) {
-        return { value: city.cityID, label: city.cityName };
-      })
+          return { value: city.cityID, label: city.cityName };
+        })
       : [{ value: "reload", label: "Error loading, click to reload again" }];
 
   const handleCityDetailsList = (value) => {
@@ -262,11 +262,11 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
         SpecialNote: "",
         Event: "insert",
       };
-      console.log('guestRegisterBody', guestRegisterBody);
+      console.log("guestRegisterBody", guestRegisterBody);
       axios.post(`/setdata/guestdetails`, guestRegisterBody).then((res) => {
         console.log("Guest Entry", res);
         toast.success("Guest registered succesfully");
-        getOption()
+        getOption();
       });
     } catch (error) {
       console.log("Guest Register Error", error.message);
@@ -429,14 +429,13 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
       <Modal
         isOpen={open}
         toggle={handleOpen}
-        className="modal-dialog-centered modal-md hotel-modal-header"
+        className="modal-dialog-centered modal-lg hotel-modal-header"
         backdrop={false}
       >
         {/* ---------- HEADER ---------- */}
-       
 
-        <ModalHeader className='bg-transparent' toggle={handleOpen}>
-          <span className=' mb-1'>Add Client </span>
+        <ModalHeader className="bg-transparent" toggle={handleOpen}>
+          <span className=" mb-1">Add Client </span>
         </ModalHeader>
 
         <Form onSubmit={onSubmit}>
@@ -445,82 +444,101 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
             <Row className="mb-1">
               <Col md={12}>
                 <Label className="form-label">
-                  Client Name <span className="text-danger">*</span>
+                  Company Type <span className="text-danger">*</span>
                 </Label>
-                <input
-                  type="text"
-                  placeholder="e.g., Team Global"
-                  className="form-control"
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Type"
                 />
               </Col>
             </Row>
 
             {/* ---------- EMAIL & PHONE ---------- */}
             <Row className="mb-1">
-              <Col lg='6' className='mb-1'>
-                <Label className='form-label' for='countries'><span className='text-danger'>*</span> Category</Label>
+              <Col lg="6" className="mb-1">
+                <Label className="form-label" for="countries">
+                  <span className="text-danger">*</span> Company Size
+                </Label>
                 <Select
                   // theme={selectThemeColors}
-                  className='react-select'
-                  classNamePrefix='select'
-                  placeholder="Select Category"
-                // options={countryList}
-                // onChange={e => {
-                //   setCountryId(e.value)
-                //   setCountryCode(e.CountryCode)
-                //   setCountry(e.label)
-                // }}
-                // invalid={display && country === ''}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Size"
+                  // options={countryList}
+                  // onChange={e => {
+                  //   setCountryId(e.value)
+                  //   setCountryCode(e.CountryCode)
+                  //   setCountry(e.label)
+                  // }}
+                  // invalid={display && country === ''}
                 />
-                {display && !country ? <span className='error_msg_lbl'>Enter Category </span> : null}
+                {display && !country ? (
+                  <span className="error_msg_lbl">Enter Category </span>
+                ) : null}
               </Col>
-              <Col lg='6' className='mb-1'>
-                <Label className='form-label' for='countries'><span className='text-danger'>*</span> Industry</Label>
+              <Col lg="6" className="mb-1">
+                <Label className="form-label" for="countries">
+                  <span className="text-danger">*</span>Company Industry
+                </Label>
                 <Select
                   // theme={selectThemeColors}
-                  className='react-select'
-                  classNamePrefix='select'
+                  className="react-select"
+                  classNamePrefix="select"
                   placeholder="Select Industry"
-                // options={countryList}
-                // onChange={e => {
-                //   setCountryId(e.value)
-                //   setCountryCode(e.CountryCode)
-                //   setCountry(e.label)
-                // }}
-                // invalid={display && country === ''}
+                  // options={countryList}
+                  // onChange={e => {
+                  //   setCountryId(e.value)
+                  //   setCountryCode(e.CountryCode)
+                  //   setCountry(e.label)
+                  // }}
+                  // invalid={display && country === ''}
                 />
-                {display && !country ? <span className='error_msg_lbl'>Enter Industry </span> : null}
+                {display && !country ? (
+                  <span className="error_msg_lbl">Enter Industry </span>
+                ) : null}
               </Col>
 
-              <Col md={6}>
-                <Label className="form-label">
-                  Phone
-                </Label>
+              <Col md={4}>
+                <Label className="form-label">Company Name</Label>
                 <input
-                  type="tel"
-                  placeholder="+1 234 567 8900"
+                  type="text"
+                  placeholder="Company Name"
                   className="form-control"
                 />
               </Col>
 
-              <Col md={6}>
-                <Label className="form-label">
-                  Email
-                </Label>
+              <Col md={4}>
+                <Label className="form-label">Email</Label>
                 <input
                   type="email"
-                  placeholder="contact@client.com"
+                  placeholder="company@sales.com"
                   className="form-control"
                 />
               </Col>
-
-
+              <Col md={4}>
+                <Label className="form-label">Tax Info</Label>
+                <input
+                  type="text"
+                  placeholder="xx-xxxx789"
+                  className="form-control"
+                />
+              </Col>
             </Row>
 
             {/* ---------- ADDRESS ---------- */}
             <Row className="mb-1">
-              <Col md={12}>
-                <Label className="form-label">Address</Label>
+              <Col md={6}>
+                <Label className="form-label">Address 1</Label>
+                <input
+                  type="text"
+                  placeholder="Street address"
+                  className="form-control"
+                />
+              </Col>
+              <Col md={6}>
+                <Label className="form-label">Address 2</Label>
                 <input
                   type="text"
                   placeholder="Street address"
@@ -531,30 +549,50 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
             {/* ---------- CITY & COUNTRY ---------- */}
             <Row className="mb-1">
-
-              <Col md={6}>
-                <Label className="form-label">
-                  Country
-                </Label>
-                <input
-                  type="text"
-                  placeholder="Country name"
-                  className="form-control"
+              <Col md={4}>
+                <Label className="form-label">Country</Label>
+               <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Country"
                 />
               </Col>
 
-              <Col md={6}>
-                <Label className="form-label">
-                  City
-                </Label>
+              <Col md={4}>
+                <Label className="form-label">State</Label>
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select State"
+                />
+              </Col>
+              <Col md={4}>
+                <Label className="form-label">City</Label>
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select City"
+                />
+              </Col>
+              <Col md={4}>
+                <Label className="form-label">Pincode</Label>
                 <input
                   type="text"
-                  placeholder="City name"
+                  placeholder="Pincode"
                   className="form-control"
                 />
               </Col>
-
-
+              <Col md={4}>
+                <Label className="form-label">Phone No.</Label>
+                <input
+                  type="text"
+                  placeholder="Phone No."
+                  className="form-control"
+                />
+              </Col>
             </Row>
 
             {/* ---------- ROOM COUNT & ACTIVE USERS ---------- */}
@@ -590,7 +628,6 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
           </ModalFooter>
         </Form>
       </Modal>
-
 
       {open ? <div className="modal-backdrop fade show"></div> : null}
     </>

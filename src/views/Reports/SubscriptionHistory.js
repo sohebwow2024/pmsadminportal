@@ -82,28 +82,22 @@ const SubscriptionHistory = () => {
   const data = [
     {
       name: "Adani Cement",
-      type: "Enterprises",
-      status: "Active",
-      startdates: "Aug 02, 2025",
-      enddates: "Aug 02, 2026",
-      rooms: "₹30000",
-      user: "50",
+      clientid: "023141",
+      creationtime: "Aug 02, 2026",
+      startdates: "₹30000",
       action: "btns",
     },
     {
       name: "LNT",
-      type: "Professional",
-      status: "Active",
-      startdates: "Nov 30, 2025",
-      enddates: "May 30, 2026",
-      rooms: "₹2000",
-      user: "15",
+      startdates: "₹20000",
+      creationtime: "May 30, 2026",
+      clientid: "203042",
       action: "btns",
     },
   ];
   const basicColumns = [
     {
-      name: "Client List",
+      name: "Subscription Id",
       sortable: true,
       minWidth: "250px",
       cell: (row) => <span>{row.name}</span>,
@@ -114,39 +108,24 @@ const SubscriptionHistory = () => {
     //   cell: (row) => <span>{row.type}</span>,
     // },
     {
-      name: "Plan",
+      name: "Client Id",
       sortable: true,
       minWidth: "10px",
-      cell: (row) => <span>{row.rooms}</span>,
+      cell: (row) => <span>{row.clientid}</span>,
     },
     {
-      name: "Start Date",
+      name: "Plan Rate Id",
       sortable: true,
       // minWidth: '310px',
       cell: (row) => <span>{row.startdates}</span>,
     },
     {
-      name: "Expiry Date",
+      name: "Creation Time",
       sortable: true,
       // minWidth: '250px',
-      cell: (row) => <span>{row.enddates}</span>,
+      cell: (row) => <span>{row.creationtime}</span>,
     },
-    {
-      name: "Status",
-      sortable: true,
-      selector: (row) => row.status,
-      cell: (row) => {
-        return (
-          <>
-            {row.status === "Active" ? (
-              <Badge color="light-success"> {row.status}</Badge>
-            ) : (
-              <Badge color="light-primary"> {row.status}</Badge>
-            )}
-          </>
-        );
-      },
-    },
+    
     {
       name: "Actions",
       center: true,
