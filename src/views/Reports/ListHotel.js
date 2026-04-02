@@ -12,6 +12,9 @@ import {
   Label,
   Row,
   Badge,
+  Modal,
+  ModalBody,
+  ModalHeader,
 } from "reactstrap";
 import {
   ChevronDown,
@@ -61,102 +64,143 @@ const ListHotel = () => {
     { value: "Checkin Date", label: "Checkin Date" },
     { value: "Checkout Date", label: "Checkout Date" },
   ];
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
 
   const staticData = [
     {
       // id: 12222000372122,
-      hotel: "Grand Plaza Hotel",
-      city: "Mumbai",
+      type: "Private",
+      size: "300+",
+      industry: "IT Service",
+      name: "Adani Cement",
+      tax: "27ABCDE1234F1Z5",
+      email: "industry@indus.com",
       phone: "+919677734223",
-      rooms: "150",
-      active: "12",
-      status: "Active",
-      date: "Jun 02,2025",
+      address: "162, Madanpura",
+      country: "India",
+      state: "Maharashtra",
+      city: "Mumbai",
+      pincode: "420001",
     },
     {
       // id: 12222000372111,
-      hotel: "Royal Inn",
-      city: "Delhi",
-      phone: "+918222245634",
-      rooms: "75",
-      active: "8",
-      status: "Trial",
-      date: "Sep 30,2025",
+      type: "Public",
+      size: "500+",
+      industry: "Banking",
+      name: "Bank of India",
+      tax: "29ABCDE1234F2Z7",
+      email: "boi@banking.com",
+      phone: "+918467774347",
+      address: "150, Hadapsar",
+      country: "India",
+      state: "Maharashtra",
+      city: "Pune",
+      pincode: "400011",
     },
   ];
 
   const Columns = [
     {
-      name: "Client Name",
-      sortable: true,
-      width: "17rem",
-      selector: (row) => row.hotel,
-    },
-    {
-      name: "Category",
-      sortable: true,
-      selector: (row) => row.city,
-    },
-    {
-      name: "Industry",
+      name: "Company Type",
       sortable: true,
       width: "12rem",
-      selector: (row) => row.phone,
+      selector: (row) => row.type,
     },
     {
-      name: "Phone",
+      name: "Company Size",
       sortable: true,
-      width: "7rem",
-      selector: (row) => row.rooms,
+      width: "12rem",
+      selector: (row) => row.size,
+    },
+    {
+      name: "Company Industry",
+      sortable: true,
+      width: "12rem",
+      selector: (row) => row.industry,
+    },
+    {
+      name: "Company Name",
+      sortable: true,
+      width: "12rem",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Tax Info",
+      sortable: true,
+      width: "12rem",
+      selector: (row) => row.tax,
     },
     {
       name: "Email",
       sortable: true,
-      selector: (row) => row.active,
+      width: "13rem",
+      selector: (row) => row.email,
     },
     {
-      name: "Country",
+      name: "Phone No.",
       sortable: true,
-      selector: (row) => row.active,
-    },
-    {
-      name: "City",
-      sortable: true,
-      selector: (row) => row.active,
+      width: "10rem",
+      selector: (row) => row.phone,
     },
     {
       name: "Address",
       sortable: true,
-      selector: (row) => row.date,
+      width: "12rem",
+      selector: (row) => row.address,
     },
     {
-      name: "Action",
+      name: "Country",
       sortable: true,
-      center: true,
-      width: "9rem",
-
-      selector: (row) => (
-        <>
-          {/* <Col> */}
-          <Edit
-            className="me-1 cursor-pointer"
-            onClick={() => {
-              handleUpdateHotel();
-              //   setGuestId(row.guestID);
-            }}
-            size={15}
-          />
-          <Archive
-            className="me-1 cursor-pointer"
-            size={15}
-            onClick={() => {
-            //    handleUpdateHotel();
-              // setPromoId(row.promotionId);
-            }}
-          />
-        </>
-      ),
+      width: "7rem",
+      selector: (row) => row.country,
     },
+    {
+      name: "State",
+      sortable: true,
+      width: "10rem",
+      selector: (row) => row.state,
+    },
+    {
+      name: "City",
+      sortable: true,
+      width: "10rem",
+      selector: (row) => row.city,
+    },
+    {
+      name: "Pincode",
+      sortable: true,
+      width: "8rem",
+      selector: (row) => row.pincode,
+    },
+    // {
+    //   name: "Action",
+    //   sortable: true,
+    //   center: true,
+    //   width: "9rem",
+
+    //   selector: (row) => (
+    //     <>
+    //       {/* <Col> */}
+    //       <Edit
+    //         className="me-1 cursor-pointer"
+    //         onClick={() => {
+    //           handleUpdateHotel(true);
+    //           // setGuestId(row.guestID);
+    //         }}
+    //         size={15}
+    //       />
+    //       <Trash
+    //         className="me-1 cursor-pointer"
+    //         size={15}
+    //         onClick={() => {
+    //           handleCancelOpen();
+    //           // setPromoId(row.promotionId);
+    //         }}
+    //       />
+    //     </>
+    //   ),
+    // },
   ];
 
   const options = {
@@ -218,7 +262,7 @@ const ListHotel = () => {
         </CardHeader>
 
         <Row className="align-items-end ms-2">
-          <Col className="text-start">
+          {/* <Col className="text-start">
             <Label className="form-label" for="dateType">
               Date Type
             </Label>
@@ -235,7 +279,7 @@ const ListHotel = () => {
               options={dateType}
               isClearable={false}
             />
-          </Col>
+          </Col> */}
           <Col className="text-start">
             <Label className="form-label" for="startDate">
               From Date
@@ -305,6 +349,36 @@ const ListHotel = () => {
           </Row>
         </CardBody>
       </Card>
+
+      {/***** Delete Modal *****/}
+      <Modal
+        isOpen={cancelOpen}
+        toggle={handleCancelOpen}
+        className="modal-dialog-centered modal-lg"
+      >
+        <ModalHeader className="bg-transparent" toggle={handleCancelOpen}>
+          Delete Client
+        </ModalHeader>
+        <ModalBody>
+          <h3 className="text-center">Are you sure you want to delete?</h3>
+          <Col className="text-center">
+            <Button
+              className="m-1"
+              color="danger"
+              // onClick={() => handleCancelBooking(id)}
+            >
+              Confirm
+            </Button>
+            <Button
+              className="m-1"
+              color="primary"
+              onClick={() => handleCancelOpen()}
+            >
+              Cancel
+            </Button>
+          </Col>
+        </ModalBody>
+      </Modal>
 
       <UpdateHotel
         // setShowUpdate={setShowUpdate}

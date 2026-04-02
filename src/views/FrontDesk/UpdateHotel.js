@@ -312,8 +312,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
       <Modal
         isOpen={showUpdate}
         toggle={handleUpdateHotel}
-        className="modal-dialog-centered modal-md hotel-modal-header"
-        backdrop={false}
+        className="modal-dialog-centered modal-lg hotel-modal-header"
+        // backdrop={false}
       >
         {/* ---------- HEADER ---------- */}
        
@@ -328,82 +328,110 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
             <Row className="mb-1">
               <Col md={12}>
                 <Label className="form-label">
-                  Client Name <span className="text-danger">*</span>
+                  Company Type <span className="text-danger">*</span>
                 </Label>
-                <input
-                  type="text"
-                  placeholder="e.g., Team Global"
-                  className="form-control"
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Type"
                 />
               </Col>
             </Row>
 
             {/* ---------- EMAIL & PHONE ---------- */}
             <Row className="mb-1">
-              <Col lg='6' className='mb-1'>
-                <Label className='form-label' for='countries'><span className='text-danger'>*</span> Category</Label>
+              <Col lg="6" className="mb-1">
+                <Label className="form-label" for="countries">
+                   Company Size <span className="text-danger">*</span>
+                </Label>
                 <Select
                   // theme={selectThemeColors}
-                  className='react-select'
-                  classNamePrefix='select'
-                  placeholder="Select Category"
-                // options={countryList}
-                // onChange={e => {
-                //   setCountryId(e.value)
-                //   setCountryCode(e.CountryCode)
-                //   setCountry(e.label)
-                // }}
-                // invalid={display && country === ''}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Size"
+                  // options={countryList}
+                  // onChange={e => {
+                  //   setCountryId(e.value)
+                  //   setCountryCode(e.CountryCode)
+                  //   setCountry(e.label)
+                  // }}
+                  // invalid={display && country === ''}
                 />
-                {display && !country ? <span className='error_msg_lbl'>Enter Category </span> : null}
+                {display && !country ? (
+                  <span className="error_msg_lbl">Enter Category </span>
+                ) : null}
               </Col>
-              <Col lg='6' className='mb-1'>
-                <Label className='form-label' for='countries'><span className='text-danger'>*</span> Industry</Label>
+              <Col lg="6" className="mb-1">
+                <Label className="form-label" for="countries">
+                 Company Industry <span className="text-danger">*</span>
+                </Label>
                 <Select
                   // theme={selectThemeColors}
-                  className='react-select'
-                  classNamePrefix='select'
+                  className="react-select"
+                  classNamePrefix="select"
                   placeholder="Select Industry"
-                // options={countryList}
-                // onChange={e => {
-                //   setCountryId(e.value)
-                //   setCountryCode(e.CountryCode)
-                //   setCountry(e.label)
-                // }}
-                // invalid={display && country === ''}
+                  // options={countryList}
+                  // onChange={e => {
+                  //   setCountryId(e.value)
+                  //   setCountryCode(e.CountryCode)
+                  //   setCountry(e.label)
+                  // }}
+                  // invalid={display && country === ''}
                 />
-                {display && !country ? <span className='error_msg_lbl'>Enter Industry </span> : null}
+                {display && !country ? (
+                  <span className="error_msg_lbl">Enter Industry </span>
+                ) : null}
               </Col>
 
               <Col md={6}>
-                <Label className="form-label">
-                  Phone
-                </Label>
+                <Label className="form-label">Company Name <span className="text-danger">*</span></Label>
                 <input
-                  type="tel"
-                  placeholder="+1 234 567 8900"
+                  type="text"
+                  placeholder="Company Name"
+                  className="form-control"
+                />
+              </Col>
+              <Col md={6}>
+                <Label className="form-label">Tax Info <span className="text-danger">*</span></Label>
+                <input
+                  type="text"
+                  placeholder="xx-xxxx789"
                   className="form-control"
                 />
               </Col>
 
               <Col md={6}>
-                <Label className="form-label">
-                  Email
-                </Label>
+                <Label className="form-label">Email</Label>
                 <input
                   type="email"
-                  placeholder="contact@client.com"
+                  placeholder="company@sales.com"
                   className="form-control"
                 />
               </Col>
-
-
+              <Col md={6}>
+                <Label className="form-label">Phone No.</Label>
+                <input
+                  type="text"
+                  placeholder="Phone No."
+                  className="form-control"
+                />
+              </Col>
+              
             </Row>
 
             {/* ---------- ADDRESS ---------- */}
             <Row className="mb-1">
-              <Col md={12}>
-                <Label className="form-label">Address</Label>
+              <Col md={6}>
+                <Label className="form-label">Address 1</Label>
+                <input
+                  type="text"
+                  placeholder="Street address"
+                  className="form-control"
+                />
+              </Col>
+              <Col md={6}>
+                <Label className="form-label">Address 2</Label>
                 <input
                   type="text"
                   placeholder="Street address"
@@ -414,30 +442,43 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
 
             {/* ---------- CITY & COUNTRY ---------- */}
             <Row className="mb-1">
-
               <Col md={6}>
-                <Label className="form-label">
-                  Country
-                </Label>
-                <input
-                  type="text"
-                  placeholder="Country name"
-                  className="form-control"
+                <Label className="form-label">Country</Label>
+               <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Country"
                 />
               </Col>
 
               <Col md={6}>
-                <Label className="form-label">
-                  City
-                </Label>
+                <Label className="form-label">State</Label>
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select State"
+                />
+              </Col>
+              <Col md={6}>
+                <Label className="form-label">City</Label>
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select City"
+                />
+              </Col>
+              <Col md={6}>
+                <Label className="form-label">Pincode</Label>
                 <input
                   type="text"
-                  placeholder="City name"
+                  placeholder="Pincode"
                   className="form-control"
                 />
               </Col>
-
-
+              
             </Row>
 
             {/* ---------- ROOM COUNT & ACTIVE USERS ---------- */}
@@ -468,7 +509,7 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
               Cancel
             </Button>
             <Button color="primary" type="submit">
-              Add Client
+              Update
             </Button>
           </ModalFooter>
         </Form>

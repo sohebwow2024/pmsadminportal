@@ -459,7 +459,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
             <Row className="mb-1">
               <Col lg="6" className="mb-1">
                 <Label className="form-label" for="countries">
-                  <span className="text-danger">*</span> Company Size
+                   Company Size <span className="text-danger">*</span>
                 </Label>
                 <Select
                   // theme={selectThemeColors}
@@ -480,7 +480,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
               </Col>
               <Col lg="6" className="mb-1">
                 <Label className="form-label" for="countries">
-                  <span className="text-danger">*</span>Company Industry
+                 Company Industry <span className="text-danger">*</span>
                 </Label>
                 <Select
                   // theme={selectThemeColors}
@@ -500,16 +500,24 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                 ) : null}
               </Col>
 
-              <Col md={4}>
-                <Label className="form-label">Company Name</Label>
+              <Col md={6}>
+                <Label className="form-label">Company Name <span className="text-danger">*</span></Label>
                 <input
                   type="text"
                   placeholder="Company Name"
                   className="form-control"
                 />
               </Col>
+              <Col md={6}>
+                <Label className="form-label">Tax Info <span className="text-danger">*</span></Label>
+                <input
+                  type="text"
+                  placeholder="xx-xxxx789"
+                  className="form-control"
+                />
+              </Col>
 
-              <Col md={4}>
+              <Col md={6}>
                 <Label className="form-label">Email</Label>
                 <input
                   type="email"
@@ -517,14 +525,15 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   className="form-control"
                 />
               </Col>
-              <Col md={4}>
-                <Label className="form-label">Tax Info</Label>
+              <Col md={6}>
+                <Label className="form-label">Phone No.</Label>
                 <input
                   type="text"
-                  placeholder="xx-xxxx789"
+                  placeholder="Phone No."
                   className="form-control"
                 />
               </Col>
+              
             </Row>
 
             {/* ---------- ADDRESS ---------- */}
@@ -549,7 +558,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
             {/* ---------- CITY & COUNTRY ---------- */}
             <Row className="mb-1">
-              <Col md={4}>
+              <Col md={6}>
                 <Label className="form-label">Country</Label>
                <Select
                   // theme={selectThemeColors}
@@ -559,7 +568,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                 />
               </Col>
 
-              <Col md={4}>
+              <Col md={6}>
                 <Label className="form-label">State</Label>
                 <Select
                   // theme={selectThemeColors}
@@ -568,7 +577,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   placeholder="Select State"
                 />
               </Col>
-              <Col md={4}>
+              <Col md={6}>
                 <Label className="form-label">City</Label>
                 <Select
                   // theme={selectThemeColors}
@@ -577,7 +586,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   placeholder="Select City"
                 />
               </Col>
-              <Col md={4}>
+              <Col md={6}>
                 <Label className="form-label">Pincode</Label>
                 <input
                   type="text"
@@ -585,14 +594,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   className="form-control"
                 />
               </Col>
-              <Col md={4}>
-                <Label className="form-label">Phone No.</Label>
-                <input
-                  type="text"
-                  placeholder="Phone No."
-                  className="form-control"
-                />
-              </Col>
+              
             </Row>
 
             {/* ---------- ROOM COUNT & ACTIVE USERS ---------- */}

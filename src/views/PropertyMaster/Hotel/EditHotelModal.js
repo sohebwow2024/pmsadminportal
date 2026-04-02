@@ -275,7 +275,7 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                         <Form>
                             <Row>
                                 <Col lg='6' className='mb-1'>
-                                    <Label className='form-label' for='hotel'><span className='text-danger'>*</span>Product Name</Label>
+                                    <Label className='form-label' for='hotel'>Product Name <span className='text-danger'>*</span></Label>
                                     <Input
                                         type='text'
                                         name='hotel'
@@ -287,7 +287,7 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                                     {display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null}
                                 </Col>
                                 <Col lg='6' className='mb-1'>
-                                    <Label className='form-label' for='address'><span className='text-danger'>*</span>Product Code </Label>
+                                    <Label className='form-label' for='address'>Product Code <span className='text-danger'>*</span> </Label>
                                     <Input
                                         type='text'
                                         name='address'
@@ -303,7 +303,7 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                             <Row>
                                 
                                 <Col lg='6' className='mb-1'>
-                                    <Label className='form-label' for='countries'><span className='text-danger'>*</span>Product Category</Label>
+                                    <Label className='form-label' for='countries'>Product Category <span className='text-danger'>*</span></Label>
                                     <Select
                                         theme={selectThemeColors}
                                         className='react-select'
@@ -320,7 +320,7 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                                     {display && !country ? <span className='error_msg_lbl'>Enter Category </span> : null}
                                 </Col>
                                <Col lg='6' className='mb-1'>
-                                    <Label className='form-label' for='address'><span className='text-danger'>*</span>Product Description </Label>
+                                    <Label className='form-label' for='address'>Product Description </Label>
                                     <Input
                                         type='text'
                                         name='address'
