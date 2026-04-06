@@ -93,6 +93,9 @@ import HotelManagement from "../../views/FrontDesk/Hotel Management.js";
 import Feature from "../../views/PropertyMaster/Feature.js";
 import ProductCategory from "../../views/PropertyMaster/Hotel/ProductCategory.js";
 import IndustryCategory from "../../views/RoomInventory/IndustryCategory.js";
+import PlanRate from "../../views/PropertyMaster/User/PlanRate.js";
+import PlanPoint from "../../views/PropertyMaster/User/PlanPoint.js";
+import Promocode from "../../views/PropertyMaster/User/Promocode.js";
 
 // import ManageProfile from '../../../../ layouts/components/menu/vertical-menu/EditProfileModal.js'
 // import PaymentGateWay from "../../views/FrontDesk/PaymentsFolioAcc/PaymentGateWay";
@@ -167,6 +170,8 @@ const ProductsMaster = lazy(() =>
 );
 //test
 const PlansMaster = lazy(() => import("../../views/PropertyMaster/User/Plans.js"));
+const PlanIncluding = lazy(() => import("../../views/PropertyMaster/User/PlanIncluding.js"));
+const PlanExcluding = lazy(() => import("../../views/PropertyMaster/User/PlanExcluding.js"));
 const PriceMaster = lazy(() =>
   import("../../views/PropertyMaster/Floor/Price.js")
 );
@@ -565,6 +570,27 @@ const Routes = [
   {
     path: "/plans",
     element: <PlansMaster />,
+  },
+  {
+    path: "/planincluding",
+    element: <PlanIncluding />,
+  },
+  {
+    path: "/planexcluding",
+    element: <PlanExcluding />,
+  },
+  {
+    path: "/planrate",
+    element: <PlanRate />,
+  },
+  {
+    path: "/planpoint",
+    element: <PlanPoint />,
+  },
+
+   {
+    path: "/promocode",
+    element: <Promocode />,
   },
   {
     path: "/priceMaster",

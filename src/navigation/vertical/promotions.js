@@ -29,6 +29,38 @@ export default [
         navLink: '/plans'
       },
 
+      {
+        id: 'planincluding',
+        title: 'Plan Including',
+        icon: <AiOutlineArrowRight size={20} />,
+        navLink: '/planincluding'
+      },
+      {
+        id: 'planexcluding',
+        title: 'Plan Excluding',
+        icon: <AiOutlineArrowRight size={20} />,
+        navLink: '/planexcluding'
+      },
+
+      {
+        id: 'planrate',
+        title: 'Plan Rate',
+        icon: <AiOutlineArrowRight size={20} />,
+        navLink: '/planrate'
+      },
+      {
+        id: 'planpoint',
+        title: 'Plan Points',
+        icon: <AiOutlineArrowRight size={20} />,
+        navLink: '/planpoint'
+      },
+
+      {
+        id: 'promocode',
+        title: 'Promocode',
+        icon: <AiOutlineArrowRight size={20} />,
+        navLink: '/promocode'
+      },
     ]
   }
 ]

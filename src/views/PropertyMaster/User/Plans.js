@@ -254,7 +254,7 @@ const Plans = () => {
 							<Form>
 								<Row>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Plan Name</Label>
+										<Label className='form-label' for='countries'>Plan Name <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -271,11 +271,12 @@ const Plans = () => {
 										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='hotel'><span className='text-danger'>*</span>Product Name</Label>
+										<Label className='form-label' for='hotel'>Title <span className='text-danger'>*</span></Label>
 										<Input
 											type='text'
 											name='hotel'
 											id='hotel'
+											placeholder= "Title"
 											// value={hotelName}
 											// onChange={e => setHotelName(e.target.value)}
 											invalid={display && hotelName === ''}
@@ -283,7 +284,7 @@ const Plans = () => {
 										{display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Price</Label>
+										<Label className='form-label' for='countries'>Plan Including <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -300,7 +301,7 @@ const Plans = () => {
 										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Billing Cycle</Label>
+										<Label className='form-label' for='countries'>Plan Excluding <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -317,7 +318,7 @@ const Plans = () => {
 										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Currency</Label>
+										<Label className='form-label' for='countries'>Plan Rates <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -333,7 +334,7 @@ const Plans = () => {
 										/>
 										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
 									</Col>
-									<Col lg='6' className='mb-1'>
+									{/* <Col lg='6' className='mb-1'>
 										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Duration</Label>
 										<Select
 											theme={selectThemeColors}
@@ -349,16 +350,15 @@ const Plans = () => {
 										// invalid={display && country === ''}
 										/>
 										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
-									</Col>
-								</Row>
-								<Row>
-									<Col lg="12" className="mb-1">
+									</Col> */}
+									<Col lg="6" className="mb-1">
 										<Label className="form-label" for="userName">
-											<span className="text-danger">*</span>Description
+											Promocode <span className="text-danger">*</span>
 										</Label>
 										<Input
 											type="text"
 											name="userName"
+											placeholder= "e.g. 20% OFF"
 											id="userName"
 											value={userName}
 											onChange={(e) => setUserName(e.target.value)}
@@ -370,7 +370,6 @@ const Plans = () => {
 											<></>
 										)}
 									</Col>
-
 								</Row>
 							</Form>
 
@@ -493,7 +492,7 @@ const Plans = () => {
 							<Form>
 								<Row>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Plan Name</Label>
+										<Label className='form-label' for='countries'>Plan Name <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -510,7 +509,7 @@ const Plans = () => {
 										{/* {display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null} */}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='hotel'><span className='text-danger'>*</span>Product Name</Label>
+										<Label className='form-label' for='hotel'>Product Name <span className='text-danger'>*</span></Label>
 										<Input
 											type='text'
 											name='hotel'
@@ -522,7 +521,7 @@ const Plans = () => {
 										{/* {display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null} */}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Price</Label>
+										<Label className='form-label' for='countries'>Price <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -539,7 +538,7 @@ const Plans = () => {
 										{/* {display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null} */}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Billing Cycle</Label>
+										<Label className='form-label' for='countries'>Billing Cycle <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -556,7 +555,7 @@ const Plans = () => {
 										{/* {display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null} */}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Currency</Label>
+										<Label className='form-label' for='countries'>Currency <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -573,7 +572,7 @@ const Plans = () => {
 										{/* {display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null} */}
 									</Col>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Duration</Label>
+										<Label className='form-label' for='countries'>Duration <span className='text-danger'>*</span></Label>
 										<Select
 											theme={selectThemeColors}
 											className='react-select'
@@ -593,7 +592,7 @@ const Plans = () => {
 								<Row>
 									<Col lg="12" className="mb-1">
 										<Label className="form-label" for="userName">
-											<span className="text-danger">*</span>Description
+											Description <span className="text-danger">*</span>
 										</Label>
 										<Input
 											type="text"
@@ -620,7 +619,7 @@ const Plans = () => {
 										color="primary"
 										onClick={editHandleSubmit}
 									>
-										Submit
+										Update
 									</Button>
 									<Button color="secondary" outline onClick={handleEditModal}>
 										Cancel
