@@ -208,6 +208,16 @@ const PlanIncluding = () => {
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShow(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="me-1"
+              >
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
               Add Plan Including
             </Button>
           ) : null}
@@ -286,7 +296,7 @@ const PlanIncluding = () => {
                   <Input
                     type="text"
                     name="hotel"
-                    placeholder="Category Name"
+                    placeholder="Plan Including Name"
                     id="hotel"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
@@ -322,7 +332,6 @@ const PlanIncluding = () => {
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 
-
       {/********* Add Modal ********/}
       <Modal
         isOpen={show}
@@ -352,7 +361,7 @@ const PlanIncluding = () => {
                   <Input
                     type="text"
                     name="hotel"
-                    placeholder="Category Name"
+                    placeholder="Plan Including Name"
                     id="hotel"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}

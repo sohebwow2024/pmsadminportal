@@ -219,6 +219,16 @@ const ProductCategory = () => {
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShowCategroy(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="me-1"
+              >
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
               Add Category
             </Button>
           ) : null}
@@ -337,13 +347,13 @@ const ProductCategory = () => {
               <Row>
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="hotel">
-                    Category Id 
+                    Category Id
                   </Label>
                   <Input
                     type="text"
                     name="hotel"
                     id="hotel"
-                    placeholder= "Category Id"
+                    placeholder="Category Id"
                     value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
                     // invalid={display && hotelName === ""}
@@ -360,7 +370,7 @@ const ProductCategory = () => {
                     type="text"
                     name="address"
                     id="address"
-                    placeholder= "Category Name"
+                    placeholder="Category Name"
                     // value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     // invalid={display && address === ""}
@@ -404,7 +414,7 @@ const ProductCategory = () => {
                     onChange={(e) => setAddress(e.target.value)}
                     // invalid={display && address === ""}
                   /> */}
-                  {/* {display && !address ? (
+                {/* {display && !address ? (
                     <span className="error_msg_lbl">
                       Enter Product Description{" "}
                     </span>

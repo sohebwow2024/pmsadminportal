@@ -209,6 +209,16 @@ const PlanExcluding = () => {
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShow(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="me-1"
+              >
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
               Add Plan Excluding
             </Button>
           ) : null}
@@ -227,7 +237,7 @@ const PlanExcluding = () => {
         </CardBody>
       </Card>
 
-          {/********** Delete Modal **************/}
+      {/********** Delete Modal **************/}
       <Modal
         isOpen={cancelOpen}
         toggle={handleCancelOpen}
@@ -257,8 +267,7 @@ const PlanExcluding = () => {
         </ModalBody>
       </Modal>
 
-
-          {/********** Add Modal **************/}
+      {/********** Add Modal **************/}
       <Modal
         isOpen={show}
         toggle={handleShowModal}
@@ -287,7 +296,7 @@ const PlanExcluding = () => {
                   <Input
                     type="text"
                     name="hotel"
-                    placeholder="Category Name"
+                    placeholder="Plan Excluding Name"
                     id="hotel"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
@@ -323,8 +332,7 @@ const PlanExcluding = () => {
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 
-
-          {/********* Update Modal ***********/}
+      {/********* Update Modal ***********/}
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
@@ -353,7 +361,7 @@ const PlanExcluding = () => {
                   <Input
                     type="text"
                     name="hotel"
-                    placeholder="Category Name"
+                    placeholder="Plan Excluding Name"
                     id="hotel"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
@@ -362,7 +370,6 @@ const PlanExcluding = () => {
                   {/* {display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null} */}
                 </Col>
               </Row>
-              
 
               <Row>
                 <Col md="12 text-lg-end text-md-center mt-1">

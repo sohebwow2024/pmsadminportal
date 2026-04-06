@@ -621,11 +621,11 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
           {/* ---------- FOOTER ---------- */}
           <ModalFooter className="justify-content-end">
-            <Button color="secondary" outline onClick={handleReset}>
-              Cancel
-            </Button>
             <Button color="primary" type="submit">
               Add Client
+            </Button>
+            <Button color="secondary" outline onClick={handleReset}>
+              Cancel
             </Button>
           </ModalFooter>
         </Form>

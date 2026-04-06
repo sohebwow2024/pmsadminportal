@@ -129,8 +129,8 @@ const Products = () => {
     getOTAphoto();
   }, [show, showEdit, del]);
 
-      const [cancelOpen, setCancelOpen] = useState(false)
-      const handleCancelOpen = () => setCancelOpen(!cancelOpen)
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
 
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
@@ -216,6 +216,16 @@ const Products = () => {
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShow(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="me-1"
+              >
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
               Add Product
             </Button>
           ) : null}
@@ -243,9 +253,7 @@ const Products = () => {
           Delete Product
         </ModalHeader>
         <ModalBody>
-          <h3 className="text-center">
-            Are you sure you want to delete?
-          </h3>
+          <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
             <Button
               className="m-1"

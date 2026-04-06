@@ -281,6 +281,7 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                                         name='hotel'
                                         id='hotel'
                                         value={hotelName}
+                                        placeholder= "Product Name"
                                         onChange={e => setHotelName(e.target.value)}
                                         invalid={display && hotelName === ''}
                                     />
@@ -292,7 +293,8 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                                         type='text'
                                         name='address'
                                         id='address'
-                                        value={address}
+                                        placeholder= "Product Code"
+                                        // value={address}
                                         onChange={e => setAddress(e.target.value)}
                                         invalid={display && address === ''}
 
@@ -323,9 +325,10 @@ const EditHotelModal = ({ showEdit, handleEditModal, hotels, id, handleShowModal
                                     <Label className='form-label' for='address'>Product Description </Label>
                                     <Input
                                         type='text'
-                                        name='address'
-                                        id='address'
-                                        value={address}
+                                        name='desc'
+                                        id='desc'
+                                        placeholder= "Product Description"
+                                        // value={address}
                                         onChange={e => setAddress(e.target.value)}
                                         invalid={display && address === ''}
 
