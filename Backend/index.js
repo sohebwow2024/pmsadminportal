@@ -11,6 +11,7 @@ import productRoutes from "./routes/PostgreRoutes/productRoutes.js";
 import planRoutes from "./routes/PostgreRoutes/planRoutes.js";
 import AuthRoutes from "./routes/PostgreRoutes/AuthRoutes.js";
 import clientRoutes from "./routes/PostgreRoutes/clientRoutes.js";
+import subscriptionRoutes from "./routes/PostgreRoutes/subscriptionRoutes.js";
 
 // Swagger
 import swaggerUi from "swagger-ui-express";
@@ -52,6 +53,7 @@ app.use(
 app.use("/api/products", verifyToken, productRoutes);
 app.use("/api/plans", verifyToken, planRoutes);
 app.use("/api/clients", verifyToken, clientRoutes);
+app.use("/api/subscriptions", verifyToken, subscriptionRoutes);
 app.use("/api/auth", AuthRoutes);
 
 app.listen(5000, () => {

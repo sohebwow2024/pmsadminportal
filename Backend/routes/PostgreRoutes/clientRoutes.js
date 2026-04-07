@@ -5,7 +5,7 @@ const router = express.Router();
 
 const sendSuccess = (res, statusCode, message, data, extra = {}) => {
     return res.status(statusCode).json({
-        success: true,
+        // success: true,
         status: "success",
         message,
         ...extra,
@@ -15,7 +15,7 @@ const sendSuccess = (res, statusCode, message, data, extra = {}) => {
 
 const sendWarning = (res, statusCode, message, extra = {}) => {
     return res.status(statusCode).json({
-        success: false,
+        // success: false,
         status: "warning",
         message,
         ...extra
@@ -24,11 +24,59 @@ const sendWarning = (res, statusCode, message, extra = {}) => {
 
 const sendError = (res, message = "Internal server error") => {
     return res.status(500).json({
-        success: false,
+        // success: false,
         status: "error",
         message
     });
 };
+
+const countryNameFromCode = (code) => {
+    try {
+        if (!code) return null;
+        const display = new Intl.DisplayNames(["en"], { type: "region" });
+        return display.of(String(code).toUpperCase()) || code;
+    } catch {
+        return code ?? null;
+    }
+};
+
+const prettyFromId = (value) => {
+    if (value === null || value === undefined) return null;
+    const str = String(value).trim();
+    if (!str) return null;
+
+    return str
+        .replace(/[_-]+/g, " ")
+        .replace(/\s+/g, " ")
+        .replace(/\b\w/g, (ch) => ch.toUpperCase());
+};
+
+const formatClientForRead = (row) => ({
+    id: row.id,
+    company_name: row.company_name ?? null,
+    company_type_id: row.company_type ?? null,
+    company_type_name: prettyFromId(row.company_type),
+    company_size_id: row.company_size ?? null,
+    company_size_name: prettyFromId(row.company_size),
+    company_industry_id: row.company_industry ?? null,
+    company_industry_name: prettyFromId(row.company_industry),
+    country_id: row.country ?? null,
+    country_name: countryNameFromCode(row.country),
+    state_id: row.state ?? null,
+    state_name: prettyFromId(row.state),
+    city_id: row.city ?? null,
+    city_name: prettyFromId(row.city),
+    pincode_id: row.pincode ?? null,
+    pincode_name: row.pincode ?? null,
+    tax_info: row.tax_info ?? null,
+    address_line1: row.address_line1 ?? null,
+    address_line2: row.address_line2 ?? null,
+    email: row.email ?? null,
+    phone: row.phone ?? null,
+    is_active: row.is_active,
+    created_at: row.created_at,
+    updated_at: row.updated_at
+});
 
 router.get("/countries", async (req, res) => {
     // #swagger.tags = ['Clients']
@@ -202,39 +250,86 @@ router.post("/clients", async (req, res) => {
             company_type,
             company_size,
             company_industry,
+            company_type_id,
+            company_size_id,
+            company_industry_id,
             tax_info,
             address_line1,
             address_line2,
             country,
             state,
             city,
+            country_id,
+            state_id,
+            city_id,
+            pincode,
+            pincode_id,
             email,
             phone
         } = req.body;
 
+        const finalCompanyName = company_name?.toString().trim();
+        const finalCompanyTypeId = (company_type_id ?? company_type)?.toString().trim();
+        const finalCompanySizeId = (company_size_id ?? company_size)?.toString().trim();
+        const finalCompanyIndustryId = (company_industry_id ?? company_industry)?.toString().trim();
+        const finalCountryId = (country_id ?? country)?.toString().trim();
+        const finalStateId = (state_id ?? state)?.toString().trim();
+        const finalCityId = (city_id ?? city)?.toString().trim();
+        const finalPincodeId = (pincode_id ?? pincode)?.toString().trim();
+
         // Basic validation
-        if (!company_name) {
-            return sendWarning(res, 400, "Company name is required");
+        if (
+            !finalCompanyTypeId ||
+            !finalCompanySizeId ||
+            !finalCompanyIndustryId ||
+            !finalCountryId ||
+            !finalStateId ||
+            !finalCityId ||
+            !finalPincodeId
+        ) {
+            return sendWarning(
+                res,
+                400,
+                "company_type_id, company_size_id, company_industry_id, country_id, state_id, city_id and pincode_id are required"
+            );
+        }
+
+        if (!finalCompanyName) {
+            return sendWarning(res, 400, "company_name is required");
+        }
+
+        const duplicateClient = await pool.query(
+            `SELECT id
+             FROM clients
+             WHERE is_active = true
+               AND LOWER(TRIM(company_name)) = LOWER(TRIM($1))
+             LIMIT 1`,
+            [finalCompanyName]
+        );
+
+        if (duplicateClient.rows.length > 0) {
+            return sendWarning(res, 409, "Client name already exist");
         }
 
         const result = await pool.query(
             `INSERT INTO clients (
         company_name, company_type, company_size, company_industry, tax_info,
-        address_line1, address_line2, country, state, city, email, phone
+        address_line1, address_line2, country, state, city, pincode, email, phone
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
       RETURNING *`,
             [
-                company_name,
-                company_type,
-                company_size,
-                company_industry,
+                finalCompanyName,
+                finalCompanyTypeId,
+                finalCompanySizeId,
+                finalCompanyIndustryId,
                 tax_info,
                 address_line1,
                 address_line2,
-                country,
-                state,
-                city,
+                finalCountryId,
+                finalStateId,
+                finalCityId,
+                finalPincodeId,
                 email,
                 phone
             ]
@@ -258,12 +353,20 @@ router.put("/clients/:id", async (req, res) => {
             company_type,
             company_size,
             company_industry,
+            company_type_id,
+            company_size_id,
+            company_industry_id,
             tax_info,
             address_line1,
             address_line2,
             country,
             state,
             city,
+            country_id,
+            state_id,
+            city_id,
+            pincode,
+            pincode_id,
             email,
             phone
         } = req.body;
@@ -278,6 +381,17 @@ router.put("/clients/:id", async (req, res) => {
             return sendWarning(res, 404, "Client not found");
         }
 
+        const oldClient = existing.rows[0];
+
+        const finalCompanyName = (company_name ?? oldClient.company_name)?.toString().trim();
+        const finalCompanyTypeId = (company_type_id ?? company_type ?? oldClient.company_type)?.toString().trim();
+        const finalCompanySizeId = (company_size_id ?? company_size ?? oldClient.company_size)?.toString().trim();
+        const finalCompanyIndustryId = (company_industry_id ?? company_industry ?? oldClient.company_industry)?.toString().trim();
+        const finalCountryId = (country_id ?? country ?? oldClient.country)?.toString().trim();
+        const finalStateId = (state_id ?? state ?? oldClient.state)?.toString().trim();
+        const finalCityId = (city_id ?? city ?? oldClient.city)?.toString().trim();
+        const finalPincodeId = (pincode_id ?? pincode ?? oldClient.pincode)?.toString().trim();
+
         const result = await pool.query(
             `UPDATE clients SET
         company_name = $1,
@@ -290,23 +404,25 @@ router.put("/clients/:id", async (req, res) => {
         country = $8,
         state = $9,
         city = $10,
-        email = $11,
-        phone = $12
-      WHERE id = $13
+        pincode = $11,
+        email = $12,
+        phone = $13
+      WHERE id = $14
       RETURNING *`,
             [
-                company_name,
-                company_type,
-                company_size,
-                company_industry,
-                tax_info,
-                address_line1,
-                address_line2,
-                country,
-                state,
-                city,
-                email,
-                phone,
+                finalCompanyName,
+                finalCompanyTypeId,
+                finalCompanySizeId,
+                finalCompanyIndustryId,
+                tax_info ?? oldClient.tax_info,
+                address_line1 ?? oldClient.address_line1,
+                address_line2 ?? oldClient.address_line2,
+                finalCountryId,
+                finalStateId,
+                finalCityId,
+                finalPincodeId,
+                email ?? oldClient.email,
+                phone ?? oldClient.phone,
                 id
             ]
         );
@@ -324,8 +440,8 @@ router.get("/clients", async (req, res) => {
     try {
         let { search = "", page = 1, limit = 10, country, state, city } = req.query;
 
-        page = parseInt(page);
-        limit = parseInt(limit);
+        page = Math.max(1, parseInt(page) || 1);
+        limit = Math.max(1, parseInt(limit) || 10);
         const offset = (page - 1) * limit;
 
         let query = `SELECT * FROM clients WHERE is_active = true`;
@@ -359,16 +475,22 @@ router.get("/clients", async (req, res) => {
         const countValues = values.slice(0, values.length - 2);
         const totalResult = await pool.query(countQuery, countValues);
         const total = parseInt(totalResult.rows[0].count);
+        const totalPages = Math.max(1, Math.ceil(total / limit));
 
-        if (data.rows.length === 0) {
-            return res.status(204).send();
-        }
-
-        return sendSuccess(res, 200, "Clients fetched successfully", data.rows, {
+        return sendSuccess(
+            res,
+            200,
+            data.rows.length ? "Clients fetched successfully" : "No clients found for this page",
+            data.rows.map(formatClientForRead),
+            {
             total,
+            total_pages: totalPages,
             page,
-            limit
-        });
+            limit,
+            has_next: page < totalPages,
+            has_prev: page > 1
+            }
+        );
 
     } catch (error) {
         console.error("GET CLIENTS ERROR:", error);
@@ -390,7 +512,7 @@ router.get("/clientsDetailsById/:id", async (req, res) => {
             return sendWarning(res, 404, "Client not found");
         }
 
-        return sendSuccess(res, 200, "Client details fetched successfully", result.rows[0]);
+        return sendSuccess(res, 200, "Client details fetched successfully", formatClientForRead(result.rows[0]));
 
     } catch (error) {
         console.error("GET CLIENT DETAIL ERROR:", error);

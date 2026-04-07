@@ -24,6 +24,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "409": {
             "description": "Conflict"
           },
@@ -128,6 +131,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "409": {
             "description": "Conflict"
           },
@@ -144,13 +150,7 @@
                   "product_name": {
                     "example": "any"
                   },
-                  "category": {
-                    "example": "any"
-                  },
                   "category_id": {
-                    "example": "any"
-                  },
-                  "industry_category": {
                     "example": "any"
                   },
                   "industry_category_id": {
@@ -494,22 +494,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "product_id": {
+                  "rates": {
                     "example": "any"
                   },
-                  "plan_name": {
+                  "Rates": {
                     "example": "any"
                   },
-                  "title": {
+                  "rate": {
                     "example": "any"
                   },
-                  "description": {
+                  "rate_list": {
                     "example": "any"
                   },
-                  "including_ids": {
-                    "example": "any"
-                  },
-                  "excluding_ids": {
+                  "rates_list": {
                     "example": "any"
                   }
                 }
@@ -662,6 +659,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "409": {
+            "description": "Conflict"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -680,27 +680,10 @@
                   },
                   "description": {
                     "example": "any"
-                  },
-                  "type": {
-                    "example": "any"
                   }
                 }
               }
             }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -741,6 +724,22 @@
         }
       }
     },
+    "/api/plans/getAllplanPoints": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/plans/planPoints/{plan_id}": {
       "get": {
         "tags": [
@@ -767,6 +766,366 @@
         }
       }
     },
+    "/api/plans/planIncluding": {
+      "post": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan_id": {
+                    "example": "any"
+                  },
+                  "point_name": {
+                    "example": "any"
+                  },
+                  "icon": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/plans/getAllIncludingPlan": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planIncluding/{plan_id}": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planIncluding/{id}": {
+      "put": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan_id": {
+                    "example": "any"
+                  },
+                  "point_name": {
+                    "example": "any"
+                  },
+                  "icon": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/plans/planIncludingToggle/{id}": {
+      "put": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planExcluding": {
+      "post": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan_id": {
+                    "example": "any"
+                  },
+                  "point_name": {
+                    "example": "any"
+                  },
+                  "icon": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/plans/getAllExcludingPlan": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planExcluding/{plan_id}": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planExcluding/{id}": {
+      "put": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan_id": {
+                    "example": "any"
+                  },
+                  "point_name": {
+                    "example": "any"
+                  },
+                  "icon": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/plans/planExcludingToggle/{id}": {
+      "put": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/plans/promoCode": {
       "post": {
         "tags": [
@@ -782,6 +1141,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
           },
           "500": {
             "description": "Internal Server Error"
@@ -951,6 +1313,9 @@
           "200": {
             "description": "OK"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -969,6 +1334,12 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1002,6 +1373,22 @@
         }
       }
     },
+    "/api/plans/getAllPlanRate": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/plans/planRate/{id}": {
       "put": {
         "tags": [
@@ -1027,6 +1414,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1069,6 +1459,35 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/plans/planRates/{plan_id}": {
+      "get": {
+        "tags": [
+          "Plans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "plan_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1211,6 +1630,15 @@
                   "company_industry": {
                     "example": "any"
                   },
+                  "company_type_id": {
+                    "example": "any"
+                  },
+                  "company_size_id": {
+                    "example": "any"
+                  },
+                  "company_industry_id": {
+                    "example": "any"
+                  },
                   "tax_info": {
                     "example": "any"
                   },
@@ -1227,6 +1655,21 @@
                     "example": "any"
                   },
                   "city": {
+                    "example": "any"
+                  },
+                  "country_id": {
+                    "example": "any"
+                  },
+                  "state_id": {
+                    "example": "any"
+                  },
+                  "city_id": {
+                    "example": "any"
+                  },
+                  "pincode": {
+                    "example": "any"
+                  },
+                  "pincode_id": {
                     "example": "any"
                   },
                   "email": {
@@ -1291,8 +1734,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -1336,6 +1779,15 @@
                   "company_industry": {
                     "example": "any"
                   },
+                  "company_type_id": {
+                    "example": "any"
+                  },
+                  "company_size_id": {
+                    "example": "any"
+                  },
+                  "company_industry_id": {
+                    "example": "any"
+                  },
                   "tax_info": {
                     "example": "any"
                   },
@@ -1352,6 +1804,21 @@
                     "example": "any"
                   },
                   "city": {
+                    "example": "any"
+                  },
+                  "country_id": {
+                    "example": "any"
+                  },
+                  "state_id": {
+                    "example": "any"
+                  },
+                  "city_id": {
+                    "example": "any"
+                  },
+                  "pincode": {
+                    "example": "any"
+                  },
+                  "pincode_id": {
                     "example": "any"
                   },
                   "email": {
@@ -1413,10 +1880,10 @@
         }
       }
     },
-    "/api/auth/register": {
+    "/api/subscriptions/create-checkout": {
       "post": {
         "tags": [
-          "Auth"
+          "Subscriptions"
         ],
         "description": "",
         "responses": {
@@ -1425,9 +1892,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "409": {
-            "description": "Conflict"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1439,16 +1903,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "client_id": {
                     "example": "any"
                   },
-                  "email": {
+                  "plan_rate_id": {
                     "example": "any"
                   },
-                  "password": {
-                    "example": "any"
-                  },
-                  "role": {
+                  "payment_method": {
                     "example": "any"
                   }
                 }
@@ -1458,18 +1919,28 @@
         }
       }
     },
-    "/api/auth/login": {
+    "/api/subscriptions/confirm-payment/{order_id}": {
       "post": {
+        "tags": [
+          "Subscriptions"
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
           "400": {
             "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -1484,15 +1955,116 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
+                  "payment_status": {
                     "example": "any"
                   },
-                  "password": {
+                  "provider_payment_id": {
+                    "example": "any"
+                  },
+                  "provider_order_id": {
+                    "example": "any"
+                  },
+                  "provider_signature": {
+                    "example": "any"
+                  },
+                  "payment_method": {
                     "example": "any"
                   }
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/subscriptions/payment-status/{order_id}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/subscription-report": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/subscriptions/subscribe": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }
