@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive } from "react-feather";
+import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import {
   Button,
@@ -27,15 +27,15 @@ import axios, { Image_base_uri } from "../../../API/axios";
 // ** Styles
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 import { useSelector } from "react-redux";
-import NewHotelModal from "./NewHotelModal";
-import EditHotelModal from "./EditHotelModal";
-import DeleteHotelModal from "./DeleteHotelModal";
-import HotelOTA from "./HotelOTA";
+// import NewHotelModal from "./NewHotelModal";
+// import EditHotelModal from "./EditHotelModal";
+// import DeleteHotelModal from "./DeleteHotelModal";
+// import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
+import { Description } from "@mui/icons-material";
+// import PromocodeModal from "./PromocodeModal";
 
-const ProductCategory = () => {
-  const [hotelName, setHotelName] = useState("");
-
+const Promocode = () => {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "PMS-Products";
@@ -72,33 +72,22 @@ const ProductCategory = () => {
     //   action: "btns",
     // },
     {
-      id: "024321",
-      name: "PMS",
-      dates: "Aug 08,2025",
-      // applicability: "All Users",
-      // room: "100",
-      // user: "50",
+      promo: "SAVE20",
+      type: "Fixed Amount",
+      volume: "Unlimited Usage",
       action: "btns",
     },
     {
-      id: "213042",
-      name: "LLM",
-      dates: "Oct 10,2025",
-      // applicability: "selected",
-      // room: "500",
-      // user: "200",
+      promo: "WELCOME10",
+      type: "Free Shipping",
+      volume: "Limited Availability",
       action: "btns",
     },
   ];
 
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
-
-  const [cancelOpen, setCancelOpen] = useState(false);
-  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
-
-  const [showCategroy, setShowCategroy] = useState(false);
-  const handleShowModalCategory = () => setShowCategroy(!show);
+  const handleSubmit = () => setShow(!show);
 
   const [showEdit, setShowEdit] = useState(false);
   const handleEditModal = () => setShowEdit(!showEdit);
@@ -135,6 +124,9 @@ const ProductCategory = () => {
     getOTAphoto();
   }, [show, showEdit, del]);
 
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
   //     LoginID,
@@ -158,29 +150,29 @@ const ProductCategory = () => {
 
   const hotelTable = [
     {
-      name: "Category Id",
+      name: "Promo Code",
       sortable: true,
       minWidth: "80px",
-      cell: (row) => <span>{row.id}</span>,
-    },
-    {
-      name: "Category Name",
-      sortable: true,
-      minWidth: "50px",
-      cell: (row) => <span>{row.name}</span>,
-    },
-    {
-      name: "Creation Time",
-      sortable: true,
-      minWidth: "180px",
-      cell: (row) => <span>{row.dates}</span>,
+      cell: (row) => <span>{row.promo}</span>,
     },
     // {
-    //   name: "Product Description",
+    //   name: "Plan Including Name",
     //   sortable: true,
     //   minWidth: "50px",
-    //   cell: (row) => <span>{row.dates}</span>,
+    //   cell: (row) => <span>{row.name}</span>,
     // },
+    {
+      name: "Unit Type",
+      sortable: true,
+      minWidth: "180px",
+      cell: (row) => <span>{row.type}</span>,
+    },
+    {
+      name: "Unit Volume",
+      sortable: true,
+      minWidth: "50px",
+      cell: (row) => <span>{row.volume}</span>,
+    },
     {
       name: "Action",
       sortable: true,
@@ -215,10 +207,10 @@ const ProductCategory = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>Category</h2>
+            <h2>Promocode</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShowCategroy(true)}>
+            <Button color="primary" onClick={() => setShow(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -229,7 +221,7 @@ const ProductCategory = () => {
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
-              Add Category
+              Add Promocode
             </Button>
           ) : null}
         </CardHeader>
@@ -246,69 +238,16 @@ const ProductCategory = () => {
           </Row>
         </CardBody>
       </Card>
-      <Modal
-        isOpen={showCategroy}
-        toggle={() => setShowCategroy(false)}
-        className="modal-dialog-centered modal-lg"
-      >
-        <ModalHeader
-          className="bg-transparent"
-          toggle={() => setShowCategroy(false)}
-        >
-          <span className=" mb-1">Add Category </span>
-        </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
-          <>
-            <Form>
-              <Row>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Category Name <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    placeholder="Category Name"
-                    id="hotel"
-                    value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button className="me-1" color="primary">
-                    Add Category
-                  </Button>
-                  <Button
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={() => setShowCategroy(false)}
-                  >
-                    Cancel
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
-          </>
-        </ModalBody>
-      </Modal>
 
-      {/***** Delete Modal *****/}
+      {/********** Delete Modal **********/}
+
       <Modal
         isOpen={cancelOpen}
         toggle={handleCancelOpen}
         className="modal-dialog-centered modal-lg"
       >
         <ModalHeader className="bg-transparent" toggle={handleCancelOpen}>
-          Delete Category
+          Delete Promo Code
         </ModalHeader>
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
@@ -331,95 +270,95 @@ const ProductCategory = () => {
         </ModalBody>
       </Modal>
 
-      {/********* Update Modal *******/}
+      {/********** Add Modal **********/}
       <Modal
-        isOpen={showUpdate}
-        toggle={handleShowModalUpdate}
+        isOpen={show}
+        toggle={handleShowModal}
         className="modal-dialog-centered modal-lg"
         // backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Category </span>
+        <ModalHeader className="bg-transparent" toggle={handleShowModal}>
+          <span className=" mb-1">Add Promocode</span>
         </ModalHeader>
         <ModalBody className="px-sm-2 mx-50 pb-5">
           <>
             <Form>
               <Row>
                 <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Category Id
+                  <Label className="form-label" for="countries">
+                    Promo Code <span className="text-danger">*</span>
                   </Label>
                   <Input
                     type="text"
                     name="hotel"
-                    id="hotel"
-                    placeholder="Category Id"
-                    value={hotelName}
+                    placeholder="Promo Code"
+                    // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
                     // invalid={display && hotelName === ""}
                   />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter Tenure Type </span>
                   ) : null} */}
                 </Col>
+
                 <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Category Name <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="address"
-                    id="address"
-                    placeholder="Category Name"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
-                  />
-                  {/* {display && !address ? (
-                    <span className="error_msg_lbl">Enter Product Code </span>
-                  ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Product Category <span className="text-danger">*</span>
+                  <Label className="form-label" for="hotel">
+                    Unit Type <span className="text-danger">*</span>
                   </Label>
                   <Select
                     theme={selectThemeColors}
                     className="react-select"
                     classNamePrefix="select"
-                    placeholder="Select Category"
+                    placeholder="Select Tenure Type"
                     // options={countryList}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    invalid={display && country === ''}
                   />
-                  {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
-                  ) : null}
-                </Col> */}
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Creation Time <span className="text-danger">*</span>
+                  {/* {display && !hotelName ? (
+                    <span className="error_msg_lbl">Enter  Point Icons </span>
+                  ) : null} */}
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Unit Volume <span className="text-danger">*</span>
                   </Label>
                   <Input
                     type="text"
-                    name="address"
-                    id="address"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
-                  /> */}
-                {/* {display && !address ? (
-                    <span className="error_msg_lbl">
-                      Enter Product Description{" "}
-                    </span>
+                    placeholder="Unit Volume"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter  Point Description </span>
                   ) : null} */}
-                {/* </Col> */}
+                </Col>
+                {/* <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="address">
+                    isDiscountable{" "}
+                  </Label>
+                  <Col>
+                    <Input
+                      type="checkbox"
+                      name="address"
+                      placeholder="isDiscountable"
+                      id="address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      invalid={display && address === ""}
+                    />
+                    {display && !address ? (
+                      <span className="error_msg_lbl">
+                        Check isDiscountable{" "}
+                      </span>
+                    ) : null}
+                  </Col>
+                </Col> */}
               </Row>
 
               <Row>
@@ -427,7 +366,126 @@ const ProductCategory = () => {
                   <Button
                     className="me-1"
                     color="primary"
-                    // onClick={handleSubmit}
+                    onClick={handleSubmit}
+                  >
+                    Add Promocode
+                  </Button>
+                  <Button
+                    color="secondary"
+                    outline
+                    // onClick={() => {
+                    //     setShow(!show)
+                    // }}
+                    onClick={handleShowModal}
+                  >
+                    Cancel
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </>
+        </ModalBody>
+      </Modal>
+
+      {/********** Update Modal **********/}
+
+      <Modal
+        isOpen={showUpdate}
+        toggle={handleShowModalUpdate}
+        className="modal-dialog-centered modal-lg"
+        // backdrop={false}
+      >
+        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
+          <span className=" mb-1">Update Promocode</span>
+        </ModalHeader>
+        <ModalBody className="px-sm-2 mx-50 pb-5">
+          <>
+            <Form>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Promo Code <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    placeholder="Promo Code"
+                    // options={countryList}
+                    onChange={(e) => {
+                      setCountryId(e.value);
+                      setCountryCode(e.CountryCode);
+                      setCountry(e.label);
+                    }}
+                  />
+                  {/* {display && !country ? (
+                          <span className="error_msg_lbl">Enter Tenure Type </span>
+                        ) : null} */}
+                </Col>
+
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="hotel">
+                    Unit Type <span className="text-danger">*</span>
+                  </Label>
+                  <Select
+                    theme={selectThemeColors}
+                    className="react-select"
+                    classNamePrefix="select"
+                    placeholder="Select Unit Type"
+                    id="dprate"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !hotelName ? (
+                          <span className="error_msg_lbl">Enter Dp Rate </span>
+                        ) : null} */}
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Description <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    name="hotel"
+                    placeholder="Selling Price"
+                    id="selling"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !country ? (
+                          <span className="error_msg_lbl">Enter Selling Price </span>
+                        ) : null} */}
+                </Col>
+                {/* <Col lg="6" className="mb-1">
+                        <Label className="form-label" for="address">
+                          isDiscountable{" "}
+                        </Label>
+                        <Col>
+                          <Input
+                            type="checkbox"
+                            name="address"
+                            placeholder="isDiscountable"
+                            id="address"
+                            // value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            // invalid={display && address === ""}
+                          /> */}
+                {/* {display && !address ? (
+                            <span className="error_msg_lbl">
+                              Check isDiscountable{" "}
+                            </span>
+                          ) : null} */}
+                {/* </Col>
+                      </Col> */}
+              </Row>
+
+              <Row>
+                <Col md="12 text-lg-end text-md-center mt-1">
+                  <Button
+                    className="me-1"
+                    color="primary"
+                    onClick={handleSubmit}
                   >
                     Submit
                   </Button>
@@ -447,17 +505,11 @@ const ProductCategory = () => {
           </>
         </ModalBody>
       </Modal>
-      {show && (
-        <NewHotelModal
+
+      {/* {show && (
+        <PromocodeModal
           show={show}
           handleShowModal={handleShowModal}
-          getAllHotelList={getAllHotelList}
-        />
-      )}
-      {/* {showCategroy && (
-        <NewHotelModal
-          show={showCategroy}
-          handleShowModal={handleShowModalCategory}
           getAllHotelList={getAllHotelList}
         />
       )} */}
@@ -484,4 +536,4 @@ const ProductCategory = () => {
   );
 };
 
-export default ProductCategory;
+export default Promocode;

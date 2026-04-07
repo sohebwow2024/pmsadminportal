@@ -279,7 +279,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                                     <Input
                                         type='text'
                                         name='hotel'
-                                        placeholder="Product Name"
+                                        placeholder="Category Name"
                                         id='hotel'
                                         value={hotelName}
                                         onChange={e => setHotelName(e.target.value)}
@@ -321,11 +321,10 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                                             setCountryCode(e.CountryCode)
                                             setCountry(e.label)
                                         }}
-                                    // invalid={display && country === ''}
                                     />
                                     {display && !country ? <span className='error_msg_lbl'>Enter Category </span> : null}
                                 </Col>
-                                <Col lg='6' className='mb-1'>
+                                 <Col lg='6' className='mb-1'>
                                     <Label className='form-label' for='address'>Product Description </Label>
                                     <Input
                                         type='text'
@@ -337,7 +336,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                                         invalid={display && address === ''}
 
                                     />
-                                    {/* {display && !address ? <span className='error_msg_lbl'>Enter Product Description </span> : null} */}
+                                    {display && !address ? <span className='error_msg_lbl'>Enter Product Description </span> : null}
                                 </Col>
                             </Row>
 
@@ -345,7 +344,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                             <Row>
                                 <Col md='12 text-lg-end text-md-center mt-1'>
                                     <Button className='me-1' color='primary' onClick={handleSubmit}>
-                                        Add product
+                                        Add Product
                                     </Button>
                                     <Button
                                         color='secondary'

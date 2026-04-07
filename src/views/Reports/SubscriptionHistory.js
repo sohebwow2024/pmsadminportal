@@ -81,26 +81,26 @@ const SubscriptionHistory = () => {
 
   const data = [
     {
-      name: "Adani Cement",
+      subsid: "030641",
       clientid: "023141",
       creationtime: "Aug 02, 2026",
-      startdates: "₹30000",
-      action: "btns",
+      planrateid: "808214",
+      // action: "btns",
     },
     {
-      name: "LNT",
-      startdates: "₹20000",
+      subsid: "556837",
+      clientid: "064273",
       creationtime: "May 30, 2026",
-      clientid: "203042",
-      action: "btns",
+      planrateid: "203042",
+      // action: "btns",
     },
   ];
   const basicColumns = [
     {
       name: "Subscription Id",
       sortable: true,
-      minWidth: "250px",
-      cell: (row) => <span>{row.name}</span>,
+      // width: "22rem",
+      cell: (row) => <span>{row.subsid}</span>,
     },
     // {
     //   name: "Purchase Plan",
@@ -110,51 +110,51 @@ const SubscriptionHistory = () => {
     {
       name: "Client Id",
       sortable: true,
-      minWidth: "10px",
+      // width: "22rem",
       cell: (row) => <span>{row.clientid}</span>,
     },
     {
       name: "Plan Rate Id",
       sortable: true,
-      // minWidth: '310px',
-      cell: (row) => <span>{row.startdates}</span>,
+      // width: "22rem",
+      cell: (row) => <span>{row.planrateid}</span>,
     },
     {
       name: "Creation Time",
       sortable: true,
-      // minWidth: '250px',
+      width: "22rem",
       cell: (row) => <span>{row.creationtime}</span>,
     },
     
-    {
-      name: "Actions",
-      center: true,
-      //  minWidth: '150px',
-      selector: (row) => {
-        return (
-          <>
-            <Col>
-              <Edit
-                className="me-1 cursor-pointer"
-                size={15}
-                onClick={() => {
-                  handleUpdateOpen();
-                  setPromoId(row.promotionId);
-                }}
-              />
-              <Archive
-                className="me-1 cursor-pointer"
-                size={15}
-                onClick={() => {
-                  // handleUpdateOpen();
-                  setPromoId(row.promotionId);
-                }}
-              />
-            </Col>
-          </>
-        );
-      },
-    },
+    // {
+    //   name: "Actions",
+    //   center: true,
+    //   //  minWidth: '150px',
+    //   selector: (row) => {
+    //     return (
+    //       <>
+    //         <Col>
+    //           <Edit
+    //             className="me-1 cursor-pointer"
+    //             size={15}
+    //             onClick={() => {
+    //               handleUpdateOpen();
+    //               setPromoId(row.promotionId);
+    //             }}
+    //           />
+    //           <Trash
+    //             className="me-1 cursor-pointer"
+    //             size={15}
+    //             onClick={() => {
+    //               // handleUpdateOpen();
+    //               setPromoId(row.promotionId);
+    //             }}
+    //           />
+    //         </Col>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   const options = {
@@ -210,76 +210,6 @@ const SubscriptionHistory = () => {
 
   return (
     <>
-      {/* <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Subscription History</h2>
-          </CardTitle>
-        </CardHeader>
-        <CardBody className="text-center">
-          <Row className="align-items-end">
-            <Col className="text-start">
-              <Label className="form-label" for="startDate">
-                From Date
-              </Label>
-             
-              <Flatpickr
-                className="form-control"
-                value={fromDate}
-                onChange={(date) => {
-                  setFromDate(moment(date[0]).format("YYYY-MM-DD"));
-                }}
-                id="startDate"
-                options={{
-                  altInput: true,
-                  dateFormat: "Y-m-d",
-                }}
-              />
-              
-            </Col>
-            <Col className="text-start">
-              <Label className="form-label" for="endDate">
-                To Date
-              </Label>
-            
-              <Flatpickr
-                className="form-control"
-                value={toDate}
-                onChange={(date) => {
-                  setToDate(moment(date[0]).format("YYYY-MM-DD"));
-                }}
-                id="endDate"
-                options={{
-                  altInput: true,
-                  dateFormat: "Y-m-d",
-                }}
-              />
-             
-            </Col>
-            <Col>
-              <Button className="me-1" color="primary" onClick={getBookingData}>
-                Search
-              </Button>
-              <Button className="me-1" color="primary" onClick={handelReset}>
-                Reset
-              </Button>
-            </Col>
-          </Row>
-        </CardBody>
-        
-        <div className="react-dataTable pt-2">
-          <DataTable
-            noHeader
-            pagination
-            data={data}
-            columns={basicColumns}
-            className="react-dataTable ms-3"
-            sortIcon={<ChevronDown size={10} />}
-            paginationRowsPerPageOptions={[10, 25, 50, 100]}
-          />
-        </div>
-      </Card> */}
-
       <Card>
         <CardHeader>
           <CardTitle>

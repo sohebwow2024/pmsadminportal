@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive } from "react-feather";
+import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import {
   Button,
@@ -27,15 +27,13 @@ import axios, { Image_base_uri } from "../../../API/axios";
 // ** Styles
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 import { useSelector } from "react-redux";
-import NewHotelModal from "./NewHotelModal";
-import EditHotelModal from "./EditHotelModal";
-import DeleteHotelModal from "./DeleteHotelModal";
-import HotelOTA from "./HotelOTA";
+// import NewHotelModal from "./NewHotelModal";
+// import EditHotelModal from "./EditHotelModal";
+// import DeleteHotelModal from "./DeleteHotelModal";
+// import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
 
-const ProductCategory = () => {
-  const [hotelName, setHotelName] = useState("");
-
+const PlanPoint = () => {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "PMS-Products";
@@ -72,21 +70,15 @@ const ProductCategory = () => {
     //   action: "btns",
     // },
     {
-      id: "024321",
-      name: "PMS",
-      dates: "Aug 08,2025",
-      // applicability: "All Users",
-      // room: "100",
-      // user: "50",
+      name: "Unlimited Website",
+      icons: "File",
+      description: "Description",
       action: "btns",
     },
     {
-      id: "213042",
-      name: "LLM",
-      dates: "Oct 10,2025",
-      // applicability: "selected",
-      // room: "500",
-      // user: "200",
+      name: "Unlimited FTP Account",
+      icons: "Upload File",
+      description: "Description",
       action: "btns",
     },
   ];
@@ -94,17 +86,12 @@ const ProductCategory = () => {
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
 
-  const [cancelOpen, setCancelOpen] = useState(false);
-  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
-
-  const [showCategroy, setShowCategroy] = useState(false);
-  const handleShowModalCategory = () => setShowCategroy(!show);
-
   const [showEdit, setShowEdit] = useState(false);
   const handleEditModal = () => setShowEdit(!showEdit);
 
   const [showUpdate, setShowUpdate] = useState(false);
   const handleShowModalUpdate = () => setShowUpdate(!showUpdate);
+  const handleSubmit = () => setShow(!show);
 
   const [selected_hotel, setSelected_hotel] = useState();
 
@@ -135,6 +122,9 @@ const ProductCategory = () => {
     getOTAphoto();
   }, [show, showEdit, del]);
 
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
   //     LoginID,
@@ -158,29 +148,29 @@ const ProductCategory = () => {
 
   const hotelTable = [
     {
-      name: "Category Id",
+      name: "Plan Point Name",
       sortable: true,
       minWidth: "80px",
-      cell: (row) => <span>{row.id}</span>,
-    },
-    {
-      name: "Category Name",
-      sortable: true,
-      minWidth: "50px",
       cell: (row) => <span>{row.name}</span>,
     },
     {
-      name: "Creation Time",
+      name: "Plan Point Icon",
       sortable: true,
-      minWidth: "180px",
-      cell: (row) => <span>{row.dates}</span>,
+      minWidth: "50px",
+      cell: (row) => <span>{row.icons}</span>,
     },
     // {
-    //   name: "Product Description",
+    //   name: "Product Category",
     //   sortable: true,
-    //   minWidth: "50px",
-    //   cell: (row) => <span>{row.dates}</span>,
+    //   minWidth: "180px",
+    //   cell: (row) => <span>{row.details}</span>,
     // },
+    {
+      name: "Description",
+      sortable: true,
+      minWidth: "50px",
+      cell: (row) => <span>{row.description}</span>,
+    },
     {
       name: "Action",
       sortable: true,
@@ -215,10 +205,10 @@ const ProductCategory = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>Category</h2>
+            <h2>Plan Points</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShowCategroy(true)}>
+            <Button color="primary" onClick={() => setShow(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -229,7 +219,7 @@ const ProductCategory = () => {
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
-              Add Category
+              Add Plan Points
             </Button>
           ) : null}
         </CardHeader>
@@ -246,69 +236,16 @@ const ProductCategory = () => {
           </Row>
         </CardBody>
       </Card>
-      <Modal
-        isOpen={showCategroy}
-        toggle={() => setShowCategroy(false)}
-        className="modal-dialog-centered modal-lg"
-      >
-        <ModalHeader
-          className="bg-transparent"
-          toggle={() => setShowCategroy(false)}
-        >
-          <span className=" mb-1">Add Category </span>
-        </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
-          <>
-            <Form>
-              <Row>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Category Name <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    placeholder="Category Name"
-                    id="hotel"
-                    value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button className="me-1" color="primary">
-                    Add Category
-                  </Button>
-                  <Button
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={() => setShowCategroy(false)}
-                  >
-                    Cancel
-                  </Button>
-                </Col>
-              </Row>
-            </Form>
-          </>
-        </ModalBody>
-      </Modal>
 
-      {/***** Delete Modal *****/}
+      {/********** Delete Modal **********/}
+
       <Modal
         isOpen={cancelOpen}
         toggle={handleCancelOpen}
         className="modal-dialog-centered modal-lg"
       >
         <ModalHeader className="bg-transparent" toggle={handleCancelOpen}>
-          Delete Category
+          Delete Plan Point
         </ModalHeader>
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
@@ -331,7 +268,8 @@ const ProductCategory = () => {
         </ModalBody>
       </Modal>
 
-      {/********* Update Modal *******/}
+      {/********** Update Modal **********/}
+
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
@@ -339,87 +277,86 @@ const ProductCategory = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Category </span>
+          <span className=" mb-1">Update Plan Point</span>
         </ModalHeader>
         <ModalBody className="px-sm-2 mx-50 pb-5">
           <>
             <Form>
               <Row>
                 <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Category Id
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    id="hotel"
-                    placeholder="Category Id"
-                    value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
-                </Col>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Category Name <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="address"
-                    id="address"
-                    placeholder="Category Name"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
-                  />
-                  {/* {display && !address ? (
-                    <span className="error_msg_lbl">Enter Product Code </span>
-                  ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                {/* <Col lg="6" className="mb-1">
                   <Label className="form-label" for="countries">
-                    Product Category <span className="text-danger">*</span>
+                    Plan Point Name <span className="text-danger">*</span>
                   </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Category"
+                  <Input
+                    placeholder="Plan Point Name"
                     // options={countryList}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    invalid={display && country === ''}
                   />
-                  {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
-                  ) : null}
-                </Col> */}
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Creation Time <span className="text-danger">*</span>
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter Tenure Type </span>
+                  ) : null} */}
+                </Col>
+
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="hotel">
+                    Icon <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    type="file"
+                    placeholder="Icon"
+                    id="dprate"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !hotelName ? (
+                    <span className="error_msg_lbl">Enter Dp Rate </span>
+                  ) : null} */}
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Description <span className="text-danger">*</span>
                   </Label>
                   <Input
                     type="text"
-                    name="address"
-                    id="address"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
-                  /> */}
-                {/* {display && !address ? (
-                    <span className="error_msg_lbl">
-                      Enter Product Description{" "}
-                    </span>
+                    name="hotel"
+                    placeholder="Description"
+                    id="selling"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter Selling Price </span>
                   ) : null} */}
-                {/* </Col> */}
+                </Col>
+                {/* <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="address">
+                    isDiscountable{" "}
+                  </Label>
+                  <Col>
+                    <Input
+                      type="checkbox"
+                      name="address"
+                      placeholder="isDiscountable"
+                      id="address"
+                      // value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      // invalid={display && address === ""}
+                    /> */}
+                {/* {display && !address ? (
+                      <span className="error_msg_lbl">
+                        Check isDiscountable{" "}
+                      </span>
+                    ) : null} */}
+                {/* </Col>
+                </Col> */}
               </Row>
 
               <Row>
@@ -427,7 +364,7 @@ const ProductCategory = () => {
                   <Button
                     className="me-1"
                     color="primary"
-                    // onClick={handleSubmit}
+                    onClick={handleSubmit}
                   >
                     Submit
                   </Button>
@@ -447,31 +384,124 @@ const ProductCategory = () => {
           </>
         </ModalBody>
       </Modal>
-      {show && (
-        <NewHotelModal
-          show={show}
-          handleShowModal={handleShowModal}
-          getAllHotelList={getAllHotelList}
-        />
-      )}
-      {/* {showCategroy && (
-        <NewHotelModal
-          show={showCategroy}
-          handleShowModal={handleShowModalCategory}
-          getAllHotelList={getAllHotelList}
-        />
-      )} */}
-      {/* {showUpdate && ( */}
-      {/* <EditHotelModal
-        // showEdit={showEdit}
-        // handleEditModal={handleEditModal}
-        handleShowModalUpdate={handleShowModalUpdate}
-        showUpdate={showUpdate}
-        hotels={hotels}
-        id={selected_hotel}
-        // show={show}
-      /> */}
-      {/* )} */}
+
+      {/********** Add Modal **********/}
+
+      <Modal
+        isOpen={show}
+        toggle={handleShowModal}
+        className="modal-dialog-centered modal-lg"
+        backdrop={false}
+      >
+        <ModalHeader className="bg-transparent" toggle={handleShowModal}>
+          <span className=" mb-1">Add Plan Point</span>
+        </ModalHeader>
+        <ModalBody className="px-sm-2 mx-50 pb-5">
+          <>
+            <Form>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Plan Point Name <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    placeholder="Enter Plan Point"
+                    // options={countryList}
+                    onChange={(e) => {
+                      setCountryId(e.value);
+                      setCountryCode(e.CountryCode);
+                      setCountry(e.label);
+                    }}
+                  />
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter Tenure Type </span>
+                  ) : null} */}
+                </Col>
+
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="hotel">
+                    Icon <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    type="file"
+                    placeholder="Dp Rate"
+                    id="dprate"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !hotelName ? (
+                    <span className="error_msg_lbl">Enter Dp Rate </span>
+                  ) : null} */}
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="countries">
+                    Description <span className="text-danger">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    name="hotel"
+                    placeholder="Selling Price"
+                    id="selling"
+                    // value={hotelName}
+                    onChange={(e) => setHotelName(e.target.value)}
+                    // invalid={display && hotelName === ""}
+                  />
+                  {/* {display && !country ? (
+                    <span className="error_msg_lbl">Enter Selling Price </span>
+                  ) : null} */}
+                </Col>
+                {/* <Col lg="6" className="mb-1">
+                  <Label className="form-label" for="address">
+                    isDiscountable{" "}
+                  </Label>
+                  <Col>
+                    <Input
+                      type="checkbox"
+                      name="address"
+                      placeholder="isDiscountable"
+                      id="address"
+                      // value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      // invalid={display && address === ""}
+                    /> */}
+                {/* {display && !address ? (
+                      <span className="error_msg_lbl">
+                        Check isDiscountable{" "}
+                      </span>
+                    ) : null} */}
+                {/* </Col>
+                </Col> */}
+              </Row>
+              <Row>
+                <Col md="12 text-lg-end text-md-center mt-1">
+                  <Button
+                    className="me-1"
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Add Plan Point
+                  </Button>
+                  <Button
+                    color="secondary"
+                    outline
+                    // onClick={() => {
+                    //     setShow(!show)
+                    // }}
+                    onClick={handleShowModal}
+                  >
+                    Cancel
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </>
+        </ModalBody>
+      </Modal>
+      {show ? <div className="modal-backdrop fade show"></div> : null}
+
       {del && (
         <DeleteHotelModal
           del={del}
@@ -484,4 +514,4 @@ const ProductCategory = () => {
   );
 };
 
-export default ProductCategory;
+export default PlanPoint;

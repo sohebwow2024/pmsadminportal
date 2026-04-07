@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive } from "react-feather";
+import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import {
   Button,
@@ -129,6 +129,9 @@ const Products = () => {
     getOTAphoto();
   }, [show, showEdit, del]);
 
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
   //     LoginID,
@@ -191,11 +194,11 @@ const Products = () => {
             }}
             size={15}
           />
-          <Archive
+          <Trash
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
-              // handleShowModal();
+              handleCancelOpen();
               // setPromoId(row.promotionId);
             }}
           />
@@ -213,6 +216,16 @@ const Products = () => {
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShow(true)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="me-1"
+              >
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
               Add Product
             </Button>
           ) : null}
@@ -230,6 +243,35 @@ const Products = () => {
           </Row>
         </CardBody>
       </Card>
+
+      <Modal
+        isOpen={cancelOpen}
+        toggle={handleCancelOpen}
+        className="modal-dialog-centered modal-lg"
+      >
+        <ModalHeader className="bg-transparent" toggle={handleCancelOpen}>
+          Delete Product
+        </ModalHeader>
+        <ModalBody>
+          <h3 className="text-center">Are you sure you want to delete?</h3>
+          <Col className="text-center">
+            <Button
+              className="m-1"
+              color="danger"
+              // onClick={() => handleCancelBooking(id)}
+            >
+              Confirm
+            </Button>
+            <Button
+              className="m-1"
+              color="primary"
+              onClick={() => handleCancelOpen()}
+            >
+              Cancel
+            </Button>
+          </Col>
+        </ModalBody>
+      </Modal>
 
       {show && (
         <NewHotelModal

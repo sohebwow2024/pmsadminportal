@@ -21,6 +21,12 @@ export default [
                 icon: <AiOutlineArrowRight size={20} />,
                 navLink: '/category'
             },
+            {
+                id: 'industrycategory',
+                title: 'Industry Category',
+                icon: <AiOutlineArrowRight size={20} />,
+                navLink: '/industrycategory'
+            }
             // {
             //     id: 'plansMaster',
             //     title: 'Plans',

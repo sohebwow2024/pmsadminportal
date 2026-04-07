@@ -23,14 +23,14 @@ import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 import Flatpickr from "react-flatpickr";
-import axios, { Image_base_uri } from "../../../API/axios";
+import axios, { Image_base_uri } from "../../API/axios";
 // ** Styles
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 import { useSelector } from "react-redux";
-import NewHotelModal from "./NewHotelModal";
-import EditHotelModal from "./EditHotelModal";
-import DeleteHotelModal from "./DeleteHotelModal";
-import HotelOTA from "./HotelOTA";
+// import NewHotelModal from "./NewHotelModal";
+// import EditHotelModal from "./EditHotelModal";
+// import DeleteHotelModal from "./DeleteHotelModal";
+// import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
 
 const ProductCategory = () => {
@@ -215,7 +215,7 @@ const ProductCategory = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>Category</h2>
+            <h2>Industry Category</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button color="primary" onClick={() => setShowCategroy(true)}>
@@ -339,7 +339,7 @@ const ProductCategory = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Category </span>
+          <span className=" mb-1">Update Industry Category </span>
         </ModalHeader>
         <ModalBody className="px-sm-2 mx-50 pb-5">
           <>

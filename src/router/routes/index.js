@@ -48,7 +48,7 @@ import TermsAndConditions from "../../views/PropertyMaster/TermsAndCondition/Ter
 import ProductMaster from "../../views/RoomInventory/ProductMaster/ProductMaster";
 import PurchaseInvoice from "../../views/RoomInventory/PurchaseOrder/PurchaseOrder";
 import PurchaseReceive from "../../views/RoomInventory/PurchaseReceive/PurchaseReceive";
-import StockCount from "../../views/RoomInventory/StockCount";
+// import StockCount from "../../views/RoomInventory/IndustryCategory.js";
 import GuestList from "../../views/Reports/GuestList";
 import GuestWithRate from "../../views/Reports/GuestWithRate";
 import GuestWithoutRate from "../../views/Reports/GuestWithoutRate";
@@ -92,6 +92,10 @@ import SubscriptionPlan from "../../views/GuestMaster/SubscriptionPlan.js";
 import HotelManagement from "../../views/FrontDesk/Hotel Management.js";
 import Feature from "../../views/PropertyMaster/Feature.js";
 import ProductCategory from "../../views/PropertyMaster/Hotel/ProductCategory.js";
+import IndustryCategory from "../../views/RoomInventory/IndustryCategory.js";
+import PlanRate from "../../views/PropertyMaster/User/PlanRate.js";
+import PlanPoint from "../../views/PropertyMaster/User/PlanPoint.js";
+import Promocode from "../../views/PropertyMaster/User/Promocode.js";
 
 // import ManageProfile from '../../../../ layouts/components/menu/vertical-menu/EditProfileModal.js'
 // import PaymentGateWay from "../../views/FrontDesk/PaymentsFolioAcc/PaymentGateWay";
@@ -166,6 +170,8 @@ const ProductsMaster = lazy(() =>
 );
 //test
 const PlansMaster = lazy(() => import("../../views/PropertyMaster/User/Plans.js"));
+const PlanIncluding = lazy(() => import("../../views/PropertyMaster/User/PlanIncluding.js"));
+const PlanExcluding = lazy(() => import("../../views/PropertyMaster/User/PlanExcluding.js"));
 const PriceMaster = lazy(() =>
   import("../../views/PropertyMaster/Floor/Price.js")
 );
@@ -228,7 +234,7 @@ const PurchaseInvoiceMaster = lazy(() =>
   import("../../views/RoomInventory/PurchaseOrder/PurchaseOrder")
 );
 const StockCountMaster = lazy(() =>
-  import("../../views/RoomInventory/StockCount")
+  import("../../views/RoomInventory/IndustryCategory.js")
 );
 const GuestListReport = lazy(() => import("../../views/Reports/GuestList"));
 const GuestWithRateReport = lazy(() =>
@@ -566,6 +572,27 @@ const Routes = [
     element: <PlansMaster />,
   },
   {
+    path: "/planincluding",
+    element: <PlanIncluding />,
+  },
+  {
+    path: "/planexcluding",
+    element: <PlanExcluding />,
+  },
+  {
+    path: "/planrate",
+    element: <PlanRate />,
+  },
+  {
+    path: "/planpoint",
+    element: <PlanPoint />,
+  },
+
+   {
+    path: "/promocode",
+    element: <Promocode />,
+  },
+  {
     path: "/priceMaster",
     element: <PriceMaster />,
   },
@@ -688,8 +715,8 @@ const Routes = [
     element: <PurchaseReceive />,
   },
   {
-    path: "/stockCount",
-    element: <StockCount />,
+    path: "/industrycategory",
+    element: <IndustryCategory />,
   },
   {
     path: "/guestList",
