@@ -4,6 +4,10 @@ import slugify from "slugify";
 
 const router = express.Router();
 const duplicateWithPlanMessage = (fieldName) => `${fieldName} already exist with this plan`;
+const sanitizeSlugForResponse = (slug) =>
+  typeof slug === "string" ? slug.replace(/-\d+$/, "") : slug;
+const buildPlanSlug = (title) =>
+  slugify(title || "", { lower: true, strict: true, trim: true });
 const parsePagination = (query) => {
   const page = Math.max(1, parseInt(query.page, 10) || 1);
   const limit = Math.max(1, parseInt(query.limit, 10) || 10);
@@ -70,7 +74,7 @@ router.post("/plans", async (req, res) => {
       });
     }
 
-    const slug = slugify(title, { lower: true }) + "-" + Date.now();
+    const slug = buildPlanSlug(title);
 
     await client.query("BEGIN");
 
@@ -275,6 +279,7 @@ router.post("/plans", async (req, res) => {
 
     const responseData = {
       ...createdPlan,
+      slug: sanitizeSlugForResponse(createdPlan.slug),
       including_ids: normalizedIncludingIds,
       excluding_ids: normalizedExcludingIds,
       // return only rate ids in POST response
@@ -334,7 +339,10 @@ router.get("/plansByProduct/:product_id", async (req, res) => {
     res.status(200).json({
       status: "success",
       message: "Assigned plan fetched successfully",
-      data: result.rows[0]
+      data: {
+        ...result.rows[0],
+        slug: sanitizeSlugForResponse(result.rows[0].slug)
+      }
     });
 
   } catch (error) {
@@ -511,7 +519,7 @@ router.get("/getAllPlans", async (req, res) => {
       product_id: plan.product_id,
       plan_name: plan.plan_name,
       title: plan.title,
-      slug: plan.slug,
+      slug: sanitizeSlugForResponse(plan.slug),
       description: plan.description,
       including_ids: includeIdsMap.get(toPlanKey(plan.id)) || [],
       excluding_ids: excludeIdsMap.get(toPlanKey(plan.id)) || [],
@@ -723,7 +731,7 @@ router.put("/plans/:id", async (req, res) => {
     // slug update only if title changed
     let slug = oldPlan.slug;
     if (title && title !== oldPlan.title) {
-      slug = slugify(title, { lower: true }) + "-" + Date.now();
+      slug = buildPlanSlug(title);
     }
 
     await client.query("BEGIN");

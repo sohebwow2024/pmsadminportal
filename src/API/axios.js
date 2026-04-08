@@ -13,7 +13,8 @@ import jwtDefaultConfig from "../../src/@core/auth/jwt/jwtDefaultConfig";
 
 // 
 // const BASE_URL = `https://devserver.hostynnist.com/api`
-const BASE_URL = `https://preprod-pms-api.potenzer.com/api`
+// const BASE_URL = `https://preprod-pms-api.potenzer.com/api`
+const BASE_URL = `http://localhost:5000`
 export const Image_base_uri = `https://preprod-pms-api.potenzer.com`
 export const Staah = `https://dev.staah.hostynnist.com/api`
 // export const Image_base_uri = `https://devserver.hostynnist.com`

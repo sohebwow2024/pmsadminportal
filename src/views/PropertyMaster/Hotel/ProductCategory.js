@@ -32,9 +32,10 @@ import EditHotelModal from "./EditHotelModal";
 import DeleteHotelModal from "./DeleteHotelModal";
 import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
+import api from "../../../api";
 
 const ProductCategory = () => {
-  const [hotelName, setHotelName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -90,7 +91,7 @@ const ProductCategory = () => {
       action: "btns",
     },
   ];
-
+  const newToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJTb2hlYkFwcmlsMTIzIiwiZW1haWwiOiJ0ZXN0MTIzNDU1MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NTU0MDQyNSwiZXhwIjoxNzc1NjI2ODI1fQ.uEE7xILzv5E3J0xl-tS-g3eJIolnecPA0Tof8TbjrHY"
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
 
@@ -99,6 +100,49 @@ const ProductCategory = () => {
 
   const [showCategroy, setShowCategroy] = useState(false);
   const handleShowModalCategory = () => setShowCategroy(!show);
+
+  const handleAddCategory = async () => {
+    console.log("==============>");
+
+    if (!categoryName) {
+      toast.error("Please enter category name", {
+        position: "top-right",
+      });
+      return;
+    }
+    try {
+      const payload = {
+        category_name: categoryName,
+        LoginID,
+        Token,
+      };
+      console.log("payload", payload);
+
+      const res = await api.post("/api/products/category", payload, {
+        headers: {
+          LoginID,
+          Token,
+          Authorization: `Bearer ${Token}`,
+        },
+      });
+
+      if (res?.status === 200 || res?.status === 201) {
+        toast.success("Category added successfully", {
+          position: "top-right",
+        });
+        setCategoryName("");
+        setShowCategroy(false);
+      }
+    } catch (error) {
+      console.log("add category error", error);
+      toast.error(
+        error?.response?.data?.Message || "Failed to add category",
+        {
+          position: "top-right",
+        },
+      );
+    }
+  };
 
   const [showEdit, setShowEdit] = useState(false);
   const handleEditModal = () => setShowEdit(!showEdit);
@@ -154,7 +198,7 @@ const ProductCategory = () => {
   // useEffect(() => {
   //   getAllHotelList()
   //   // getAllState()
-  // }, [])
+  // }, [categoryName])
 
   const hotelTable = [
     {
@@ -246,6 +290,7 @@ const ProductCategory = () => {
           </Row>
         </CardBody>
       </Card>
+
       <Modal
         isOpen={showCategroy}
         toggle={() => setShowCategroy(false)}
@@ -270,18 +315,23 @@ const ProductCategory = () => {
                     name="hotel"
                     placeholder="Category Name"
                     id="hotel"
-                    value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    value={categoryName}
+                    onChange={(e) => setCategoryName(e.target.value)}
+                  // invalid={display && categoryName === ""}
                   />
-                  {/* {display && !hotelName ? (
+                  {/* {display && !categoryName ? (
                     <span className="error_msg_lbl">Enter Product Name </span>
                   ) : null} */}
                 </Col>
               </Row>
               <Row>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button className="me-1" color="primary">
+                  <Button
+                    className="me-1"
+                    color="primary"
+                    type="button"
+                    onClick={handleAddCategory}
+                  >
                     Add Category
                   </Button>
                   <Button
@@ -316,7 +366,7 @@ const ProductCategory = () => {
             <Button
               className="m-1"
               color="danger"
-              // onClick={() => handleCancelBooking(id)}
+            // onClick={() => handleCancelBooking(id)}
             >
               Confirm
             </Button>
@@ -336,7 +386,7 @@ const ProductCategory = () => {
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
         className="modal-dialog-centered modal-lg"
-        // backdrop={false}
+      // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
           <span className=" mb-1">Update Category </span>
@@ -354,11 +404,11 @@ const ProductCategory = () => {
                     name="hotel"
                     id="hotel"
                     placeholder="Category Id"
-                    value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                  // value={categoryName}
+                  // onChange={(e) => setCategoryName(e.target.value)}
+                  // invalid={display && categoryName === ""}
                   />
-                  {/* {display && !hotelName ? (
+                  {/* {display && !categoryName ? (
                     <span className="error_msg_lbl">Enter Product Name </span>
                   ) : null} */}
                 </Col>
@@ -373,7 +423,7 @@ const ProductCategory = () => {
                     placeholder="Category Name"
                     // value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
+                  // invalid={display && address === ""}
                   />
                   {/* {display && !address ? (
                     <span className="error_msg_lbl">Enter Product Code </span>
@@ -427,7 +477,7 @@ const ProductCategory = () => {
                   <Button
                     className="me-1"
                     color="primary"
-                    // onClick={handleSubmit}
+                  // onClick={handleSubmit}
                   >
                     Submit
                   </Button>
