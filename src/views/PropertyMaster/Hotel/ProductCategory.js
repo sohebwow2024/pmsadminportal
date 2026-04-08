@@ -253,6 +253,7 @@ const ProductCategory = () => {
       ),
     },
   ];
+console.log("test");
 
   return (
     <>
