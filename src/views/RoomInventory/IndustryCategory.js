@@ -255,9 +255,9 @@ const ProductCategory = () => {
           className="bg-transparent"
           toggle={() => setShowCategroy(false)}
         >
-          <span className=" mb-1">Add Category </span>
+          <span><h4>Add Category</h4> </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <ModalBody className="px-sm-2 mx-50 pb-2">
           <>
             <Form>
               <Row>
