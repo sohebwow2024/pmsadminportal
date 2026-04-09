@@ -416,7 +416,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
               </Row>
 
               <Row>
-                
+                <hr className="mt-1"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
                   <Button
                     className="btn btn-danger me-1"

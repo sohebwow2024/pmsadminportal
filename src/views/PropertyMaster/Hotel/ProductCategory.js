@@ -304,7 +304,7 @@ console.log("test");
           <span><h4>Add Category </h4></span>
         </ModalHeader>
          <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 mx-50 pb-2">
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -327,17 +327,11 @@ console.log("test");
                 </Col>
               </Row>
               <Row>
-                <Col md="12 text-lg-end text-md-center mt-1">
+                <hr className="mt-2"></hr>
+                <Col md="12 text-lg-end text-md-center mt-1" >
+                  
                   <Button
-                    className="me-1"
-                    color="primary"
-                    type="button"
-                    onClick={handleAddCategory}
-                  >
-                    Add Category
-                  </Button>
-                  <Button
-                    color="secondary"
+                    className="btn btn-danger me-1"
                     outline
                     // onClick={() => {
                     //     setShow(!show)
@@ -345,6 +339,13 @@ console.log("test");
                     onClick={() => setShowCategroy(false)}
                   >
                     Cancel
+                  </Button>
+                  <Button
+                    color="primary"
+                    type="button"
+                    onClick={handleAddCategory}
+                  >
+                    Add Category
                   </Button>
                 </Col>
               </Row>
@@ -391,9 +392,10 @@ console.log("test");
       // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Category </span>
+          <span><h4>Update Category </h4> </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -475,16 +477,10 @@ console.log("test");
               </Row>
 
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                  // onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    color="secondary"
+                <Button
+                    className="me-1 btn btn-danger"
                     outline
                     // onClick={() => {
                     //     setShow(!show)
@@ -493,6 +489,14 @@ console.log("test");
                   >
                     Cancel
                   </Button>
+                  <Button
+                    type="button"
+                    color="primary"
+                  // onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                  
                 </Col>
               </Row>
             </Form>

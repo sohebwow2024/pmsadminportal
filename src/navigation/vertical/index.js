@@ -62,7 +62,7 @@ pageName = [
     ...promotions,
     ...hotelPannel,
     ...subscription,
-    ...notifications,
+    // ...notifications,
     // ...plan,
     // ...hotels,
     // ...planmaster,
