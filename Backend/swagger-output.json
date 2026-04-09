@@ -1601,6 +1601,45 @@
         }
       }
     },
+    "/api/clients/company-typesDDL": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clients/company-sizesDDL": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/clients/company-industriesDDL": {
+      "get": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/clients/clients": {
       "post": {
         "tags": [
