@@ -29,6 +29,20 @@ const sendError = (res, message = "Internal server error") => {
         message
     });
 };
+const buildPaginationPayload = (page, limit, total, data = []) => {
+    const safeData = Array.isArray(data) ? data : [];
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+
+    return {
+        paging: {
+            totalrecords: total,
+            totalCount: safeData.length,
+            pageSize: limit,
+            currentPage: page,
+            totalPages
+        }
+    };
+};
 
 const countryNameFromCode = (code) => {
     try {
@@ -475,21 +489,15 @@ router.get("/clients", async (req, res) => {
         const countValues = values.slice(0, values.length - 2);
         const totalResult = await pool.query(countQuery, countValues);
         const total = parseInt(totalResult.rows[0].count);
-        const totalPages = Math.max(1, Math.ceil(total / limit));
+        const clients = data.rows.map(formatClientForRead);
+        const pagination = buildPaginationPayload(page, limit, total, clients);
 
         return sendSuccess(
             res,
             200,
             data.rows.length ? "Clients fetched successfully" : "No clients found for this page",
-            data.rows.map(formatClientForRead),
-            {
-            total,
-            total_pages: totalPages,
-            page,
-            limit,
-            has_next: page < totalPages,
-            has_prev: page > 1
-            }
+            clients,
+            pagination
         );
 
     } catch (error) {

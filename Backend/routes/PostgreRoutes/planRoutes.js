@@ -14,6 +14,20 @@ const parsePagination = (query) => {
   const offset = (page - 1) * limit;
   return { page, limit, offset };
 };
+const buildPaginationPayload = (page, limit, total, data = []) => {
+  const safeData = Array.isArray(data) ? data : [];
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+
+  return {
+    total,
+    total_pages: totalPages,
+    page,
+    limit,
+    has_next: page < totalPages,
+    has_prev: page > 1,
+    current_page_count: safeData.length
+  };
+};
 
 // Plan 
 
@@ -371,20 +385,16 @@ router.get("/getAllPlans", async (req, res) => {
     ]);
 
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const emptyData = [];
+    const emptyPagination = buildPaginationPayload(page, limit, total, emptyData);
 
     // no plans
     if (result.rows.length === 0) {
       return res.status(200).json({
         status: "success",
         message: "No plans found",
-        total,
-        total_pages: totalPages,
-        page,
-        limit,
-        has_next: page < totalPages,
-        has_prev: page > 1,
-        data: []
+        ...emptyPagination,
+        data: emptyData
       });
     }
 
@@ -531,15 +541,12 @@ router.get("/getAllPlans", async (req, res) => {
       updated_at: plan.updated_at
     }));
 
+    const pagination = buildPaginationPayload(page, limit, total, shaped);
+
     return res.status(200).json({
       status: "success",
       message: shaped.length ? "Plans fetched successfully" : "No plans found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: shaped
     });
 
@@ -997,15 +1004,10 @@ router.get("/getAllplanPoints", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     res.status(200).json({
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1043,15 +1045,10 @@ router.get("/planPoints/:plan_id", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     res.status(200).json({
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1162,19 +1159,14 @@ router.get("/getAllIncludingPlan", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length
         ? "All including points fetched successfully"
         : "No including points found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1226,19 +1218,14 @@ router.get("/planIncluding/:plan_id", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length
         ? "Plan including fetched successfully"
         : "No including points found for this plan",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1487,19 +1474,14 @@ router.get("/getAllExcludingPlan", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length
         ? "All excluding points fetched successfully"
         : "No excluding points found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1551,19 +1533,14 @@ router.get("/planExcluding/:plan_id", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length
         ? "Plan excluding fetched successfully"
         : "No excluding points found for this plan",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -1842,17 +1819,12 @@ router.get("/getAllPromoCode", async (req, res) => {
       pool.query(`SELECT COUNT(*) AS total FROM promo_codes`)
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Promo codes fetched successfully" : "No promo codes found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -2164,17 +2136,12 @@ router.get("/getAllPlanRate", async (req, res) => {
       pool.query(`SELECT COUNT(*) AS total FROM plan_rates`)
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Plan rates fetched successfully" : "No plan rates found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -2371,17 +2338,12 @@ router.get("/planRates/:plan_id", async (req, res) => {
       )
     ]);
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Plan rates fetched successfully" : "No active rates found for this plan",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 

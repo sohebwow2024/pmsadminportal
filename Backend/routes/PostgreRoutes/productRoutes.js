@@ -9,6 +9,20 @@ const parsePagination = (query) => {
   const offset = (page - 1) * limit;
   return { page, limit, offset };
 };
+const buildPaginationPayload = (page, limit, total, data = []) => {
+  const safeData = Array.isArray(data) ? data : [];
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+
+  return {
+    total,
+    total_pages: totalPages,
+    page,
+    limit,
+    has_next: page < totalPages,
+    has_prev: page > 1,
+    current_page_count: safeData.length
+  };
+};
 
 
 // ADD PRODUCT
@@ -182,17 +196,12 @@ router.get("/products", async (req, res) => {
     ]);
 
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Products fetched successfully" : "No products found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
+      ...pagination,
       data: result.rows
     });
 
@@ -485,22 +494,18 @@ router.get("/getAllCategories", async (req, res) => {
     ]);
 
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const categories = result.rows.map((category) => ({
+      id: category.id,
+      name: category.category_name,
+      isActive: category.status
+    }));
+    const pagination = buildPaginationPayload(page, limit, total, categories);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Categories fetched successfully" : "No categories found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
-      data: result.rows.map((category) => ({
-        id: category.id,
-        name: category.category_name,
-        isActive: category.status
-      }))
+      ...pagination,
+      data: categories
     });
 
   } catch (error) {
@@ -719,22 +724,18 @@ router.get("/industryCategory", async (req, res) => {
     ]);
 
     const total = Number(totalResult.rows[0]?.total || 0);
-    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const industryCategories = result.rows.map((industryCategory) => ({
+      id: industryCategory.id,
+      name: industryCategory.name,
+      isActive: industryCategory.is_active
+    }));
+    const pagination = buildPaginationPayload(page, limit, total, industryCategories);
 
     return res.status(200).json({
       status: "success",
       message: result.rows.length ? "Industry categories fetched successfully" : "No industry categories found",
-      total,
-      total_pages: totalPages,
-      page,
-      limit,
-      has_next: page < totalPages,
-      has_prev: page > 1,
-      data: result.rows.map((industryCategory) => ({
-        id: industryCategory.id,
-        name: industryCategory.name,
-        isActive: industryCategory.is_active
-      }))
+      ...pagination,
+      data: industryCategories
     });
 
   } catch (error) {

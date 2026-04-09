@@ -3,6 +3,20 @@ import pool from "../../db/postgres.js";
 import crypto from "crypto";
 
 const router = express.Router();
+const buildPaginationPayload = (page, limit, total, data = []) => {
+  const safeData = Array.isArray(data) ? data : [];
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+
+  return {
+    total,
+    total_pages: totalPages,
+    page,
+    limit,
+    has_next: page < totalPages,
+    has_prev: page > 1,
+    current_page_count: safeData.length
+  };
+};
 
 const ensurePaymentTables = async () => {
   await pool.query(`
@@ -393,13 +407,18 @@ router.get("/subscription-report", async (req, res) => {
       pool.query(countQuery, values)
     ]);
 
+    const pagination = buildPaginationPayload(
+      parsedPage,
+      parsedLimit,
+      countResult.rows[0].total,
+      dataResult.rows
+    );
+
     return res.status(200).json({
       message: dataResult.rows.length
         ? "Subscription report fetched successfully"
         : "No subscription data found",
-      total: countResult.rows[0].total,
-      page: parsedPage,
-      limit: parsedLimit,
+      ...pagination,
       data: dataResult.rows
     });
 
