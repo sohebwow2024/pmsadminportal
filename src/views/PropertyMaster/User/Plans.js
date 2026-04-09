@@ -254,21 +254,17 @@ const Plans = () => {
 							<Form>
 								<Row>
 									<Col lg='6' className='mb-1'>
-										<Label className='form-label' for='countries'>Plan Name <span className='text-danger'>*</span></Label>
-										<Select
-											theme={selectThemeColors}
-											className='react-select'
-											classNamePrefix='select'
-											placeholder="Select Category"
-										//   options={countryList}
-										//   onChange={e => {
-										//     setCountryId(e.value)
-										//     setCountryCode(e.CountryCode)
-										//     setCountry(e.label)
-										//   }}
-										// invalid={display && country === ''}
+										<Label className='form-label' for='hotel'>Plan Name <span className='text-danger'>*</span></Label>
+										<Input
+											type='text'
+											name='hotel'
+											id='hotel'
+											placeholder= "Plan Name"
+											// value={hotelName}
+											// onChange={e => setHotelName(e.target.value)}
+											invalid={display && hotelName === ''}
 										/>
-										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
+										{display && !hotelName ? <span className='error_msg_lbl'>Enter Plan Name </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
 										<Label className='form-label' for='hotel'>Title <span className='text-danger'>*</span></Label>
@@ -281,7 +277,7 @@ const Plans = () => {
 											// onChange={e => setHotelName(e.target.value)}
 											invalid={display && hotelName === ''}
 										/>
-										{display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null}
+										{display && !hotelName ? <span className='error_msg_lbl'>Enter Title </span> : null}
 									</Col>
 									<Col lg='6' className='mb-1'>
 										<Label className='form-label' for='countries'>Plan Including <span className='text-danger'>*</span></Label>
@@ -289,7 +285,7 @@ const Plans = () => {
 											theme={selectThemeColors}
 											className='react-select'
 											classNamePrefix='select'
-											placeholder="Select Category"
+											placeholder="Select Plan Including"
 										//   options={countryList}
 										//   onChange={e => {
 										//     setCountryId(e.value)
@@ -332,7 +328,7 @@ const Plans = () => {
 										//   }}
 										// invalid={display && country === ''}
 										/>
-										{display && !country ? <span className='error_msg_lbl'>Enter Plan </span> : null}
+										{display && !country ? <span className='error_msg_lbl'>Enter Plan Rates </span> : null}
 									</Col>
 									{/* <Col lg='6' className='mb-1'>
 										<Label className='form-label' for='countries'><span className='text-danger'>*</span>Duration</Label>
@@ -365,7 +361,7 @@ const Plans = () => {
 											invalid={display ? userName === "" : false}
 										/>
 										{display === true && !userName ? (
-											<span className="error_msg_lbl">Enter User Id </span>
+											<span className="error_msg_lbl">Enter Promocode </span>
 										) : (
 											<></>
 										)}
