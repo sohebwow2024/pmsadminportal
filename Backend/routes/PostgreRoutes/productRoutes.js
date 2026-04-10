@@ -4,146 +4,147 @@ import pool from "../../db/postgres.js";      // PostgreSQL (new)
 const router = express.Router();
 
 const parsePagination = (query) => {
-  const page = Math.max(1, parseInt(query.page, 10) || 1);
-  const limit = Math.max(1, parseInt(query.limit, 10) || 10);
-  const offset = (page - 1) * limit;
-  return { page, limit, offset };
+	const page = Math.max(1, parseInt(query.page, 10) || 1);
+	const limit = Math.max(1, parseInt(query.limit, 10) || 10);
+	const offset = (page - 1) * limit;
+	return { page, limit, offset };
 };
-const buildPaginationPayload = (page, limit, total, data = []) => {
-  const safeData = Array.isArray(data) ? data : [];
-  const totalPages = Math.max(1, Math.ceil(total / limit));
 
-  return {
-    total,
-    total_pages: totalPages,
-    page,
-    limit,
-    has_next: page < totalPages,
-    has_prev: page > 1,
-    current_page_count: safeData.length
-  };
+const buildPaginationPayload = (page, limit, total, data = []) => {
+	const safeData = Array.isArray(data) ? data : [];
+	const totalPages = Math.max(1, Math.ceil(total / limit));
+
+	return {
+		total,
+		total_pages: totalPages,
+		page,
+		limit,
+		has_next: page < totalPages,
+		has_prev: page > 1,
+		current_page_count: safeData.length
+	};
 };
 
 
 // ADD PRODUCT
 
 router.post("/products", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const {
-      product_name,
-      category_id,
-      industry_category_id,
-      description
-    } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const {
+			product_name,
+			category_id,
+			industry_category_id,
+			description
+		} = req.body;
 
-    // 1️⃣ Validation
-    if (!product_name) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "product_name is required"
-      });
-    }
+		// 1️⃣ Validation
+		if (!product_name) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "product_name is required"
+			});
+		}
 
-    if (!category_id || !industry_category_id) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "category_id and industry_category_id are required"
-      });
-    }
+		if (!category_id || !industry_category_id) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "category_id and industry_category_id are required"
+			});
+		}
 
-    // 2️⃣ Insert
-    const normalizedProductName = product_name.trim();
-    const parsedCategoryId = Number(category_id);
-    const parsedIndustryCategoryId = Number(industry_category_id);
+		// 2️⃣ Insert
+		const normalizedProductName = product_name.trim();
+		const parsedCategoryId = Number(category_id);
+		const parsedIndustryCategoryId = Number(industry_category_id);
 
-    if (Number.isNaN(parsedCategoryId) || Number.isNaN(parsedIndustryCategoryId)) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "category_id and industry_category_id must be valid numbers"
-      });
-    }
+		if (Number.isNaN(parsedCategoryId) || Number.isNaN(parsedIndustryCategoryId)) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "category_id and industry_category_id must be valid numbers"
+			});
+		}
 
-    const productCheck = await pool.query(
-      "SELECT id FROM products_table WHERE LOWER(product_name) = LOWER($1)",
-      [normalizedProductName]
-    );
+		const productCheck = await pool.query(
+			"SELECT id FROM products_table WHERE LOWER(product_name) = LOWER($1)",
+			[normalizedProductName]
+		);
 
-    if (productCheck.rows.length > 0) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: `${normalizedProductName} already exist`
-      });
-    }
+		if (productCheck.rows.length > 0) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: `${normalizedProductName} already exist`
+			});
+		}
 
-    const [categoryCheck, industryCheck] = await Promise.all([
-      pool.query(
-        "SELECT id FROM product_categories WHERE id = $1 AND status = true",
-        [parsedCategoryId]
-      ),
-      pool.query(
-        "SELECT id FROM industry_categories WHERE id = $1 AND is_active = true",
-        [parsedIndustryCategoryId]
-      )
-    ]);
+		const [categoryCheck, industryCheck] = await Promise.all([
+			pool.query(
+				"SELECT id FROM product_categories WHERE id = $1 AND status = true",
+				[parsedCategoryId]
+			),
+			pool.query(
+				"SELECT id FROM industry_categories WHERE id = $1 AND is_active = true",
+				[parsedIndustryCategoryId]
+			)
+		]);
 
-    if (categoryCheck.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        status: "warning",
-        message: "Category not found"
-      });
-    }
+		if (categoryCheck.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				status: "warning",
+				message: "Category not found"
+			});
+		}
 
-    if (industryCheck.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        status: "warning",
-        message: "Industry category not found"
-      });
-    }
+		if (industryCheck.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				status: "warning",
+				message: "Industry category not found"
+			});
+		}
 
-    const result = await pool.query(
-      `INSERT INTO products_table
+		const result = await pool.query(
+			`INSERT INTO products_table
       (product_name, category, industry_category, description)
       VALUES ($1, $2, $3, $4)
       RETURNING *`,
-      [
-        normalizedProductName,
-        parsedCategoryId,
-        parsedIndustryCategoryId,
-        description
-      ]
-    );
+			[
+				normalizedProductName,
+				parsedCategoryId,
+				parsedIndustryCategoryId,
+				description
+			]
+		);
 
-    // 3️⃣ Response
-    return res.status(201).json({
-      status: "success",
-      message: "Product added successfully",
-      data: result.rows[0]
-    });
+		// 3️⃣ Response
+		return res.status(201).json({
+			status: "success",
+			message: "Product added successfully",
+			data: result.rows[0]
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.get("/products", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { search } = req.query;
-    const { page, limit, offset } = parsePagination(req.query);
+	// #swagger.tags = ['Products']
+	try {
+		const { search } = req.query;
+		const { page, limit, offset } = parsePagination(req.query);
 
-    let query = `
+		let query = `
       SELECT 
         p.id,
         p.product_name,
@@ -160,7 +161,7 @@ router.get("/products", async (req, res) => {
         ON ic.id::text = p.industry_category::text
     `;
 
-    let countQuery = `
+		let countQuery = `
       SELECT COUNT(*) AS total
       FROM products_table p
       LEFT JOIN product_categories pc
@@ -169,59 +170,59 @@ router.get("/products", async (req, res) => {
         ON ic.id::text = p.industry_category::text
     `;
 
-    let values = [];
-    let countValues = [];
+		let values = [];
+		let countValues = [];
 
-    if (search) {
-      // check agar number hai (id search)
-      if (!isNaN(search)) {
-        query += ` WHERE p.id = $1 OR p.product_name ILIKE $2`;
-        countQuery += ` WHERE p.id = $1 OR p.product_name ILIKE $2`;
-        values.push(Number(search), `%${search}%`);
-        countValues.push(Number(search), `%${search}%`);
-      } else {
-        query += ` WHERE p.product_name ILIKE $1`;
-        countQuery += ` WHERE p.product_name ILIKE $1`;
-        values.push(`%${search}%`);
-        countValues.push(`%${search}%`);
-      }
-    }
+		if (search) {
+			// check agar number hai (id search)
+			if (!isNaN(search)) {
+				query += ` WHERE p.id = $1 OR p.product_name ILIKE $2`;
+				countQuery += ` WHERE p.id = $1 OR p.product_name ILIKE $2`;
+				values.push(Number(search), `%${search}%`);
+				countValues.push(Number(search), `%${search}%`);
+			} else {
+				query += ` WHERE p.product_name ILIKE $1`;
+				countQuery += ` WHERE p.product_name ILIKE $1`;
+				values.push(`%${search}%`);
+				countValues.push(`%${search}%`);
+			}
+		}
 
-    query += ` ORDER BY p.id DESC LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
-    values.push(limit, offset);
+		query += ` ORDER BY p.id DESC LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
+		values.push(limit, offset);
 
-    const [result, totalResult] = await Promise.all([
-      pool.query(query, values),
-      pool.query(countQuery, countValues)
-    ]);
+		const [result, totalResult] = await Promise.all([
+			pool.query(query, values),
+			pool.query(countQuery, countValues)
+		]);
 
-    const total = Number(totalResult.rows[0]?.total || 0);
-    const pagination = buildPaginationPayload(page, limit, total, result.rows);
+		const total = Number(totalResult.rows[0]?.total || 0);
+		const pagination = buildPaginationPayload(page, limit, total, result.rows);
 
-    return res.status(200).json({
-      status: "success",
-      message: result.rows.length ? "Products fetched successfully" : "No products found",
-      ...pagination,
-      data: result.rows
-    });
+		return res.status(200).json({
+			status: "success",
+			message: result.rows.length ? "Products fetched successfully" : "No products found",
+			...pagination,
+			data: result.rows
+		});
 
-  } catch (error) {
-    console.log("GET PRODUCTS ERROR:", error);
+	} catch (error) {
+		console.log("GET PRODUCTS ERROR:", error);
 
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: error.message
-    });
-  }
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: error.message
+		});
+	}
 });
 
 router.get("/productDetailById/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
+	try {
+		const { id } = req.params;
 
-    const result = await pool.query(
-      `SELECT 
+		const result = await pool.query(
+			`SELECT 
         p.id,
         p.product_name,
         p.description,
@@ -236,108 +237,108 @@ router.get("/productDetailById/:id", async (req, res) => {
       LEFT JOIN industry_categories ic
         ON ic.id::text = p.industry_category::text
       WHERE p.id = $1`,
-      [id]
-    );
+			[id]
+		);
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found"
-      });
-    }
+		if (result.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				message: "Product not found"
+			});
+		}
 
-    return res.status(200).json({
-      message: "Product details fetched successfully",
-      data: result.rows[0]
-    });
+		return res.status(200).json({
+			message: "Product details fetched successfully",
+			data: result.rows[0]
+		});
 
-  } catch (error) {
-    console.log("GET PRODUCT BY ID ERROR:", error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: error.message
-    });
-  }
+	} catch (error) {
+		console.log("GET PRODUCT BY ID ERROR:", error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: error.message
+		});
+	}
 });
 
 router.put("/products/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
-    const {
-      product_name,
-      category_id,
-      industry_category_id,
-      description
-    } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
+		const {
+			product_name,
+			category_id,
+			industry_category_id,
+			description
+		} = req.body;
 
-    // 1️⃣ Validation
-    if (!product_name) {
-      return res.status(400).json({
-        success: false,
-        message: "product_name is required"
-      });
-    }
+		// 1️⃣ Validation
+		if (!product_name) {
+			return res.status(400).json({
+				success: false,
+				message: "product_name is required"
+			});
+		}
 
-    // 2️⃣ Check if product exists
-    const check = await pool.query(
-      "SELECT * FROM products_table WHERE id = $1",
-      [id]
-    );
+		// 2️⃣ Check if product exists
+		const check = await pool.query(
+			"SELECT * FROM products_table WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: "Product already deleted"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: "Product already deleted"
+			});
+		}
 
-    const existingProduct = check.rows[0];
-    const nextCategoryId = category_id ?? existingProduct.category;
-    const nextIndustryCategoryId = industry_category_id ?? existingProduct.industry_category;
-    const parsedCategoryId = Number(nextCategoryId);
-    const parsedIndustryCategoryId = Number(nextIndustryCategoryId);
+		const existingProduct = check.rows[0];
+		const nextCategoryId = category_id ?? existingProduct.category;
+		const nextIndustryCategoryId = industry_category_id ?? existingProduct.industry_category;
+		const parsedCategoryId = Number(nextCategoryId);
+		const parsedIndustryCategoryId = Number(nextIndustryCategoryId);
 
-    if (Number.isNaN(parsedCategoryId) || Number.isNaN(parsedIndustryCategoryId)) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "category_id and industry_category_id must be valid numbers"
-      });
-    }
+		if (Number.isNaN(parsedCategoryId) || Number.isNaN(parsedIndustryCategoryId)) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "category_id and industry_category_id must be valid numbers"
+			});
+		}
 
-    const [categoryCheck, industryCheck] = await Promise.all([
-      pool.query(
-        "SELECT id FROM product_categories WHERE id = $1 AND status = true",
-        [parsedCategoryId]
-      ),
-      pool.query(
-        "SELECT id FROM industry_categories WHERE id = $1 AND is_active = true",
-        [parsedIndustryCategoryId]
-      )
-    ]);
+		const [categoryCheck, industryCheck] = await Promise.all([
+			pool.query(
+				"SELECT id FROM product_categories WHERE id = $1 AND status = true",
+				[parsedCategoryId]
+			),
+			pool.query(
+				"SELECT id FROM industry_categories WHERE id = $1 AND is_active = true",
+				[parsedIndustryCategoryId]
+			)
+		]);
 
-    if (categoryCheck.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        status: "warning",
-        message: "Category not found"
-      });
-    }
+		if (categoryCheck.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				status: "warning",
+				message: "Category not found"
+			});
+		}
 
-    if (industryCheck.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        status: "warning",
-        message: "Industry category not found"
-      });
-    }
+		if (industryCheck.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				status: "warning",
+				message: "Industry category not found"
+			});
+		}
 
-    // 3️⃣ Update
-    const result = await pool.query(
-      `UPDATE products_table
+		// 3️⃣ Update
+		const result = await pool.query(
+			`UPDATE products_table
        SET 
          product_name = $1,
          category = $2,
@@ -345,138 +346,138 @@ router.put("/products/:id", async (req, res) => {
          description = $4
        WHERE id = $5
        RETURNING *`,
-      [
-        product_name,
-        parsedCategoryId,
-        parsedIndustryCategoryId,
-        description,
-        id
-      ]
-    );
+			[
+				product_name,
+				parsedCategoryId,
+				parsedIndustryCategoryId,
+				description,
+				id
+			]
+		);
 
-    return res.status(200).json({
-      message: "Product updated successfully",
-      data: result.rows[0]
-    });
+		return res.status(200).json({
+			message: "Product updated successfully",
+			data: result.rows[0]
+		});
 
-  } catch (error) {
-    console.log("UPDATE PRODUCT ERROR:", error);
+	} catch (error) {
+		console.log("UPDATE PRODUCT ERROR:", error);
 
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: error.message
-    });
-  }
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: error.message
+		});
+	}
 });
 
 router.delete("/products/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
 
-    // 1️⃣ Check if product exists
-    const check = await pool.query(
-      "SELECT * FROM products_table WHERE id = $1",
-      [id]
-    );
+		// 1️⃣ Check if product exists
+		const check = await pool.query(
+			"SELECT * FROM products_table WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: "Product already deleted"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: "Product already deleted"
+			});
+		}
 
-    // 2️⃣ Delete product
-    await pool.query(
-      "DELETE FROM products_table WHERE id = $1",
-      [id]
-    );
+		// 2️⃣ Delete product
+		await pool.query(
+			"DELETE FROM products_table WHERE id = $1",
+			[id]
+		);
 
-    return res.status(200).json({
-      status: "success",
-      message: "Deleted successfully"
-    });
+		return res.status(200).json({
+			status: "success",
+			message: "Deleted successfully"
+		});
 
-  } catch (error) {
-    console.log(error);
+	} catch (error) {
+		console.log(error);
 
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 
 // Product Category
 
 router.post("/category", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { category_name } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const { category_name } = req.body;
 
-    if (!category_name) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "category_name is required"
-      });
-    }
+		if (!category_name) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "category_name is required"
+			});
+		}
 
-    const normalizedCategoryName = category_name.trim();
+		const normalizedCategoryName = category_name.trim();
 
-    // duplicate check
-    const check = await pool.query(
-      "SELECT * FROM product_categories WHERE LOWER(category_name) = LOWER($1)",
-      [normalizedCategoryName]
-    );
+		// duplicate check
+		const check = await pool.query(
+			"SELECT * FROM product_categories WHERE LOWER(category_name) = LOWER($1)",
+			[normalizedCategoryName]
+		);
 
-    if (check.rows.length > 0) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: `${normalizedCategoryName} already exist`
-      });
-    }
+		if (check.rows.length > 0) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: `${normalizedCategoryName} already exist`
+			});
+		}
 
-    const result = await pool.query(
-      `INSERT INTO product_categories (category_name, status)
+		const result = await pool.query(
+			`INSERT INTO product_categories (category_name, status)
        VALUES ($1, $2)
        RETURNING *`,
-      [normalizedCategoryName, true]
-    );
+			[normalizedCategoryName, true]
+		);
 
-    return res.status(201).json({
-      status: "success",
-      message: "Category created successfully",
-      data: {
-        ...result.rows[0],
-        status: "active"
-      }
-    });
+		return res.status(201).json({
+			status: "success",
+			message: "Category created successfully",
+			data: {
+				...result.rows[0],
+				status: "active"
+			}
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.get("/getAllCategories", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { page, limit, offset } = parsePagination(req.query);
+	// #swagger.tags = ['Products']
+	try {
+		const { page, limit, offset } = parsePagination(req.query);
 
-    const [result, totalResult] = await Promise.all([
-      pool.query(
-      `SELECT 
+		const [result, totalResult] = await Promise.all([
+			pool.query(
+				`SELECT 
         id,
         category_name,
         status
@@ -484,170 +485,170 @@ router.get("/getAllCategories", async (req, res) => {
        WHERE status = true
        ORDER BY id DESC
        LIMIT $1 OFFSET $2`,
-      [limit, offset]
-    ),
-      pool.query(
-        `SELECT COUNT(*) AS total
+				[limit, offset]
+			),
+			pool.query(
+				`SELECT COUNT(*) AS total
          FROM product_categories
          WHERE status = true`
-      )
-    ]);
+			)
+		]);
 
-    const total = Number(totalResult.rows[0]?.total || 0);
-    const categories = result.rows.map((category) => ({
-      id: category.id,
-      name: category.category_name,
-      isActive: category.status
-    }));
-    const pagination = buildPaginationPayload(page, limit, total, categories);
+		const total = Number(totalResult.rows[0]?.total || 0);
+		const categories = result.rows.map((category) => ({
+			id: category.id,
+			name: category.category_name,
+			isActive: category.status
+		}));
+		const pagination = buildPaginationPayload(page, limit, total, categories);
 
-    return res.status(200).json({
-      status: "success",
-      message: result.rows.length ? "Categories fetched successfully" : "No categories found",
-      ...pagination,
-      data: categories
-    });
+		return res.status(200).json({
+			status: "success",
+			message: result.rows.length ? "Categories fetched successfully" : "No categories found",
+			...pagination,
+			data: categories
+		});
 
-  } catch (error) {
-    console.log(error);
+	} catch (error) {
+		console.log(error);
 
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.put("/category/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
-    const { category_name, isActive } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
+		const { category_name, isActive } = req.body;
 
-    // Check if category exists
-    const check = await pool.query(
-      "SELECT * FROM product_categories WHERE id = $1",
-      [id]
-    );
+		// Check if category exists
+		const check = await pool.query(
+			"SELECT * FROM product_categories WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(404).json({
-        // success: false,
-        message: "Category not found"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(404).json({
+				// success: false,
+				message: "Category not found"
+			});
+		}
 
-    const existingCategory = check.rows[0];
+		const existingCategory = check.rows[0];
 
-    const normalizedCategoryName = category_name?.trim();
-    const nextCategoryName =
-      normalizedCategoryName || existingCategory.category_name;
+		const normalizedCategoryName = category_name?.trim();
+		const nextCategoryName =
+			normalizedCategoryName || existingCategory.category_name;
 
-    // 👇 Boolean handling
-    const nextIsActive =
-      typeof isActive === "boolean" ? isActive : existingCategory.status;
+		// 👇 Boolean handling
+		const nextIsActive =
+			typeof isActive === "boolean" ? isActive : existingCategory.status;
 
-    if (!normalizedCategoryName && typeof isActive !== "boolean") {
-      return res.status(400).json({
-        // success: false,
-        status: "warning",
-        message: "Provide category_name or isActive to update"
-      });
-    }
+		if (!normalizedCategoryName && typeof isActive !== "boolean") {
+			return res.status(400).json({
+				// success: false,
+				status: "warning",
+				message: "Provide category_name or isActive to update"
+			});
+		}
 
-    // Duplicate check
-    if (normalizedCategoryName) {
-      const duplicate = await pool.query(
-        "SELECT * FROM product_categories WHERE category_name = $1 AND id != $2",
-        [normalizedCategoryName, id]
-      );
+		// Duplicate check
+		if (normalizedCategoryName) {
+			const duplicate = await pool.query(
+				"SELECT * FROM product_categories WHERE category_name = $1 AND id != $2",
+				[normalizedCategoryName, id]
+			);
 
-      if (duplicate.rows.length > 0) {
-        return res.status(409).json({
-          // success: false,
-          status: "warning",
-          message: "Category already exists"
-        });
-      }
-    }
+			if (duplicate.rows.length > 0) {
+				return res.status(409).json({
+					// success: false,
+					status: "warning",
+					message: "Category already exists"
+				});
+			}
+		}
 
-    // Update
-    const result = await pool.query(
-      `UPDATE product_categories
+		// Update
+		const result = await pool.query(
+			`UPDATE product_categories
        SET category_name = $1,
            status = $2
        WHERE id = $3
        RETURNING *`,
-      [nextCategoryName, nextIsActive, id]
-    );
+			[nextCategoryName, nextIsActive, id]
+		);
 
-    return res.status(200).json({
-      // status: "success",
-      message: "Category updated successfully",
-      data: {
-        id: result.rows[0].id,
-        category_name: result.rows[0].category_name,
-        isActive: result.rows[0].status
-      }
-    });
+		return res.status(200).json({
+			// status: "success",
+			message: "Category updated successfully",
+			data: {
+				id: result.rows[0].id,
+				category_name: result.rows[0].category_name,
+				isActive: result.rows[0].status
+			}
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.delete("/category/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
 
-    const check = await pool.query(
-      "SELECT * FROM product_categories WHERE id = $1",
-      [id]
-    );
+		const check = await pool.query(
+			"SELECT * FROM product_categories WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Category not found"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				message: "Category not found"
+			});
+		}
 
-    const existingCategory = check.rows[0];
+		const existingCategory = check.rows[0];
 
-    if (existingCategory.status === false) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: `${existingCategory.category_name} already deleted`
-      });
-    }
+		if (existingCategory.status === false) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: `${existingCategory.category_name} already deleted`
+			});
+		}
 
-    // Soft delete (deactivate)
-    await pool.query(
-      "UPDATE product_categories SET status = false WHERE id = $1",
-      [id]
-    );
+		// Soft delete (deactivate)
+		await pool.query(
+			"UPDATE product_categories SET status = false WHERE id = $1",
+			[id]
+		);
 
-    return res.status(200).json({
-      status: "success",
-      message: "Deleted successfully"
-    });
+		return res.status(200).json({
+			status: "success",
+			message: "Deleted successfully"
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 
@@ -655,222 +656,222 @@ router.delete("/category/:id", async (req, res) => {
 // Industry category
 
 router.post("/industryCategory", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { name, is_active } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const { name, is_active } = req.body;
 
-    if (!name) {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "Name is required"
-      });
-    }
+		if (!name) {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "Name is required"
+			});
+		}
 
-    const normalizedIndustryName = name.trim();
+		const normalizedIndustryName = name.trim();
 
-    const check = await pool.query(
-      "SELECT * FROM industry_categories WHERE LOWER(name) = LOWER($1)",
-      [normalizedIndustryName]
-    );
+		const check = await pool.query(
+			"SELECT * FROM industry_categories WHERE LOWER(name) = LOWER($1)",
+			[normalizedIndustryName]
+		);
 
-    if (check.rows.length > 0) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: `${normalizedIndustryName} already exist`
-      });
-    }
+		if (check.rows.length > 0) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: `${normalizedIndustryName} already exist`
+			});
+		}
 
-    const result = await pool.query(
-      `INSERT INTO industry_categories (name, is_active, created_at, updated_at)
+		const result = await pool.query(
+			`INSERT INTO industry_categories (name, is_active, created_at, updated_at)
        VALUES ($1, $2, NOW(), NOW()) RETURNING *`,
-      [normalizedIndustryName, is_active ?? true]
-    );
+			[normalizedIndustryName, is_active ?? true]
+		);
 
-    return res.status(201).json({
-      status: "success",
-      message: "Industry category added successfully",
-      data: result.rows[0]
-    });
+		return res.status(201).json({
+			status: "success",
+			message: "Industry category added successfully",
+			data: result.rows[0]
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.get("/industryCategory", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { page, limit, offset } = parsePagination(req.query);
-    const [result, totalResult] = await Promise.all([
-      pool.query(
-        `SELECT * FROM industry_categories
+	// #swagger.tags = ['Products']
+	try {
+		const { page, limit, offset } = parsePagination(req.query);
+		const [result, totalResult] = await Promise.all([
+			pool.query(
+				`SELECT * FROM industry_categories
          WHERE is_active = true
          ORDER BY id DESC
          LIMIT $1 OFFSET $2`,
-        [limit, offset]
-      ),
-      pool.query(
-        `SELECT COUNT(*) AS total
+				[limit, offset]
+			),
+			pool.query(
+				`SELECT COUNT(*) AS total
          FROM industry_categories
          WHERE is_active = true`
-      )
-    ]);
+			)
+		]);
 
-    const total = Number(totalResult.rows[0]?.total || 0);
-    const industryCategories = result.rows.map((industryCategory) => ({
-      id: industryCategory.id,
-      name: industryCategory.name,
-      isActive: industryCategory.is_active
-    }));
-    const pagination = buildPaginationPayload(page, limit, total, industryCategories);
+		const total = Number(totalResult.rows[0]?.total || 0);
+		const industryCategories = result.rows.map((industryCategory) => ({
+			id: industryCategory.id,
+			name: industryCategory.name,
+			isActive: industryCategory.is_active
+		}));
+		const pagination = buildPaginationPayload(page, limit, total, industryCategories);
 
-    return res.status(200).json({
-      status: "success",
-      message: result.rows.length ? "Industry categories fetched successfully" : "No industry categories found",
-      ...pagination,
-      data: industryCategories
-    });
+		return res.status(200).json({
+			status: "success",
+			message: result.rows.length ? "Industry categories fetched successfully" : "No industry categories found",
+			...pagination,
+			data: industryCategories
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.put("/industryCategory/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
-    const { name, is_active, isActive } = req.body;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
+		const { name, is_active, isActive } = req.body;
 
-    const check = await pool.query(
-      "SELECT * FROM industry_categories WHERE id = $1",
-      [id]
-    );
+		const check = await pool.query(
+			"SELECT * FROM industry_categories WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Industry category not found"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				message: "Industry category not found"
+			});
+		}
 
-    const existingIndustryCategory = check.rows[0];
-    const normalizedName = name?.trim();
-    const nextName = normalizedName || existingIndustryCategory.name;
-    const nextIsActive =
-      typeof isActive === "boolean"
-        ? isActive
-        : typeof is_active === "boolean"
-          ? is_active
-          : existingIndustryCategory.is_active;
+		const existingIndustryCategory = check.rows[0];
+		const normalizedName = name?.trim();
+		const nextName = normalizedName || existingIndustryCategory.name;
+		const nextIsActive =
+			typeof isActive === "boolean"
+				? isActive
+				: typeof is_active === "boolean"
+					? is_active
+					: existingIndustryCategory.is_active;
 
-    if (!normalizedName && typeof isActive !== "boolean" && typeof is_active !== "boolean") {
-      return res.status(400).json({
-        success: false,
-        status: "warning",
-        message: "Provide name or isActive to update"
-      });
-    }
+		if (!normalizedName && typeof isActive !== "boolean" && typeof is_active !== "boolean") {
+			return res.status(400).json({
+				success: false,
+				status: "warning",
+				message: "Provide name or isActive to update"
+			});
+		}
 
-    if (normalizedName) {
-      const duplicate = await pool.query(
-        "SELECT * FROM industry_categories WHERE LOWER(name) = LOWER($1) AND id != $2",
-        [normalizedName, id]
-      );
+		if (normalizedName) {
+			const duplicate = await pool.query(
+				"SELECT * FROM industry_categories WHERE LOWER(name) = LOWER($1) AND id != $2",
+				[normalizedName, id]
+			);
 
-      if (duplicate.rows.length > 0) {
-        return res.status(409).json({
-          success: false,
-          status: "warning",
-          message: `${normalizedName} already exist`
-        });
-      }
-    }
+			if (duplicate.rows.length > 0) {
+				return res.status(409).json({
+					success: false,
+					status: "warning",
+					message: `${normalizedName} already exist`
+				});
+			}
+		}
 
-    const result = await pool.query(
-      `UPDATE industry_categories 
+		const result = await pool.query(
+			`UPDATE industry_categories 
        SET name = $1, is_active = $2, updated_at = NOW()
        WHERE id = $3 RETURNING *`,
-      [nextName, nextIsActive, id]
-    );
+			[nextName, nextIsActive, id]
+		);
 
-    return res.status(200).json({
-      status: "success",
-      message: "Industry category updated successfully",
-      data: {
-        id: result.rows[0].id,
-        name: result.rows[0].name,
-        isActive: result.rows[0].is_active
-      }
-    });
+		return res.status(200).json({
+			status: "success",
+			message: "Industry category updated successfully",
+			data: {
+				id: result.rows[0].id,
+				name: result.rows[0].name,
+				isActive: result.rows[0].is_active
+			}
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 router.delete("/industryCategory/:id", async (req, res) => {
-  // #swagger.tags = ['Products']
-  try {
-    const { id } = req.params;
+	// #swagger.tags = ['Products']
+	try {
+		const { id } = req.params;
 
-    const check = await pool.query(
-      "SELECT * FROM industry_categories WHERE id = $1",
-      [id]
-    );
+		const check = await pool.query(
+			"SELECT * FROM industry_categories WHERE id = $1",
+			[id]
+		);
 
-    if (check.rows.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Industry category not found"
-      });
-    }
+		if (check.rows.length === 0) {
+			return res.status(404).json({
+				success: false,
+				message: "Industry category not found"
+			});
+		}
 
-    const existingIndustryCategory = check.rows[0];
+		const existingIndustryCategory = check.rows[0];
 
-    if (existingIndustryCategory.is_active === false) {
-      return res.status(409).json({
-        success: false,
-        status: "warning",
-        message: `${existingIndustryCategory.name} already deleted`
-      });
-    }
+		if (existingIndustryCategory.is_active === false) {
+			return res.status(409).json({
+				success: false,
+				status: "warning",
+				message: `${existingIndustryCategory.name} already deleted`
+			});
+		}
 
-    await pool.query(
-      "UPDATE industry_categories SET is_active = false, updated_at = NOW() WHERE id = $1",
-      [id]
-    );
+		await pool.query(
+			"UPDATE industry_categories SET is_active = false, updated_at = NOW() WHERE id = $1",
+			[id]
+		);
 
-    return res.status(200).json({
-      status: "success",
-      message: "Deleted successfully"
-    });
+		return res.status(200).json({
+			status: "success",
+			message: "Deleted successfully"
+		});
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      status: "error",
-      message: "Internal server error"
-    });
-  }
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			success: false,
+			status: "error",
+			message: "Internal server error"
+		});
+	}
 });
 
 
