@@ -239,7 +239,7 @@ const HotelManagement = () => {
       <Card>
         <CardHeader>
           <CardTitle>
-            <h2>Add Client</h2>
+            <h2>Client Manager</h2>
           </CardTitle>
           {/* {UserRole === "SuperAdmin" ? ( */}
           <Button

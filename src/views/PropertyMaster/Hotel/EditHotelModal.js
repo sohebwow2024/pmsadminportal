@@ -333,7 +333,7 @@ const EditHotelModal = ({
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
           <span><h4>Update Product</h4> </span>
         </ModalHeader>
-         <hr className="m-1"></hr>
+         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 mx-50 pb-2">
           <>
             <Form>
@@ -431,7 +431,7 @@ const EditHotelModal = ({
                     Cancel
                   </Button>
                   <Button color="primary" onClick={handleSubmit}>
-                    Submit
+                    Update
                   </Button>
                 </Col>
               </Row>

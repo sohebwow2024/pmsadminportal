@@ -255,9 +255,12 @@ const ProductCategory = () => {
           className="bg-transparent"
           toggle={() => setShowCategroy(false)}
         >
-          <span><h4>Add Category</h4> </span>
+          <span>
+            <h4>Add Category</h4>{" "}
+          </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-2">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -280,11 +283,10 @@ const ProductCategory = () => {
                 </Col>
               </Row>
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button className="me-1" color="primary">
-                    Add Category
-                  </Button>
                   <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -294,6 +296,7 @@ const ProductCategory = () => {
                   >
                     Cancel
                   </Button>
+                  <Button  color="primary">Add Category</Button>
                 </Col>
               </Row>
             </Form>
@@ -339,9 +342,10 @@ const ProductCategory = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Industry Category </span>
+          <span className=" mb-1"><h4>Update Industry Category</h4></span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -423,15 +427,10 @@ const ProductCategory = () => {
               </Row>
 
               <Row>
+                  <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                    // onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
+                <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -441,6 +440,14 @@ const ProductCategory = () => {
                   >
                     Cancel
                   </Button>
+                  <Button
+                    
+                    color="primary"
+                    // onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                  
                 </Col>
               </Row>
             </Form>

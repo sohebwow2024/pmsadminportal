@@ -275,9 +275,10 @@ const PlanExcluding = () => {
         backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span className=" mb-1">Add Plan Excluding </span>
+          <span><h4>Add Plan Excluding </h4></span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -306,15 +307,10 @@ const PlanExcluding = () => {
                 </Col>
               </Row>
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Add Plan Excluding
-                  </Button>
-                  <Button
+                <Button
+                    className="me-1 btn-danger" 
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -324,6 +320,14 @@ const PlanExcluding = () => {
                   >
                     Cancel
                   </Button>
+                  <Button
+                   
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Add Plan Excluding
+                  </Button>
+                  
                 </Col>
               </Row>
             </Form>
@@ -340,9 +344,10 @@ const PlanExcluding = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Plan Excluding</span>
+          <span><h4>Update Plan Excluding</h4></span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -372,15 +377,10 @@ const PlanExcluding = () => {
               </Row>
 
               <Row>
+                  <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
+                 <Button
+                    className="me-1 btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -390,6 +390,13 @@ const PlanExcluding = () => {
                   >
                     Cancel
                   </Button>
+                  <Button
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                 
                 </Col>
               </Row>
             </Form>
