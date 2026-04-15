@@ -273,17 +273,20 @@ const PlanPoint = () => {
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered modal-md"
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Plan Point</span>
+          <span>
+            <h4>Update Plan Point</h4>
+          </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Plan Point Name <span className="text-danger">*</span>
                   </Label>
@@ -301,7 +304,7 @@ const PlanPoint = () => {
                   ) : null} */}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Icon <span className="text-danger">*</span>
                   </Label>
@@ -319,14 +322,14 @@ const PlanPoint = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Description <span className="text-danger">*</span>
                   </Label>
                   <Input
-                    type="text"
+                    type="textarea"
                     name="hotel"
-                    placeholder="Description"
+                    placeholder="Enter Description"
                     id="selling"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
@@ -360,15 +363,10 @@ const PlanPoint = () => {
               </Row>
 
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
                   <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
+                    className="me-1  btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -377,6 +375,9 @@ const PlanPoint = () => {
                     onClick={handleShowModalUpdate}
                   >
                     Cancel
+                  </Button>
+                  <Button color="primary" onClick={handleSubmit}>
+                    Submit
                   </Button>
                 </Col>
               </Row>
@@ -390,22 +391,25 @@ const PlanPoint = () => {
       <Modal
         isOpen={show}
         toggle={handleShowModal}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered modal-md"
         backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span className=" mb-1">Add Plan Point</span>
+          <span>
+            <h4>Add Plan Point</h4>
+          </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Plan Point Name <span className="text-danger">*</span>
                   </Label>
                   <Input
-                    placeholder="Enter Plan Point"
+                    placeholder="Enter Plan Point Name"
                     // options={countryList}
                     onChange={(e) => {
                       setCountryId(e.value);
@@ -418,7 +422,7 @@ const PlanPoint = () => {
                   ) : null} */}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Icon <span className="text-danger">*</span>
                   </Label>
@@ -436,14 +440,14 @@ const PlanPoint = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Description <span className="text-danger">*</span>
                   </Label>
                   <Input
-                    type="text"
+                    type="textarea"
                     name="hotel"
-                    placeholder="Selling Price"
+                    placeholder="Enter Description"
                     id="selling"
                     // value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
@@ -476,15 +480,10 @@ const PlanPoint = () => {
                 </Col> */}
               </Row>
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
                   <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Add Plan Point
-                  </Button>
-                  <Button
+                    className="me-1  btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -493,6 +492,9 @@ const PlanPoint = () => {
                     onClick={handleShowModal}
                   >
                     Cancel
+                  </Button>
+                  <Button color="primary" onClick={handleSubmit}>
+                    Add Plan Point
                   </Button>
                 </Col>
               </Row>

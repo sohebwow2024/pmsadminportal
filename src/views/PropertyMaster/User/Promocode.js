@@ -274,17 +274,18 @@ const Promocode = () => {
       <Modal
         isOpen={show}
         toggle={handleShowModal}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered modal-md"
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span className=" mb-1">Add Promocode</span>
+          <span><h4>Add Promocode</h4></span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Promo Code <span className="text-danger">*</span>
                   </Label>
@@ -301,7 +302,7 @@ const Promocode = () => {
                   ) : null} */}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Unit Type <span className="text-danger">*</span>
                   </Label>
@@ -323,7 +324,7 @@ const Promocode = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Unit Volume <span className="text-danger">*</span>
                   </Label>
@@ -362,15 +363,10 @@ const Promocode = () => {
               </Row>
 
               <Row>
+                <hr className="mt-2" />
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Add Promocode
-                  </Button>
-                  <Button
+                <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -380,6 +376,14 @@ const Promocode = () => {
                   >
                     Cancel
                   </Button>
+                  <Button
+                   
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Add Promocode
+                  </Button>
+                  
                 </Col>
               </Row>
             </Form>
@@ -392,17 +396,18 @@ const Promocode = () => {
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered modal-md"
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Promocode</span>
+          <span ><h4>Update Promocode</h4></span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Promo Code <span className="text-danger">*</span>
                   </Label>
@@ -420,7 +425,7 @@ const Promocode = () => {
                         ) : null} */}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Unit Type <span className="text-danger">*</span>
                   </Label>
@@ -440,9 +445,9 @@ const Promocode = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col lg="12" className="mb-1">
                   <Label className="form-label" for="countries">
-                    Description <span className="text-danger">*</span>
+                    Unit Volume <span className="text-danger">*</span>
                   </Label>
                   <Input
                     type="text"
@@ -460,7 +465,7 @@ const Promocode = () => {
                 {/* <Col lg="6" className="mb-1">
                         <Label className="form-label" for="address">
                           isDiscountable{" "}
-                        </Label>
+                        </Label> 
                         <Col>
                           <Input
                             type="checkbox"
@@ -481,15 +486,10 @@ const Promocode = () => {
               </Row>
 
               <Row>
+                <hr className="mt-2" />
                 <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
+                <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -499,6 +499,14 @@ const Promocode = () => {
                   >
                     Cancel
                   </Button>
+                  <Button
+                    
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                  
                 </Col>
               </Row>
             </Form>

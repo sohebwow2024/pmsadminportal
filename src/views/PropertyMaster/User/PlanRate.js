@@ -282,9 +282,12 @@ const PlanRate = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1">Update Plan Rate</span>
+          <span>
+            <h4>Update Plan Rate</h4>
+          </span>
         </ModalHeader>
-        <ModalBody className="px-sm-2 mx-50 pb-5">
+        <hr className="m-0"></hr>
+        <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
               <Row>
@@ -368,15 +371,10 @@ const PlanRate = () => {
               </Row>
 
               <Row>
+                <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
                   <Button
-                    className="me-1"
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                  <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -385,6 +383,9 @@ const PlanRate = () => {
                     onClick={handleShowModalUpdate}
                   >
                     Cancel
+                  </Button>
+                  <Button color="primary" onClick={handleSubmit}>
+                    Submit
                   </Button>
                 </Col>
               </Row>
@@ -401,7 +402,9 @@ const PlanRate = () => {
         backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span ><h4>Add Plan Rate</h4></span>
+          <span>
+            <h4>Add Plan Rate</h4>
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
@@ -489,8 +492,8 @@ const PlanRate = () => {
               <Row>
                 <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                <Button
-                      className="me-1 btn btn-danger"
+                  <Button
+                    className="me-1 btn btn-danger"
                     color="secondary"
                     outline
                     // onClick={() => {
@@ -500,14 +503,9 @@ const PlanRate = () => {
                   >
                     Cancel
                   </Button>
-                  <Button
-                    
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
+                  <Button color="primary" onClick={handleSubmit}>
                     Add Plan Rate
                   </Button>
-                  
                 </Col>
               </Row>
             </Form>

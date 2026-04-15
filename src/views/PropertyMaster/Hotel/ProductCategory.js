@@ -91,7 +91,8 @@ const ProductCategory = () => {
       action: "btns",
     },
   ];
-  const newToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJTb2hlYkFwcmlsMTIzIiwiZW1haWwiOiJ0ZXN0MTIzNDU1MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NTU0MDQyNSwiZXhwIjoxNzc1NjI2ODI1fQ.uEE7xILzv5E3J0xl-tS-g3eJIolnecPA0Tof8TbjrHY"
+  const newToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJTb2hlYkFwcmlsMTIzIiwiZW1haWwiOiJ0ZXN0MTIzNDU1MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NTU0MDQyNSwiZXhwIjoxNzc1NjI2ODI1fQ.uEE7xILzv5E3J0xl-tS-g3eJIolnecPA0Tof8TbjrHY";
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
 
@@ -135,12 +136,9 @@ const ProductCategory = () => {
       }
     } catch (error) {
       console.log("add category error", error);
-      toast.error(
-        error?.response?.data?.Message || "Failed to add category",
-        {
-          position: "top-right",
-        },
-      );
+      toast.error(error?.response?.data?.Message || "Failed to add category", {
+        position: "top-right",
+      });
     }
   };
 
@@ -253,7 +251,7 @@ const ProductCategory = () => {
       ),
     },
   ];
-console.log("test");
+  console.log("test");
 
   return (
     <>
@@ -301,9 +299,11 @@ console.log("test");
           className="bg-transparent"
           toggle={() => setShowCategroy(false)}
         >
-          <span><h4>Add Category </h4></span>
+          <span>
+            <h4>Add Category </h4>
+          </span>
         </ModalHeader>
-         <hr className="m-0"></hr>
+        <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
           <>
             <Form>
@@ -319,39 +319,34 @@ console.log("test");
                     id="hotel"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
-                  // invalid={display && categoryName === ""}
+                    // invalid={display && categoryName === ""}
                   />
                   {/* {display && !categoryName ? (
                     <span className="error_msg_lbl">Enter Product Name </span>
                   ) : null} */}
                 </Col>
               </Row>
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1" >
-                  
-                  <Button
-                    className="btn btn-danger me-1"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={() => setShowCategroy(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    color="primary"
-                    type="button"
-                    onClick={handleAddCategory}
-                  >
-                    Add Category
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className={"px-1"}>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="btn btn-danger me-1"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={() => setShowCategroy(false)}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" type="button" onClick={handleAddCategory}>
+              Add Category
+            </Button>
+          </Col>
+        </Row>
       </Modal>
 
       {/***** Delete Modal *****/}
@@ -369,7 +364,7 @@ console.log("test");
             <Button
               className="m-1"
               color="danger"
-            // onClick={() => handleCancelBooking(id)}
+              // onClick={() => handleCancelBooking(id)}
             >
               Confirm
             </Button>
@@ -389,10 +384,12 @@ console.log("test");
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
         className="modal-dialog-centered modal-lg"
-      // backdrop={false}
+        // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span><h4>Update Category </h4> </span>
+          <span>
+            <h4>Update Category </h4>{" "}
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
@@ -408,9 +405,9 @@ console.log("test");
                     name="hotel"
                     id="hotel"
                     placeholder="Category Id"
-                  // value={categoryName}
-                  // onChange={(e) => setCategoryName(e.target.value)}
-                  // invalid={display && categoryName === ""}
+                    // value={categoryName}
+                    // onChange={(e) => setCategoryName(e.target.value)}
+                    // invalid={display && categoryName === ""}
                   />
                   {/* {display && !categoryName ? (
                     <span className="error_msg_lbl">Enter Product Name </span>
@@ -427,7 +424,7 @@ console.log("test");
                     placeholder="Category Name"
                     // value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                  // invalid={display && address === ""}
+                    // invalid={display && address === ""}
                   />
                   {/* {display && !address ? (
                     <span className="error_msg_lbl">Enter Product Code </span>
@@ -479,7 +476,7 @@ console.log("test");
               <Row>
                 <hr className="mt-2"></hr>
                 <Col md="12 text-lg-end text-md-center mt-1">
-                <Button
+                  <Button
                     className="me-1 btn btn-danger"
                     outline
                     // onClick={() => {
@@ -492,11 +489,10 @@ console.log("test");
                   <Button
                     type="button"
                     color="primary"
-                  // onClick={handleSubmit}
+                    // onClick={handleSubmit}
                   >
                     Submit
                   </Button>
-                  
                 </Col>
               </Row>
             </Form>

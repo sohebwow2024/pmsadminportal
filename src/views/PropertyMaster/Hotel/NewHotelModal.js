@@ -414,31 +414,27 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                   ) : null}
                 </Col>
               </Row>
-
-              <Row>
-                <hr className="mt-1"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="btn btn-danger me-1"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModal}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Add Product
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className={"px-1"}>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="btn btn-danger me-1"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModal}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Add Product
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
     </>
