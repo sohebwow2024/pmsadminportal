@@ -391,27 +391,26 @@ const Plans = () => {
                   </Col>
                 </Row>
               </Form>
-
-              <Row tag="form" className="gy-1 gx-2 mt-75">
-                <hr className="mt-2"></hr>
-                <Col className="text-lg-end text-md-center mt-1" xs={12}>
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    onClick={() => {
-                      setShow(false);
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button color="primary" onClick={handleSubmit}>
-                    Add Plan
-                  </Button>
-                </Col>
-              </Row>
             </>
           </ModalBody>
+          <Row className="px-1">
+            <hr className="mt-1"></hr>
+            <Col className="text-lg-end text-md-center mt-1 pb-2" xs={12}>
+              <Button
+                className="me-1 btn btn-danger"
+                color="secondary"
+                outline
+                onClick={() => {
+                  setShow(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button color="primary" onClick={handleSubmit}>
+                Add Plan
+              </Button>
+            </Col>
+          </Row>
         </Modal>
         {show ? <div className="modal-backdrop fade show"></div> : null}
       </>
@@ -639,25 +638,24 @@ const Plans = () => {
                   </Col>
                 </Row>
               </Form>
-
-              <Row tag="form" className="gy-1 gx-2 mt-75">
-                <hr className="mt-2"></hr>
-                <Col className="text-lg-end text-md-center mt-1" xs={12}>
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    onClick={handleEditModal}
-                  >
-                    Cancel
-                  </Button>
-                  <Button color="primary" onClick={editHandleSubmit}>
-                    Update
-                  </Button>
-                </Col>
-              </Row>
             </>
           </ModalBody>
+          <Row tag="form" className="px-1">
+            <hr className="mt-2"></hr>
+            <Col className="text-lg-end text-md-center mt-1 pb-2" xs={12}>
+              <Button
+                className="me-1 btn btn-danger"
+                color="secondary"
+                outline
+                onClick={handleEditModal}
+              >
+                Cancel
+              </Button>
+              <Button color="primary" onClick={editHandleSubmit}>
+                Update
+              </Button>
+            </Col>
+          </Row>
         </Modal>
         {showEdit ? <div className="modal-backdrop fade show"></div> : null}
       </>
@@ -1070,7 +1068,10 @@ const Plans = () => {
             </div>
 
             <div className="d-flex justify-content-between plan-actions">
-              <Button color="primary" onClick={() => handleEditModal("enterprise")}>
+              <Button
+                color="primary"
+                onClick={() => handleEditModal("enterprise")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

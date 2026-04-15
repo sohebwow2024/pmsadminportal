@@ -331,9 +331,11 @@ const EditHotelModal = ({
         backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span><h4>Update Product</h4> </span>
+          <span>
+            <h4>Update Product</h4>{" "}
+          </span>
         </ModalHeader>
-         <hr className="m-0"></hr>
+        <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 mx-50 pb-2">
           <>
             <Form>
@@ -415,29 +417,28 @@ const EditHotelModal = ({
                   ) : null}
                 </Col>
               </Row>
-
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="btn btn-danger me-1"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModalUpdate}
-                  >
-                    Cancel
-                  </Button>
-                  <Button color="primary" onClick={handleSubmit}>
-                    Update
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className={"px-1"}>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="btn btn-danger me-1"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModalUpdate}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Update
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {showUpdate ? <div className="modal-backdrop fade show"></div> : null}
     </>

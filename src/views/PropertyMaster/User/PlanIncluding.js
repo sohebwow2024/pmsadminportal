@@ -275,7 +275,9 @@ const PlanIncluding = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span><h4>Update Plan Including </h4></span>
+          <span>
+            <h4>Update Plan Including </h4>
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
@@ -306,33 +308,28 @@ const PlanIncluding = () => {
                   {/* {display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null} */}
                 </Col>
               </Row>
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                 <Button
-                    className="me-1 btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModalUpdate}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                 
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className="px-1">
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="me-1 btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModalUpdate}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 
@@ -344,7 +341,9 @@ const PlanIncluding = () => {
         backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span><h4>Add Plan Including</h4></span>
+          <span>
+            <h4>Add Plan Including</h4>
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
@@ -375,33 +374,28 @@ const PlanIncluding = () => {
                   {/* {display && !hotelName ? <span className='error_msg_lbl'>Enter Product Name </span> : null} */}
                 </Col>
               </Row>
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                <Button
-                    className="me-1 btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModal}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-
-                    color="primary"
-                    onClick={handleSubmit}
-                  >
-                    Add Plan Including
-                  </Button>
-                  
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className="px-1">
+          <hr className="mt-2"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="me-1 btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModal}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Add Plan Including
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {/* {show ? <div className="modal-backdrop fade show"></div> : null} */}
 

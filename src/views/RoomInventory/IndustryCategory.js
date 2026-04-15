@@ -282,26 +282,26 @@ const ProductCategory = () => {
                   ) : null} */}
                 </Col>
               </Row>
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={() => setShowCategroy(false)}
-                  >
-                    Cancel
-                  </Button>
-                  <Button  color="primary">Add Category</Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className={"px-1"}>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="me-1 btn btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={() => setShowCategroy(false)}
+            >
+              Cancel
+            </Button>
+            <Button color="primary">Add Category</Button>
+          </Col>
+        </Row>
       </Modal>
 
       {/***** Delete Modal *****/}
@@ -342,7 +342,9 @@ const ProductCategory = () => {
         // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span className=" mb-1"><h4>Update Industry Category</h4></span>
+          <span className=" mb-1">
+            <h4>Update Industry Category</h4>
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
@@ -426,10 +428,14 @@ const ProductCategory = () => {
                 {/* </Col> */}
               </Row>
 
-              <Row>
-                  <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                <Button
+              
+            </Form>
+          </>
+        </ModalBody>
+        <Row className={"px-1"}>
+                <hr className="mt-1"></hr>
+                <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+                  <Button
                     className="me-1 btn btn-danger"
                     color="secondary"
                     outline
@@ -441,18 +447,13 @@ const ProductCategory = () => {
                     Cancel
                   </Button>
                   <Button
-                    
                     color="primary"
                     // onClick={handleSubmit}
                   >
                     Submit
                   </Button>
-                  
                 </Col>
               </Row>
-            </Form>
-          </>
-        </ModalBody>
       </Modal>
       {show && (
         <NewHotelModal

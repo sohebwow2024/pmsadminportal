@@ -472,32 +472,31 @@ const ProductCategory = () => {
                   ) : null} */}
                 {/* </Col> */}
               </Row>
-
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1 btn btn-danger"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModalUpdate}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="button"
-                    color="primary"
-                    // onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className={"px-1"}>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="me-1 btn btn-danger"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModalUpdate}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              color="primary"
+              // onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {show && (
         <NewHotelModal
