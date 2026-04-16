@@ -369,29 +369,28 @@ const PlanRate = () => {
                   </Col>
                 </Col>
               </Row>
-
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModalUpdate}
-                  >
-                    Cancel
-                  </Button>
-                  <Button color="primary" onClick={handleSubmit}>
-                    Submit
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className="px-1">
+          <hr ></hr>
+          <Col md="12 text-lg-end text-md-center pb-2">
+            <Button
+              className="me-1 btn btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModalUpdate}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Col>
+        </Row>
       </Modal>
 
       {/********* Add Modal ********/}
@@ -489,28 +488,28 @@ const PlanRate = () => {
                   </Col>
                 </Col>
               </Row>
-              <Row>
-                <hr className="mt-2"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1">
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModal}
-                  >
-                    Cancel
-                  </Button>
-                  <Button color="primary" onClick={handleSubmit}>
-                    Add Plan Rate
-                  </Button>
-                </Col>
-              </Row>
             </Form>
           </>
         </ModalBody>
+        <Row className="px-1">
+          <hr></hr>
+          <Col md="12 text-lg-end text-md-center pb-2">
+            <Button
+              className="me-1 btn btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModal}
+            >
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Add Plan Rate
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 

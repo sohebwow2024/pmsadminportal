@@ -147,11 +147,13 @@ const ProductCategory = () => {
 
   const [showUpdate, setShowUpdate] = useState(false);
   const handleShowModalUpdate = () => setShowUpdate(!showUpdate);
+  const [handleSubmit] = useState(false);
 
   const [selected_hotel, setSelected_hotel] = useState();
 
   const [del, setDel] = useState(false);
   const handleDelModal = () => setDel(!del);
+  const [display, setDisplay] = useState(false);
 
   const [OTA, SetOTA] = useState(false);
   const handleOTA = () => SetOTA(!OTA);
@@ -319,11 +321,11 @@ const ProductCategory = () => {
                     id="hotel"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
-                    // invalid={display && categoryName === ""}
+                    invalid={display && categoryName === ""}
                   />
-                  {/* {display && !categoryName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
+                  {display && !categoryName ? (
+                    <span className="error_msg_lbl">Enter Category Name </span>
+                  ) : null}
                 </Col>
               </Row>
             </Form>
@@ -491,7 +493,7 @@ const ProductCategory = () => {
             <Button
               type="button"
               color="primary"
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
             >
               Submit
             </Button>

@@ -366,7 +366,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    // invalid={display && country === ''}
+                    invalid={display && country === ''}
                   />
                   {display && !country ? (
                     <span className="error_msg_lbl">Enter Category </span>

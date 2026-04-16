@@ -437,7 +437,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
         <ModalHeader className="bg-transparent" toggle={handleOpen}>
           <span className=" mb-1">Add Client </span>
         </ModalHeader>
-
+        <hr className="m-0"></hr>
         <Form onSubmit={onSubmit}>
           <ModalBody>
             {/* ---------- HOTEL NAME ---------- */}
@@ -459,7 +459,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
             <Row className="mb-1">
               <Col lg="6" className="mb-1">
                 <Label className="form-label" for="countries">
-                   Company Size <span className="text-danger">*</span>
+                  Company Size <span className="text-danger">*</span>
                 </Label>
                 <Select
                   // theme={selectThemeColors}
@@ -480,7 +480,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
               </Col>
               <Col lg="6" className="mb-1">
                 <Label className="form-label" for="countries">
-                 Company Industry <span className="text-danger">*</span>
+                  Company Industry <span className="text-danger">*</span>
                 </Label>
                 <Select
                   // theme={selectThemeColors}
@@ -501,7 +501,9 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
               </Col>
 
               <Col md={6}>
-                <Label className="form-label">Company Name <span className="text-danger">*</span></Label>
+                <Label className="form-label">
+                  Company Name <span className="text-danger">*</span>
+                </Label>
                 <input
                   type="text"
                   placeholder="Company Name"
@@ -509,7 +511,9 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                 />
               </Col>
               <Col md={6}>
-                <Label className="form-label">Tax Info <span className="text-danger">*</span></Label>
+                <Label className="form-label">
+                  Tax Info <span className="text-danger">*</span>
+                </Label>
                 <input
                   type="text"
                   placeholder="xx-xxxx789"
@@ -533,7 +537,6 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   className="form-control"
                 />
               </Col>
-              
             </Row>
 
             {/* ---------- ADDRESS ---------- */}
@@ -560,7 +563,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
             <Row className="mb-1">
               <Col md={6}>
                 <Label className="form-label">Country</Label>
-               <Select
+                <Select
                   // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
@@ -594,7 +597,6 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
                   className="form-control"
                 />
               </Col>
-              
             </Row>
 
             {/* ---------- ROOM COUNT & ACTIVE USERS ---------- */}
@@ -621,11 +623,11 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
           {/* ---------- FOOTER ---------- */}
           <ModalFooter className="justify-content-end">
+            <Button className="btn btn-danger" outline onClick={handleReset}>
+              Cancel
+            </Button>
             <Button color="primary" type="submit">
               Add Client
-            </Button>
-            <Button color="secondary" outline onClick={handleReset}>
-              Cancel
             </Button>
           </ModalFooter>
         </Form>

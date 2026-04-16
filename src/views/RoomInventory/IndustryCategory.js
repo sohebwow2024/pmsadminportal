@@ -256,7 +256,7 @@ const ProductCategory = () => {
           toggle={() => setShowCategroy(false)}
         >
           <span>
-            <h4>Add Category</h4>{" "}
+            <h4>Add Categoryaaa</h4>{" "}
           </span>
         </ModalHeader>
         <hr className="m-0"></hr>

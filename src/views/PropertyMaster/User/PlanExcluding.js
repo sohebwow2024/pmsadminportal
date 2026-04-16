@@ -378,8 +378,8 @@ const PlanExcluding = () => {
           </>
         </ModalBody>
         <Row className="px-1">
-          <hr className="mt-1"></hr>
-          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+          <hr ></hr>
+          <Col md="12 text-lg-end text-md-center pt-1 pb-2">
             <Button
               className="me-1 btn-danger"
               color="secondary"
