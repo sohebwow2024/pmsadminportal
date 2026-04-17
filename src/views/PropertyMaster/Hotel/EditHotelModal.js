@@ -126,6 +126,40 @@ const EditHotelModal = ({
     getCityData();
   }, [countryId, stateId, cityId]);
 
+  const resetForm = () => {
+    setHotelName("");
+    setAddress("");
+    setNoOfFloor("");
+    setCountry("");
+    setState("");
+    setCity("");
+    setContact("");
+    setEmail("");
+    setBaseCurrency("");
+    setAcc_startDate("");
+    setAcc_endDate("");
+    setGst("");
+    setBankName("");
+    setAccountNumber("");
+    setBranch("");
+    setIfsc("");
+    setWebsite("");
+    setLogo("");
+    setPincode("");
+    setSurname("");
+    setPersonName("");
+    setLongitude("");
+    setLatitude("");
+    setLicenseNumber("");
+    setPropertydescription("");
+    setDisplay(false); 
+  };
+
+  const handleCloseModal = () => {
+    resetForm();
+    handleShowModalUpdate();
+  };
+
   const [hotelName, setHotelName] = useState("");
   const [address, setAddress] = useState("");
   const [noOfFloor, setNoOfFloor] = useState("");
@@ -326,11 +360,11 @@ const EditHotelModal = ({
     <>
       <Modal
         isOpen={showUpdate}
-        toggle={handleShowModalUpdate}
+        toggle={handleCloseModal}
         className="modal-dialog-centered modal-lg"
         backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
+        <ModalHeader className="bg-transparent" toggle={handleCloseModal}>
           <span>
             <h4>Update Product</h4>{" "}
           </span>
@@ -430,7 +464,7 @@ const EditHotelModal = ({
               // onClick={() => {
               //     setShow(!show)
               // }}
-              onClick={handleShowModalUpdate}
+              onClick={handleCloseModal}
             >
               Cancel
             </Button>

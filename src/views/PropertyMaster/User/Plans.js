@@ -188,55 +188,186 @@ const Plans = () => {
       email,
     };
     console.log("getAccountUserList", getAccountUserList);
-    const handleSubmit = async () => {
-      setDisplay(true);
-      if (user && userRole && userName && password !== "") {
-        console.log("userRole: ", user.split(" "));
-        let cipherPassword = cipherPasswordFunc(password);
-        let obj = {
-          Username: userName,
-          Password: password,
-          Event: "insert",
-          LoginID: getUserData.LoginID,
-          UserID: userId, //getAccountUserList.data[0].find(i=>i.Email == user.split(" ")[3]).UserID,
-          //"UserRoleID": "URO001",
-          UserRole: userRole,
-          Token: getUserData.Token,
-        };
-        console.log("user obj", obj);
-        // usersRoleDataApi()
 
-        const loginnResponse = await axios
-          .post("/authentication/userauthentication/loginauthentication", obj)
-          .then((response) => {
-            console.log("res", response);
-            if (response.status === 200) {
-              setUsers([...users, userObj]);
-              // handleModal()
-              toast.success("User Added Successfully!", {
-                position: "top-center",
-              });
-            }
-          })
-          .catch(function (error) {
-            console.log(
-              "User Login Error=====",
-              error?.response?.data?.Message,
-            );
-            toast.error(error?.response?.data?.Message);
+    const [hotelName, setHotelName] = useState("");
+    const [address, setAddress] = useState("");
+    const [noOfFloor, setNoOfFloor] = useState("");
+    const [country, setCountry] = useState("");
+    const [state, setState] = useState("");
+    const [city, setCity] = useState("");
+    const [contact, setContact] = useState("");
+    const [categoryName, setCategoryName] = useState("");
+    const [logo, setLogo] = useState("");
+
+    const handleSubmit = async () => {
+      let uploadedImage;
+      if (logo !== "") {
+        let imageformData = new FormData();
+        imageformData.append("File", logo);
+        imageformData.append("CompanyID", CompanyID);
+        console.log("imageformData", imageformData);
+        try {
+          const res = await axios({
+            method: "post",
+            baseURL: `${Image_base_uri}`,
+            url: "/api/property/hotel/uploadlogo",
+            data: imageformData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+              LoginID,
+              Token,
+            },
           });
+          console.log("res", res);
+          if (res.data.FileName) {
+            // setNewPoslogo(res.data.FileName)
+            // handleRefresh()
+            // setUploadImgStatus(true)
+            uploadedImage = res.data.FileName;
+          }
+        } catch (error) {
+          console.log("error", error);
+          // setUploadImgStatus(false)
+          return 0;
+        }
       }
-      fetchPromise(URLs);
-      // else {
-      //     toast.error('Fill All Fields!', {
-      //         position: "top-center",
-      //         style: {
-      //             minWidth: '250px'
-      //         },
-      //         duration: 3000
-      //     })
-      // }
+      console.log(uploadedImage);
+      try {
+        const latRegex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
+        const lonRegex = /^-?((1[0-7]|[1-9])?\d(\.\d+)?|180(\.0+)?)$/;
+        const phoneregex = /^\+\d{1,3}\d{9,10}$/;
+        setDisplay(true);
+        // console.log(CompanyID);
+        if (
+          hotelName &&
+          address &&
+          noOfFloor &&
+          country &&
+          pincode &&
+          latitude &&
+          longitude &&
+          personName &&
+          state &&
+          city &&
+          email &&
+          categoryName &&
+          ifsc !== ""
+        ) {
+          if (
+            latRegex.test(latitude) &&
+            latitude >= -90 &&
+            latitude <= 90 &&
+            lonRegex.test(longitude) &&
+            longitude >= -180 &&
+            longitude <= 180
+          ) {
+            if (phoneregex.test(contact)) {
+              if (
+                CompanyID !== "" &&
+                CompanyID !== "null" &&
+                CompanyID !== null
+              ) {
+                const long = Number(longitude);
+                const lat = Number(latitude);
+                const body = {
+                  LoginID: LoginID,
+                  Token: Token,
+                  CompanyID: CompanyID,
+                  HotelName: hotelName,
+                  HotelType: "Hotel",
+                  HotelTypeCode: "1",
+                  PropertyDesc: propertydescription,
+                  FloorCount: noOfFloor,
+                  AddressLine: address,
+                  CityID: cityId,
+                  CityName: city,
+                  CountryCode: countryCode,
+                  CountryName: country,
+                  PostalCode: pincode,
+                  Longitude: long.toFixed(10),
+                  Latitude: lat.toFixed(10),
+                  TimeZone: "Asia/Kolkata",
+                  LanguageCode: "en",
+                  CurrencyCode: baseCurrency,
+                  PropertyLicenseNumber: licenseNumber,
+                  LogoFile: uploadedImage, // need to send the file content as well
+                  WebSIte: website,
+                  BankName: bankName,
+                  AccountNumber: accountNumber,
+                  Branch: branch,
+                  CategoryName: categoryName,
+                  IFSC: ifsc,
+                  GSTNumber: gst,
+                  ContactPersonName: personName,
+                  Surname: surname,
+                  PhoneNumber: contact,
+                  Email: email,
+                  Seckey: "abc",
+                };
+                console.log("body", body);
+                const res = await axios.post("/property/hotel", body);
+                console.log("response: ", res.data[0]);
+                if (res.data[0][0].status === "Success") {
+                  handleShowModal();
+                  toast.success(res.data[0][0].message, {
+                    position: "top-center",
+                  });
+                  getAllHotelList();
+                }
+              } else {
+                toast.error("Company Id Cannot be null!", {
+                  position: "top-center",
+                });
+              }
+            } else {
+              toast.error(
+                "please enter correct Phone Number with country code!",
+                { position: "top-center" },
+              );
+            }
+          } else {
+            toast.error("please enter correct Longitude and Latitude value!", {
+              position: "top-center",
+            });
+          }
+        } else {
+          toast.error("please enter required fields!", {
+            position: "top-center",
+          });
+        }
+      } catch (e) {
+        toast.error(e.response.data.message, { position: "top-center" });
+
+        console.log(e);
+        handleShowModal();
+      }
     };
+
+    const planIncluding = [
+      { value: "breakfast", label: "Breakfast Included" },
+      { value: "lunch", label: "Lunch Included" },
+      { value: "dinner", label: "Dinner Included" },
+      { value: "all_meals", label: "All Meals Included" },
+      { value: "wifi", label: "Free WiFi" },
+      { value: "parking", label: "Free Parking" },
+    ];
+
+    const planExcluding = [
+      { value: "breakfast", label: "Breakfast Not Included" },
+      { value: "lunch", label: "Lunch Not Included" },
+      { value: "dinner", label: "Dinner Not Included" },
+      { value: "wifi", label: "WiFi Not Included" },
+      { value: "parking", label: "Parking Not Included" },
+      { value: "airport_transfer", label: "Airport Transfer Not Included" },
+    ];
+
+    const planRates = [
+      { value: "per_night", label: "Per Night" },
+      { value: "four_person", label: "Four Person" },
+      { value: "double_room", label: "Double Room" },
+      { value: "per_day", label: "Per Day" },
+      { value: "one_week", label: "One Week" },
+    ];
 
     return (
       <>
@@ -265,8 +396,8 @@ const Plans = () => {
                       name="hotel"
                       id="hotel"
                       placeholder="Plan Name"
-                      // value={hotelName}
-                      // onChange={e => setHotelName(e.target.value)}
+                      value={hotelName}
+                      onChange={(e) => setHotelName(e.target.value)}
                       invalid={display && hotelName === ""}
                     />
                     {display && !hotelName ? (
@@ -299,7 +430,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Plan Including"
-                      //   options={countryList}
+                      options={planIncluding}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -308,7 +439,9 @@ const Plans = () => {
                       // invalid={display && country === ''}
                     />
                     {display && !country ? (
-                      <span className="error_msg_lbl">Enter Plan </span>
+                      <span className="error_msg_lbl">
+                        Enter Plan Including
+                      </span>
                     ) : null}
                   </Col>
                   <Col lg="6" className="mb-1">
@@ -320,7 +453,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Plan Excluding"
-                      //   options={countryList}
+                      options={planExcluding}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -329,7 +462,9 @@ const Plans = () => {
                       // invalid={display && country === ''}
                     />
                     {display && !country ? (
-                      <span className="error_msg_lbl">Enter Plan </span>
+                      <span className="error_msg_lbl">
+                        Enter Plan Excluding
+                      </span>
                     ) : null}
                   </Col>
                   <Col lg="6" className="mb-1">
@@ -341,7 +476,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Plan Rates"
-                      //   options={countryList}
+                      options={planRates}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -492,6 +627,34 @@ const Plans = () => {
       // }
     };
 
+    const duration = [
+      { value: "1_month", label: "1 Month" },
+      { value: "3_months", label: "3 Months" },
+      { value: "6_months", label: "6 Months" },
+      { value: "1_year", label: "1 Year" },
+    ];
+
+    const priceList = [
+      { value: "0-1000", label: "₹0 - ₹1,000" },
+      { value: "1000-5000", label: "₹1,000 - ₹5,000" },
+      { value: "5000-10000", label: "₹5,000 - ₹10,000" },
+      { value: "10000-20000", label: "₹10,000 - ₹20,000" },
+      { value: "20000+", label: "₹20,000+" },
+    ];
+
+    const billingCycle = [
+      { value: "monthly", label: "Monthly" },
+      { value: "quarterly", label: "Quarterly" },
+      { value: "yearly", label: "Yearly" },
+    ];
+
+    const currency = [
+      { value: "INR", label: "₹ INR (Indian Rupee)" },
+      { value: "USD", label: "$ USD (US Dollar)" },
+      { value: "EUR", label: "€ EUR (Euro)" },
+      { value: "GBP", label: "£ GBP (British Pound)" },
+    ];
+
     return (
       <>
         <Modal
@@ -549,7 +712,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Price"
-                      //   options={countryList}
+                      options={priceList}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -568,7 +731,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Billing Cycle"
-                      //   options={countryList}
+                      options={billingCycle}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -587,7 +750,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Currency"
-                      //   options={countryList}
+                      options={currency}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -606,7 +769,7 @@ const Plans = () => {
                       className="react-select"
                       classNamePrefix="select"
                       placeholder="Select Duration"
-                      //   options={countryList}
+                      options={duration}
                       //   onChange={e => {
                       //     setCountryId(e.value)
                       //     setCountryCode(e.CountryCode)
@@ -620,7 +783,7 @@ const Plans = () => {
                 <Row>
                   <Col lg="12" className="mb-1">
                     <Label className="form-label" for="userName">
-                      Description <span className="text-danger">*</span>
+                      Description
                     </Label>
                     <Input
                       type="textarea"
@@ -839,7 +1002,7 @@ const Plans = () => {
           <div className="p-1">
             <div className="d-flex justify-content-between">
               <div className="mb-3">
-                <h2>Starter</h2>
+                <h2>Monthly</h2>
                 {/* <p className="mb-2 text-dark">
 									Perfect for small hotels getting started
 								</p> */}
@@ -929,7 +1092,7 @@ const Plans = () => {
           <div className="p-1">
             <div className="d-flex justify-content-between">
               <div className="mb-3">
-                <h2>Professional</h2>
+                <h2>Quarterly</h2>
                 {/* <p className="mb-2 text-dark">
 									Comprehensive solution for growing properties
 								</p> */}
@@ -1020,7 +1183,7 @@ const Plans = () => {
           <div className="p-1">
             <div className="d-flex justify-content-between">
               <div className="mb-3">
-                <h2>Enterprise</h2>
+                <h2>Yearly</h2>
                 {/* <p className="mb-2 text-dark">
 									Perfect for small hotels getting started
 								</p> */}

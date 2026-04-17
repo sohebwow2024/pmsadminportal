@@ -435,7 +435,9 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
         {/* ---------- HEADER ---------- */}
 
         <ModalHeader className="bg-transparent" toggle={handleOpen}>
-          <span className=" mb-1">Add Client </span>
+          <span>
+            <h4>Add Hotel</h4>
+          </span>
         </ModalHeader>
         <hr className="m-0"></hr>
         <Form onSubmit={onSubmit}>
@@ -444,13 +446,12 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
             <Row className="mb-1">
               <Col md={12}>
                 <Label className="form-label">
-                  Company Type <span className="text-danger">*</span>
+                  Company Name <span className="text-danger">*</span>
                 </Label>
-                <Select
-                  // theme={selectThemeColors}
-                  className="react-select"
-                  classNamePrefix="select"
-                  placeholder="Select Type"
+                <Input
+                  type="text"
+                  placeholder="Company Name"
+                  className="form-control"
                 />
               </Col>
             </Row>
@@ -502,14 +503,16 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
               <Col md={6}>
                 <Label className="form-label">
-                  Company Name <span className="text-danger">*</span>
+                  Company Type <span className="text-danger">*</span>
                 </Label>
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  className="form-control"
+                <Select
+                  // theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Type"
                 />
               </Col>
+
               <Col md={6}>
                 <Label className="form-label">
                   Tax Info <span className="text-danger">*</span>

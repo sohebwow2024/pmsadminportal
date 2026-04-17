@@ -34,8 +34,6 @@ import { useSelector } from "react-redux";
 import Avatar from "@components/avatar";
 
 const ProductCategory = () => {
-  const [hotelName, setHotelName] = useState("");
-
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "PMS-Products";
@@ -127,6 +125,167 @@ const ProductCategory = () => {
       setOtaData(res?.data[0][0]);
     } catch (error) {
       console.log("error", error);
+    }
+  };
+
+  const [hotelName, setHotelName] = useState("");
+  const [address, setAddress] = useState("");
+  const [noOfFloor, setNoOfFloor] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [logo, setLogo] = useState("");
+  const [display, setDisplay] = useState(false);
+
+  const handleSubmit = async () => {
+    let uploadedImage;
+    if (logo !== "") {
+      let imageformData = new FormData();
+      imageformData.append("File", logo);
+      imageformData.append("CompanyID", CompanyID);
+      console.log("imageformData", imageformData);
+      try {
+        const res = await axios({
+          method: "post",
+          baseURL: `${Image_base_uri}`,
+          url: "/api/property/hotel/uploadlogo",
+          data: imageformData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            LoginID,
+            Token,
+          },
+        });
+        console.log("res", res);
+        if (res.data.FileName) {
+          // setNewPoslogo(res.data.FileName)
+          // handleRefresh()
+          // setUploadImgStatus(true)
+          uploadedImage = res.data.FileName;
+        }
+      } catch (error) {
+        console.log("error", error);
+        // setUploadImgStatus(false)
+        return 0;
+      }
+    }
+    console.log(uploadedImage);
+    try {
+      const latRegex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?)/;
+      const lonRegex = /^-?((1[0-7]|[1-9])?\d(\.\d+)?|180(\.0+)?)$/;
+      const phoneregex = /^\+\d{1,3}\d{9,10}$/;
+      setDisplay(true);
+      // console.log(CompanyID);
+      if (
+        hotelName &&
+        address &&
+        noOfFloor &&
+        country &&
+        pincode &&
+        latitude &&
+        longitude &&
+        personName &&
+        state &&
+        city &&
+        email &&
+        baseCurrency &&
+        gst &&
+        bankName &&
+        accountNumber &&
+        branch &&
+        categoryName &&
+        ifsc !== ""
+      ) {
+        if (
+          latRegex.test(latitude) &&
+          latitude >= -90 &&
+          latitude <= 90 &&
+          lonRegex.test(longitude) &&
+          longitude >= -180 &&
+          longitude <= 180
+        ) {
+          if (phoneregex.test(contact)) {
+            if (
+              CompanyID !== "" &&
+              CompanyID !== "null" &&
+              CompanyID !== null
+            ) {
+              const long = Number(longitude);
+              const lat = Number(latitude);
+              const body = {
+                LoginID: LoginID,
+                Token: Token,
+                CompanyID: CompanyID,
+                HotelName: hotelName,
+                HotelType: "Hotel",
+                HotelTypeCode: "1",
+                PropertyDesc: propertydescription,
+                FloorCount: noOfFloor,
+                AddressLine: address,
+                CityID: cityId,
+                CityName: city,
+                CountryCode: countryCode,
+                CountryName: country,
+                PostalCode: pincode,
+                Longitude: long.toFixed(10),
+                Latitude: lat.toFixed(10),
+                TimeZone: "Asia/Kolkata",
+                LanguageCode: "en",
+                CurrencyCode: baseCurrency,
+                PropertyLicenseNumber: licenseNumber,
+                LogoFile: uploadedImage, // need to send the file content as well
+                WebSIte: website,
+                BankName: bankName,
+                AccountNumber: accountNumber,
+                Branch: branch,
+                CategoryName: categoryName,
+                IFSC: ifsc,
+                GSTNumber: gst,
+                ContactPersonName: personName,
+                Surname: surname,
+                PhoneNumber: contact,
+                Email: email,
+                Seckey: "abc",
+              };
+              console.log("body", body);
+              const res = await axios.post("/property/hotel", body);
+              console.log("response: ", res.data[0]);
+              if (res.data[0][0].status === "Success") {
+                handleShowModal();
+                toast.success(res.data[0][0].message, {
+                  position: "top-center",
+                });
+                getAllHotelList();
+              }
+            } else {
+              toast.error("Company Id Cannot be null!", {
+                position: "top-center",
+              });
+            }
+          } else {
+            toast.error(
+              "please enter correct Phone Number with country code!",
+              { position: "top-center" },
+            );
+          }
+        } else {
+          toast.error("please enter correct Longitude and Latitude value!", {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("please enter required fields!", {
+          position: "top-center",
+        });
+      }
+    } catch (e) {
+      toast.error(e.response.data.message, { position: "top-center" });
+
+      console.log(e);
+      handleShowModal();
     }
   };
 
@@ -256,7 +415,7 @@ const ProductCategory = () => {
           toggle={() => setShowCategroy(false)}
         >
           <span>
-            <h4>Add Categoryaaa</h4>{" "}
+            <h4>Add Category</h4>
           </span>
         </ModalHeader>
         <hr className="m-0"></hr>
@@ -270,16 +429,16 @@ const ProductCategory = () => {
                   </Label>
                   <Input
                     type="text"
-                    name="hotel"
+                    name="category"
                     placeholder="Category Name"
-                    id="hotel"
+                    id="category"
                     value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    invalid={display && hotelName === ""}
                   />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
+                  {display && !hotelName ? (
+                    <span className="error_msg_lbl">Enter Category Name </span>
+                  ) : null}
                 </Col>
               </Row>
             </Form>
@@ -299,7 +458,9 @@ const ProductCategory = () => {
             >
               Cancel
             </Button>
-            <Button color="primary">Add Category</Button>
+            <Button color="primary" type="button" onClick={handleSubmit}>
+              Add Category
+            </Button>
           </Col>
         </Row>
       </Modal>
@@ -358,15 +519,15 @@ const ProductCategory = () => {
                   <Input
                     type="text"
                     name="hotel"
-                    id="hotel"
+                    // id="hotel"
                     placeholder="Category Id"
                     value={hotelName}
                     onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    invalid={display && hotelName === ""}
                   />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null} */}
+                  {display && !hotelName ? (
+                    <span className="error_msg_lbl">Enter Category Id </span>
+                  ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="address">
@@ -377,83 +538,40 @@ const ProductCategory = () => {
                     name="address"
                     id="address"
                     placeholder="Category Name"
-                    // value={address}
+                    value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
+                    invalid={display && address === ""}
                   />
-                  {/* {display && !address ? (
-                    <span className="error_msg_lbl">Enter Product Code </span>
-                  ) : null} */}
+                  {display && !address ? (
+                    <span className="error_msg_lbl">Enter Category Name </span>
+                  ) : null}
                 </Col>
               </Row>
-              <Row>
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Product Category <span className="text-danger">*</span>
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Category"
-                    // options={countryList}
-                    onChange={(e) => {
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
-                    invalid={display && country === ''}
-                  />
-                  {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
-                  ) : null}
-                </Col> */}
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Creation Time <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="address"
-                    id="address"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    // invalid={display && address === ""}
-                  /> */}
-                {/* {display && !address ? (
-                    <span className="error_msg_lbl">
-                      Enter Product Description{" "}
-                    </span>
-                  ) : null} */}
-                {/* </Col> */}
-              </Row>
-
-              
             </Form>
           </>
         </ModalBody>
         <Row className={"px-1"}>
-                <hr className="mt-1"></hr>
-                <Col md="12 text-lg-end text-md-center mt-1 pb-2">
-                  <Button
-                    className="me-1 btn btn-danger"
-                    color="secondary"
-                    outline
-                    // onClick={() => {
-                    //     setShow(!show)
-                    // }}
-                    onClick={handleShowModalUpdate}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    color="primary"
-                    // onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-              </Row>
+          <hr className="mt-1"></hr>
+          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
+            <Button
+              className="me-1 btn btn-danger"
+              color="secondary"
+              outline
+              // onClick={() => {
+              //     setShow(!show)
+              // }}
+              onClick={handleShowModalUpdate}
+            >
+              Cancel
+            </Button>
+            <Button
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          </Col>
+        </Row>
       </Modal>
       {show && (
         <NewHotelModal

@@ -96,7 +96,6 @@ const PlanRate = () => {
 
   const [showUpdate, setShowUpdate] = useState(false);
   const handleShowModalUpdate = () => setShowUpdate(!showUpdate);
-  const handleSubmit = () => setShow(!show);
 
   const [selected_hotel, setSelected_hotel] = useState();
 
@@ -204,6 +203,168 @@ const PlanRate = () => {
       ),
     },
   ];
+  const [dpRate, setDpRate] = useState("");
+  const [sellingPrice, setSellingPrice] = useState("");
+  const [noOfFloor, setNoOfFloor] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [logo, setLogo] = useState("");
+  const [display, setDisplay] = useState(false);
+
+  const tenureType = [
+    { value: "short_term", label: "Short Term" },
+    { value: "long_term", label: "Long Term" },
+    { value: "fixed", label: "Fixed Tenure" },
+    { value: "flexible", label: "Flexible Tenure" },
+  ];
+
+  const handleSubmit = async () => {
+    let uploadedImage;
+    if (logo !== "") {
+      let imageformData = new FormData();
+      imageformData.append("File", logo);
+      imageformData.append("CompanyID", CompanyID);
+      console.log("imageformData", imageformData);
+      try {
+        const res = await axios({
+          method: "post",
+          baseURL: `${Image_base_uri}`,
+          url: "/api/property/hotel/uploadlogo",
+          data: imageformData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            LoginID,
+            Token,
+          },
+        });
+        console.log("res", res);
+        if (res.data.FileName) {
+          // setNewPoslogo(res.data.FileName)
+          // handleRefresh()
+          // setUploadImgStatus(true)
+          uploadedImage = res.data.FileName;
+        }
+      } catch (error) {
+        console.log("error", error);
+        // setUploadImgStatus(false)
+        return 0;
+      }
+    }
+    console.log(uploadedImage);
+    try {
+      const latRegex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
+      const lonRegex = /^-?((1[0-7]|[1-9])?\d(\.\d+)?|180(\.0+)?)$/;
+      const phoneregex = /^\+\d{1,3}\d{9,10}$/;
+      setDisplay(true);
+      // console.log(CompanyID);
+      if (
+        dpRate &&
+        sellingPrice &&
+        noOfFloor &&
+        country &&
+        pincode &&
+        latitude &&
+        longitude &&
+        personName &&
+        state &&
+        city &&
+        email &&
+        categoryName &&
+        ifsc !== ""
+      ) {
+        if (
+          latRegex.test(latitude) &&
+          latitude >= -90 &&
+          latitude <= 90 &&
+          lonRegex.test(longitude) &&
+          longitude >= -180 &&
+          longitude <= 180
+        ) {
+          if (phoneregex.test(contact)) {
+            if (
+              CompanyID !== "" &&
+              CompanyID !== "null" &&
+              CompanyID !== null
+            ) {
+              const long = Number(longitude);
+              const lat = Number(latitude);
+              const body = {
+                LoginID: LoginID,
+                Token: Token,
+                CompanyID: CompanyID,
+                DpRate: dpRate,
+                HotelType: "Hotel",
+                HotelTypeCode: "1",
+                PropertyDesc: propertydescription,
+                FloorCount: noOfFloor,
+                SellingPrice: sellingPrice,
+                CityID: cityId,
+                CityName: city,
+                CountryCode: countryCode,
+                CountryName: country,
+                PostalCode: pincode,
+                Longitude: long.toFixed(10),
+                Latitude: lat.toFixed(10),
+                TimeZone: "Asia/Kolkata",
+                LanguageCode: "en",
+                CurrencyCode: baseCurrency,
+                PropertyLicenseNumber: licenseNumber,
+                LogoFile: uploadedImage, // need to send the file content as well
+                WebSIte: website,
+                BankName: bankName,
+                AccountNumber: accountNumber,
+                Branch: branch,
+                CategoryName: categoryName,
+                IFSC: ifsc,
+                GSTNumber: gst,
+                ContactPersonName: personName,
+                Surname: surname,
+                PhoneNumber: contact,
+                Email: email,
+                Seckey: "abc",
+              };
+              console.log("body", body);
+              const res = await axios.post("/property/hotel", body);
+              console.log("response: ", res.data[0]);
+              if (res.data[0][0].status === "Success") {
+                handleShowModal();
+                toast.success(res.data[0][0].message, {
+                  position: "top-center",
+                });
+                getAllHotelList();
+              }
+            } else {
+              toast.error("Company Id Cannot be null!", {
+                position: "top-center",
+              });
+            }
+          } else {
+            toast.error(
+              "please enter correct Phone Number with country code!",
+              { position: "top-center" },
+            );
+          }
+        } else {
+          toast.error("please enter correct Longitude and Latitude value!", {
+            position: "top-center",
+          });
+        }
+      } else {
+        toast.error("please enter required fields!", {
+          position: "top-center",
+        });
+      }
+    } catch (e) {
+      toast.error(e.response.data.message, { position: "top-center" });
+
+      console.log(e);
+      handleShowModal();
+    }
+  };
 
   return (
     <>
@@ -300,16 +461,16 @@ const PlanRate = () => {
                     className="react-select"
                     classNamePrefix="select"
                     placeholder="Select Tenure Type"
-                    // options={countryList}
+                    options={tenureType}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
                   />
-                  {/* {display && !country ? (
+                  {display && !country ? (
                     <span className="error_msg_lbl">Enter Tenure Type </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
 
                 <Col lg="6" className="mb-1">
@@ -320,13 +481,13 @@ const PlanRate = () => {
                     type="text"
                     placeholder="Dp Rate"
                     id="dprate"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    value={dpRate}
+                    onChange={(e) => setDpRate(e.target.value)}
+                    invalid={display && dpRate === ""}
                   />
-                  {/* {display && !hotelName ? (
+                  {display && !dpRate ? (
                     <span className="error_msg_lbl">Enter Dp Rate </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
               </Row>
               <Row>
@@ -339,13 +500,13 @@ const PlanRate = () => {
                     name="hotel"
                     placeholder="Selling Price"
                     id="selling"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    value={sellingPrice}
+                    onChange={(e) => setSellingPrice(e.target.value)}
+                    invalid={display && sellingPrice === ""}
                   />
-                  {/* {display && !country ? (
+                  {display && !sellingPrice ? (
                     <span className="error_msg_lbl">Enter Selling Price </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="address">
@@ -357,15 +518,15 @@ const PlanRate = () => {
                       name="address"
                       placeholder="isDiscountable"
                       id="address"
-                      // value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      // invalid={display && address === ""}
+                      value={sellingPrice}
+                      onChange={(e) => setSellingPrice(e.target.value)}
+                      invalid={display && sellingPrice === ""}
                     />
-                    {/* {display && !address ? (
+                    {display && !sellingPrice ? (
                       <span className="error_msg_lbl">
                         Check isDiscountable{" "}
                       </span>
-                    ) : null} */}
+                    ) : null}
                   </Col>
                 </Col>
               </Row>
@@ -373,7 +534,7 @@ const PlanRate = () => {
           </>
         </ModalBody>
         <Row className="px-1">
-          <hr ></hr>
+          <hr></hr>
           <Col md="12 text-lg-end text-md-center pb-2">
             <Button
               className="me-1 btn btn-danger"
@@ -419,16 +580,16 @@ const PlanRate = () => {
                     className="react-select"
                     classNamePrefix="select"
                     placeholder="Select Tenure Type"
-                    // options={countryList}
+                    options={tenureType}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
                   />
-                  {/* {display && !country ? (
+                  {display && !country ? (
                     <span className="error_msg_lbl">Enter Tenure Type </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
 
                 <Col lg="6" className="mb-1">
@@ -439,13 +600,13 @@ const PlanRate = () => {
                     type="text"
                     placeholder="Dp Rate"
                     id="dprate"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    value={dpRate}
+                    onChange={(e) => setDpRate(e.target.value)}
+                    invalid={display && dpRate === ""}
                   />
-                  {/* {display && !hotelName ? (
+                  {display && !dpRate ? (
                     <span className="error_msg_lbl">Enter Dp Rate </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
               </Row>
               <Row>
@@ -458,13 +619,13 @@ const PlanRate = () => {
                     name="hotel"
                     placeholder="Selling Price"
                     id="selling"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
+                    value={sellingPrice}
+                    onChange={(e) => setSellingPrice(e.target.value)}
+                    invalid={display && sellingPrice === ""}
                   />
-                  {/* {display && !country ? (
+                  {display && !sellingPrice ? (
                     <span className="error_msg_lbl">Enter Selling Price </span>
-                  ) : null} */}
+                  ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="address">
@@ -476,15 +637,15 @@ const PlanRate = () => {
                       name="address"
                       placeholder="isDiscountable"
                       id="address"
-                      // value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      // invalid={display && address === ""}
+                      value={sellingPrice}
+                      onChange={(e) => setSellingPrice(e.target.value)}
+                      invalid={display && sellingPrice === ""}
                     />
-                    {/* {display && !address ? (
+                    {display && !sellingPrice ? (
                       <span className="error_msg_lbl">
                         Check isDiscountable{" "}
                       </span>
-                    ) : null} */}
+                    ) : null}
                   </Col>
                 </Col>
               </Row>

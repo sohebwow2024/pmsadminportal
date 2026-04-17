@@ -369,7 +369,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     invalid={display && country === ''}
                   />
                   {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
+                    <span className="error_msg_lbl">Select Product Category </span>
                   ) : null}
                 </Col>
               </Row>
@@ -391,7 +391,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     }}
                   />
                   {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
+                    <span className="error_msg_lbl">Select Industry Category </span>
                   ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">
@@ -403,15 +403,15 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     name="address"
                     placeholder="Enter Product Description"
                     id="address"
-                    value={address}
+                    // value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    invalid={display && address === ""}
+                    // invalid={display && address === ""}
                   />
-                  {display && !address ? (
+                  {/* {display && !address ? (
                     <span className="error_msg_lbl">
                       Enter Product Description{" "}
                     </span>
-                  ) : null}
+                  ) : null} */}
                 </Col>
               </Row>
             </Form>

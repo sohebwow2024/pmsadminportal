@@ -29,18 +29,18 @@ export default [
         navLink: '/plans'
       },
 
-      {
-        id: 'planincluding',
-        title: 'Plan Including',
-        icon: <AiOutlineArrowRight size={20} />,
-        navLink: '/planincluding'
-      },
-      {
-        id: 'planexcluding',
-        title: 'Plan Excluding',
-        icon: <AiOutlineArrowRight size={20} />,
-        navLink: '/planexcluding'
-      },
+      // {
+      //   id: 'planincluding',
+      //   title: 'Plan Including',
+      //   icon: <AiOutlineArrowRight size={20} />,
+      //   navLink: '/planincluding'
+      // },
+      // {
+      //   id: 'planexcluding',
+      //   title: 'Plan Excluding',
+      //   icon: <AiOutlineArrowRight size={20} />,
+      //   navLink: '/planexcluding'
+      // },
 
       {
         id: 'planrate',
