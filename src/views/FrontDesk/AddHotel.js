@@ -436,7 +436,7 @@ const AddHotel = ({ open, handleOpen, getOption }) => {
 
         <ModalHeader className="bg-transparent" toggle={handleOpen}>
           <span>
-            <h4>Add Hotel</h4>
+            <h4>Add Client</h4>
           </span>
         </ModalHeader>
         <hr className="m-0"></hr>

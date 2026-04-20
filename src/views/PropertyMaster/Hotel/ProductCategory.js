@@ -101,15 +101,15 @@ const ProductCategory = () => {
   const handleShowModalCategory = () => setShowCategroy(!show);
 
   const [categoryId, setCategoryId] = useState("");
-    const [address, setAddress] = useState("");
-    const [noOfFloor, setNoOfFloor] = useState("");
-    const [country, setCountry] = useState("");
-    const [state, setState] = useState("");
-    const [city, setCity] = useState("");
-    const [contact, setContact] = useState("");
-    const [email, setEmail] = useState("");
-    const [categoryName, setCategoryName] = useState("");
-    const [logo, setLogo] = useState("");
+  const [address, setAddress] = useState("");
+  const [noOfFloor, setNoOfFloor] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [logo, setLogo] = useState("");
 
   // const handleAddCategory = async () => {
   //   console.log("==============>");
@@ -309,7 +309,7 @@ const ProductCategory = () => {
         noOfFloor &&
         country &&
         pincode &&
-        latitude &&  
+        latitude &&
         longitude &&
         personName &&
         state &&
@@ -408,6 +408,27 @@ const ProductCategory = () => {
     }
   };
 
+  const resetCategoryForm = () => {
+    setCategoryName("");
+    setCategoryId("");
+    setDisplay(false);
+  };
+
+  const handleCloseCategoryModal = () => {
+    resetCategoryForm();
+    setShowCategroy(false);
+  };
+
+  const resetUpdateForm = () => {
+    setCategoryId("");
+    setCategoryName("");
+    setDisplay(false);
+  };
+
+  const handleCloseUpdateModal = () => {
+    resetUpdateForm();
+    setShowUpdate(false);
+  };
   return (
     <>
       <Card>
@@ -447,12 +468,12 @@ const ProductCategory = () => {
 
       <Modal
         isOpen={showCategroy}
-        toggle={() => setShowCategroy(false)}
+        toggle={handleCloseCategoryModal}
         className="modal-dialog-centered modal-lg"
       >
         <ModalHeader
           className="bg-transparent"
-          toggle={() => setShowCategroy(false)}
+          toggle={handleCloseCategoryModal}
         >
           <span>
             <h4>Add Category </h4>
@@ -494,7 +515,7 @@ const ProductCategory = () => {
               // onClick={() => {
               //     setShow(!show)
               // }}
-              onClick={() => setShowCategroy(false)}
+              onClick={handleCloseCategoryModal}
             >
               Cancel
             </Button>
@@ -538,11 +559,11 @@ const ProductCategory = () => {
       {/********* Update Modal *******/}
       <Modal
         isOpen={showUpdate}
-        toggle={handleShowModalUpdate}
+        toggle={handleCloseUpdateModal}
         className="modal-dialog-centered modal-lg"
         // backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
+        <ModalHeader className="bg-transparent" toggle={handleCloseUpdateModal}>
           <span>
             <h4>Update Category </h4>{" "}
           </span>
@@ -599,7 +620,7 @@ const ProductCategory = () => {
               // onClick={() => {
               //     setShow(!show)
               // }}
-              onClick={handleShowModalUpdate}
+              onClick={handleCloseUpdateModal}
             >
               Cancel
             </Button>

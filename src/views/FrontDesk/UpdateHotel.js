@@ -505,12 +505,13 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
 
           {/* ---------- FOOTER ---------- */}
           <ModalFooter className="justify-content-end">
+            <Button className="me-1 btn btn-danger" outline onClick={handleReset}>
+              Cancel
+            </Button>
             <Button color="primary" type="submit">
               Update
             </Button>
-            <Button color="secondary" outline onClick={handleReset}>
-              Cancel
-            </Button>
+            
           </ModalFooter>
         </Form>
       </Modal>

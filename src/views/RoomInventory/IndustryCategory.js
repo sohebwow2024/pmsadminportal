@@ -109,8 +109,8 @@ const ProductCategory = () => {
   const [del, setDel] = useState(false);
   const handleDelModal = () => setDel(!del);
 
-  const [OTA, SetOTA] = useState(false);
-  const handleOTA = () => SetOTA(!OTA);
+  // const [OTA, SetOTA] = useState(false);
+  // const handleOTA = () => SetOTA(!OTA);
 
   const [otaData, setOtaData] = useState([]);
   const getOTAphoto = async () => {
@@ -139,6 +139,27 @@ const ProductCategory = () => {
   const [categoryName, setCategoryName] = useState("");
   const [logo, setLogo] = useState("");
   const [display, setDisplay] = useState(false);
+
+  const resetAddCategoryForm = () => {
+  setHotelName("");
+  setDisplay(false);
+};
+
+const handleCloseAddModal = () => {
+  resetAddCategoryForm();
+  setShowCategroy(false);
+};
+
+const resetUpdateForm = () => {
+  setHotelName("");
+  setAddress("");
+  setDisplay(false);
+};
+
+const handleCloseUpdateModal = () => {
+  resetUpdateForm();
+  setShowUpdate(false);
+};
 
   const handleSubmit = async () => {
     let uploadedImage;
@@ -407,12 +428,12 @@ const ProductCategory = () => {
       </Card>
       <Modal
         isOpen={showCategroy}
-        toggle={() => setShowCategroy(false)}
+        toggle={handleCloseAddModal}
         className="modal-dialog-centered modal-lg"
       >
         <ModalHeader
           className="bg-transparent"
-          toggle={() => setShowCategroy(false)}
+          toggle={handleCloseAddModal}
         >
           <span>
             <h4>Add Category</h4>
@@ -454,7 +475,7 @@ const ProductCategory = () => {
               // onClick={() => {
               //     setShow(!show)
               // }}
-              onClick={() => setShowCategroy(false)}
+              onClick={handleCloseAddModal}
             >
               Cancel
             </Button>
@@ -498,11 +519,11 @@ const ProductCategory = () => {
       {/********* Update Modal *******/}
       <Modal
         isOpen={showUpdate}
-        toggle={handleShowModalUpdate}
+        toggle={handleCloseUpdateModal}
         className="modal-dialog-centered modal-lg"
         // backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
+        <ModalHeader className="bg-transparent" toggle={handleCloseUpdateModal}>
           <span className=" mb-1">
             <h4>Update Industry Category</h4>
           </span>
@@ -512,7 +533,7 @@ const ProductCategory = () => {
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                {/* <Col lg="6" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Category Id
                   </Label>
@@ -528,7 +549,7 @@ const ProductCategory = () => {
                   {display && !hotelName ? (
                     <span className="error_msg_lbl">Enter Category Id </span>
                   ) : null}
-                </Col>
+                </Col> */}
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="address">
                     Category Name <span className="text-danger">*</span>
@@ -560,7 +581,7 @@ const ProductCategory = () => {
               // onClick={() => {
               //     setShow(!show)
               // }}
-              onClick={handleShowModalUpdate}
+              onClick={handleCloseUpdateModal}
             >
               Cancel
             </Button>

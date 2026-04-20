@@ -152,7 +152,7 @@ const EditHotelModal = ({
     setLatitude("");
     setLicenseNumber("");
     setPropertydescription("");
-    setDisplay(false); 
+    setDisplay(false);
   };
 
   const handleCloseModal = () => {
@@ -208,6 +208,21 @@ const EditHotelModal = ({
     website,
     logo,
   };
+
+  const productcategory = [
+    { value: "private_limited", label: "Private Limited Company" },
+    { value: "public_limited", label: "Public Limited Company" },
+    { value: "partnership", label: "Partnership Firm" },
+    { value: "startup", label: "Startup" },
+    { value: "enterprise", label: "Enterprise" },
+  ];
+
+  const industryCategory = [
+    { value: "private_limited", label: "Private Limited Company" },
+    { value: "public_limited", label: "Public Limited Company" },
+    { value: "government", label: "Government Organization" },
+    { value: "ngo", label: "Non-Profit Organization (NGO)" },
+  ];
 
   const handleSubmit = async () => {
     let uploadedImage;
@@ -395,17 +410,23 @@ const EditHotelModal = ({
                   <Label className="form-label" for="address">
                     Product Category <span className="text-danger">*</span>{" "}
                   </Label>
-                  <Input
-                    type="text"
-                    name="address"
-                    id="address"
-                    placeholder="Product Category"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    invalid={display && address === ""}
+                  <Select
+                    theme={selectThemeColors}
+                    className="react-select"
+                    classNamePrefix="select"
+                    placeholder="Select Product Category"
+                    options={productcategory}
+                    onChange={(e) => {
+                      setCountryId(e.value);
+                      setCountryCode(e.CountryCode);
+                      setCountry(e.label);
+                    }}
+                    invalid={display && country === ""}
                   />
                   {display && !address ? (
-                    <span className="error_msg_lbl">Enter Product Code </span>
+                    <span className="error_msg_lbl">
+                      Enter Product Category{" "}
+                    </span>
                   ) : null}
                 </Col>
               </Row>
@@ -419,7 +440,7 @@ const EditHotelModal = ({
                     className="react-select"
                     classNamePrefix="select"
                     placeholder="Select Industry Category"
-                    options={countryList}
+                    options={industryCategory}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
@@ -428,7 +449,9 @@ const EditHotelModal = ({
                     // invalid={display && country === ''}
                   />
                   {display && !country ? (
-                    <span className="error_msg_lbl">Enter Category </span>
+                    <span className="error_msg_lbl">
+                      Enter Industry Category{" "}
+                    </span>
                   ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">

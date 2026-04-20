@@ -168,6 +168,21 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
     logo,
   };
 
+  const productcategory = [
+    { value: "private_limited", label: "Private Limited Company" },
+    { value: "public_limited", label: "Public Limited Company" },
+    { value: "partnership", label: "Partnership Firm" },
+    { value: "startup", label: "Startup" },
+    { value: "enterprise", label: "Enterprise" },
+  ];
+
+  const industryCategory = [
+    { value: "private_limited", label: "Private Limited Company" },
+    { value: "public_limited", label: "Public Limited Company" },
+    { value: "government", label: "Government Organization" },
+    { value: "ngo", label: "Non-Profit Organization (NGO)" },
+  ];
+
   const handleSubmit = async () => {
     let uploadedImage;
     if (logo !== "") {
@@ -360,16 +375,18 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     className="react-select"
                     classNamePrefix="select"
                     placeholder="Select Product Category"
-                    options={countryList}
+                    options={productcategory}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    invalid={display && country === ''}
+                    invalid={display && country === ""}
                   />
                   {display && !country ? (
-                    <span className="error_msg_lbl">Select Product Category </span>
+                    <span className="error_msg_lbl">
+                      Select Product Category{" "}
+                    </span>
                   ) : null}
                 </Col>
               </Row>
@@ -383,7 +400,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     className="react-select"
                     classNamePrefix="select"
                     placeholder="Select Industry Category"
-                    options={countryList}
+                    options={industryCategory}
                     onChange={(e) => {
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
@@ -391,7 +408,9 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     }}
                   />
                   {display && !country ? (
-                    <span className="error_msg_lbl">Select Industry Category </span>
+                    <span className="error_msg_lbl">
+                      Select Industry Category{" "}
+                    </span>
                   ) : null}
                 </Col>
                 <Col lg="6" className="mb-1">
