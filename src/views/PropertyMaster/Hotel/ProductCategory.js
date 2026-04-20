@@ -61,7 +61,9 @@ const ProductCategory = () => {
         console.log(e);
       });
   };
-  const data = [
+  const CATEGORY_STORAGE_KEY = "product_category_table_rows";
+
+  const defaultCategories = [
     // {
     //   id: 1,
     //   type: "Basic",
@@ -89,13 +91,41 @@ const ProductCategory = () => {
       action: "btns",
     },
   ];
+
+  const formatCreationTime = (date) => {
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const day = `${date.getDate()}`.padStart(2, "0");
+    const year = date.getFullYear();
+    return `${month} ${day},${year}`;
+  };
+
+  const loadCategories = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(CATEGORY_STORAGE_KEY));
+      if (Array.isArray(stored) && stored.length > 0) return stored;
+    } catch (e) {
+      // ignore
+    }
+    return defaultCategories;
+  };
+
+  const [data, setData] = useState(loadCategories);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const persistCategories = (next) => {
+    setData(next);
+    localStorage.setItem(CATEGORY_STORAGE_KEY, JSON.stringify(next));
+  };
   const newToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJTb2hlYkFwcmlsMTIzIiwiZW1haWwiOiJ0ZXN0MTIzNDU1MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NTU0MDQyNSwiZXhwIjoxNzc1NjI2ODI1fQ.uEE7xILzv5E3J0xl-tS-g3eJIolnecPA0Tof8TbjrHY";
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
 
   const [cancelOpen, setCancelOpen] = useState(false);
-  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+  const handleCancelOpen = () => {
+    setCancelOpen(!cancelOpen);
+    if (cancelOpen) setSelectedCategory(null);
+  };
 
   const [showCategroy, setShowCategroy] = useState(false);
   const handleShowModalCategory = () => setShowCategroy(!show);
@@ -245,6 +275,9 @@ const ProductCategory = () => {
           <Edit
             className="me-1 cursor-pointer"
             onClick={() => {
+              setSelectedCategory(row);
+              setCategoryId(row.id);
+              setCategoryName(row.name);
               handleShowModalUpdate(true);
               // setGuestId(row.guestID);
             }}
@@ -254,6 +287,7 @@ const ProductCategory = () => {
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
+              setSelectedCategory(row);
               handleCancelOpen();
               // setPromoId(row.promotionId);
             }}
@@ -265,147 +299,66 @@ const ProductCategory = () => {
   console.log("test");
 
   const handleSubmit = async () => {
-    let uploadedImage;
-    if (logo !== "") {
-      let imageformData = new FormData();
-      imageformData.append("File", logo);
-      imageformData.append("CompanyID", CompanyID);
-      console.log("imageformData", imageformData);
-      try {
-        const res = await axios({
-          method: "post",
-          baseURL: `${Image_base_uri}`,
-          url: "/api/property/hotel/uploadlogo",
-          data: imageformData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            LoginID,
-            Token,
-          },
-        });
-        console.log("res", res);
-        if (res.data.FileName) {
-          // setNewPoslogo(res.data.FileName)
-          // handleRefresh()
-          // setUploadImgStatus(true)
-          uploadedImage = res.data.FileName;
-        }
-      } catch (error) {
-        console.log("error", error);
-        // setUploadImgStatus(false)
-        return 0;
-      }
-    }
-    console.log(uploadedImage);
-    try {
-      const latRegex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
-      const lonRegex = /^-?((1[0-7]|[1-9])?\d(\.\d+)?|180(\.0+)?)$/;
-      const phoneregex = /^\+\d{1,3}\d{9,10}$/;
-      setDisplay(true);
-      // console.log(CompanyID);
-      if (
-        hotelName &&
-        address &&
-        noOfFloor &&
-        country &&
-        pincode &&
-        latitude &&
-        longitude &&
-        personName &&
-        state &&
-        city &&
-        email &&
-        categoryName &&
-        ifsc !== ""
-      ) {
-        if (
-          latRegex.test(latitude) &&
-          latitude >= -90 &&
-          latitude <= 90 &&
-          lonRegex.test(longitude) &&
-          longitude >= -180 &&
-          longitude <= 180
-        ) {
-          if (phoneregex.test(contact)) {
-            if (
-              CompanyID !== "" &&
-              CompanyID !== "null" &&
-              CompanyID !== null
-            ) {
-              const long = Number(longitude);
-              const lat = Number(latitude);
-              const body = {
-                LoginID: LoginID,
-                Token: Token,
-                CompanyID: CompanyID,
-                HotelName: hotelName,
-                HotelType: "Hotel",
-                HotelTypeCode: "1",
-                PropertyDesc: propertydescription,
-                FloorCount: noOfFloor,
-                AddressLine: address,
-                CityID: cityId,
-                CityName: city,
-                CountryCode: countryCode,
-                CountryName: country,
-                PostalCode: pincode,
-                Longitude: long.toFixed(10),
-                Latitude: lat.toFixed(10),
-                TimeZone: "Asia/Kolkata",
-                LanguageCode: "en",
-                CurrencyCode: baseCurrency,
-                PropertyLicenseNumber: licenseNumber,
-                LogoFile: uploadedImage, // need to send the file content as well
-                WebSIte: website,
-                BankName: bankName,
-                AccountNumber: accountNumber,
-                Branch: branch,
-                CategoryName: categoryName,
-                IFSC: ifsc,
-                GSTNumber: gst,
-                ContactPersonName: personName,
-                Surname: surname,
-                PhoneNumber: contact,
-                Email: email,
-                Seckey: "abc",
-              };
-              console.log("body", body);
-              const res = await axios.post("/property/hotel", body);
-              console.log("response: ", res.data[0]);
-              if (res.data[0][0].status === "Success") {
-                handleShowModal();
-                toast.success(res.data[0][0].message, {
-                  position: "top-center",
-                });
-                getAllHotelList();
-              }
-            } else {
-              toast.error("Company Id Cannot be null!", {
-                position: "top-center",
-              });
-            }
-          } else {
-            toast.error(
-              "please enter correct Phone Number with country code!",
-              { position: "top-center" },
-            );
-          }
-        } else {
-          toast.error("please enter correct Longitude and Latitude value!", {
-            position: "top-center",
-          });
-        }
-      } else {
-        toast.error("please enter required fields!", {
-          position: "top-center",
-        });
-      }
-    } catch (e) {
-      toast.error(e.response.data.message, { position: "top-center" });
+    const trimmedName = (categoryName || "").trim();
+    setDisplay(true);
 
-      console.log(e);
-      handleShowModal();
+    if (!trimmedName) {
+      toast.error("Please enter category name", { position: "top-right" });
+      return;
     }
+
+    const nameExists = (nextName, excludeId = null) =>
+      data.some(
+        (c) =>
+          `${c?.name || ""}`.trim().toLowerCase() ===
+            nextName.trim().toLowerCase() && `${c?.id}` !== `${excludeId}`,
+      );
+
+    // Update Category
+    if (showUpdate) {
+      if (!selectedCategory?.id) return;
+
+      if (nameExists(trimmedName, selectedCategory.id)) {
+        toast.error("Category already exists", { position: "top-right" });
+        return;
+      }
+
+      const next = data.map((c) =>
+        `${c.id}` === `${selectedCategory.id}` ? { ...c, name: trimmedName } : c,
+      );
+      persistCategories(next);
+      toast.success("Category updated", { position: "top-right" });
+      setSelectedCategory(null);
+      handleCloseUpdateModal();
+      return;
+    }
+
+    // Add Category
+    if (nameExists(trimmedName)) {
+      toast.error("Category already exists", { position: "top-right" });
+      return;
+    }
+
+    const newRow = {
+      id: `${Date.now()}`,
+      name: trimmedName,
+      dates: formatCreationTime(new Date()),
+      action: "btns",
+    };
+
+    persistCategories([newRow, ...data]);
+    toast.success("Category added", { position: "top-right" });
+    setSelectedCategory(null);
+    handleCloseCategoryModal();
+  };
+
+  const handleDeleteCategory = () => {
+    if (!selectedCategory?.id) return;
+    const next = data.filter((c) => `${c.id}` !== `${selectedCategory.id}`);
+    persistCategories(next);
+    toast.success("Category deleted", { position: "top-right" });
+    setSelectedCategory(null);
+    setCancelOpen(false);
   };
 
   const resetCategoryForm = () => {
@@ -416,6 +369,7 @@ const ProductCategory = () => {
 
   const handleCloseCategoryModal = () => {
     resetCategoryForm();
+    setSelectedCategory(null);
     setShowCategroy(false);
   };
 
@@ -427,6 +381,7 @@ const ProductCategory = () => {
 
   const handleCloseUpdateModal = () => {
     resetUpdateForm();
+    setSelectedCategory(null);
     setShowUpdate(false);
   };
   return (
@@ -437,14 +392,21 @@ const ProductCategory = () => {
             <h2>Category</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShowCategroy(true)}>
+            <Button
+              color="primary"
+              onClick={() => {
+                resetCategoryForm();
+                setSelectedCategory(null);
+                setShowCategroy(true);
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
                 viewBox="0 0 256 256"
-                class="me-1"
+                className="me-1"
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
@@ -459,6 +421,7 @@ const ProductCategory = () => {
                 noHeader
                 data={data}
                 columns={hotelTable}
+                keyField="id"
                 className="react-dataTable"
               />
             </Col>
@@ -519,7 +482,7 @@ const ProductCategory = () => {
             >
               Cancel
             </Button>
-            <Button color="primary" type="button" onClick={handleSubmit}>
+            <Button color="primary" type="button" onClick={handleSubmit} disabled={!categoryName.trim()}>
               Add Category
             </Button>
           </Col>
@@ -540,18 +503,20 @@ const ProductCategory = () => {
           <Col className="text-center">
             <Button
               className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
-            >
-              Confirm
-            </Button>
-            <Button
-              className="m-1"
               color="primary"
               onClick={() => handleCancelOpen()}
             >
               Cancel
             </Button>
+            <Button
+              className="m-1"
+              color="danger"
+              // onClick={() => handleCancelBooking(id)}
+              onClick={handleDeleteCategory}
+            >
+              Confirm
+            </Button>
+          
           </Col>
         </ModalBody>
       </Modal>

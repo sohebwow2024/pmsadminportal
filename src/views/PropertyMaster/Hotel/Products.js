@@ -108,6 +108,8 @@ const Products = () => {
   const [data, setData] = useState(loadProducts);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const toastOptions = { position: "top-right" };
+
   const persistProducts = (next) => {
     setData(next);
     localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(next));
@@ -163,6 +165,7 @@ const Products = () => {
       ...data,
     ];
     persistProducts(next);
+    toast.success("Product added", toastOptions);
   };
 
   const handleUpdateProduct = (updatedProduct) => {
@@ -170,14 +173,19 @@ const Products = () => {
       p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p,
     );
     persistProducts(next);
+    toast.success("Product updated", toastOptions);
   };
 
   const handleDeleteProduct = () => {
-    if (!selectedProduct?.id) return;
+    if (!selectedProduct?.id) {
+      toast.error("Please select a product to delete", toastOptions);
+      return;
+    }
     const next = data.filter((p) => p.id !== selectedProduct.id);
     persistProducts(next);
     setSelectedProduct(null);
     setCancelOpen(false);
+    toast.success("Product deleted", toastOptions);
   };
 
   // const getAllState = () => {
@@ -279,7 +287,7 @@ const Products = () => {
                 height="16"
                 fill="currentColor"
                 viewBox="0 0 256 256"
-                class="me-1"
+                className="me-1"
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
