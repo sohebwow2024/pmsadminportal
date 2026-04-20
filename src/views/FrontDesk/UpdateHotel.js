@@ -319,7 +319,7 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
        
 
         <ModalHeader className='bg-transparent' toggle={handleUpdateHotel}>
-          <span className=' mb-1'>Update Client </span>
+          <span ><h4>Update Client </h4></span>
         </ModalHeader>
 
         <Form onSubmit={onSubmit}>

@@ -573,7 +573,7 @@ const ProductCategory = () => {
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                {/* <Col lg="6" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Category Id
                   </Label>
@@ -589,7 +589,7 @@ const ProductCategory = () => {
                   {display && !categoryId ? (
                     <span className="error_msg_lbl">Enter Category Id </span>
                   ) : null}
-                </Col>
+                </Col> */}
                 <Col lg="6" className="mb-1">
                   <Label className="form-label" for="address">
                     Category Name <span className="text-danger">*</span>
