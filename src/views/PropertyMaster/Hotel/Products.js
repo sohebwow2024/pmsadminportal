@@ -46,6 +46,8 @@ const Products = () => {
   const getUserData = useSelector((state) => state.userManageSlice.userData);
   const { LoginID, Token, CompanyID, UserRole } = getUserData;
 
+  const PRODUCTS_STORAGE_KEY = "products_table_products";
+
   const [hotels, setHotels] = useState([]);
   const getAllHotelList = () => {
     axios
@@ -60,7 +62,8 @@ const Products = () => {
         console.log(e);
       });
   };
-  const data = [
+
+  const defaultProducts = [
     // {
     //   id: 1,
     //   type: "Basic",
@@ -70,6 +73,7 @@ const Products = () => {
     //   action: "btns",
     // },
     {
+      id: 1,
       name: "PMS",
       category: "Private",
       industry: "Pvt, Ltd Limited",
@@ -77,6 +81,7 @@ const Products = () => {
       action: "btns",
     },
     {
+      id: 2,
       name: "LLM",
       category: "Public",
       industry: "Pvt, Ltd Limited",
@@ -84,6 +89,29 @@ const Products = () => {
       action: "btns",
     },
   ];
+
+  const loadProducts = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(PRODUCTS_STORAGE_KEY));
+      if (Array.isArray(stored) && stored.length > 0) {
+        return stored.map((p, index) => ({
+          id: p?.id ?? Date.now() + index,
+          ...p,
+        }));
+      }
+    } catch (e) {
+      // ignore
+    }
+    return defaultProducts;
+  };
+
+  const [data, setData] = useState(loadProducts);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const persistProducts = (next) => {
+    setData(next);
+    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(next));
+  };
 
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
@@ -124,7 +152,33 @@ const Products = () => {
   }, [show, showEdit, del]);
 
   const [cancelOpen, setCancelOpen] = useState(false);
-  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+  const handleCancelOpen = () => {
+    setCancelOpen(!cancelOpen);
+    if (cancelOpen) setSelectedProduct(null);
+  };
+
+  const handleAddProduct = (product) => {
+    const next = [
+      { id: Date.now(), ...product, action: "btns" },
+      ...data,
+    ];
+    persistProducts(next);
+  };
+
+  const handleUpdateProduct = (updatedProduct) => {
+    const next = data.map((p) =>
+      p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p,
+    );
+    persistProducts(next);
+  };
+
+  const handleDeleteProduct = () => {
+    if (!selectedProduct?.id) return;
+    const next = data.filter((p) => p.id !== selectedProduct.id);
+    persistProducts(next);
+    setSelectedProduct(null);
+    setCancelOpen(false);
+  };
 
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
@@ -184,6 +238,7 @@ const Products = () => {
           <Edit
             className="me-1 cursor-pointer"
             onClick={() => {
+              setSelectedProduct(row);
               handleShowModalUpdate(true);
               // setGuestId(row.guestID);
             }}
@@ -193,6 +248,7 @@ const Products = () => {
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
+              setSelectedProduct(row);
               handleCancelOpen();
               // setPromoId(row.promotionId);
             }}
@@ -210,7 +266,13 @@ const Products = () => {
             <h2>Products</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShow(true)}>
+            <Button
+              color="primary"
+              onClick={() => {
+                setSelectedProduct(null);
+                setShow(true);
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -232,6 +294,7 @@ const Products = () => {
                 noHeader
                 data={data}
                 columns={hotelTable}
+                keyField="id"
                 className="react-dataTable"
               />
             </Col>
@@ -252,17 +315,17 @@ const Products = () => {
           <Col className="text-center">
             <Button
               className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
-            >
-              Confirm
-            </Button>
-            <Button
-              className="m-1"
               color="primary"
               onClick={() => handleCancelOpen()}
             >
               Cancel
+            </Button>
+             <Button
+              className="m-1"
+              color="danger"
+              onClick={handleDeleteProduct}
+            >
+              Confirm
             </Button>
           </Col>
         </ModalBody>
@@ -273,6 +336,7 @@ const Products = () => {
           show={show}
           handleShowModal={handleShowModal}
           getAllHotelList={getAllHotelList}
+          onAddProduct={handleAddProduct}
         />
       )}
       {/* {showUpdate && ( */}
@@ -283,6 +347,8 @@ const Products = () => {
         showUpdate={showUpdate}
         hotels={hotels}
         id={selected_hotel}
+        product={selectedProduct}
+        onUpdateProduct={handleUpdateProduct}
         // show={show}
       />
       {/* )} */}

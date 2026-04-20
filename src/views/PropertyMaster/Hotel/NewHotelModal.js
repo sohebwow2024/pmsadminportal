@@ -23,7 +23,13 @@ let currency = [
   { value: "USD", label: "USD" },
   { value: "EUR", label: "EUR" },
 ];
-const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
+const NewHotelModal = ({
+  setShow,
+  show,
+  handleShowModal,
+  getAllHotelList,
+  onAddProduct,
+}) => {
   const getUserData = useSelector((state) => state.userManageSlice.userData);
   const { LoginID, Token, CompanyID } = getUserData;
 
@@ -145,6 +151,13 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
   const [licenseNumber, setLicenseNumber] = useState("");
   const [propertydescription, setPropertydescription] = useState("");
   const [display, setDisplay] = useState(false);
+  const [productCategoryValue, setProductCategoryValue] = useState("");
+  const [industryCategoryValue, setIndustryCategoryValue] = useState("");
+
+  const isAddDisabled =
+    !hotelName?.trim() ||
+    !productCategoryValue?.trim() ||
+    !industryCategoryValue?.trim();
 
   const hotelObj = {
     id: Math.floor(Math.random() * 100),
@@ -184,6 +197,32 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
   ];
 
   const handleSubmit = async () => {
+    // Products page: add locally without API (keeps modal UI unchanged)
+    if (typeof onAddProduct === "function") {
+      setDisplay(true);
+      if (!hotelName || !productCategoryValue || !industryCategoryValue) {
+        toast.error("please enter required fields!", {
+          position: "top-center",
+        });
+        return;
+      }
+
+      onAddProduct({
+        name: hotelName,
+        category: productCategoryValue,
+        industry: industryCategoryValue,
+        desc: address,
+      });
+
+      handleShowModal();
+      setHotelName("");
+      setAddress("");
+      setProductCategoryValue("");
+      setIndustryCategoryValue("");
+      setDisplay(false);
+      return;
+    }
+
     let uploadedImage;
     if (logo !== "") {
       let imageformData = new FormData();
@@ -376,14 +415,20 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     classNamePrefix="select"
                     placeholder="Select Product Category"
                     options={productcategory}
+                    value={
+                      productcategory.find(
+                        (o) => o.label === productCategoryValue,
+                      ) || null
+                    }
                     onChange={(e) => {
+                      setProductCategoryValue(e?.label || "");
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    invalid={display && country === ""}
+                    invalid={display && productCategoryValue === ""}
                   />
-                  {display && !country ? (
+                  {display && !productCategoryValue ? (
                     <span className="error_msg_lbl">
                       Select Product Category{" "}
                     </span>
@@ -401,13 +446,19 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
                     classNamePrefix="select"
                     placeholder="Select Industry Category"
                     options={industryCategory}
+                    value={
+                      industryCategory.find(
+                        (o) => o.label === industryCategoryValue,
+                      ) || null
+                    }
                     onChange={(e) => {
+                      setIndustryCategoryValue(e?.label || "");
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
                   />
-                  {display && !country ? (
+                  {display && !industryCategoryValue ? (
                     <span className="error_msg_lbl">
                       Select Industry Category{" "}
                     </span>
@@ -449,7 +500,7 @@ const NewHotelModal = ({ setShow, show, handleShowModal, getAllHotelList }) => {
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleSubmit}>
+            <Button color="primary" onClick={handleSubmit} disabled={isAddDisabled}>
               Add Product
             </Button>
           </Col>

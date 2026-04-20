@@ -30,6 +30,8 @@ const EditHotelModal = ({
   id,
   handleShowModalUpdate,
   showUpdate,
+  product,
+  onUpdateProduct,
 }) => {
   const getUserData = useSelector((state) => state.userManageSlice.userData);
   const { LoginID, Token, CompanyID } = getUserData;
@@ -186,6 +188,17 @@ const EditHotelModal = ({
   const [licenseNumber, setLicenseNumber] = useState("");
   const [propertydescription, setPropertydescription] = useState("");
   const [display, setDisplay] = useState(false);
+  const [productCategoryValue, setProductCategoryValue] = useState("");
+  const [industryCategoryValue, setIndustryCategoryValue] = useState("");
+
+  useEffect(() => {
+    if (showUpdate && product) {
+      setHotelName(product?.name || "");
+      setAddress(product?.desc || "");
+      setProductCategoryValue(product?.category || "");
+      setIndustryCategoryValue(product?.industry || "");
+    }
+  }, [showUpdate, product]);
 
   const hotelObj = {
     id: Math.floor(Math.random() * 100),
@@ -225,6 +238,27 @@ const EditHotelModal = ({
   ];
 
   const handleSubmit = async () => {
+    // Products page: update locally without API (keeps modal UI unchanged)
+    if (typeof onUpdateProduct === "function" && product) {
+      setDisplay(true);
+      if (!hotelName || !productCategoryValue || !industryCategoryValue) {
+        toast.error("please enter required fields!", {
+          position: "top-center",
+        });
+        return;
+      }
+
+      onUpdateProduct({
+        ...product,
+        name: hotelName,
+        category: productCategoryValue,
+        industry: industryCategoryValue,
+        desc: address,
+      });
+      handleCloseModal();
+      return;
+    }
+
     let uploadedImage;
     if (logo !== "") {
       let imageformData = new FormData();
@@ -416,14 +450,20 @@ const EditHotelModal = ({
                     classNamePrefix="select"
                     placeholder="Select Product Category"
                     options={productcategory}
+                    value={
+                      productcategory.find(
+                        (o) => o.label === productCategoryValue,
+                      ) || null
+                    }
                     onChange={(e) => {
+                      setProductCategoryValue(e?.label || "");
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
-                    invalid={display && country === ""}
+                    invalid={display && productCategoryValue === ""}
                   />
-                  {display && !address ? (
+                  {display && !productCategoryValue ? (
                     <span className="error_msg_lbl">
                       Enter Product Category{" "}
                     </span>
@@ -441,14 +481,20 @@ const EditHotelModal = ({
                     classNamePrefix="select"
                     placeholder="Select Industry Category"
                     options={industryCategory}
+                    value={
+                      industryCategory.find(
+                        (o) => o.label === industryCategoryValue,
+                      ) || null
+                    }
                     onChange={(e) => {
+                      setIndustryCategoryValue(e?.label || "");
                       setCountryId(e.value);
                       setCountryCode(e.CountryCode);
                       setCountry(e.label);
                     }}
                     // invalid={display && country === ''}
                   />
-                  {display && !country ? (
+                  {display && !industryCategoryValue ? (
                     <span className="error_msg_lbl">
                       Enter Industry Category{" "}
                     </span>
