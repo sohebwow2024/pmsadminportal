@@ -462,20 +462,21 @@ const handleCloseUpdateModal = () => {
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
-            <Button
-              className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
-              onClick={handleDeleteCategory}
-            >
-              Confirm
-            </Button>
+           
             <Button
               className="m-1"
               color="primary"
               onClick={() => handleCancelOpen()}
             >
               Cancel
+            </Button>
+             <Button
+              className="m-1"
+              color="danger"
+              // onClick={() => handleCancelBooking(id)}
+              onClick={handleDeleteCategory}
+            >
+              Confirm
             </Button>
           </Col>
         </ModalBody>

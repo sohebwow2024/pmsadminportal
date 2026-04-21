@@ -6,22 +6,80 @@ import {
   CardTitle,
   CardHeader,
   Button,
-  Badge,
   Row,
   Col,
   Modal,
   ModalBody,
   ModalHeader,
 } from "reactstrap";
-import { ChevronDown, Edit, Trash, Archive } from "react-feather";
-import { useSelector } from "react-redux";
-import axios from "../../API/axios";
+import { Edit, Trash } from "react-feather";
+import { toast } from "react-hot-toast";
 import AddHotel from "./AddHotel";
 import UpdateHotel from "./UpdateHotel";
-// import NewGuest from "../GuestMaster/NewGuest";
-// import BookingModal from "./BookingModal";
-// import NewGuest from "./NewGuest";
-// import GuestEdit from "./GuestEdit";
+
+const STORAGE_KEY = "frontdesk_client_manager_rows";
+
+const defaultClients = [
+  {
+    id: "12222000372122",
+    type: "Private",
+    size: "300+",
+    industry: "IT Service",
+    name: "Adani Cement",
+    tax: "27ABCDE1234F1Z5",
+    email: "industry@indus.com",
+    phone: "+919677734223",
+    address1: "162, Madanpura",
+    address2: "",
+    address: "162, Madanpura",
+    country: "India",
+    state: "Maharashtra",
+    city: "Mumbai",
+    pincode: "420001",
+  },
+  {
+    id: "12222000372111",
+    type: "Public",
+    size: "500+",
+    industry: "Banking",
+    name: "Bank of India",
+    tax: "29ABCDE1234F2Z7",
+    email: "boi@banking.com",
+    phone: "+918467774347",
+    address1: "150, Hadapsar",
+    address2: "",
+    address: "150, Hadapsar",
+    country: "India",
+    state: "Maharashtra",
+    city: "Pune",
+    pincode: "400011",
+  },
+];
+
+const buildClientRecord = (clientData, existingId = null) => {
+  const address = [clientData.address1, clientData.address2]
+    .filter((value) => `${value || ""}`.trim())
+    .join(", ");
+
+  return {
+    id: existingId || `${Date.now()}`,
+    ...clientData,
+    address,
+  };
+};
+
+const loadClients = () => {
+  try {
+    const storedClients = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (Array.isArray(storedClients) && storedClients.length > 0) {
+      return storedClients;
+    }
+  } catch (error) {
+    console.log("Unable to read saved clients", error);
+  }
+
+  return defaultClients;
+};
 
 const HotelManagement = () => {
   useEffect(() => {
@@ -33,39 +91,73 @@ const HotelManagement = () => {
     };
   }, []);
 
-  const [guestOptions, setGuestOptions] = useState([]);
   const [newGuest, setNewGuest] = useState(false);
-  const handleNewGuest = () => setNewGuest(!newGuest);
-  const [showEdit, setShowEdit] = useState(false);
-  const handleGuestEdit = () => setShowEdit(!showEdit);
-  const [guestId, setGuestId] = useState("");
-  const [refresh, setRefresh] = useState(false);
-  const handelRefresh = () => setRefresh(!refresh);
-  const [activeTab, setActiveTab] = useState("active");
-
   const [showUpdate, setShowUpdate] = useState(false);
-  const handleUpdateHotel = () => setShowUpdate(!showUpdate);
-
   const [cancelOpen, setCancelOpen] = useState(false);
-  const handleCancelOpen = () => setCancelOpen(!cancelOpen);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [clients, setClients] = useState(loadClients);
 
-  const statusOptions = [
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
-  ];
+  const persistClients = (nextClients) => {
+    setClients(nextClients);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextClients));
+  };
 
-  const getUserData = useSelector((state) => state.userManageSlice.userData);
-  const { LoginID, Token } = getUserData;
+  const handleNewGuest = () => {
+    setNewGuest((prev) => !prev);
+  };
 
-  const [query, setQuery] = useState("");
-  const search = (data) => {
-    return data.filter(
-      (item) =>
-        item.guestID.toLowerCase().includes(query.toLowerCase()) ||
-        item.guestName.toLowerCase().includes(query.toLowerCase()) ||
-        item.guestMobileNumber.toLowerCase().includes(query.toLowerCase()),
-      // item.GuestAddress.toLowerCase().includes(query.toLowerCase())
+  const handleAddClient = (clientData) => {
+    const nextClients = [buildClientRecord(clientData), ...clients];
+    persistClients(nextClients);
+    toast.success("Client added successfully", { position: "top-right" });
+  };
+
+  const handleEditClick = (row) => {
+    setSelectedClient(row);
+    setShowUpdate(true);
+  };
+
+  const handleUpdateClient = (clientData) => {
+    if (!selectedClient?.id) {
+      return;
+    }
+
+    const nextClients = clients.map((client) =>
+      client.id === selectedClient.id
+        ? buildClientRecord(clientData, selectedClient.id)
+        : client,
     );
+
+    persistClients(nextClients);
+    setSelectedClient(null);
+    toast.success("Client updated successfully", { position: "top-right" });
+  };
+
+  const handleDeleteClick = (row) => {
+    setSelectedClient(row);
+    setCancelOpen(true);
+  };
+
+  const handleDeleteClient = () => {
+    if (!selectedClient?.id) {
+      return;
+    }
+
+    const nextClients = clients.filter((client) => client.id !== selectedClient.id);
+    persistClients(nextClients);
+    setSelectedClient(null);
+    setCancelOpen(false);
+    toast.success("Client deleted successfully", { position: "top-right" });
+  };
+
+  const handleCloseDeleteModal = () => {
+    setCancelOpen(false);
+    setSelectedClient(null);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setShowUpdate(false);
+    setSelectedClient(null);
   };
 
   const Columns = [
@@ -149,12 +241,10 @@ const HotelManagement = () => {
 
       selector: (row) => (
         <>
-          {/* <Col> */}
           <Edit
             className="me-1 cursor-pointer"
             onClick={() => {
-              handleUpdateHotel(true);
-              // setGuestId(row.guestID);
+              handleEditClick(row);
             }}
             size={15}
           />
@@ -162,8 +252,7 @@ const HotelManagement = () => {
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
-              handleCancelOpen();
-              // setPromoId(row.promotionId);
+              handleDeleteClick(row);
             }}
           />
         </>
@@ -171,69 +260,6 @@ const HotelManagement = () => {
     },
   ];
 
-  const handleGuestOptions = async () => {
-    try {
-      let obj = {
-        LoginID,
-        Token,
-        Seckey: "abc",
-        SearchPhrase: null,
-        Event: "select",
-      };
-      const res = await axios.post(`/getdata/bookingdata/guestdetails`, obj);
-      console.log("Guest data - OK > ", res);
-      let result = res?.data[0];
-      let arr = result.map((r) => {
-        return {
-          value: r?.guestID,
-          label: `${r.guestName} : ${r.guestEmail} : ${r.guestMobileNumber}`,
-          ...r,
-        };
-      });
-
-      setGuestOptions(arr);
-    } catch (error) {
-      console.log("guesterror", error);
-    }
-  };
-
-  useEffect(() => {
-    handleGuestOptions();
-    setRefresh();
-  }, [refresh, newGuest, showEdit]);
-
-  const staticData = [
-    {
-      // id: 12222000372122,
-      type: "Private",
-      size: "300+",
-      industry: "IT Service",
-      name: "Adani Cement",
-      tax: "27ABCDE1234F1Z5",
-      email: "industry@indus.com",
-      phone: "+919677734223",
-      address: "162, Madanpura",
-      country: "India",
-      state: "Maharashtra",
-      city: "Mumbai",
-      pincode: "420001",
-    },
-    {
-      // id: 12222000372111,
-      type: "Public",
-      size: "500+",
-      industry: "Banking",
-      name: "Bank of India",
-      tax: "29ABCDE1234F2Z7",
-      email: "boi@banking.com",
-      phone: "+918467774347",
-      address: "150, Hadapsar",
-      country: "India",
-      state: "Maharashtra",
-      city: "Pune",
-      pincode: "400011",
-    },
-  ];
   return (
     <>
       <Card>
@@ -254,7 +280,7 @@ const HotelManagement = () => {
               height="16"
               fill="currentColor"
               viewBox="0 0 256 256"
-              class="me-1"
+              className="me-1"
             >
               <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
             </svg>
@@ -267,8 +293,9 @@ const HotelManagement = () => {
             <Col>
               <DataTable
                 noHeader
-                data={staticData}
+                data={clients}
                 columns={Columns}
+                keyField="id"
                 className="react-dataTable"
               />
             </Col>
@@ -279,10 +306,10 @@ const HotelManagement = () => {
           {/***** Delete Modal *****/}
       <Modal
         isOpen={cancelOpen}
-        toggle={handleCancelOpen}
+        toggle={handleCloseDeleteModal}
         className="modal-dialog-centered modal-lg"
       >
-        <ModalHeader className="bg-transparent" toggle={handleCancelOpen}>
+        <ModalHeader className="bg-transparent" toggle={handleCloseDeleteModal}>
           Delete Client
         </ModalHeader>
         <ModalBody>
@@ -290,17 +317,17 @@ const HotelManagement = () => {
           <Col className="text-center">
             <Button
               className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
+              color="primary"
+              onClick={handleCloseDeleteModal}
             >
-              Confirm
+              Cancel
             </Button>
             <Button
               className="m-1"
-              color="primary"
-              onClick={() => handleCancelOpen()}
+              color="danger"
+              onClick={handleDeleteClient}
             >
-              Cancel
+              Confirm
             </Button>
           </Col>
         </ModalBody>
@@ -310,26 +337,17 @@ const HotelManagement = () => {
         <AddHotel
           open={newGuest}
           handleOpen={handleNewGuest}
-          getOption={handleGuestOptions}
+          onAddClient={handleAddClient}
         />
       ) : (
         <></>
       )}
-      {/* {showEdit ? (
-        <HotelEdit
-          open={showEdit}
-          handleOpen={handleGuestEdit}
-          guestData={guestId}
-          onRefresh={handelRefresh}
-        />
-      ) : (
-        <></>
-      )} */}
 
       <UpdateHotel
-        // setShowUpdate={setShowUpdate}
-        handleUpdateHotel={handleUpdateHotel}
+        handleUpdateHotel={handleCloseUpdateModal}
         showUpdate={showUpdate}
+        selectedClient={selectedClient}
+        onUpdateClient={handleUpdateClient}
       />
     </>
   );
