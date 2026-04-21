@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
+import ReactPaginate from "react-paginate";
+import { Edit, Trash } from "react-feather";
 import { AiOutlineCloudSync } from "react-icons/ai";
 import {
   Button,
   Card,
   CardBody,
-  CardText,
   Input,
   CardTitle,
   Col,
-  Label,
   Modal,
   ModalBody,
   ModalHeader,
   Row,
-  Form,
-  FormFeedback,
   CardHeader,
 } from "reactstrap";
-import Select from "react-select";
-import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
-import Flatpickr from "react-flatpickr";
 import axios, { Image_base_uri } from "../../../API/axios";
 // ** Styles
 import "@styles/react/libs/flatpickr/flatpickr.scss";
@@ -107,6 +101,11 @@ const Products = () => {
 
   const [data, setData] = useState(loadProducts);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const toastOptions = { position: "top-right" };
 
@@ -165,6 +164,7 @@ const Products = () => {
       ...data,
     ];
     persistProducts(next);
+    setCurrentPage(0);
     toast.success("Product added", toastOptions);
   };
 
@@ -185,8 +185,109 @@ const Products = () => {
     persistProducts(next);
     setSelectedProduct(null);
     setCancelOpen(false);
+    setCurrentPage(0);
     toast.success("Product deleted", toastOptions);
   };
+
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return data;
+    }
+
+    return data.filter((item) =>
+      [item.name, item.category, item.industry, item.desc]
+        .filter(Boolean)
+        .some((value) =>
+          `${value}`.toLowerCase().includes(normalizedSearch),
+        ),
+    );
+  }, [data, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${firstRow?.[sortField] ?? ""}`.toLowerCase();
+      const secondValue = `${secondRow?.[sortField] ?? ""}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(Math.ceil(sortedData.length / rowsPerPage) - 1, 0);
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "name");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
 
   // const getAllState = () => {
   //   axios.post("/getdata/regiondata/statedetails", {
@@ -211,33 +312,50 @@ const Products = () => {
 
   const hotelTable = [
     {
+      id: 1,
       name: "Product Name",
       sortable: true,
       minWidth: "80px",
+      selector: (row) => row.name,
+      sortField: "name",
+      selectorKey: "name",
       cell: (row) => <span>{row.name}</span>,
     },
 
     {
+      id: 2,
       name: "Product Category",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.category,
+      sortField: "category",
+      selectorKey: "category",
       cell: (row) => <span>{row.category}</span>,
     },
     {
+      id: 3,
       name: "Industry Category",
       sortable: true,
       minWidth: "50px",
+      selector: (row) => row.industry,
+      sortField: "industry",
+      selectorKey: "industry",
       cell: (row) => <span>{row.industry}</span>,
     },
     {
+      id: 4,
       name: "Product Description",
       sortable: true,
       minWidth: "50px",
+      selector: (row) => row.desc,
+      sortField: "desc",
+      selectorKey: "desc",
       cell: (row) => <span>{row.desc}</span>,
     },
     {
+      id: 5,
       name: "Action",
-      sortable: true,
+      sortable: false,
       center: true,
       width: "9rem",
 
@@ -296,15 +414,57 @@ const Products = () => {
           ) : null}
         </CardHeader>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={data}
+                data={paginatedData}
                 columns={hotelTable}
                 keyField="id"
                 className="react-dataTable"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>
