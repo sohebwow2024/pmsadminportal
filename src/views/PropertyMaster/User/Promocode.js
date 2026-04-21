@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
-import { AiOutlineCloudSync } from "react-icons/ai";
+import { Edit, Trash } from "react-feather";
 import {
   Button,
   Card,
   CardBody,
-  CardText,
   Input,
   CardTitle,
   Col,
@@ -16,24 +14,34 @@ import {
   ModalHeader,
   Row,
   Form,
-  FormFeedback,
   CardHeader,
 } from "reactstrap";
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
-import Flatpickr from "react-flatpickr";
-import axios, { Image_base_uri } from "../../../API/axios";
-// ** Styles
-import "@styles/react/libs/flatpickr/flatpickr.scss";
 import { useSelector } from "react-redux";
-// import NewHotelModal from "./NewHotelModal";
-// import EditHotelModal from "./EditHotelModal";
-// import DeleteHotelModal from "./DeleteHotelModal";
-// import HotelOTA from "./HotelOTA";
-import Avatar from "@components/avatar";
-import { Description } from "@mui/icons-material";
-// import PromocodeModal from "./PromocodeModal";
+
+const initialPromocodeData = [
+  {
+    id: 1,
+    promo: "SAVE20",
+    type: "Short Term",
+    volume: "Unlimited Usage",
+  },
+  {
+    id: 2,
+    promo: "WELCOME10",
+    type: "Long Term",
+    volume: "Limited Availability",
+  },
+];
+
+const tenureTypeOptions = [
+  { value: "short_term", label: "Short Term" },
+  { value: "long_term", label: "Long Term" },
+  { value: "fixed_tenure", label: "Fixed Tenure" },
+  { value: "flexible_tenure", label: "Flexible Tenure" },
+];
 
 const Promocode = () => {
   useEffect(() => {
@@ -46,123 +54,127 @@ const Promocode = () => {
   }, []);
 
   const getUserData = useSelector((state) => state.userManageSlice.userData);
-  const { LoginID, Token, CompanyID, UserRole } = getUserData;
+  const { UserRole } = getUserData;
 
-  const [hotels, setHotels] = useState([]);
-  const getAllHotelList = () => {
-    axios
-      .get(
-        `/property/hotel/all?CompanyID=${CompanyID}&LoginID=${LoginID}&Token=${Token}`,
-      )
-      .then((res) => {
-        console.log("response:__", res.data[0]);
-        setHotels(res.data[0]);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  const data = [
-    // {
-    //   id: 1,
-    //   type: "Basic",
-    //   details: "something",
-    //   dates: "22/8/2022",
-    //   applicability: "all",
-    //   action: "btns",
-    // },
-    {
-      promo: "SAVE20",
-      type: "Fixed Amount",
-      volume: "Unlimited Usage",
-      action: "btns",
-    },
-    {
-      promo: "WELCOME10",
-      type: "Free Shipping",
-      volume: "Limited Availability",
-      action: "btns",
-    },
-  ];
-
+  const [promoData, setPromoData] = useState(initialPromocodeData);
   const [show, setShow] = useState(false);
-  const handleShowModal = () => setShow(!show);
-  const handleSubmit = () => setShow(!show);
-
-  const [showEdit, setShowEdit] = useState(false);
-  const handleEditModal = () => setShowEdit(!showEdit);
-
   const [showUpdate, setShowUpdate] = useState(false);
-  const handleShowModalUpdate = () => setShowUpdate(!showUpdate);
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const [selectedPromoId, setSelectedPromoId] = useState(null);
 
-  const [selected_hotel, setSelected_hotel] = useState();
+  const [promoCode, setPromoCode] = useState("");
+  const [tenureType, setTenureType] = useState(null);
+  const [unitVolume, setUnitVolume] = useState("");
+  const [display, setDisplay] = useState(false);
 
-  const [del, setDel] = useState(false);
-  const handleDelModal = () => setDel(!del);
-
-  const [OTA, SetOTA] = useState(false);
-  const handleOTA = () => SetOTA(!OTA);
-
-  const [otaData, setOtaData] = useState([]);
-  const getOTAphoto = async () => {
-    try {
-      const res = await axios.get(`/booking/getotalogo/244`, {
-        headers: {
-          LoginID,
-          Token,
-        },
-      });
-      console.log("otaData", res?.data[0]);
-      setOtaData(res?.data[0][0]);
-    } catch (error) {
-      console.log("error", error);
-    }
+  const resetForm = () => {
+    setPromoCode("");
+    setTenureType(null);
+    setUnitVolume("");
+    setDisplay(false);
+    setSelectedPromoId(null);
   };
 
-  useEffect(() => {
-    getAllHotelList();
-    getOTAphoto();
-  }, [show, showEdit, del]);
+  const handleShowModal = () => {
+    if (!show) {
+      resetForm();
+    }
+    setShow(!show);
+  };
 
-  const [cancelOpen, setCancelOpen] = useState(false);
+  const handleShowModalUpdate = () => {
+    if (showUpdate) {
+      resetForm();
+    }
+    setShowUpdate(!showUpdate);
+  };
+
   const handleCancelOpen = () => setCancelOpen(!cancelOpen);
 
-  // const getAllState = () => {
-  //   axios.post("/getdata/regiondata/statedetails", {
-  //     LoginID,
-  //     Token,
-  //     Seckey: "abc",
-  //     Event: "selectall"
-  //   }).then(res => {
-  //     console.log("testing:_", res)
-  //     if (res.data !== null) {
-  //       res.data[0].map(i => states.push({ label: i.StateName, value: i.StateID }))
+  const validateForm = () => {
+    setDisplay(true);
 
-  //     }
-  //   }).catch(e => {
-  //     toast.error(e.response.data.Message, { position: 'top-right' })
-  //   })
-  // }
-  // useEffect(() => {
-  //   getAllHotelList()
-  //   // getAllState()
-  // }, [])
+    if (!promoCode.trim() || !tenureType || !unitVolume.trim()) {
+      toast.error("please enter required fields!", {
+        position: "top-center",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const isPromocodeFormComplete =
+    !!promoCode.trim() && !!tenureType && !!unitVolume.trim();
+
+  const buildPromoPayload = () => ({
+    id: selectedPromoId || Date.now(),
+    promo: promoCode.trim(),
+    type: tenureType.label,
+    volume: unitVolume.trim(),
+  });
+
+  const handleAddPromocode = () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const payload = buildPromoPayload();
+    setPromoData((prev) => [...prev, payload]);
+    toast.success("Promocode added successfully", {
+      position: "top-center",
+    });
+    handleShowModal();
+  };
+
+  const handleEditClick = (row) => {
+    setSelectedPromoId(row.id);
+    setPromoCode(row.promo);
+    setTenureType(
+      tenureTypeOptions.find((item) => item.label === row.type) || null,
+    );
+    setUnitVolume(row.volume);
+    setDisplay(false);
+    setShowUpdate(true);
+  };
+
+  const handleUpdatePromocode = () => {
+    if (!validateForm() || !selectedPromoId) {
+      return;
+    }
+
+    const payload = buildPromoPayload();
+    setPromoData((prev) =>
+      prev.map((item) => (item.id === selectedPromoId ? payload : item)),
+    );
+    toast.success("Promocode updated successfully", {
+      position: "top-center",
+    });
+    handleShowModalUpdate();
+  };
+
+  const handleDeletePromocode = () => {
+    if (!selectedPromoId) {
+      return;
+    }
+
+    setPromoData((prev) => prev.filter((item) => item.id !== selectedPromoId));
+    toast.success("Promocode deleted successfully", {
+      position: "top-center",
+    });
+    setSelectedPromoId(null);
+    setCancelOpen(false);
+  };
 
   const hotelTable = [
     {
       name: "Promo Code",
       sortable: true,
-      minWidth: "80px",
+      minWidth: "120px",
       cell: (row) => <span>{row.promo}</span>,
     },
-    // {
-    //   name: "Plan Including Name",
-    //   sortable: true,
-    //   minWidth: "50px",
-    //   cell: (row) => <span>{row.name}</span>,
-    // },
     {
-      name: "Unit Type",
+      name: "Tenure Type",
       sortable: true,
       minWidth: "180px",
       cell: (row) => <span>{row.type}</span>,
@@ -170,7 +182,7 @@ const Promocode = () => {
     {
       name: "Unit Volume",
       sortable: true,
-      minWidth: "50px",
+      minWidth: "160px",
       cell: (row) => <span>{row.volume}</span>,
     },
     {
@@ -178,23 +190,19 @@ const Promocode = () => {
       sortable: true,
       center: true,
       width: "9rem",
-
       selector: (row) => (
         <>
           <Edit
             className="me-1 cursor-pointer"
-            onClick={() => {
-              handleShowModalUpdate(true);
-              // setGuestId(row.guestID);
-            }}
+            onClick={() => handleEditClick(row)}
             size={15}
           />
           <Trash
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
+              setSelectedPromoId(row.id);
               handleCancelOpen();
-              // setPromoId(row.promotionId);
             }}
           />
         </>
@@ -210,14 +218,14 @@ const Promocode = () => {
             <h2>Promocode</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShow(true)}>
+            <Button color="primary" onClick={handleShowModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
                 viewBox="0 0 256 256"
-                class="me-1"
+                className="me-1"
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
@@ -230,7 +238,7 @@ const Promocode = () => {
             <Col>
               <DataTable
                 noHeader
-                data={data}
+                data={promoData}
                 columns={hotelTable}
                 className="react-dataTable"
               />
@@ -238,8 +246,6 @@ const Promocode = () => {
           </Row>
         </CardBody>
       </Card>
-
-      {/********** Delete Modal **********/}
 
       <Modal
         isOpen={cancelOpen}
@@ -252,30 +258,24 @@ const Promocode = () => {
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
-            <Button
-              className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
-            >
-              Confirm
+            <Button className="m-1" color="primary" onClick={handleCancelOpen}>
+              Cancel
             </Button>
             <Button
               className="m-1"
-              color="primary"
-              onClick={() => handleCancelOpen()}
+              color="danger"
+              onClick={handleDeletePromocode}
             >
-              Cancel
+              Confirm
             </Button>
           </Col>
         </ModalBody>
       </Modal>
 
-      {/********** Add Modal **********/}
       <Modal
         isOpen={show}
         toggle={handleShowModal}
         className="modal-dialog-centered modal-md"
-        // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModal}>
           <span>
@@ -284,87 +284,60 @@ const Promocode = () => {
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
-          <>
-            <Form>
-              <Row>
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Promo Code <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    placeholder="Promo Code"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !country ? (
-                    <span className="error_msg_lbl">Enter Tenure Type </span>
-                  ) : null} */}
-                </Col>
+          <Form>
+            <Row>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Promo Code <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="Promo Code"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  invalid={display && promoCode.trim() === ""}
+                />
+                {display && !promoCode.trim() ? (
+                  <span className="error_msg_lbl">Enter Promo Code </span>
+                ) : null}
+              </Col>
 
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Unit Type <span className="text-danger">*</span>
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Tenure Type"
-                    // options={countryList}
-                    onChange={(e) => {
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
-                  />
-                  {/* {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter  Point Icons </span>
-                  ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Unit Volume <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    placeholder="Unit Volume"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !country ? (
-                    <span className="error_msg_lbl">Enter  Point Description </span>
-                  ) : null} */}
-                </Col>
-                {/* <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    isDiscountable{" "}
-                  </Label>
-                  <Col>
-                    <Input
-                      type="checkbox"
-                      name="address"
-                      placeholder="isDiscountable"
-                      id="address"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      invalid={display && address === ""}
-                    />
-                    {display && !address ? (
-                      <span className="error_msg_lbl">
-                        Check isDiscountable{" "}
-                      </span>
-                    ) : null}
-                  </Col>
-                </Col> */}
-              </Row>
-            </Form>
-          </>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Tenure Type <span className="text-danger">*</span>
+                </Label>
+                <Select
+                  theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Tenure Type"
+                  options={tenureTypeOptions}
+                  value={tenureType}
+                  onChange={setTenureType}
+                />
+                {display && !tenureType ? (
+                  <span className="error_msg_lbl">Enter Tenure Type </span>
+                ) : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Unit Volume <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="Unit Volume"
+                  value={unitVolume}
+                  onChange={(e) => setUnitVolume(e.target.value)}
+                  invalid={display && unitVolume.trim() === ""}
+                />
+                {display && !unitVolume.trim() ? (
+                  <span className="error_msg_lbl">Enter Unit Volume </span>
+                ) : null}
+              </Col>
+            </Row>
+          </Form>
         </ModalBody>
         <Row className="px-1">
           <hr className="mt-1" />
@@ -373,27 +346,25 @@ const Promocode = () => {
               className="me-1 btn btn-danger"
               color="secondary"
               outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
               onClick={handleShowModal}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleSubmit}>
+            <Button
+              color="primary"
+              onClick={handleAddPromocode}
+              disabled={!isPromocodeFormComplete}
+            >
               Add Promocode
             </Button>
           </Col>
         </Row>
       </Modal>
 
-      {/********** Update Modal **********/}
-
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
         className="modal-dialog-centered modal-md"
-        // backdrop={false}
       >
         <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
           <span>
@@ -402,88 +373,51 @@ const Promocode = () => {
         </ModalHeader>
         <hr className="m-0"></hr>
         <ModalBody className="px-sm-2 pb-2">
-          <>
-            <Form>
-              <Row>
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Promo Code <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    placeholder="Promo Code"
-                    // options={countryList}
-                    onChange={(e) => {
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
-                  />
-                  {/* {display && !country ? (
-                          <span className="error_msg_lbl">Enter Tenure Type </span>
-                        ) : null} */}
-                </Col>
+          <Form>
+            <Row>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Promo Code <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="Promo Code"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  invalid={display && promoCode.trim() === ""}
+                />
+              </Col>
 
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Unit Type <span className="text-danger">*</span>
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Unit Type"
-                    id="dprate"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !hotelName ? (
-                          <span className="error_msg_lbl">Enter Dp Rate </span>
-                        ) : null} */}
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="12" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Unit Volume <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    placeholder="Selling Price"
-                    id="selling"
-                    // value={hotelName}
-                    onChange={(e) => setHotelName(e.target.value)}
-                    // invalid={display && hotelName === ""}
-                  />
-                  {/* {display && !country ? (
-                          <span className="error_msg_lbl">Enter Selling Price </span>
-                        ) : null} */}
-                </Col>
-                {/* <Col lg="6" className="mb-1">
-                        <Label className="form-label" for="address">
-                          isDiscountable{" "}
-                        </Label> 
-                        <Col>
-                          <Input
-                            type="checkbox"
-                            name="address"
-                            placeholder="isDiscountable"
-                            id="address"
-                            // value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                            // invalid={display && address === ""}
-                          /> */}
-                {/* {display && !address ? (
-                            <span className="error_msg_lbl">
-                              Check isDiscountable{" "}
-                            </span>
-                          ) : null} */}
-                {/* </Col>
-                      </Col> */}
-              </Row>
-            </Form>
-          </>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Tenure Type <span className="text-danger">*</span>
+                </Label>
+                <Select
+                  theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Tenure Type"
+                  options={tenureTypeOptions}
+                  value={tenureType}
+                  onChange={setTenureType}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="12" className="mb-1">
+                <Label className="form-label">
+                  Unit Volume <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="text"
+                  placeholder="Unit Volume"
+                  value={unitVolume}
+                  onChange={(e) => setUnitVolume(e.target.value)}
+                  invalid={display && unitVolume.trim() === ""}
+                />
+              </Col>
+            </Row>
+          </Form>
         </ModalBody>
         <Row className="px-1">
           <hr className="mt-1" />
@@ -492,46 +426,16 @@ const Promocode = () => {
               className="me-1 btn btn-danger"
               color="secondary"
               outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
               onClick={handleShowModalUpdate}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleSubmit}>
+            <Button color="primary" onClick={handleUpdatePromocode}>
               Submit
             </Button>
           </Col>
         </Row>
       </Modal>
-
-      {/* {show && (
-        <PromocodeModal
-          show={show}
-          handleShowModal={handleShowModal}
-          getAllHotelList={getAllHotelList}
-        />
-      )} */}
-      {/* {showUpdate && ( */}
-      {/* <EditHotelModal
-        // showEdit={showEdit}
-        // handleEditModal={handleEditModal}
-        handleShowModalUpdate={handleShowModalUpdate}
-        showUpdate={showUpdate}
-        hotels={hotels}
-        id={selected_hotel}
-        // show={show}
-      /> */}
-      {/* )} */}
-      {del && (
-        <DeleteHotelModal
-          del={del}
-          handleDelModal={handleDelModal}
-          hotels={hotels}
-          id={selected_hotel}
-        />
-      )}
     </>
   );
 };

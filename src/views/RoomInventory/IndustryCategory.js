@@ -174,27 +174,27 @@ const ProductCategory = () => {
   const [display, setDisplay] = useState(false);
 
   const resetAddCategoryForm = () => {
-  setHotelName("");
-  setDisplay(false);
-};
+    setHotelName("");
+    setDisplay(false);
+  };
 
-const handleCloseAddModal = () => {
-  resetAddCategoryForm();
-  setSelectedRow(null);
-  setShowCategroy(false);
-};
+  const handleCloseAddModal = () => {
+    resetAddCategoryForm();
+    setSelectedRow(null);
+    setShowCategroy(false);
+  };
 
-const resetUpdateForm = () => {
-  setHotelName("");
-  setAddress("");
-  setDisplay(false);
-};
+  const resetUpdateForm = () => {
+    setHotelName("");
+    setAddress("");
+    setDisplay(false);
+  };
 
-const handleCloseUpdateModal = () => {
-  resetUpdateForm();
-  setSelectedRow(null);
-  setShowUpdate(false);
-};
+  const handleCloseUpdateModal = () => {
+    resetUpdateForm();
+    setSelectedRow(null);
+    setShowUpdate(false);
+  };
 
   const toastOptions = { position: "top-right" };
 
@@ -230,7 +230,7 @@ const handleCloseUpdateModal = () => {
         `${c.id}` === `${selectedRow.id}` ? { ...c, name: trimmedName } : c,
       );
       persistRows(next);
-      toast.success("Category updated", toastOptions);
+      toast.success("Category updated", { position: "top-center" });
       handleCloseUpdateModal();
       return;
     }
@@ -242,18 +242,18 @@ const handleCloseUpdateModal = () => {
       action: "btns",
     };
     persistRows([newRow, ...data]);
-    toast.success("Category added", toastOptions);
+    toast.success("Category added", { position: "top-center" });
     handleCloseAddModal();
   };
 
   const handleDeleteCategory = () => {
     if (!selectedRow?.id) {
-      toast.error("Please select a category to delete", toastOptions);
+      toast.error("Please select a category to delete", { position: "top-center" });
       return;
     }
     const next = data.filter((c) => `${c.id}` !== `${selectedRow.id}`);
     persistRows(next);
-    toast.success("Category deleted", toastOptions);
+    toast.success("Category deleted", { position: "top-center" });
     setSelectedRow(null);
     setCancelOpen(false);
   };
@@ -390,10 +390,7 @@ const handleCloseUpdateModal = () => {
         toggle={handleCloseAddModal}
         className="modal-dialog-centered modal-lg"
       >
-        <ModalHeader
-          className="bg-transparent"
-          toggle={handleCloseAddModal}
-        >
+        <ModalHeader className="bg-transparent" toggle={handleCloseAddModal}>
           <span>
             <h4>Add Category</h4>
           </span>
@@ -462,7 +459,6 @@ const handleCloseUpdateModal = () => {
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
-           
             <Button
               className="m-1"
               color="primary"
@@ -470,7 +466,7 @@ const handleCloseUpdateModal = () => {
             >
               Cancel
             </Button>
-             <Button
+            <Button
               className="m-1"
               color="danger"
               // onClick={() => handleCancelBooking(id)}

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Edit, RefreshCcw, Trash, Archive, Delete } from "react-feather";
-import { AiOutlineCloudSync } from "react-icons/ai";
+import { Edit, Trash } from "react-feather";
 import {
   Button,
   Card,
   CardBody,
-  CardText,
   Input,
   CardTitle,
   Col,
@@ -16,23 +14,30 @@ import {
   ModalHeader,
   Row,
   Form,
-  FormFeedback,
   CardHeader,
 } from "reactstrap";
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
-import Flatpickr from "react-flatpickr";
-import axios, { Image_base_uri } from "../../../API/axios";
-// ** Styles
-import "@styles/react/libs/flatpickr/flatpickr.scss";
+import axios from "../../../API/axios";
 import { useSelector } from "react-redux";
-// import NewHotelModal from "./NewHotelModal";
-// import EditHotelModal from "./EditHotelModal";
-// import DeleteHotelModal from "./DeleteHotelModal";
-// import HotelOTA from "./HotelOTA";
-import Avatar from "@components/avatar";
-// import PlanRateModal from "./PlanRateModal";
+
+const initialPlanRateData = [
+  {
+    id: 1,
+    tenureType: { value: "short_term", label: "Short Term" },
+    dprate: "40000",
+    sellingprice: "50000",
+    isdiscount: true,
+  },
+  {
+    id: 2,
+    tenureType: { value: "long_term", label: "Long Term" },
+    dprate: "40000",
+    sellingprice: "50000",
+    isdiscount: false,
+  },
+];
 
 const PlanRate = () => {
   useEffect(() => {
@@ -61,49 +66,11 @@ const PlanRate = () => {
         console.log(e);
       });
   };
-  const data = [
-    // {
-    //   id: 1,
-    //   type: "Basic",
-    //   details: "something",
-    //   dates: "22/8/2022",
-    //   applicability: "all",
-    //   action: "btns",
-    // },
-    {
-      icons: "File",
-      name: "Unlimited Website",
-      dprate: "40000",
-      sellingprice: "50000",
-      isdiscount: "15%",
-      action: "btns",
-    },
-    {
-      icons: "Upload File",
-      name: "Unlimited FTP Account",
-      dprate: "40000",
-      sellingprice: "50000",
-      isdiscount: "10%",
-      action: "btns",
-    },
-  ];
-
   const [show, setShow] = useState(false);
-  const handleShowModal = () => setShow(!show);
-
-  const [showEdit, setShowEdit] = useState(false);
-  const handleEditModal = () => setShowEdit(!showEdit);
+  const [planRates, setPlanRates] = useState(initialPlanRateData);
 
   const [showUpdate, setShowUpdate] = useState(false);
-  const handleShowModalUpdate = () => setShowUpdate(!showUpdate);
-
-  const [selected_hotel, setSelected_hotel] = useState();
-
-  const [del, setDel] = useState(false);
-  const handleDelModal = () => setDel(!del);
-
-  const [OTA, SetOTA] = useState(false);
-  const handleOTA = () => SetOTA(!OTA);
+  const [selectedPlanRateId, setSelectedPlanRateId] = useState(null);
 
   const [otaData, setOtaData] = useState([]);
   const getOTAphoto = async () => {
@@ -124,7 +91,7 @@ const PlanRate = () => {
   useEffect(() => {
     getAllHotelList();
     getOTAphoto();
-  }, [show, showEdit, del]);
+  }, []);
 
   const [cancelOpen, setCancelOpen] = useState(false);
   const handleCancelOpen = () => setCancelOpen(!cancelOpen);
@@ -152,10 +119,10 @@ const PlanRate = () => {
 
   const hotelTable = [
     {
-      name: "Plan Rate Icon",
+      name: "Tenure Type",
       sortable: true,
-      minWidth: "80px",
-      cell: (row) => <span>{row.icons}</span>,
+      minWidth: "180px",
+      cell: (row) => <span>{row.tenureType?.label || "-"}</span>,
     },
     {
       name: "Dp Rate",
@@ -172,8 +139,8 @@ const PlanRate = () => {
     {
       name: "isDiscountable",
       sortable: true,
-      minWidth: "50px",
-      cell: (row) => <span>{row.isdiscount}</span>,
+      minWidth: "120px",
+      cell: (row) => <span>{row.isdiscount ? "Yes" : "No"}</span>,
     },
     {
       name: "Action",
@@ -186,8 +153,13 @@ const PlanRate = () => {
           <Edit
             className="me-1 cursor-pointer"
             onClick={() => {
-              handleShowModalUpdate(true);
-              // setGuestId(row.guestID);
+              setSelectedPlanRateId(row.id);
+              setTenureTypeValue(row.tenureType);
+              setDpRate(row.dprate);
+              setSellingPrice(row.sellingprice);
+              setIsDiscountable(row.isdiscount);
+              setDisplay(false);
+              setShowUpdate(true);
             }}
             size={15}
           />
@@ -195,8 +167,8 @@ const PlanRate = () => {
             className="me-1 cursor-pointer"
             size={15}
             onClick={() => {
+              setSelectedPlanRateId(row.id);
               handleCancelOpen();
-              // setPromoId(row.promotionId);
             }}
           />
         </>
@@ -205,14 +177,8 @@ const PlanRate = () => {
   ];
   const [dpRate, setDpRate] = useState("");
   const [sellingPrice, setSellingPrice] = useState("");
-  const [noOfFloor, setNoOfFloor] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [contact, setContact] = useState("");
-  const [email, setEmail] = useState("");
-  const [categoryName, setCategoryName] = useState("");
-  const [logo, setLogo] = useState("");
+  const [tenureTypeValue, setTenureTypeValue] = useState(null);
+  const [isDiscountable, setIsDiscountable] = useState(false);
   const [display, setDisplay] = useState(false);
 
   const tenureType = [
@@ -222,148 +188,92 @@ const PlanRate = () => {
     { value: "flexible", label: "Flexible Tenure" },
   ];
 
-  const handleSubmit = async () => {
-    let uploadedImage;
-    if (logo !== "") {
-      let imageformData = new FormData();
-      imageformData.append("File", logo);
-      imageformData.append("CompanyID", CompanyID);
-      console.log("imageformData", imageformData);
-      try {
-        const res = await axios({
-          method: "post",
-          baseURL: `${Image_base_uri}`,
-          url: "/api/property/hotel/uploadlogo",
-          data: imageformData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            LoginID,
-            Token,
-          },
-        });
-        console.log("res", res);
-        if (res.data.FileName) {
-          // setNewPoslogo(res.data.FileName)
-          // handleRefresh()
-          // setUploadImgStatus(true)
-          uploadedImage = res.data.FileName;
-        }
-      } catch (error) {
-        console.log("error", error);
-        // setUploadImgStatus(false)
-        return 0;
-      }
-    }
-    console.log(uploadedImage);
-    try {
-      const latRegex = /^-?([1-8]?\d(\.\d+)?|90(\.0+)?)$/;
-      const lonRegex = /^-?((1[0-7]|[1-9])?\d(\.\d+)?|180(\.0+)?)$/;
-      const phoneregex = /^\+\d{1,3}\d{9,10}$/;
-      setDisplay(true);
-      // console.log(CompanyID);
-      if (
-        dpRate &&
-        sellingPrice &&
-        noOfFloor &&
-        country &&
-        pincode &&
-        latitude &&
-        longitude &&
-        personName &&
-        state &&
-        city &&
-        email &&
-        categoryName &&
-        ifsc !== ""
-      ) {
-        if (
-          latRegex.test(latitude) &&
-          latitude >= -90 &&
-          latitude <= 90 &&
-          lonRegex.test(longitude) &&
-          longitude >= -180 &&
-          longitude <= 180
-        ) {
-          if (phoneregex.test(contact)) {
-            if (
-              CompanyID !== "" &&
-              CompanyID !== "null" &&
-              CompanyID !== null
-            ) {
-              const long = Number(longitude);
-              const lat = Number(latitude);
-              const body = {
-                LoginID: LoginID,
-                Token: Token,
-                CompanyID: CompanyID,
-                DpRate: dpRate,
-                HotelType: "Hotel",
-                HotelTypeCode: "1",
-                PropertyDesc: propertydescription,
-                FloorCount: noOfFloor,
-                SellingPrice: sellingPrice,
-                CityID: cityId,
-                CityName: city,
-                CountryCode: countryCode,
-                CountryName: country,
-                PostalCode: pincode,
-                Longitude: long.toFixed(10),
-                Latitude: lat.toFixed(10),
-                TimeZone: "Asia/Kolkata",
-                LanguageCode: "en",
-                CurrencyCode: baseCurrency,
-                PropertyLicenseNumber: licenseNumber,
-                LogoFile: uploadedImage, // need to send the file content as well
-                WebSIte: website,
-                BankName: bankName,
-                AccountNumber: accountNumber,
-                Branch: branch,
-                CategoryName: categoryName,
-                IFSC: ifsc,
-                GSTNumber: gst,
-                ContactPersonName: personName,
-                Surname: surname,
-                PhoneNumber: contact,
-                Email: email,
-                Seckey: "abc",
-              };
-              console.log("body", body);
-              const res = await axios.post("/property/hotel", body);
-              console.log("response: ", res.data[0]);
-              if (res.data[0][0].status === "Success") {
-                handleShowModal();
-                toast.success(res.data[0][0].message, {
-                  position: "top-center",
-                });
-                getAllHotelList();
-              }
-            } else {
-              toast.error("Company Id Cannot be null!", {
-                position: "top-center",
-              });
-            }
-          } else {
-            toast.error(
-              "please enter correct Phone Number with country code!",
-              { position: "top-center" },
-            );
-          }
-        } else {
-          toast.error("please enter correct Longitude and Latitude value!", {
-            position: "top-center",
-          });
-        }
-      } else {
-        toast.error("please enter required fields!", {
-          position: "top-center",
-        });
-      }
-    } catch (e) {
-      toast.error(e.response.data.message, { position: "top-center" });
+  const resetForm = () => {
+    setTenureTypeValue(null);
+    setDpRate("");
+    setSellingPrice("");
+    setIsDiscountable(false);
+    setDisplay(false);
+    setSelectedPlanRateId(null);
+  };
 
-      console.log(e);
-      handleShowModal();
+  const handleShowModal = () => {
+    if (!show) {
+      resetForm();
     }
+    setShow(!show);
+  };
+
+  const handleShowModalUpdate = () => {
+    if (showUpdate) {
+      resetForm();
+    }
+    setShowUpdate(!showUpdate);
+  };
+
+  const validateForm = () => {
+    setDisplay(true);
+
+    if (!tenureTypeValue || !dpRate.trim() || !sellingPrice.trim()) {
+      toast.error("please enter required fields!", {
+        position: "top-center",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const isPlanRateFormComplete =
+    !!tenureTypeValue && !!dpRate.trim() && !!sellingPrice.trim();
+
+  const buildPlanRatePayload = () => ({
+    id: selectedPlanRateId || Date.now(),
+    tenureType: tenureTypeValue,
+    dprate: dpRate.trim(),
+    sellingprice: sellingPrice.trim(),
+    isdiscount: isDiscountable,
+  });
+
+  const handleAddPlanRate = () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const payload = buildPlanRatePayload();
+    setPlanRates((prev) => [...prev, payload]);
+    toast.success("Plan rate added", {
+      position: "top-center",
+    });
+    handleShowModal();
+  };
+
+  const handleUpdatePlanRate = () => {
+    if (!validateForm() || !selectedPlanRateId) {
+      return;
+    }
+
+    const payload = buildPlanRatePayload();
+    setPlanRates((prev) =>
+      prev.map((item) => (item.id === selectedPlanRateId ? payload : item)),
+    );
+    toast.success("Plan rate updated", {
+      position: "top-center",
+    });
+    handleShowModalUpdate();
+  };
+
+  const handleDeletePlanRate = () => {
+    if (!selectedPlanRateId) {
+      return;
+    }
+
+    setPlanRates((prev) => prev.filter((item) => item.id !== selectedPlanRateId));
+    toast.success("Plan rate deleted", {
+      position: "top-center",
+    });
+    setSelectedPlanRateId(null);
+    setCancelOpen(false);
   };
 
   return (
@@ -374,14 +284,14 @@ const PlanRate = () => {
             <h2>Plan Rate</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={() => setShow(true)}>
+            <Button color="primary" onClick={handleShowModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
                 viewBox="0 0 256 256"
-                class="me-1"
+                className="me-1"
               >
                 <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
               </svg>
@@ -394,7 +304,7 @@ const PlanRate = () => {
             <Col>
               <DataTable
                 noHeader
-                data={data}
+                data={planRates}
                 columns={hotelTable}
                 className="react-dataTable"
               />
@@ -416,20 +326,21 @@ const PlanRate = () => {
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
-            <Button
-              className="m-1"
-              color="danger"
-              // onClick={() => handleCancelBooking(id)}
-            >
-              Confirm
-            </Button>
-            <Button
+          <Button
               className="m-1"
               color="primary"
               onClick={() => handleCancelOpen()}
             >
               Cancel
             </Button>
+            <Button
+              className="m-1"
+              color="danger"
+              onClick={handleDeletePlanRate}
+            >
+              Confirm
+            </Button>
+            
           </Col>
         </ModalBody>
       </Modal>
@@ -462,13 +373,10 @@ const PlanRate = () => {
                     classNamePrefix="select"
                     placeholder="Select Tenure Type"
                     options={tenureType}
-                    onChange={(e) => {
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
+                    value={tenureTypeValue}
+                    onChange={setTenureTypeValue}
                   />
-                  {display && !country ? (
+                  {display && !tenureTypeValue ? (
                     <span className="error_msg_lbl">Enter Tenure Type </span>
                   ) : null}
                 </Col>
@@ -518,15 +426,9 @@ const PlanRate = () => {
                       name="address"
                       placeholder="isDiscountable"
                       id="address"
-                      value={sellingPrice}
-                      onChange={(e) => setSellingPrice(e.target.value)}
-                      invalid={display && sellingPrice === ""}
+                      checked={isDiscountable}
+                      onChange={(e) => setIsDiscountable(e.target.checked)}
                     />
-                    {display && !sellingPrice ? (
-                      <span className="error_msg_lbl">
-                        Check isDiscountable{" "}
-                      </span>
-                    ) : null}
                   </Col>
                 </Col>
               </Row>
@@ -547,7 +449,7 @@ const PlanRate = () => {
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleSubmit}>
+            <Button color="primary" onClick={handleUpdatePlanRate}>
               Submit
             </Button>
           </Col>
@@ -581,13 +483,10 @@ const PlanRate = () => {
                     classNamePrefix="select"
                     placeholder="Select Tenure Type"
                     options={tenureType}
-                    onChange={(e) => {
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
+                    value={tenureTypeValue}
+                    onChange={setTenureTypeValue}
                   />
-                  {display && !country ? (
+                  {display && !tenureTypeValue ? (
                     <span className="error_msg_lbl">Enter Tenure Type </span>
                   ) : null}
                 </Col>
@@ -597,7 +496,7 @@ const PlanRate = () => {
                     Dp Rate <span className="text-danger">*</span>
                   </Label>
                   <Input
-                    type="text"
+                    type="number"
                     placeholder="Dp Rate"
                     id="dprate"
                     value={dpRate}
@@ -615,7 +514,7 @@ const PlanRate = () => {
                     Selling Price <span className="text-danger">*</span>
                   </Label>
                   <Input
-                    type="text"
+                    type="number"
                     name="hotel"
                     placeholder="Selling Price"
                     id="selling"
@@ -637,15 +536,9 @@ const PlanRate = () => {
                       name="address"
                       placeholder="isDiscountable"
                       id="address"
-                      value={sellingPrice}
-                      onChange={(e) => setSellingPrice(e.target.value)}
-                      invalid={display && sellingPrice === ""}
+                      checked={isDiscountable}
+                      onChange={(e) => setIsDiscountable(e.target.checked)}
                     />
-                    {display && !sellingPrice ? (
-                      <span className="error_msg_lbl">
-                        Check isDiscountable{" "}
-                      </span>
-                    ) : null}
                   </Col>
                 </Col>
               </Row>
@@ -666,7 +559,11 @@ const PlanRate = () => {
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleSubmit}>
+            <Button
+              color="primary"
+              onClick={handleAddPlanRate}
+              disabled={!isPlanRateFormComplete}
+            >
               Add Plan Rate
             </Button>
           </Col>
@@ -674,32 +571,6 @@ const PlanRate = () => {
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 
-      {/* {show && (
-        <PlanRateModal
-          show={show}
-          handleShowModal={handleShowModal}
-          getAllHotelList={getAllHotelList}
-        />
-      )} */}
-      {/* {showUpdate && ( */}
-      {/* <EditHotelModal
-        // showEdit={showEdit}
-        // handleEditModal={handleEditModal}
-        handleShowModalUpdate={handleShowModalUpdate}
-        showUpdate={showUpdate}
-        hotels={hotels}
-        id={selected_hotel}
-        // show={show}
-      /> */}
-      {/* )} */}
-      {del && (
-        <DeleteHotelModal
-          del={del}
-          handleDelModal={handleDelModal}
-          hotels={hotels}
-          id={selected_hotel}
-        />
-      )}
     </>
   );
 };
