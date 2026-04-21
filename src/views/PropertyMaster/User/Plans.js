@@ -31,6 +31,7 @@ import {
   usersRoleDataApi,
 } from "../../../common/commonMethods";
 
+
 const userRoles = [
   { value: "Admin", label: "Admin" },
   { value: "Basic", label: "Basic" },
@@ -189,10 +190,13 @@ const Plans = () => {
     };
     console.log("getAccountUserList", getAccountUserList);
 
-    const [hotelName, setHotelName] = useState("");
+    const [planName, setPlanName] = useState("");
+    const [title, setTitle] = useState("");
     const [address, setAddress] = useState("");
     const [noOfFloor, setNoOfFloor] = useState("");
     const [country, setCountry] = useState("");
+    const [countryId, setCountryId] = useState("");
+    const [countryCode, setCountryCode] = useState("");
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
     const [contact, setContact] = useState("");
@@ -239,7 +243,7 @@ const Plans = () => {
         setDisplay(true);
         // console.log(CompanyID);
         if (
-          hotelName &&
+          planName &&
           address &&
           noOfFloor &&
           country &&
@@ -273,7 +277,8 @@ const Plans = () => {
                   LoginID: LoginID,
                   Token: Token,
                   CompanyID: CompanyID,
-                  HotelName: hotelName,
+                  planName: planName,
+                  Title: title,
                   HotelType: "Hotel",
                   HotelTypeCode: "1",
                   PropertyDesc: propertydescription,
@@ -394,13 +399,13 @@ const Plans = () => {
                     <Input
                       type="text"
                       name="hotel"
-                      id="hotel"
+                      id="plan"
                       placeholder="Plan Name"
-                      value={hotelName}
-                      onChange={(e) => setHotelName(e.target.value)}
-                      invalid={display && hotelName === ""}
+                      value={planName}
+                      onChange={(e) => setPlanName(e.target.value)}
+                      invalid={display && planName === ""}
                     />
-                    {display && !hotelName ? (
+                    {display && !planName ? (
                       <span className="error_msg_lbl">Enter Plan Name </span>
                     ) : null}
                   </Col>
@@ -411,13 +416,13 @@ const Plans = () => {
                     <Input
                       type="text"
                       name="hotel"
-                      id="hotel"
+                      id="title"
                       placeholder="Title"
-                      // value={hotelName}
-                      // onChange={e => setHotelName(e.target.value)}
-                      invalid={display && hotelName === ""}
+                      value={title}
+                      onChange={e => setTitle(e.target.value)}
+                      invalid={display && title === ""}
                     />
-                    {display && !hotelName ? (
+                    {display && !title ? (
                       <span className="error_msg_lbl">Enter Title </span>
                     ) : null}
                   </Col>
@@ -431,12 +436,12 @@ const Plans = () => {
                       classNamePrefix="select"
                       placeholder="Select Plan Including"
                       options={planIncluding}
-                      //   onChange={e => {
-                      //     setCountryId(e.value)
-                      //     setCountryCode(e.CountryCode)
-                      //     setCountry(e.label)
-                      //   }}
-                      // invalid={display && country === ''}
+                        onChange={e => {
+                          setCountryId(e.value)
+                          setCountryCode(e.CountryCode)
+                          setCountry(e.label)
+                        }}
+                      invalid={display && country === ''}
                     />
                     {display && !country ? (
                       <span className="error_msg_lbl">
@@ -454,12 +459,12 @@ const Plans = () => {
                       classNamePrefix="select"
                       placeholder="Select Plan Excluding"
                       options={planExcluding}
-                      //   onChange={e => {
-                      //     setCountryId(e.value)
-                      //     setCountryCode(e.CountryCode)
-                      //     setCountry(e.label)
-                      //   }}
-                      // invalid={display && country === ''}
+                        onChange={e => {
+                          setCountryId(e.value)
+                          setCountryCode(e.CountryCode)
+                          setCountry(e.label)
+                        }}
+                      invalid={display && country === ''}
                     />
                     {display && !country ? (
                       <span className="error_msg_lbl">
@@ -477,12 +482,12 @@ const Plans = () => {
                       classNamePrefix="select"
                       placeholder="Select Plan Rates"
                       options={planRates}
-                      //   onChange={e => {
-                      //     setCountryId(e.value)
-                      //     setCountryCode(e.CountryCode)
-                      //     setCountry(e.label)
-                      //   }}
-                      // invalid={display && country === ''}
+                        onChange={e => {
+                          setCountryId(e.value)
+                          setCountryCode(e.CountryCode)
+                          setCountry(e.label)
+                        }}
+                      invalid={display && country === ''}
                     />
                     {display && !country ? (
                       <span className="error_msg_lbl">Enter Plan Rates </span>
