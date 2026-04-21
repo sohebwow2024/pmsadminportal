@@ -3,7 +3,6 @@ import {
   Button,
   Col,
   Form,
-  Input,
   Label,
   Modal,
   ModalBody,
@@ -12,314 +11,85 @@ import {
   Row,
 } from "reactstrap";
 import Select from "react-select";
-import { toast } from "react-hot-toast";
+import {
+  cityOptions,
+  companyIndustryOptions,
+  companySizeOptions,
+  companyTypeOptions,
+  countryOptions,
+  stateOptions,
+} from "./clientFormOptions";
+import Hotel from "../FrontDesk/Hotel.css";
 
-// ** Third Party Components
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+const getInitialFormState = (selectedClient) => ({
+  type: selectedClient?.type || "",
+  size: selectedClient?.size || "",
+  industry: selectedClient?.industry || "",
+  name: selectedClient?.name || "",
+  tax: selectedClient?.tax || "",
+  email: selectedClient?.email || "",
+  phone: selectedClient?.phone || "",
+  address1: selectedClient?.address1 || selectedClient?.address || "",
+  address2: selectedClient?.address2 || "",
+  country: selectedClient?.country || "",
+  state: selectedClient?.state || "",
+  city: selectedClient?.city || "",
+  pincode: selectedClient?.pincode || "",
+});
 
-import { selectThemeColors } from "@utils";
-
-import axios from "../../API/axios";
-import { useSelector } from "react-redux";
-import Hotel from "../FrontDesk/Hotel.css"
-
-const defaultValues = {
-  name: "",
-  last_name: "",
-  prefix: "",
-  mobile_number: "",
-  email: "",
-  dob: "",
-  address: "",
-  pincode: "",
-  country: "",
-  state: "",
-  city: "",
-};
-
-const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
-  const getUserData = useSelector((state) => state.userManageSlice.userData);
-
-  const { LoginID, Token } = getUserData;
-
-  const [stateList, setStateList] = useState([]);
-  const [countryList, setCountryList] = useState([]);
-  const [districtList, setDistrictList] = useState([]);
-  const [cityList, setCityList] = useState([]);
-  const [guestName, setGuestName] = useState("");
-  const [guestLastName, setGuestLastName] = useState("");
-  const [mobPrefix, setMobPrefix] = useState("");
-  const [mobNumber, setMobNumber] = useState("");
-  const [guestEmail, setGuestEmail] = useState("");
-  const [guestDob, setGuestDob] = useState("");
-  const [pinCode, setPinCode] = useState("");
-  const [address, setAddress] = useState("");
-  const [countryId, setCountryId] = useState("");
-  const [stateId, setStateId] = useState("");
-  const [districtId, setDistrictId] = useState("");
-  const [cityId, setCityId] = useState("");
+const UpdateHotel = ({ showUpdate, handleUpdateHotel, selectedClient, onUpdateClient }) => {
+  const [formData, setFormData] = useState(getInitialFormState(selectedClient));
   const [display, setDisplay] = useState(false);
 
-  // const userId = localStorage.getItem('user-id')
-
-  // COUNTRY API
-  const countryDetailsList = async () => {
-    try {
-      const countryListBody = {
-        LoginID,
-        Token,
-        Seckey: "abc",
-        Event: "select",
-      };
-      const res = await axios.post(
-        `https://restcountries.com/v3.1/all?fields=name,flags`,
-        countryListBody
-      );
-      console.log("res-country", res);
-      setCountryList(res?.data[0]);
-    } catch (error) {
-      console.log("Country List Error", error.message);
-    }
-  };
-
-  const countryOptions =
-    countryList?.length && countryList[0]?.countryName
-      ? countryList?.map(function (country) {
-        return { value: country.countryID, label: country.countryName };
-      })
-      : [{ value: "reload", label: "Error loading, click to reload again" }];
-
-  const handleCountryDetailsList = (value) => {
-    if (value === "reload") {
-      countryDetailsList();
-      return;
-    }
-    setCountryId(value);
-  };
-
   useEffect(() => {
-    countryDetailsList();
-  }, []);
-
-  // STATE API
-  const stateDetailsList = (value) => {
-    try {
-      const stateDetailsBody = {
-        LoginID,
-        Token,
-        Seckey: "abc",
-        CountryID: value,
-        Event: "select",
-      };
-      axios
-        .post(`/getdata/regiondata/statedetails`, stateDetailsBody)
-        .then((stateDropDownResponse) => {
-          setStateList(stateDropDownResponse?.data[0]);
-        });
-    } catch (error) {
-      console.log("State Details Error", error.message);
+    if (showUpdate) {
+      setFormData(getInitialFormState(selectedClient));
+      setDisplay(false);
     }
+  }, [selectedClient, showUpdate]);
+
+  const updateField = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
-  const stateOptions =
-    stateList?.length && stateList[0]?.stateName
-      ? stateList?.map(function (state) {
-        return { value: state.stateID, label: state.stateName };
-      })
-      : [{ value: "reload", label: "Error loading, click to reload again" }];
-
-  const handleStateDetailsList = (value) => {
-    if (value === "reload") {
-      stateDetailsList();
-      return;
-    }
-    setStateId(value);
-  };
-
-  // DISTRICT API
-  // const districtDetailsList = (value) => {
-  //     try {
-  //         const districtDetailsBody = {
-  //             LoginID,
-  //             Token,
-  //             Seckey: "abc",
-  //             StateID: value,
-  //             Event: "select"
-  //         }
-  //         axios.post(`/getdata/regiondata/districtdetails`, districtDetailsBody)
-  //             .then(districtDropDownResponse => {
-  //                 setDistrictList(districtDropDownResponse?.data[0])
-  //             })
-  //     } catch (error) {
-  //         console.log("District Details Error", error.message)
-  //     }
-  // }
-  // const districtOptions = districtList?.length && districtList[0]?.DistrictName ? districtList?.map(function (district) {
-  //     return { value: district.DistrictID, label: district.DistrictName }
-  // }) : [{ value: 'reload', label: 'Error loading, click to reload again' }]
-
-  // const handelDistrictDetailsList = (value) => {
-  //     if (value === 'reload') {
-  //         districtDetailsList()
-  //         return
-  //     }
-  //     setDistrictId(value)
-  // }
-
-  // CITY API
-  const cityDetailsList = (value) => {
-    try {
-      const cityListBody = {
-        LoginID,
-        Token,
-        Seckey: "abc",
-        DistrictID: value,
-        StateID: value,
-        Event: "select",
-      };
-      axios
-        .post(`/getdata/regiondata/citydetails`, cityListBody)
-        .then((cityDropDownResponse) => {
-          console.log("cityDropDownResponse", cityDropDownResponse?.data[0]);
-          setCityList(cityDropDownResponse?.data[0]);
-        });
-    } catch (error) {
-      console.log("City Details Error", error.message);
-    }
-  };
-  const cityOptions =
-    cityList?.length && cityList[0]?.cityName
-      ? cityList?.map(function (city) {
-        return { value: city.cityID, label: city.cityName };
-      })
-      : [{ value: "reload", label: "Error loading, click to reload again" }];
-
-  const handleCityDetailsList = (value) => {
-    if (value === "reload") {
-      cityDetailsList();
-      return;
-    }
-    setCityId(value);
-  };
-
-  const GuestSchema = yup.object().shape({
-    name: yup.string().required(),
-    last_name: yup.string().required(),
-    prefix: yup.number().min(2).required(),
-    mobile_number: yup.number().min(10).required(),
-    // email: yup.string().email().required(),
-    // dob: yup.date().required(),
-    pincode: yup.number().required(),
-    address: yup.string().required(),
-    country: yup.string().required(),
-    state: yup.string().required(),
-    city: yup.string().required(),
-  });
-
-  const { reset } = useForm({
-    defaultValues,
-    resolver: yupResolver(GuestSchema),
-  });
 
   const handleReset = () => {
-    reset({
-      name: "",
-      last_name: "",
-      prefix: "",
-      mobile_number: "",
-      email: "",
-      dob: "",
-      address: "",
-      pincode: "",
-      country: "",
-      state: "",
-      city: "",
-    });
+    setFormData(getInitialFormState(selectedClient));
+    setDisplay(false);
     handleUpdateHotel();
   };
 
-  const guestRegister = () => {
-    try {
-      const guestRegisterBody = {
-        LoginID,
-        Token,
-        Seckey: "abc",
-        Name: guestName,
-        LastName: guestLastName,
-        PrefixN: mobPrefix,
-        MobileNumber: mobNumber,
-        Type: "Normal User",
-        Email: guestEmail,
-        DOB: guestDob,
-        Address: address,
-        CountryID: countryId,
-        StateID: stateId,
-        DistrictID: stateId,
-        CityID: cityId,
-        Pincode: pinCode,
-        FloorID: null,
-        SpecialNote: "",
-        Event: "insert",
-      };
-      console.log('guestRegisterBody', guestRegisterBody);
-      axios.post(`/setdata/guestdetails`, guestRegisterBody).then((res) => {
-        console.log("Guest Entry", res);
-        toast.success("Guest registered succesfully");
-        getOption()
-      });
-    } catch (error) {
-      console.log("Guest Register Error", error.message);
-    }
-  };
-
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     setDisplay(true);
+
     if (
-      guestName.trim() &&
-      guestLastName.trim() &&
-      mobPrefix.trim() &&
-      mobNumber.trim() &&
-      // guestEmail.trim() &&
-      // guestDob &&
-      countryId &&
-      stateId &&
-      cityId &&
-      pinCode.trim() &&
-      address.trim() !== ""
+      !formData.name.trim() ||
+      !formData.size.trim() ||
+      !formData.industry.trim() ||
+      !formData.type.trim() ||
+      !formData.tax.trim()
     ) {
-      guestRegister();
-      handleOpen();
-      setGuestName("");
-      setGuestLastName("");
-      setMobPrefix("");
-      setMobNumber("");
-      setGuestEmail("");
-      setGuestDob("");
-      setCountryId("");
-      setStateId("");
-      setCityId("");
-      setPinCode("");
-      setAddress("");
-      setDisplay(false);
+      return;
     }
+
+    onUpdateClient(formData);
+    handleUpdateHotel();
   };
 
   return (
     <>
-     
-
       <Modal
         isOpen={showUpdate}
         toggle={handleUpdateHotel}
         className="modal-dialog-centered modal-lg hotel-modal-header"
-        // backdrop={false}
       >
-        {/* ---------- HEADER ---------- */}
-       
-
-        <ModalHeader className='bg-transparent' toggle={handleUpdateHotel}>
-          <span ><h4>Update Client </h4></span>
+        <ModalHeader className="bg-transparent" toggle={handleUpdateHotel}>
+          <span>
+            <h4>Update Client </h4>
+          </span>
         </ModalHeader>
 
         <Form onSubmit={onSubmit}>
@@ -331,11 +101,20 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   Company Type <span className="text-danger">*</span>
                 </Label>
                 <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select Type"
+                  options={companyTypeOptions}
+                  value={
+                    companyTypeOptions.find(
+                      (option) => option.label === formData.type,
+                    ) || null
+                  }
+                  onChange={(option) => updateField("type", option?.label || "")}
                 />
+                {display && !formData.type.trim() ? (
+                  <span className="error_msg_lbl">Select Company Type </span>
+                ) : null}
               </Col>
             </Row>
 
@@ -346,19 +125,18 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                    Company Size <span className="text-danger">*</span>
                 </Label>
                 <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select Size"
-                  // options={countryList}
-                  // onChange={e => {
-                  //   setCountryId(e.value)
-                  //   setCountryCode(e.CountryCode)
-                  //   setCountry(e.label)
-                  // }}
-                  // invalid={display && country === ''}
+                  options={companySizeOptions}
+                  value={
+                    companySizeOptions.find(
+                      (option) => option.label === formData.size,
+                    ) || null
+                  }
+                  onChange={(option) => updateField("size", option?.label || "")}
                 />
-                {display && !country ? (
+                {display && !formData.size.trim() ? (
                   <span className="error_msg_lbl">Enter Category </span>
                 ) : null}
               </Col>
@@ -367,19 +145,20 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                  Company Industry <span className="text-danger">*</span>
                 </Label>
                 <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select Industry"
-                  // options={countryList}
-                  // onChange={e => {
-                  //   setCountryId(e.value)
-                  //   setCountryCode(e.CountryCode)
-                  //   setCountry(e.label)
-                  // }}
-                  // invalid={display && country === ''}
+                  options={companyIndustryOptions}
+                  value={
+                    companyIndustryOptions.find(
+                      (option) => option.label === formData.industry,
+                    ) || null
+                  }
+                  onChange={(option) =>
+                    updateField("industry", option?.label || "")
+                  }
                 />
-                {display && !country ? (
+                {display && !formData.industry.trim() ? (
                   <span className="error_msg_lbl">Enter Industry </span>
                 ) : null}
               </Col>
@@ -390,7 +169,12 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="Company Name"
                   className="form-control"
+                  value={formData.name}
+                  onChange={(e) => updateField("name", e.target.value)}
                 />
+                {display && !formData.name.trim() ? (
+                  <span className="error_msg_lbl">Enter Company Name </span>
+                ) : null}
               </Col>
               <Col md={6}>
                 <Label className="form-label">Tax Info <span className="text-danger">*</span></Label>
@@ -398,7 +182,12 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="xx-xxxx789"
                   className="form-control"
+                  value={formData.tax}
+                  onChange={(e) => updateField("tax", e.target.value)}
                 />
+                {display && !formData.tax.trim() ? (
+                  <span className="error_msg_lbl">Enter Tax Info </span>
+                ) : null}
               </Col>
 
               <Col md={6}>
@@ -407,6 +196,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="email"
                   placeholder="company@sales.com"
                   className="form-control"
+                  value={formData.email}
+                  onChange={(e) => updateField("email", e.target.value)}
                 />
               </Col>
               <Col md={6}>
@@ -415,6 +206,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="Phone No."
                   className="form-control"
+                  value={formData.phone}
+                  onChange={(e) => updateField("phone", e.target.value)}
                 />
               </Col>
               
@@ -428,6 +221,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="Street address"
                   className="form-control"
+                  value={formData.address1}
+                  onChange={(e) => updateField("address1", e.target.value)}
                 />
               </Col>
               <Col md={6}>
@@ -436,6 +231,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="Street address"
                   className="form-control"
+                  value={formData.address2}
+                  onChange={(e) => updateField("address2", e.target.value)}
                 />
               </Col>
             </Row>
@@ -445,29 +242,49 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
               <Col md={6}>
                 <Label className="form-label">Country</Label>
                <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select Country"
+                  options={countryOptions}
+                  value={
+                    countryOptions.find(
+                      (option) => option.label === formData.country,
+                    ) || null
+                  }
+                  onChange={(option) =>
+                    updateField("country", option?.label || "")
+                  }
                 />
               </Col>
 
               <Col md={6}>
                 <Label className="form-label">State</Label>
                 <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select State"
+                  options={stateOptions}
+                  value={
+                    stateOptions.find(
+                      (option) => option.label === formData.state,
+                    ) || null
+                  }
+                  onChange={(option) => updateField("state", option?.label || "")}
                 />
               </Col>
               <Col md={6}>
                 <Label className="form-label">City</Label>
                 <Select
-                  // theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
                   placeholder="Select City"
+                  options={cityOptions}
+                  value={
+                    cityOptions.find(
+                      (option) => option.label === formData.city,
+                    ) || null
+                  }
+                  onChange={(option) => updateField("city", option?.label || "")}
                 />
               </Col>
               <Col md={6}>
@@ -476,6 +293,8 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, getOption }) => {
                   type="text"
                   placeholder="Pincode"
                   className="form-control"
+                  value={formData.pincode}
+                  onChange={(e) => updateField("pincode", e.target.value)}
                 />
               </Col>
               
