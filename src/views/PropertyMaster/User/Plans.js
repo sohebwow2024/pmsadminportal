@@ -18,7 +18,7 @@ import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 
-const planTabs = ["PMS", "LLM", "BILLEX", "RESTAURANT"];
+const defaultPlanTabs = ["PMS", "LLM", "CRM", "RESTAURANT"];
 
 const billingCycleOptions = [
   { value: "monthly", label: "Monthly" },
@@ -97,7 +97,7 @@ const basePlans = [
   },
 ];
 
-const initialPlans = planTabs.flatMap((tab) =>
+const initialPlans = defaultPlanTabs.flatMap((tab) =>
   basePlans.map((plan, index) => ({
     ...plan,
     id: `${tab.toLowerCase()}-${index + 1}`,
@@ -146,8 +146,24 @@ const getBillingText = (billingCycle, duration) => {
   return `per ${duration} days`;
 };
 
+const normalizeProductName = (value) => value.trim();
+
+const getPlanTabs = (plans) => {
+  const tabs = [...defaultPlanTabs];
+
+  plans.forEach((plan) => {
+    const nextTab = normalizeProductName(plan.category || plan.product || "");
+
+    if (nextTab && !tabs.includes(nextTab)) {
+      tabs.push(nextTab);
+    }
+  });
+
+  return tabs;
+};
+
 const Plans = () => {
-  const defaultTab = planTabs[0];
+  const defaultTab = defaultPlanTabs[0];
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -166,6 +182,13 @@ const Plans = () => {
   const [addForm, setAddForm] = useState(createDefaultForm());
   const [editForm, setEditForm] = useState(createDefaultForm());
   const [selectedPlanId, setSelectedPlanId] = useState("");
+  const planTabs = getPlanTabs(plans);
+
+  useEffect(() => {
+    if (activeTab && !planTabs.includes(activeTab)) {
+      setActiveTab("");
+    }
+  }, [activeTab, defaultTab, planTabs]);
 
   const updateAddForm = (field, value) => {
     setAddForm((prev) => ({
@@ -219,11 +242,13 @@ const Plans = () => {
       return;
     }
 
+    const productName = normalizeProductName(addForm.product);
+
     const newPlan = {
       id: `plan-${Date.now()}`,
       name: addForm.name.trim(),
-      product: addForm.product.trim(),
-      category: addForm.category,
+      product: productName,
+      category: productName,
       price: addForm.price,
       billingCycle: addForm.billingCycle,
       currency: addForm.currency,
@@ -235,6 +260,7 @@ const Plans = () => {
     };
 
     setPlans((prev) => [...prev, newPlan]);
+    setActiveTab(productName);
     closeAddModal();
     toast.success("Plan added successfully.", {
       position: "top-center",
@@ -262,14 +288,16 @@ const Plans = () => {
       return;
     }
 
+    const productName = normalizeProductName(editForm.product);
+
     setPlans((prev) =>
       prev.map((plan) =>
         plan.id === selectedPlanId
           ? {
               ...plan,
               name: editForm.name.trim(),
-              product: editForm.product.trim(),
-              category: editForm.category,
+              product: productName,
+              category: productName,
               price: editForm.price,
               billingCycle: editForm.billingCycle,
               currency: editForm.currency,
@@ -284,6 +312,7 @@ const Plans = () => {
           : plan,
       ),
     );
+    setActiveTab(productName);
     closeEditModal();
     toast.success("Plan updated successfully.", {
       position: "top-center",
@@ -629,6 +658,12 @@ const Plans = () => {
           </Card>
         ))}
       </div>
+
+      {!activeTab ? (
+        <div className="text-center text-muted mt-2">
+          Select a tab to view its plans.
+        </div>
+      ) : null}
 
       {renderPlanModal({
         isOpen: showAdd,

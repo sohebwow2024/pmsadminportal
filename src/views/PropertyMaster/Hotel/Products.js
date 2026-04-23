@@ -102,7 +102,7 @@ const Products = () => {
   const [data, setData] = useState(loadProducts);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchValue, setSearchValue] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
