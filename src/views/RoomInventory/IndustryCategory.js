@@ -196,7 +196,7 @@ const ProductCategory = () => {
     setShowUpdate(false);
   };
 
-  const toastOptions = { position: "top-right" };
+  const toastOptions = { position: "top-center" };
 
   const handleSubmit = async () => {
     setDisplay(true);
@@ -230,7 +230,7 @@ const ProductCategory = () => {
         `${c.id}` === `${selectedRow.id}` ? { ...c, name: trimmedName } : c,
       );
       persistRows(next);
-      toast.success("Category updated", { position: "top-center" });
+      toast.success("Category updated", toastOptions);
       handleCloseUpdateModal();
       return;
     }
@@ -242,18 +242,18 @@ const ProductCategory = () => {
       action: "btns",
     };
     persistRows([newRow, ...data]);
-    toast.success("Category added", { position: "top-center" });
+    toast.success("Category added", toastOptions);
     handleCloseAddModal();
   };
 
   const handleDeleteCategory = () => {
     if (!selectedRow?.id) {
-      toast.error("Please select a category to delete", { position: "top-center" });
+      toast.error("Please select a category to delete", toastOptions);
       return;
     }
     const next = data.filter((c) => `${c.id}` !== `${selectedRow.id}`);
     persistRows(next);
-    toast.success("Category deleted", { position: "top-center" });
+    toast.success("Category deleted", toastOptions);
     setSelectedRow(null);
     setCancelOpen(false);
   };

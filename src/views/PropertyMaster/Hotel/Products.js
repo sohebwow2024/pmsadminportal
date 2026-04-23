@@ -107,12 +107,23 @@ const Products = () => {
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
 
-  const toastOptions = { position: "top-right" };
+  const toastOptions = { position: "top-center" };
 
   const persistProducts = (next) => {
     setData(next);
     localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(next));
   };
+
+  const normalizeValue = (value) => value?.toString().trim().toLowerCase() || "";
+
+  const isDuplicateProduct = (product, ignoreId = null) =>
+    data.some(
+      (item) =>
+        item.id !== ignoreId &&
+        normalizeValue(item.name) === normalizeValue(product.name) &&
+        normalizeValue(item.category) === normalizeValue(product.category) &&
+        normalizeValue(item.industry) === normalizeValue(product.industry),
+    );
 
   const [show, setShow] = useState(false);
   const handleShowModal = () => setShow(!show);
@@ -159,6 +170,11 @@ const Products = () => {
   };
 
   const handleAddProduct = (product) => {
+    if (isDuplicateProduct(product)) {
+      toast.error("Product already exists", toastOptions);
+      return false;
+    }
+
     const next = [
       { id: Date.now(), ...product, action: "btns" },
       ...data,
@@ -166,14 +182,21 @@ const Products = () => {
     persistProducts(next);
     setCurrentPage(0);
     toast.success("Product added", toastOptions);
+    return true;
   };
 
   const handleUpdateProduct = (updatedProduct) => {
+    if (isDuplicateProduct(updatedProduct, updatedProduct.id)) {
+      toast.error("Product already exists", toastOptions);
+      return false;
+    }
+
     const next = data.map((p) =>
       p.id === updatedProduct.id ? { ...p, ...updatedProduct } : p,
     );
     persistProducts(next);
     toast.success("Product updated", toastOptions);
+    return true;
   };
 
   const handleDeleteProduct = () => {

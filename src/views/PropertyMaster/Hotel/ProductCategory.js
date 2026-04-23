@@ -319,7 +319,7 @@ const ProductCategory = () => {
       if (!selectedCategory?.id) return;
 
       if (nameExists(trimmedName, selectedCategory.id)) {
-        toast.error("Category already exists", { position: "top-right" });
+        toast.error("Category already exists", { position: "top-center" });
         return;
       }
 
@@ -327,7 +327,7 @@ const ProductCategory = () => {
         `${c.id}` === `${selectedCategory.id}` ? { ...c, name: trimmedName } : c,
       );
       persistCategories(next);
-      toast.success("Category updated", { position: "top-right" });
+      toast.success("Category updated", { position: "top-center" });
       setSelectedCategory(null);
       handleCloseUpdateModal();
       return;
@@ -335,7 +335,7 @@ const ProductCategory = () => {
 
     // Add Category
     if (nameExists(trimmedName)) {
-      toast.error("Category already exists", { position: "top-right" });
+      toast.error("Category already exists", { position: "top-center" });
       return;
     }
 
@@ -347,7 +347,7 @@ const ProductCategory = () => {
     };
 
     persistCategories([newRow, ...data]);
-    toast.success("Category added", { position: "top-right" });
+    toast.success("Category added", { position: "top-center" });
     setSelectedCategory(null);
     handleCloseCategoryModal();
   };
@@ -356,7 +356,7 @@ const ProductCategory = () => {
     if (!selectedCategory?.id) return;
     const next = data.filter((c) => `${c.id}` !== `${selectedCategory.id}`);
     persistCategories(next);
-    toast.success("Category deleted", { position: "top-right" });
+    toast.success("Category deleted", { position: "top-center" });
     setSelectedCategory(null);
     setCancelOpen(false);
   };

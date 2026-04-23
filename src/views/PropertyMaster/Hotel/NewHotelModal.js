@@ -207,12 +207,16 @@ const NewHotelModal = ({
         return;
       }
 
-      onAddProduct({
+      const wasAdded = onAddProduct({
         name: hotelName,
         category: productCategoryValue,
         industry: industryCategoryValue,
         desc: address,
       });
+
+      if (!wasAdded) {
+        return;
+      }
 
       handleShowModal();
       setHotelName("");

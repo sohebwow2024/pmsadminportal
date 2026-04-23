@@ -65,7 +65,7 @@ const ProductMaster = () => {
       name: "Subscription Id",
       sortable: true,
       minWidth: "150px",
-      cell: (row) => <span>{row.type}</span>,
+      cell: (row) =>  <span>{row.type}</span>,
     },
     {
       name: "Mode",
