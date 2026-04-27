@@ -453,7 +453,7 @@ const PlanPoint = () => {
                 ) : null}
               </Col>
 
-              <Col lg="12" className="mb-1">
+              {/* <Col lg="12" className="mb-1">
                 <Label className="form-label">
                   Icon <span className="text-danger">*</span>
                 </Label>
@@ -467,7 +467,7 @@ const PlanPoint = () => {
                 {display && !icon.trim() ? (
                   <span className="error_msg_lbl">Choose Icon </span>
                 ) : null}
-              </Col>
+              </Col> */}
             </Row>
             <Row>
               <Col lg="12" className="mb-1">
@@ -530,7 +530,7 @@ const PlanPoint = () => {
                 ) : null}
               </Col>
 
-              <Col lg="12" className="mb-1">
+              {/* <Col lg="12" className="mb-1">
                 <Label className="form-label">
                   Icon <span className="text-danger">*</span>
                 </Label>
@@ -544,7 +544,7 @@ const PlanPoint = () => {
                 {display && !icon.trim() ? (
                   <span className="error_msg_lbl">Choose Icon </span>
                 ) : null}
-              </Col>
+              </Col> */}
             </Row>
             <Row>
               <Col lg="12" className="mb-1">

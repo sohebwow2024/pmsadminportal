@@ -44,6 +44,33 @@ const tenureTypeOptions = [
   { value: "flexible_tenure", label: "Flexible Tenure" },
 ];
 
+const modalFooterStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.75rem",
+  justifyContent: "flex-end",
+};
+
+const modalActionButtonStyles = {
+  flex: "1 1 160px",
+};
+
+const headerGroupStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  flexWrap: "nowrap",
+  gap: "0.75rem",
+  width: "100%",
+};
+
+const headerButtonStyles = {
+  flex: "0 1 clamp(150px, 28vw, 210px)",
+  padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.8vw, 1rem)",
+  fontSize: "clamp(0.8rem, 1.4vw, 1rem)",
+  whiteSpace: "nowrap",
+};
+
 const Promocode = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -333,24 +360,30 @@ const Promocode = () => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>
-            <h2>Promocode</h2>
-          </CardTitle>
-          {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={handleShowModal}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-                className="me-1"
+          <div style={headerGroupStyles}>
+            <CardTitle className="mb-0">
+              <h2 className="mb-0">Promocode</h2>
+            </CardTitle>
+            {UserRole === "SuperAdmin" ? (
+              <Button
+                color="primary"
+                onClick={handleShowModal}
+                style={headerButtonStyles}
               >
-                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
-              </svg>
-              Add Promocode
-            </Button>
-          ) : null}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  className="me-1"
+                >
+                  <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+                </svg>
+                Add Promocode
+              </Button>
+            ) : null}
+          </div>
         </CardHeader>
         <CardBody>
           <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
@@ -448,7 +481,7 @@ const Promocode = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Promo Code <span className="text-danger">*</span>
                 </Label>
@@ -464,7 +497,7 @@ const Promocode = () => {
                 ) : null}
               </Col>
 
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Tenure Type <span className="text-danger">*</span>
                 </Label>
@@ -483,7 +516,7 @@ const Promocode = () => {
               </Col>
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Unit Volume <span className="text-danger">*</span>
                 </Label>
@@ -501,14 +534,16 @@ const Promocode = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-1" />
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModal}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
@@ -516,9 +551,11 @@ const Promocode = () => {
               color="primary"
               onClick={handleAddPromocode}
               disabled={!isPromocodeFormComplete}
+              style={modalActionButtonStyles}
             >
               Add Promocode
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
@@ -537,7 +574,7 @@ const Promocode = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Promo Code <span className="text-danger">*</span>
                 </Label>
@@ -550,7 +587,7 @@ const Promocode = () => {
                 />
               </Col>
 
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Tenure Type <span className="text-danger">*</span>
                 </Label>
@@ -566,7 +603,7 @@ const Promocode = () => {
               </Col>
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Unit Volume <span className="text-danger">*</span>
                 </Label>
@@ -581,20 +618,27 @@ const Promocode = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-1" />
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModalUpdate}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleUpdatePromocode}>
+            <Button
+              color="primary"
+              onClick={handleUpdatePromocode}
+              style={modalActionButtonStyles}
+            >
               Submit
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
