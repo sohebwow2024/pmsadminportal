@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
+import ReactPaginate from "react-paginate";
 import { Edit, Trash } from "react-feather";
 import {
   Button,
@@ -43,6 +44,33 @@ const tenureTypeOptions = [
   { value: "flexible_tenure", label: "Flexible Tenure" },
 ];
 
+const modalFooterStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.75rem",
+  justifyContent: "flex-end",
+};
+
+const modalActionButtonStyles = {
+  flex: "1 1 160px",
+};
+
+const headerGroupStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  flexWrap: "nowrap",
+  gap: "0.75rem",
+  width: "100%",
+};
+
+const headerButtonStyles = {
+  flex: "0 1 clamp(150px, 28vw, 210px)",
+  padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.8vw, 1rem)",
+  fontSize: "clamp(0.8rem, 1.4vw, 1rem)",
+  whiteSpace: "nowrap",
+};
+
 const Promocode = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -61,6 +89,11 @@ const Promocode = () => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
   const [selectedPromoId, setSelectedPromoId] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const [promoCode, setPromoCode] = useState("");
   const [tenureType, setTenureType] = useState(null);
@@ -121,6 +154,7 @@ const Promocode = () => {
 
     const payload = buildPromoPayload();
     setPromoData((prev) => [...prev, payload]);
+    setCurrentPage(0);
     toast.success("Promocode added successfully", {
       position: "top-center",
     });
@@ -147,6 +181,7 @@ const Promocode = () => {
     setPromoData((prev) =>
       prev.map((item) => (item.id === selectedPromoId ? payload : item)),
     );
+    setCurrentPage(0);
     toast.success("Promocode updated successfully", {
       position: "top-center",
     });
@@ -159,6 +194,7 @@ const Promocode = () => {
     }
 
     setPromoData((prev) => prev.filter((item) => item.id !== selectedPromoId));
+    setCurrentPage(0);
     toast.success("Promocode deleted successfully", {
       position: "top-center",
     });
@@ -171,23 +207,32 @@ const Promocode = () => {
       name: "Promo Code",
       sortable: true,
       minWidth: "120px",
+      selector: (row) => row.promo,
+      sortField: "promo",
+      selectorKey: "promo",
       cell: (row) => <span>{row.promo}</span>,
     },
     {
       name: "Tenure Type",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.type,
+      sortField: "type",
+      selectorKey: "type",
       cell: (row) => <span>{row.type}</span>,
     },
     {
       name: "Unit Volume",
       sortable: true,
       minWidth: "160px",
+      selector: (row) => row.volume,
+      sortField: "volume",
+      selectorKey: "volume",
       cell: (row) => <span>{row.volume}</span>,
     },
     {
       name: "Action",
-      sortable: true,
+      sortable: false,
       center: true,
       width: "9rem",
       selector: (row) => (
@@ -210,38 +255,188 @@ const Promocode = () => {
     },
   ];
 
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return promoData;
+    }
+
+    return promoData.filter((item) =>
+      [item.promo, item.type, item.volume]
+        .filter(Boolean)
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [promoData, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${firstRow?.[sortField] ?? ""}`.toLowerCase();
+      const secondValue = `${secondRow?.[sortField] ?? ""}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "promo");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
+
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>
-            <h2>Promocode</h2>
-          </CardTitle>
-          {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={handleShowModal}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-                className="me-1"
+          <div style={headerGroupStyles}>
+            <CardTitle className="mb-0">
+              <h2 className="mb-0">Promocode</h2>
+            </CardTitle>
+            {UserRole === "SuperAdmin" ? (
+              <Button
+                color="primary"
+                onClick={handleShowModal}
+                style={headerButtonStyles}
               >
-                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
-              </svg>
-              Add Promocode
-            </Button>
-          ) : null}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  className="me-1"
+                >
+                  <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+                </svg>
+                Add Promocode
+              </Button>
+            ) : null}
+          </div>
         </CardHeader>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={promoData}
+                data={paginatedData}
                 columns={hotelTable}
                 className="react-dataTable"
+                keyField="id"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>
@@ -286,7 +481,7 @@ const Promocode = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Promo Code <span className="text-danger">*</span>
                 </Label>
@@ -302,7 +497,7 @@ const Promocode = () => {
                 ) : null}
               </Col>
 
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Tenure Type <span className="text-danger">*</span>
                 </Label>
@@ -321,7 +516,7 @@ const Promocode = () => {
               </Col>
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Unit Volume <span className="text-danger">*</span>
                 </Label>
@@ -339,14 +534,16 @@ const Promocode = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-1" />
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModal}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
@@ -354,9 +551,11 @@ const Promocode = () => {
               color="primary"
               onClick={handleAddPromocode}
               disabled={!isPromocodeFormComplete}
+              style={modalActionButtonStyles}
             >
               Add Promocode
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
@@ -375,7 +574,7 @@ const Promocode = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Promo Code <span className="text-danger">*</span>
                 </Label>
@@ -388,7 +587,7 @@ const Promocode = () => {
                 />
               </Col>
 
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Tenure Type <span className="text-danger">*</span>
                 </Label>
@@ -404,7 +603,7 @@ const Promocode = () => {
               </Col>
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Unit Volume <span className="text-danger">*</span>
                 </Label>
@@ -419,20 +618,27 @@ const Promocode = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-1" />
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModalUpdate}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleUpdatePromocode}>
+            <Button
+              color="primary"
+              onClick={handleUpdatePromocode}
+              style={modalActionButtonStyles}
+            >
               Submit
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>

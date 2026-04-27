@@ -248,13 +248,18 @@ const EditHotelModal = ({
         return;
       }
 
-      onUpdateProduct({
+      const wasUpdated = onUpdateProduct({
         ...product,
         name: hotelName,
         category: productCategoryValue,
         industry: industryCategoryValue,
         desc: address,
       });
+
+      if (!wasUpdated) {
+        return;
+      }
+
       handleCloseModal();
       return;
     }

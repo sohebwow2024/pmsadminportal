@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
+import ReactPaginate from "react-paginate";
 import {
   Card,
   CardBody,
@@ -11,6 +12,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
+  Input,
 } from "reactstrap";
 import { Edit, Trash } from "react-feather";
 import { toast } from "react-hot-toast";
@@ -96,6 +98,11 @@ const HotelManagement = () => {
   const [cancelOpen, setCancelOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
   const [clients, setClients] = useState(loadClients);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const persistClients = (nextClients) => {
     setClients(nextClients);
@@ -109,6 +116,7 @@ const HotelManagement = () => {
   const handleAddClient = (clientData) => {
     const nextClients = [buildClientRecord(clientData), ...clients];
     persistClients(nextClients);
+    setCurrentPage(0);
     toast.success("Client added successfully", { position: "top-right" });
   };
 
@@ -130,6 +138,7 @@ const HotelManagement = () => {
 
     persistClients(nextClients);
     setSelectedClient(null);
+    setCurrentPage(0);
     toast.success("Client updated successfully", { position: "top-right" });
   };
 
@@ -147,6 +156,7 @@ const HotelManagement = () => {
     persistClients(nextClients);
     setSelectedClient(null);
     setCancelOpen(false);
+    setCurrentPage(0);
     toast.success("Client deleted successfully", { position: "top-right" });
   };
 
@@ -166,76 +176,100 @@ const HotelManagement = () => {
       sortable: true,
       width: "12rem",
       selector: (row) => row.type,
+      sortField: "type",
+      selectorKey: "type",
     },
     {
       name: "Company Size",
       sortable: true,
       width: "12rem",
       selector: (row) => row.size,
+      sortField: "size",
+      selectorKey: "size",
     },
     {
       name: "Company Industry",
       sortable: true,
       width: "12rem",
       selector: (row) => row.industry,
+      sortField: "industry",
+      selectorKey: "industry",
     },
     {
       name: "Company Name",
       sortable: true,
       width: "12rem",
       selector: (row) => row.name,
+      sortField: "name",
+      selectorKey: "name",
     },
     {
       name: "Tax Info",
       sortable: true,
       width: "12rem",
       selector: (row) => row.tax,
+      sortField: "tax",
+      selectorKey: "tax",
     },
     {
       name: "Email",
       sortable: true,
       width: "13rem",
       selector: (row) => row.email,
+      sortField: "email",
+      selectorKey: "email",
     },
     {
       name: "Phone No.",
       sortable: true,
       width: "10rem",
       selector: (row) => row.phone,
+      sortField: "phone",
+      selectorKey: "phone",
     },
     {
       name: "Address",
       sortable: true,
       width: "12rem",
       selector: (row) => row.address,
+      sortField: "address",
+      selectorKey: "address",
     },
     {
       name: "Country",
       sortable: true,
       width: "7rem",
       selector: (row) => row.country,
+      sortField: "country",
+      selectorKey: "country",
     },
     {
       name: "State",
       sortable: true,
       width: "10rem",
       selector: (row) => row.state,
+      sortField: "state",
+      selectorKey: "state",
     },
     {
       name: "City",
       sortable: true,
       width: "10rem",
       selector: (row) => row.city,
+      sortField: "city",
+      selectorKey: "city",
     },
     {
       name: "Pincode",
       sortable: true,
       width: "8rem",
       selector: (row) => row.pincode,
+      sortField: "pincode",
+      selectorKey: "pincode",
     },
     {
       name: "Action",
-      sortable: true,
+      sortable: false,
       center: true,
       width: "9rem",
 
@@ -259,6 +293,120 @@ const HotelManagement = () => {
       ),
     },
   ];
+
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return clients;
+    }
+
+    return clients.filter((item) =>
+      [
+        item.type,
+        item.size,
+        item.industry,
+        item.name,
+        item.tax,
+        item.email,
+        item.phone,
+        item.address,
+        item.country,
+        item.state,
+        item.city,
+        item.pincode,
+      ]
+        .filter(Boolean)
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [clients, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${firstRow?.[sortField] ?? ""}`.toLowerCase();
+      const secondValue = `${secondRow?.[sortField] ?? ""}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "name");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
 
   return (
     <>
@@ -289,15 +437,57 @@ const HotelManagement = () => {
           {/* ) : null} */}
         </CardHeader>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={clients}
+                data={paginatedData}
                 columns={Columns}
                 keyField="id"
                 className="react-dataTable"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>

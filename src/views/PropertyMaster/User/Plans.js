@@ -18,7 +18,7 @@ import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 
-const planTabs = ["PMS", "LLM", "BILLEX", "RESTAURANT"];
+const defaultPlanTabs = ["PMS", "LLM", "CRM", "RESTAURANT"];
 
 const billingCycleOptions = [
   { value: "monthly", label: "Monthly" },
@@ -30,7 +30,6 @@ const currencyOptions = [
   { value: "USD", label: "USD" },
   { value: "INR", label: "INR" },
   { value: "EUR", label: "EUR" },
-  { value: "GBP", label: "GBP" },
 ];
 
 const moduleOptions = [
@@ -54,51 +53,158 @@ const createDefaultForm = () => ({
   includedModules: [],
 });
 
-const basePlans = [
-  {
-    name: "Monthly",
-    price: "99.00",
-    billingCycle: "monthly",
-    currency: "USD",
-    duration: "30",
-    description: "Basic plan for small hotels",
-    includedModules: ["Front Office", "Housekeeping"],
-    billingText: "per month",
-    status: "Active",
-  },
-  {
-    name: "Quarterly",
-    price: "299.00",
-    billingCycle: "quarterly",
-    currency: "USD",
-    duration: "30",
-    description: "Basic plan for small hotels",
-    includedModules: ["Front Office", "Housekeeping", "Pos", "Reports"],
-    billingText: "per month",
-    status: "Active",
-  },
-  {
-    name: "Yearly",
-    price: "2,999.00",
-    billingCycle: "yearly",
-    currency: "USD",
-    duration: "30",
-    description: "Basic plan for small hotels",
-    includedModules: [
-      "Front Office",
-      "Housekeeping",
-      "Pos",
-      "Reports",
-      "Accounting",
-      "Integrations",
-    ],
-    billingText: "per 365 days",
-    status: "Active",
-  },
-];
+const initialPlanCatalog = {
+  PMS: [
+    {
+      name: "Monthly",
+      price: "99.00",
+      billingCycle: "monthly",
+      currency: "USD",
+      duration: "30",
+      description: "Starter PMS plan for boutique hotels",
+      includedModules: ["Front Office", "Housekeeping"],
+      billingText: "per month",
+      status: "Active",
+    },
+    {
+      name: "Quarterly",
+      price: "279.00",
+      billingCycle: "quarterly",
+      currency: "USD",
+      duration: "90",
+      description: "Operational package for growing hotel teams",
+      includedModules: ["Front Office", "Housekeeping", "Pos", "Reports"],
+      billingText: "per quarter",
+      status: "Active",
+    },
+    {
+      name: "Yearly",
+      price: "1,049.00",
+      billingCycle: "yearly",
+      currency: "USD",
+      duration: "365",
+      description: "Complete PMS suite with finance and integrations",
+      includedModules: [
+        "Front Office",
+        "Housekeeping",
+        "Pos",
+        "Reports",
+        "Accounting",
+        "Integrations",
+      ],
+      billingText: "per 365 days",
+      status: "Active",
+    },
+  ],
+  LLM: [
+    {
+      name: "Monthly",
+      price: "149.00",
+      billingCycle: "monthly",
+      currency: "USD",
+      duration: "30",
+      description: "AI assistant plan for guest messaging and drafts",
+      includedModules: ["Front Office", "Reports"],
+      billingText: "per month",
+      status: "Active",
+    },
+    {
+      name: "Quarterly",
+      price: "429.00",
+      billingCycle: "quarterly",
+      currency: "USD",
+      duration: "90",
+      description: "Automation bundle for reservation and team workflows",
+      includedModules: ["Front Office", "Reports", "Accounting"],
+      billingText: "per quarter",
+      status: "Active",
+    },
+    {
+      name: "Yearly",
+      price: "1,599.00",
+      billingCycle: "yearly",
+      currency: "USD",
+      duration: "365",
+      description: "Enterprise AI plan with analytics and integrations",
+      includedModules: ["Front Office", "Reports", "Accounting", "Integrations"],
+      billingText: "per 365 days",
+      status: "Active",
+    },
+  ],
+  CRM: [
+    {
+      name: "Monthly",
+      price: "79.00",
+      billingCycle: "monthly",
+      currency: "USD",
+      duration: "30",
+      description: "Guest relationship tools for small sales teams",
+      includedModules: ["Front Office", "Reports"],
+      billingText: "per month",
+      status: "Active",
+    },
+    {
+      name: "Quarterly",
+      price: "225.00",
+      billingCycle: "quarterly",
+      currency: "USD",
+      duration: "90",
+      description: "Campaign and retention package for repeat guests",
+      includedModules: ["Front Office", "Reports", "Integrations"],
+      billingText: "per quarter",
+      status: "Active",
+    },
+    {
+      name: "Yearly",
+      price: "840.00",
+      billingCycle: "yearly",
+      currency: "USD",
+      duration: "365",
+      description: "Full CRM plan with reporting and automation support",
+      includedModules: ["Front Office", "Reports", "Accounting", "Integrations"],
+      billingText: "per 365 days",
+      status: "Active",
+    },
+  ],
+  RESTAURANT: [
+    {
+      name: "Monthly",
+      price: "129.00",
+      billingCycle: "monthly",
+      currency: "USD",
+      duration: "30",
+      description: "Restaurant operations plan for daily POS billing",
+      includedModules: ["Pos", "Reports"],
+      billingText: "per month",
+      status: "Active",
+    },
+    {
+      name: "Quarterly",
+      price: "369.00",
+      billingCycle: "quarterly",
+      currency: "USD",
+      duration: "90",
+      description: "Mid-tier dining package with kitchen reporting",
+      includedModules: ["Pos", "Reports", "Accounting"],
+      billingText: "per quarter",
+      status: "Active",
+    },
+    {
+      name: "Yearly",
+      price: "1,389.00",
+      billingCycle: "yearly",
+      currency: "USD",
+      duration: "365",
+      description: "Full restaurant suite with stock and outlet sync",
+      includedModules: ["Pos", "Reports", "Accounting", "Integrations"],
+      billingText: "per 365 days",
+      status: "Active",
+    },
+  ],
+};
 
-const initialPlans = planTabs.flatMap((tab) =>
-  basePlans.map((plan, index) => ({
+const initialPlans = defaultPlanTabs.flatMap((tab) =>
+  (initialPlanCatalog[tab] || []).map((plan, index) => ({
     ...plan,
     id: `${tab.toLowerCase()}-${index + 1}`,
     product: tab,
@@ -146,8 +252,24 @@ const getBillingText = (billingCycle, duration) => {
   return `per ${duration} days`;
 };
 
+const normalizeProductName = (value) => value.trim();
+
+const getPlanTabs = (plans) => {
+  const tabs = [...defaultPlanTabs];
+
+  plans.forEach((plan) => {
+    const nextTab = normalizeProductName(plan.category || plan.product || "");
+
+    if (nextTab && !tabs.includes(nextTab)) {
+      tabs.push(nextTab);
+    }
+  });
+
+  return tabs;
+};
+
 const Plans = () => {
-  const defaultTab = planTabs[0];
+  const defaultTab = defaultPlanTabs[0];
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -166,6 +288,13 @@ const Plans = () => {
   const [addForm, setAddForm] = useState(createDefaultForm());
   const [editForm, setEditForm] = useState(createDefaultForm());
   const [selectedPlanId, setSelectedPlanId] = useState("");
+  const planTabs = getPlanTabs(plans);
+
+  useEffect(() => {
+    if (activeTab && !planTabs.includes(activeTab)) {
+      setActiveTab("");
+    }
+  }, [activeTab, defaultTab, planTabs]);
 
   const updateAddForm = (field, value) => {
     setAddForm((prev) => ({
@@ -219,11 +348,13 @@ const Plans = () => {
       return;
     }
 
+    const productName = normalizeProductName(addForm.product);
+
     const newPlan = {
       id: `plan-${Date.now()}`,
       name: addForm.name.trim(),
-      product: addForm.product.trim(),
-      category: addForm.category,
+      product: productName,
+      category: productName,
       price: addForm.price,
       billingCycle: addForm.billingCycle,
       currency: addForm.currency,
@@ -235,6 +366,7 @@ const Plans = () => {
     };
 
     setPlans((prev) => [...prev, newPlan]);
+    setActiveTab(productName);
     closeAddModal();
     toast.success("Plan added successfully.", {
       position: "top-center",
@@ -262,14 +394,16 @@ const Plans = () => {
       return;
     }
 
+    const productName = normalizeProductName(editForm.product);
+
     setPlans((prev) =>
       prev.map((plan) =>
         plan.id === selectedPlanId
           ? {
               ...plan,
               name: editForm.name.trim(),
-              product: editForm.product.trim(),
-              category: editForm.category,
+              product: productName,
+              category: productName,
               price: editForm.price,
               billingCycle: editForm.billingCycle,
               currency: editForm.currency,
@@ -284,6 +418,7 @@ const Plans = () => {
           : plan,
       ),
     );
+    setActiveTab(productName);
     closeEditModal();
     toast.success("Plan updated successfully.", {
       position: "top-center",
@@ -629,6 +764,12 @@ const Plans = () => {
           </Card>
         ))}
       </div>
+
+      {!activeTab ? (
+        <div className="text-center text-muted mt-2">
+          Select a tab to view its plans.
+        </div>
+      ) : null}
 
       {renderPlanModal({
         isOpen: showAdd,
