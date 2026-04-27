@@ -89,15 +89,15 @@ const ProductMaster = () => {
       // name: 'Discount Amount',
       name: "Product Id",
       sortable: true,
-      // minWidth: "250px",
+      minWidth: "180px",
       cell: (row) => <span>{row.room}</span>,
     },
-    {
-      name: "Discount Amount",
-      sortable: true,
-      minWidth: "180px",
-      cell: (row) => <span>{row.disAmount}</span>,
-    },
+    // {
+    //   name: "Discount Amount",
+    //   sortable: true,
+    //   minWidth: "180px",
+    //   cell: (row) => <span>{row.disAmount}</span>,
+    // },
 
     // {
     //   name: "Actions",
