@@ -58,6 +58,13 @@ const defaultClients = [
   },
 ];
 
+const headerButtonStyles = {
+  flex: "0 1 clamp(132px, 24vw, 190px)",
+  padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.65rem, 1.8vw, 1rem)",
+  fontSize: "clamp(0.8rem, 1.35vw, 1rem)",
+  whiteSpace: "nowrap",
+};
+
 const buildClientRecord = (clientData, existingId = null) => {
   const address = [clientData.address1, clientData.address2]
     .filter((value) => `${value || ""}`.trim())
@@ -411,9 +418,9 @@ const HotelManagement = () => {
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Client Manager</h2>
+        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
+          <CardTitle className="mb-0">
+            <h2 className="mb-0">Client Manager</h2>
           </CardTitle>
           {/* {UserRole === "SuperAdmin" ? ( */}
           <Button
@@ -421,6 +428,8 @@ const HotelManagement = () => {
             onClick={() => {
               setNewGuest(true);
             }}
+            className="flex-shrink-0"
+            style={headerButtonStyles}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -438,13 +447,14 @@ const HotelManagement = () => {
         </CardHeader>
         <CardBody>
           <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
-            <Col md="6" className="d-flex align-items-center">
+            <Col xs="12" md="6">
+              <div className="d-flex flex-wrap align-items-center gap-50">
               <span className="me-50">Show</span>
               <Input
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
+                style={{ width: "90px", minWidth: "90px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
@@ -454,39 +464,43 @@ const HotelManagement = () => {
                 <option value={100}>100</option>
               </Input>
               <span className="ms-50">entries</span>
+              </div>
             </Col>
-            <Col md="6">
-              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+            <Col xs="12" md="6">
+              <div className="d-flex flex-wrap align-items-center justify-content-md-end justify-content-start gap-50">
                 <span className="me-50">Search:</span>
                 <Input
                   type="text"
                   value={searchValue}
                   onChange={handleSearchChange}
-                  style={{ maxWidth: "340px" }}
+                  style={{ width: "100%", maxWidth: "340px", minWidth: "220px" }}
                 />
               </div>
             </Col>
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={Columns}
-                keyField="id"
-                className="react-dataTable"
-                onSort={handleSort}
-                sortServer
-              />
+              <div style={{ overflowX: "auto" }}>
+                <DataTable
+                  noHeader
+                  data={paginatedData}
+                  columns={Columns}
+                  keyField="id"
+                  className="react-dataTable"
+                  onSort={handleSort}
+                  sortServer
+                  responsive
+                />
+              </div>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
-            <Col md="6">
+            <Col xs="12" md="6">
               <div className="text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
-            <Col md="6">
+            <Col xs="12" md="6">
               <CustomPagination />
             </Col>
           </Row>
