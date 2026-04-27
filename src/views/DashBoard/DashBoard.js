@@ -557,9 +557,31 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-primary">
-                    <i className="icon-base ti tabler-truck icon-28px"></i>
+                <div className="me-4">
+                  <span className="rounded bg-label-primary">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-packages text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5" />
+                      <path d="M2 13.5v5.5l5 3" />
+                      <path d="M7 16.545l5 -3.03" />
+                      <path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5" />
+                      <path d="M12 19l5 3" />
+                      <path d="M17 16.5l5 -3" />
+                      <path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5" />
+                      <path d="M7 5.03v5.455" />
+                      <path d="M12 8l5 -3" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">42</h4>
@@ -581,9 +603,26 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className	="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-warning">
-                    <i className="icon-base ti tabler-alert-triangle icon-28px"></i>
+                <div className="me-4">
+                  <span className="rounded bg-label-warning">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-credit-card text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8" />
+                      <path d="M3 10l18 0" />
+                      <path d="M7 15l.01 0" />
+                      <path d="M11 15l2 0" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">8</h4>
@@ -605,9 +644,26 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-danger">
-                    <i className="icon-base ti tabler-git-fork icon-28px"></i>
+                <div className="me-4">
+                  <span className="rounded bg-label-danger">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-users text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                      <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                      <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">27</h4>
@@ -660,9 +716,24 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-info">
-                    <i className="icon-base ti tabler-clock icon-28px"></i>
+                <div className=" me-4">
+                  <span className=" rounded bg-label-info">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-refresh text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                      <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">13</h4>
@@ -683,9 +754,25 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-info">
-                    <i className="icon-base ti tabler-clock icon-28px"></i>
+                <div className="me-4">
+                  <span className="rounded bg-label-info">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-user-check text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                      <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                      <path d="M15 19l2 2l4 -4" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">0</h4>
@@ -706,9 +793,24 @@ const DashBoard = () => {
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="avatar me-4">
-                  <span className="avatar-initial rounded bg-label-info">
-                    <i className="icon-base ti tabler-clock icon-28px"></i>
+                <div className="me-4">
+                  <span className="rounded bg-label-info">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-currency-rupee text-primary"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18 5h-11h3a4 4 0 0 1 0 8h-3l6 6" />
+                      <path d="M7 9l11 0" />
+                    </svg>
                   </span>
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">0</h4>
