@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
+import ReactPaginate from "react-paginate";
 import { Edit, Trash } from "react-feather";
 import {
   Button,
@@ -68,6 +69,11 @@ const PlanRate = () => {
   };
   const [show, setShow] = useState(false);
   const [planRates, setPlanRates] = useState(initialPlanRateData);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const [showUpdate, setShowUpdate] = useState(false);
   const [selectedPlanRateId, setSelectedPlanRateId] = useState(null);
@@ -122,29 +128,41 @@ const PlanRate = () => {
       name: "Tenure Type",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.tenureType?.label || "",
+      sortField: "tenureTypeLabel",
+      selectorKey: "tenureTypeLabel",
       cell: (row) => <span>{row.tenureType?.label || "-"}</span>,
     },
     {
       name: "Dp Rate",
       sortable: true,
       minWidth: "50px",
+      selector: (row) => row.dprate,
+      sortField: "dprate",
+      selectorKey: "dprate",
       cell: (row) => <span>{row.dprate}</span>,
     },
     {
       name: "Selling Price",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.sellingprice,
+      sortField: "sellingprice",
+      selectorKey: "sellingprice",
       cell: (row) => <span>{row.sellingprice}</span>,
     },
     {
       name: "isDiscountable",
       sortable: true,
       minWidth: "120px",
+      selector: (row) => (row.isdiscount ? "Yes" : "No"),
+      sortField: "isdiscountLabel",
+      selectorKey: "isdiscountLabel",
       cell: (row) => <span>{row.isdiscount ? "Yes" : "No"}</span>,
     },
     {
       name: "Action",
-      sortable: true,
+      sortable: false,
       center: true,
       width: "9rem",
 
@@ -175,6 +193,125 @@ const PlanRate = () => {
       ),
     },
   ];
+
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return planRates;
+    }
+
+    return planRates.filter((item) =>
+      [
+        item.tenureType?.label,
+        item.dprate,
+        item.sellingprice,
+        item.isdiscount ? "Yes" : "No",
+      ]
+        .filter(Boolean)
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [planRates, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const getSortValue = (row) => {
+      if (sortField === "tenureTypeLabel") {
+        return row.tenureType?.label || "";
+      }
+
+      if (sortField === "isdiscountLabel") {
+        return row.isdiscount ? "Yes" : "No";
+      }
+
+      return row?.[sortField] ?? "";
+    };
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${getSortValue(firstRow)}`.toLowerCase();
+      const secondValue = `${getSortValue(secondRow)}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "tenureTypeLabel");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
+
   const [dpRate, setDpRate] = useState("");
   const [sellingPrice, setSellingPrice] = useState("");
   const [tenureTypeValue, setTenureTypeValue] = useState(null);
@@ -242,6 +379,7 @@ const PlanRate = () => {
 
     const payload = buildPlanRatePayload();
     setPlanRates((prev) => [...prev, payload]);
+    setCurrentPage(0);
     toast.success("Plan rate added", {
       position: "top-center",
     });
@@ -257,6 +395,7 @@ const PlanRate = () => {
     setPlanRates((prev) =>
       prev.map((item) => (item.id === selectedPlanRateId ? payload : item)),
     );
+    setCurrentPage(0);
     toast.success("Plan rate updated", {
       position: "top-center",
     });
@@ -269,6 +408,7 @@ const PlanRate = () => {
     }
 
     setPlanRates((prev) => prev.filter((item) => item.id !== selectedPlanRateId));
+    setCurrentPage(0);
     toast.success("Plan rate deleted", {
       position: "top-center",
     });
@@ -300,14 +440,57 @@ const PlanRate = () => {
           ) : null}
         </CardHeader>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={planRates}
+                data={paginatedData}
                 columns={hotelTable}
                 className="react-dataTable"
+                keyField="id"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>

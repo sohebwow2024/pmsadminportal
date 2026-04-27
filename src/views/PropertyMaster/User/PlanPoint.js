@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
+import ReactPaginate from "react-paginate";
 import { Edit, Trash } from "react-feather";
 import {
   Button,
@@ -52,6 +53,11 @@ const PlanPoint = () => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
   const [selectedPlanPointId, setSelectedPlanPointId] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   const [pointName, setPointName] = useState("");
   const [icon, setIcon] = useState("");
@@ -111,6 +117,7 @@ const PlanPoint = () => {
 
     const payload = buildPlanPointPayload();
     setPlanPoints((prev) => [...prev, payload]);
+    setCurrentPage(0);
     toast.success("Plan point added", {
       position: "top-center",
     });
@@ -135,6 +142,7 @@ const PlanPoint = () => {
     setPlanPoints((prev) =>
       prev.map((item) => (item.id === selectedPlanPointId ? payload : item)),
     );
+    setCurrentPage(0);
     toast.success("Plan point updated", {
       position: "top-center",
     });
@@ -149,6 +157,7 @@ const PlanPoint = () => {
     setPlanPoints((prev) =>
       prev.filter((item) => item.id !== selectedPlanPointId),
     );
+    setCurrentPage(0);
     toast.success("Plan point deleted", {
       position: "top-center",
     });
@@ -161,23 +170,32 @@ const PlanPoint = () => {
       name: "Plan Point Name",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.name,
+      sortField: "name",
+      selectorKey: "name",
       cell: (row) => <span>{row.name}</span>,
     },
     {
       name: "Plan Point Icon",
       sortable: true,
       minWidth: "180px",
+      selector: (row) => row.icons,
+      sortField: "icons",
+      selectorKey: "icons",
       cell: (row) => <span>{row.icons}</span>,
     },
     {
       name: "Description",
       sortable: true,
       minWidth: "220px",
+      selector: (row) => row.description || "",
+      sortField: "description",
+      selectorKey: "description",
       cell: (row) => <span>{row.description || "-"}</span>,
     },
     {
       name: "Action",
-      sortable: true,
+      sortable: false,
       center: true,
       width: "9rem",
       selector: (row) => (
@@ -199,6 +217,107 @@ const PlanPoint = () => {
       ),
     },
   ];
+
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return planPoints;
+    }
+
+    return planPoints.filter((item) =>
+      [item.name, item.icons, item.description]
+        .filter(Boolean)
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [planPoints, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${firstRow?.[sortField] ?? ""}`.toLowerCase();
+      const secondValue = `${secondRow?.[sortField] ?? ""}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "name");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
 
   return (
     <>
@@ -224,14 +343,57 @@ const PlanPoint = () => {
           ) : null}
         </CardHeader>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={planPoints}
+                data={paginatedData}
                 columns={planPointTable}
                 className="react-dataTable"
+                keyField="id"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>
