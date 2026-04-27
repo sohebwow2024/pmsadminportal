@@ -8,7 +8,7 @@ import { selectThemeColors } from '@utils'
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Card, CardBody, CardHeader, CardTitle, Col, Form, Input, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import axios from '../../API/axios'
 import ReactQuill from 'react-quill';
-import 'quilljs/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
 const NewFaqModal = ({ show, setShow, handleModal, getFAQ, category }) => {
     const getUserData = useSelector(state => state.userManageSlice.userData)
     const { LoginID, Token } = getUserData
