@@ -34,6 +34,24 @@ const initialPlanPointData = [
   },
 ];
 
+const modalFooterStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.75rem",
+  justifyContent: "flex-end",
+};
+
+const modalActionButtonStyles = {
+  flex: "1 1 160px",
+};
+
+const headerButtonStyles = {
+  flex: "0 1 clamp(148px, 26vw, 215px)",
+  padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.8vw, 1rem)",
+  fontSize: "clamp(0.8rem, 1.35vw, 1rem)",
+  whiteSpace: "nowrap",
+};
+
 const PlanPoint = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -198,12 +216,17 @@ const PlanPoint = () => {
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Plan Points</h2>
+        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
+          <CardTitle className="mb-0">
+            <h2 className="mb-0">Plan Points</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={handleShowModal}>
+            <Button
+              color="primary"
+              onClick={handleShowModal}
+              className="flex-shrink-0"
+              style={headerButtonStyles}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -221,12 +244,15 @@ const PlanPoint = () => {
         <CardBody>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={planPoints}
-                columns={planPointTable}
-                className="react-dataTable"
-              />
+              <div style={{ overflowX: "auto" }}>
+                <DataTable
+                  noHeader
+                  data={planPoints}
+                  columns={planPointTable}
+                  className="react-dataTable"
+                  responsive
+                />
+              </div>
             </Col>
           </Row>
         </CardBody>
@@ -271,7 +297,7 @@ const PlanPoint = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Plan Point Name <span className="text-danger">*</span>
                 </Label>
@@ -303,7 +329,7 @@ const PlanPoint = () => {
               </Col> */}
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">Description</Label>
                 <Input
                   type="textarea"
@@ -315,20 +341,27 @@ const PlanPoint = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-2"></hr>
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModalUpdate}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleUpdatePlanPoint}>
+            <Button
+              color="primary"
+              onClick={handleUpdatePlanPoint}
+              style={modalActionButtonStyles}
+            >
               Submit
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
@@ -348,7 +381,7 @@ const PlanPoint = () => {
         <ModalBody className="px-sm-2 pb-2">
           <Form>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">
                   Plan Point Name <span className="text-danger">*</span>
                 </Label>
@@ -380,7 +413,7 @@ const PlanPoint = () => {
               </Col> */}
             </Row>
             <Row>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label">Description</Label>
                 <Input
                   type="textarea"
@@ -392,14 +425,16 @@ const PlanPoint = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr className="mt-2"></hr>
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
               onClick={handleShowModal}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
@@ -407,9 +442,11 @@ const PlanPoint = () => {
               color="primary"
               onClick={handleAddPlanPoint}
               disabled={!isFormValid}
+              style={modalActionButtonStyles}
             >
               Add Plan Point
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>

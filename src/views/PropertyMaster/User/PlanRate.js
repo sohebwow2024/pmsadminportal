@@ -39,6 +39,24 @@ const initialPlanRateData = [
   },
 ];
 
+const modalFooterStyles = {
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "0.75rem",
+  justifyContent: "flex-end",
+};
+
+const modalActionButtonStyles = {
+  flex: "1 1 160px",
+};
+
+const headerButtonStyles = {
+  flex: "0 1 clamp(148px, 26vw, 210px)",
+  padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.8vw, 1rem)",
+  fontSize: "clamp(0.8rem, 1.35vw, 1rem)",
+  whiteSpace: "nowrap",
+};
+
 const PlanRate = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -279,12 +297,17 @@ const PlanRate = () => {
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Plan Rate</h2>
+        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
+          <CardTitle className="mb-0">
+            <h2 className="mb-0">Plan Rate</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
-            <Button color="primary" onClick={handleShowModal}>
+            <Button
+              color="primary"
+              onClick={handleShowModal}
+              className="flex-shrink-0"
+              style={headerButtonStyles}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -302,12 +325,15 @@ const PlanRate = () => {
         <CardBody>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={planRates}
-                columns={hotelTable}
-                className="react-dataTable"
-              />
+              <div style={{ overflowX: "auto" }}>
+                <DataTable
+                  noHeader
+                  data={planRates}
+                  columns={hotelTable}
+                  className="react-dataTable"
+                  responsive
+                />
+              </div>
             </Col>
           </Row>
         </CardBody>
@@ -326,7 +352,7 @@ const PlanRate = () => {
         <ModalBody>
           <h3 className="text-center">Are you sure you want to delete?</h3>
           <Col className="text-center">
-          <Button
+            <Button
               className="m-1"
               color="primary"
               onClick={() => handleCancelOpen()}
@@ -363,7 +389,7 @@ const PlanRate = () => {
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="countries">
                     Tenure Type <span className="text-danger">*</span>
                   </Label>
@@ -381,7 +407,7 @@ const PlanRate = () => {
                   ) : null}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Dp Rate <span className="text-danger">*</span>
                   </Label>
@@ -399,7 +425,7 @@ const PlanRate = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="countries">
                     Selling Price <span className="text-danger">*</span>
                   </Label>
@@ -416,7 +442,7 @@ const PlanRate = () => {
                     <span className="error_msg_lbl">Enter Selling Price </span>
                   ) : null}
                 </Col>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="address">
                     isDiscountable{" "}
                   </Label>
@@ -435,23 +461,27 @@ const PlanRate = () => {
             </Form>
           </>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr></hr>
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
               onClick={handleShowModalUpdate}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
-            <Button color="primary" onClick={handleUpdatePlanRate}>
+            <Button
+              color="primary"
+              onClick={handleUpdatePlanRate}
+              style={modalActionButtonStyles}
+            >
               Submit
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
@@ -473,7 +503,7 @@ const PlanRate = () => {
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="countries">
                     Tenure Type <span className="text-danger">*</span>
                   </Label>
@@ -491,7 +521,7 @@ const PlanRate = () => {
                   ) : null}
                 </Col>
 
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Dp Rate <span className="text-danger">*</span>
                   </Label>
@@ -509,7 +539,7 @@ const PlanRate = () => {
                 </Col>
               </Row>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="countries">
                     Selling Price <span className="text-danger">*</span>
                   </Label>
@@ -526,7 +556,7 @@ const PlanRate = () => {
                     <span className="error_msg_lbl">Enter Selling Price </span>
                   ) : null}
                 </Col>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" lg="6" className="mb-1">
                   <Label className="form-label" for="address">
                     isDiscountable{" "}
                   </Label>
@@ -545,17 +575,16 @@ const PlanRate = () => {
             </Form>
           </>
         </ModalBody>
-        <Row className="px-1">
+        <Row className="px-1 px-sm-2">
           <hr></hr>
-          <Col md="12 text-lg-end text-md-center pb-2">
+          <Col xs="12" className="pb-2">
+            <div style={modalFooterStyles}>
             <Button
-              className="me-1 btn btn-danger"
+              className="btn btn-danger"
               color="secondary"
               outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
               onClick={handleShowModal}
+              style={modalActionButtonStyles}
             >
               Cancel
             </Button>
@@ -563,9 +592,11 @@ const PlanRate = () => {
               color="primary"
               onClick={handleAddPlanRate}
               disabled={!isPlanRateFormComplete}
+              style={modalActionButtonStyles}
             >
               Add Plan Rate
             </Button>
+            </div>
           </Col>
         </Row>
       </Modal>
