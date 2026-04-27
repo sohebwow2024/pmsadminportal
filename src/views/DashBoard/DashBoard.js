@@ -564,10 +564,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">42</h4>
               </div>
-              <p className="mb-1">Total Products</p>
+              <p className="mb-1 fs-3 fw-bold">Total Products</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">+18.2%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">+18.2%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p> 
             </div>
           </div>
@@ -588,10 +588,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">8</h4>
               </div>
-              <p className="mb-1">Total Plans</p>
+              <p className="mb-1 fs-3 fw-bold">Total Plans</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">-8.7%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">-8.7%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p>
             </div>
           </div>
@@ -612,10 +612,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">27</h4>
               </div>
-              <p className="mb-1">Total Clients</p>
+              <p className="mb-1 fs-3 fw-bold">Total Clients</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">+4.3%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">+4.3%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p>
             </div>
           </div>
@@ -667,10 +667,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">13</h4>
               </div>
-              <p className="mb-1">Total Subscription</p>
+              <p className="mb-1 fs-3 fw-bold">Total Subscription</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">-2.5%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p>
             </div>
           </div>
@@ -690,10 +690,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">0</h4>
               </div>
-              <p className="mb-1">Active Client</p>
+              <p className="mb-1 fs-3 fw-bold">Active Client</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">-2.5%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p>
             </div>
           </div>
@@ -713,10 +713,10 @@ const DashBoard = () => {
                 </div>
                 <h4 className="mb-0 fs-1 fw-bolder">0</h4>
               </div>
-              <p className="mb-1">Revenue</p>
+              <p className="mb-1 fs-3 fw-bold">Revenue</p>
               <p className="mb-0">
-                <span className="text-heading fw-medium me-2">-2.5%</span>
-                <small className="text-body-secondary">than last week</small>
+                <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
+                <small className="text-body-secondary fs-5">than last week</small>
               </p>
             </div>
           </div>
