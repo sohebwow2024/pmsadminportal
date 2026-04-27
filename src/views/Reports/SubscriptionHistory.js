@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
+import ReactPaginate from "react-paginate";
 import {
   Button,
   Card,
@@ -7,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
   Col,
+  Input,
   InputGroup,
   InputGroupText,
   Label,
@@ -50,6 +52,11 @@ const SubscriptionHistory = () => {
   );
   const [toDate, setToDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
   const [bookingData, setBookingData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
   console.log(toDate, fromDate);
 
   //   const columns = [
@@ -100,6 +107,9 @@ const SubscriptionHistory = () => {
       name: "Subscription Id",
       sortable: true,
       // width: "22rem",
+      selector: (row) => row.subsid,
+      sortField: "subsid",
+      selectorKey: "subsid",
       cell: (row) => <span>{row.subsid}</span>,
     },
     // {
@@ -111,18 +121,27 @@ const SubscriptionHistory = () => {
       name: "Client Id",
       sortable: true,
       // width: "22rem",
+      selector: (row) => row.clientid,
+      sortField: "clientid",
+      selectorKey: "clientid",
       cell: (row) => <span>{row.clientid}</span>,
     },
     {
       name: "Plan Rate Id",
       sortable: true,
       // width: "22rem",
+      selector: (row) => row.planrateid,
+      sortField: "planrateid",
+      selectorKey: "planrateid",
       cell: (row) => <span>{row.planrateid}</span>,
     },
     {
       name: "Creation Time",
       sortable: true,
       width: "22rem",
+      selector: (row) => row.creationtime,
+      sortField: "creationtime",
+      selectorKey: "creationtime",
       cell: (row) => <span>{row.creationtime}</span>,
     },
     
@@ -208,6 +227,107 @@ const SubscriptionHistory = () => {
     getBookingData();
   }, [fromDate, toDate]);
 
+  const filteredData = useMemo(() => {
+    const normalizedSearch = searchValue.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return data;
+    }
+
+    return data.filter((item) =>
+      [item.subsid, item.clientid, item.planrateid, item.creationtime]
+        .filter(Boolean)
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [data, searchValue]);
+
+  const sortedData = useMemo(() => {
+    if (!sortField) {
+      return filteredData;
+    }
+
+    const sortedRows = [...filteredData];
+
+    sortedRows.sort((firstRow, secondRow) => {
+      const firstValue = `${firstRow?.[sortField] ?? ""}`.toLowerCase();
+      const secondValue = `${secondRow?.[sortField] ?? ""}`.toLowerCase();
+
+      if (firstValue < secondValue) {
+        return sortDirection === "asc" ? -1 : 1;
+      }
+
+      if (firstValue > secondValue) {
+        return sortDirection === "asc" ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    return sortedRows;
+  }, [filteredData, sortDirection, sortField]);
+
+  const pageCount = Math.ceil(sortedData.length / rowsPerPage) || 1;
+  const currentStartIndex = currentPage * rowsPerPage;
+  const currentEndIndex = currentStartIndex + rowsPerPage;
+  const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
+
+  useEffect(() => {
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
+    if (currentPage > lastPageIndex) {
+      setCurrentPage(lastPageIndex);
+    }
+  }, [currentPage, rowsPerPage, sortedData.length]);
+
+  const handlePagination = (page) => {
+    setCurrentPage(page.selected);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+    setCurrentPage(0);
+  };
+
+  const handleRowsPerPageChange = (event) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(0);
+  };
+
+  const handleSort = (column, direction) => {
+    setSortField(column.sortField || column.selectorKey || "subsid");
+    setSortDirection(direction);
+    setCurrentPage(0);
+  };
+
+  const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
+  const showingTo = Math.min(currentEndIndex, sortedData.length);
+
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel={<span aria-hidden="true">&lsaquo;</span>}
+      nextLabel={<span aria-hidden="true">&rsaquo;</span>}
+      forcePage={Math.min(currentPage, pageCount - 1)}
+      onPageChange={handlePagination}
+      pageCount={pageCount}
+      breakLabel={"..."}
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={1}
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      nextLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakLinkClassName="page-link"
+      previousLinkClassName="page-link"
+      nextClassName="page-item next-item"
+      previousClassName="page-item prev-item"
+      disabledClassName="disabled"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-md-end justify-content-center mb-0"
+    />
+  );
+
   return (
     <>
       <Card>
@@ -263,14 +383,57 @@ const SubscriptionHistory = () => {
           </Col>
         </Row>
         <CardBody>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
+              <span className="me-50">Show</span>
+              <Input
+                type="select"
+                value={rowsPerPage}
+                onChange={handleRowsPerPageChange}
+                style={{ width: "90px" }}
+                className="mx-50"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </Input>
+              <span className="ms-50">entries</span>
+            </Col>
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                <span className="me-50">Search:</span>
+                <Input
+                  type="text"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  style={{ maxWidth: "340px" }}
+                />
+              </div>
+            </Col>
+          </Row>
           <Row className="my-1">
             <Col>
               <DataTable
                 noHeader
-                data={data}
+                data={paginatedData}
                 columns={basicColumns}
                 className="react-dataTable"
+                keyField="subsid"
+                onSort={handleSort}
+                sortServer
               />
+            </Col>
+          </Row>
+          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="text-md-start text-center">
+                {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
+              </div>
+            </Col>
+            <Col md="6">
+              <CustomPagination />
             </Col>
           </Row>
         </CardBody>
