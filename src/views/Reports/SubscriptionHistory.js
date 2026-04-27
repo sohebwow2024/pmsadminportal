@@ -336,8 +336,8 @@ const SubscriptionHistory = () => {
             <h2>Subscription History</h2>
           </CardTitle>
         </CardHeader>
-        <Row className="align-items-end ms-2">
-          <Col className="text-start">
+        <Row className="align-items-end ms-2 me-2 gx-2 gy-1">
+          <Col xs="12" md="4" className="text-start">
             <Label className="form-label" for="startDate">
               From Date
             </Label>
@@ -355,7 +355,7 @@ const SubscriptionHistory = () => {
               }}
             />
           </Col>
-          <Col className="text-start">
+          <Col xs="12" md="4" className="text-start">
             <Label className="form-label" for="endDate">
               To Date
             </Label>
@@ -373,25 +373,35 @@ const SubscriptionHistory = () => {
               }}
             />
           </Col>
-          <Col>
-            <Button className="me-1" color="primary" onClick={getBookingData}>
-              Search
-            </Button>
-            <Button className="me-1" color="primary" onClick={handelReset}>
-              Reset
-            </Button>
+          <Col xs="12" md="4">
+            <div className="d-flex flex-column flex-sm-row gap-1">
+              <Button
+                className="me-sm-1"
+                color="primary"
+                onClick={getBookingData}
+              >
+                Search
+              </Button>
+              <Button color="primary" onClick={handelReset}>
+                Reset
+              </Button>
+            </div>
           </Col>
         </Row>
         <CardBody>
           <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
-            <Col md="6" className="d-flex align-items-center">
+            <Col
+              xs="12"
+              md="6"
+              className="d-flex flex-wrap align-items-center gap-1"
+            >
               <span className="me-50">Show</span>
               <Input
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
-                className="mx-50"
+                style={{ width: "90px", minWidth: "90px" }}
+                className="mx-0"
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -399,40 +409,42 @@ const SubscriptionHistory = () => {
                 <option value={50}>50</option>
                 <option value={100}>100</option>
               </Input>
-              <span className="ms-50">entries</span>
+              <span>entries</span>
             </Col>
-            <Col md="6">
-              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
-                <span className="me-50">Search:</span>
+            <Col xs="12" md="6">
+              <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-md-end justify-content-start gap-1">
+                <span className="me-sm-50">Search:</span>
                 <Input
                   type="text"
                   value={searchValue}
                   onChange={handleSearchChange}
-                  style={{ maxWidth: "340px" }}
+                  style={{ maxWidth: "340px", width: "100%" }}
                 />
               </div>
             </Col>
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={basicColumns}
-                className="react-dataTable"
-                keyField="subsid"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="table-responsive">
+                <DataTable
+                  noHeader
+                  data={paginatedData}
+                  columns={basicColumns}
+                  className="react-dataTable"
+                  keyField="subsid"
+                  onSort={handleSort}
+                  sortServer
+                />
+              </div>
             </Col>
           </Row>
           <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
-            <Col md="6">
+            <Col xs="12" md="6">
               <div className="text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
-            <Col md="6">
+            <Col xs="12" md="6">
               <CustomPagination />
             </Col>
           </Row>
