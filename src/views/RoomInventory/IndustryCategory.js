@@ -497,7 +497,7 @@ const ProductCategory = () => {
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
+                style={{ width: "80px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
