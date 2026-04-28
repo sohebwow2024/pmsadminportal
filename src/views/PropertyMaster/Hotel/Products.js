@@ -507,7 +507,7 @@ const Products = () => {
             <Button
               className="m-1"
               color="primary"
-              onClick={() => handleCancelOpen()}
+              onClick={() => handleCancelOpen()}  
             >
               Cancel
             </Button>
