@@ -18,6 +18,9 @@ import {
 } from "reactstrap";
 import toast from "react-hot-toast";
 import axios, { Image_base_uri } from "../../../API/axios";
+import avatarFive from "../../../assets/images/avatars/5.png";
+import avatarSix from "../../../assets/images/avatars/6.png";
+import avatarSeven from "../../../assets/images/avatars/7.png";
 // ** Styles
 import "@styles/react/libs/flatpickr/flatpickr.scss";
 import { useSelector } from "react-redux";
@@ -26,6 +29,7 @@ import EditHotelModal from "./EditHotelModal";
 import DeleteHotelModal from "./DeleteHotelModal";
 import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
+import "./Products.css";
 
 const Products = () => {
   useEffect(() => {
@@ -114,7 +118,8 @@ const Products = () => {
     localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(next));
   };
 
-  const normalizeValue = (value) => value?.toString().trim().toLowerCase() || "";
+  const normalizeValue = (value) =>
+    value?.toString().trim().toLowerCase() || "";
 
   const isDuplicateProduct = (product, ignoreId = null) =>
     data.some(
@@ -175,10 +180,7 @@ const Products = () => {
       return false;
     }
 
-    const next = [
-      { id: Date.now(), ...product, action: "btns" },
-      ...data,
-    ];
+    const next = [{ id: Date.now(), ...product, action: "btns" }, ...data];
     persistProducts(next);
     setCurrentPage(0);
     toast.success("Product added", toastOptions);
@@ -222,9 +224,7 @@ const Products = () => {
     return data.filter((item) =>
       [item.name, item.category, item.industry, item.desc]
         .filter(Boolean)
-        .some((value) =>
-          `${value}`.toLowerCase().includes(normalizedSearch),
-        ),
+        .some((value) => `${value}`.toLowerCase().includes(normalizedSearch)),
     );
   }, [data, searchValue]);
 
@@ -259,7 +259,10 @@ const Products = () => {
   const paginatedData = sortedData.slice(currentStartIndex, currentEndIndex);
 
   useEffect(() => {
-    const lastPageIndex = Math.max(Math.ceil(sortedData.length / rowsPerPage) - 1, 0);
+    const lastPageIndex = Math.max(
+      Math.ceil(sortedData.length / rowsPerPage) - 1,
+      0,
+    );
     if (currentPage > lastPageIndex) {
       setCurrentPage(lastPageIndex);
     }
@@ -287,6 +290,18 @@ const Products = () => {
 
   const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
   const showingTo = Math.min(currentEndIndex, sortedData.length);
+  const productAvatars = [avatarFive, avatarSix, avatarSeven];
+
+  const getInitials = (value = "") =>
+    value
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((item) => item[0]?.toUpperCase())
+      .join("");
+
+  const getProductAvatar = (row, index) =>
+    productAvatars[Math.abs((row?.id ?? index) % productAvatars.length)];
 
   const CustomPagination = () => (
     <ReactPaginate
@@ -409,7 +424,7 @@ const Products = () => {
 
   return (
     <>
-      <Card>
+      <Card className="products-page-card">
         <CardHeader>
           <CardTitle>
             <h2>Products</h2>
@@ -437,7 +452,7 @@ const Products = () => {
           ) : null}
         </CardHeader>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
@@ -469,20 +484,106 @@ const Products = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={hotelTable}
-                keyField="id"
-                className="react-dataTable"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="products-table-shell">
+                <div className="products-table-wrap text-nowrap">
+                  <table className="products-table table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Product Category</th>
+                        <th>Users</th>
+                        <th>Industry</th>
+                        {/* <th>Status</th> */}
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row, index) => (
+                          <tr key={row.id}>
+                            <td>
+                              <div className="product-name-block">
+                                <span className="product-icon-badge">
+                                  {getInitials(row.name) || "PR"}
+                                </span>
+                                <div>
+                                  <span className="product-name-title">
+                                    {row.name}
+                                  </span>
+                                  <span className="product-name-subtitle">
+                                    {row.desc?.trim()
+                                      ? row.desc
+                                      : "Product details are available for this package."}
+                                  </span>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <span className="product-category-badge">
+                                {row.category}
+                              </span>
+                            </td>
+                            <td>
+                              <div className="product-users">
+                                <img
+                                  src={getProductAvatar(row, index)}
+                                  alt="Product user"
+                                  className="product-user-avatar"
+                                />
+                              </div>
+                            </td>
+                            <td>{row.industry}</td>
+                            {/* <td>
+                              <span className="product-status-badge">
+                                Active
+                              </span>
+                            </td> */}
+                            <td>
+                              <div className="product-action-group">
+                                <button
+                                  type="button"
+                                  className="product-action-btn"
+                                  onClick={() => {
+                                    setSelectedProduct(row);
+                                    handleShowModalUpdate(true);
+                                  }}
+                                  aria-label={`Edit ${row.name}`}
+                                >
+                                  <Edit size={15} />
+                                </button>
+                                <button
+                                  type="button"
+                                  className="product-action-btn delete"
+                                  onClick={() => {
+                                    setSelectedProduct(row);
+                                    handleCancelOpen();
+                                  }}
+                                  aria-label={`Delete ${row.name}`}
+                                >
+                                  <Trash size={15} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6">
+                            <div className="products-empty-state">
+                              No products found.
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col md="6">
-              <div className="text-md-start text-center">
+              <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
@@ -511,7 +612,7 @@ const Products = () => {
             >
               Cancel
             </Button>
-             <Button
+            <Button
               className="m-1"
               color="danger"
               onClick={handleDeleteProduct}

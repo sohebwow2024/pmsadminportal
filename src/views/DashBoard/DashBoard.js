@@ -25,6 +25,7 @@ import "../../assets/scss/style.scss";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 ChartJS.register(...registerables);
 const DashBoard = () => {
@@ -322,29 +323,6 @@ const DashBoard = () => {
             } else handleOpen();
           }}
         >
-          {/* {row.avatar === '' ? (
-            <Avatar img={require(`../../assets/images/logo/hostynnist-logo.png`).default} />
-
-          ) : (
-            <Avatar color={`light-${states[i]}`} content={row.GuestName.toUpperCase()} initials />
-          )} */}
-          {/* <Avatar
-            title="Click to Manage Booking"
-            icon={<User color='#FFFFFF' size={25} />}
-            color={
-              row.Status === 'Active' && row.CheckIn ? (
-                'success'
-              ) : row.Status === 'Checkout' ? (
-                'primary'
-              ) : row.Status === 'Cancelled' ? (
-                'danger'
-              ) : row.Status === 'Active' && row.CheckIn === false ? (
-                'warning'
-              ) : row.Status === 'OnHold' ? (
-                'info'
-              ) : '#000'
-            }
-          /> */}
           <Badge
             className="m-1 p-15 badge-glow d-flex justify-content-center align-items-center"
             title="Click to Manage Booking"
@@ -434,29 +412,6 @@ const DashBoard = () => {
             } else handleOpen();
           }}
         >
-          {/* {row.avatar === '' ? (
-            <Avatar img={require(`../../assets/images/logo/hostynnist-logo.png`).default} />
-
-          ) : (
-            <Avatar color={`light-${states[i]}`} content={row.GuestName.toUpperCase()} initials />
-          )} */}
-          {/* <Avatar
-            title="Click to Manage Booking"
-            icon={<User color='#FFFFFF' size={25} />}
-            color={
-              row.Status === 'Active' && row.CheckIn ? (
-                'success'
-              ) : row.Status === 'Checkout' ? (
-                'primary'
-              ) : row.Status === 'Cancelled' ? (
-                'danger'
-              ) : row.Status === 'Active' && row.CheckIn === false ? (
-                'warning'
-              ) : row.Status === 'OnHold' ? (
-                'info'
-              ) : '#000'
-            }
-          /> */}
           <Badge
             className="m-1 p-15 badge-glow d-flex justify-content-center align-items-center"
             title="Click to Manage Booking"
@@ -555,7 +510,7 @@ const DashBoard = () => {
             style={dashboardCardStyles}
             onClick={() => navigate("/products")}
           >
-            <div className="card-body">
+            <div className="box card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <div className="me-4">
                   <span className="rounded bg-label-primary">
@@ -589,8 +544,10 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Total Products</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">+18.2%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
-              </p> 
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
+              </p>
             </div>
           </div>
         </div>
@@ -601,7 +558,7 @@ const DashBoard = () => {
             style={dashboardCardStyles}
             onClick={() => navigate("/plans")}
           >
-            <div className="card-body">
+            <div className=" card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <div className="me-4">
                   <span className="rounded bg-label-warning">
@@ -630,7 +587,9 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Total Plans</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">-8.7%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
               </p>
             </div>
           </div>
@@ -671,7 +630,9 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Total Clients</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">+4.3%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
               </p>
             </div>
           </div>
@@ -741,7 +702,9 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Total Subscription</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
               </p>
             </div>
           </div>
@@ -780,7 +743,9 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Active Client</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
               </p>
             </div>
           </div>
@@ -789,7 +754,7 @@ const DashBoard = () => {
           <div
             className="card card-border-shadow-info h-100"
             style={dashboardCardStyles}
-            onClick={() => navigate("/revenueReport")}
+            // onClick={() => navigate("/revenueReport")}
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
@@ -818,7 +783,9 @@ const DashBoard = () => {
               <p className="mb-1 fs-3 fw-bold">Revenue</p>
               <p className="mb-0">
                 <span className="text-heading fw-medium me-2 fs-5">-2.5%</span>
-                <small className="text-body-secondary fs-5">than last week</small>
+                <small className="text-body-secondary fs-5">
+                  than last week
+                </small>
               </p>
             </div>
           </div>

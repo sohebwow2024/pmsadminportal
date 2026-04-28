@@ -1,0 +1,242 @@
+.products-page-card {
+  border: 0;
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.products-page-card .card-header {
+  padding: 1.35rem 1.5rem 1rem;
+  border-bottom: 1px solid #eef2f7;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.products-toolbar {
+  padding: 1rem 0 0.25rem;
+}
+
+.products-toolbar .form-control,
+.products-toolbar .form-select {
+  border-radius: 0.85rem;
+  border: 1px solid #d9e2f2;
+  min-height: 42px;
+  box-shadow: none;
+}
+
+.products-toolbar .form-control:focus,
+.products-toolbar .form-select:focus {
+  border-color: #7266ef;
+  box-shadow: 0 0 0 0.2rem rgba(114, 102, 239, 0.12);
+}
+
+.products-table-shell {
+  border: 1px solid #edf2f8;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.products-table-wrap {
+  overflow-x: auto;
+}
+
+.products-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.products-table thead th {
+  border: 0;
+  padding: 1rem 1.15rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b7280;
+  background: #f8fafc;
+  white-space: nowrap;
+}
+
+.products-table tbody td {
+  padding: 1rem 1.15rem;
+  border-top: 1px solid #eef2f7;
+  vertical-align: middle;
+}
+
+.products-table tbody tr {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.products-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.product-name-block {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 220px;
+}
+
+.product-icon-badge {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef2ff 0%, #dbeafe 100%);
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.08);
+}
+
+.product-name-title {
+  display: block;
+  color: #111827;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.product-name-subtitle {
+  display: block;
+  margin-top: 0.2rem;
+  color: #6b7280;
+  font-size: 0.83rem;
+}
+
+.product-category-badge,
+.product-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.product-category-badge {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.product-status-badge {
+  background: #e8fff3;
+  color: #0f9f5a;
+}
+
+.product-description {
+  max-width: 280px;
+  color: #4b5563;
+  line-height: 1.45;
+}
+
+.product-users {
+  display: flex;
+  align-items: center;
+}
+
+.product-user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+  margin-left: -10px;
+  background: #f3f4f6;
+}
+
+.product-user-avatar:first-child {
+  margin-left: 0;
+}
+
+.product-user-count {
+  min-width: 34px;
+  height: 34px;
+  margin-left: -10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #111827;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.product-action-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.product-action-btn {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  color: #475569;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-action-btn:hover {
+  transform: translateY(-2px);
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.product-action-btn.delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.products-empty-state {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.products-footer {
+  padding-top: 1rem;
+}
+
+.products-footer-note {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  .products-page-card .card-header {
+    padding: 1.1rem 1rem 0.9rem;
+  }
+
+  .products-table thead th,
+  .products-table tbody td {
+    padding: 0.9rem 0.85rem;
+  }
+
+  .product-name-block {
+    min-width: 180px;
+  }
+
+  .product-description {
+    min-width: 180px;
+  }
+}
