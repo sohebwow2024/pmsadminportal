@@ -754,7 +754,7 @@ const DashBoard = () => {
           <div
             className="card card-border-shadow-info h-100"
             style={dashboardCardStyles}
-            onClick={() => navigate("/revenueReport")}
+            // onClick={() => navigate("/revenueReport")}
           >
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
