@@ -472,7 +472,7 @@ const PlanRate = () => {
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
+                style={{ width: "80px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
@@ -506,7 +506,7 @@ const PlanRate = () => {
                         <th>Dp Rate</th>
                         <th>Selling Price</th>
                         <th>isDiscountable</th>
-                        <th className="product-action-header">Actions</th>
+                        <th className="planrate-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -523,19 +523,19 @@ const PlanRate = () => {
                                 {row.isdiscount ? "Yes" : "No"}
                               </span>
                             </td>
-                            <td className="product-action-cell">
-                              <UncontrolledDropdown className="product-action-menu">
+                            <td className="planrate-action-cell">
+                              <UncontrolledDropdown className="planrate-action-menu">
                                 <DropdownToggle
                                   tag="button"
                                   type="button"
-                                  className="product-action-trigger"
-                                  aria-label={`Open actions for ${row.tenureType?.label || 'plan rate'}`}
+                                  className="planrate-action-trigger"
+                                  aria-label={`Open actions for ${row.tenureType?.label || "plan rate"}`}
                                 >
                                   ...
                                 </DropdownToggle>
-                                <DropdownMenu end className="product-action-dropdown">
+                                <DropdownMenu end className="planrate-action-dropdown">
                                   <DropdownItem
-                                    className="product-action-dropdown-item"
+                                    className="planrate-action-dropdown-item"
                                     onClick={() => {
                                       setSelectedPlanRateId(row.id);
                                       setTenureTypeValue(row.tenureType);
@@ -550,7 +550,7 @@ const PlanRate = () => {
                                     <span>Edit</span>
                                   </DropdownItem>
                                   <DropdownItem
-                                    className="product-action-dropdown-item delete"
+                                    className="planrate-action-dropdown-item delete"
                                     onClick={() => {
                                       setSelectedPlanRateId(row.id);
                                       handleCancelOpen();

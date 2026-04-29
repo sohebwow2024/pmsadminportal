@@ -359,9 +359,16 @@
   color: #a0aec0;
 }
 
-.dark-layout .promocode-category-badge {
-  background: #4a5568;
-  color: #a0aec0;
+.dark-layout .promocode-category-badge,
+.semi-dark-layout .promocode-category-badge {
+  background: rgba(115, 103, 240, 0.18);
+  color: #c7d2fe;
+}
+
+.dark-layout .promocode-status-badge,
+.semi-dark-layout .promocode-status-badge {
+  background: rgba(40, 199, 111, 0.18);
+  color: #7ee2a8;
 }
 
 .dark-layout .promocode-action-btn {
