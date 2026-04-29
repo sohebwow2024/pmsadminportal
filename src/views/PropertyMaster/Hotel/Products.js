@@ -10,11 +10,15 @@ import {
   Input,
   CardTitle,
   Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Modal,
   ModalBody,
   ModalHeader,
   Row,
   CardHeader,
+  UncontrolledDropdown,
 } from "reactstrap";
 import toast from "react-hot-toast";
 import axios, { Image_base_uri } from "../../../API/axios";
@@ -538,31 +542,42 @@ const Products = () => {
                                 Active
                               </span>
                             </td> */}
-                            <td>
-                              <div className="product-action-group">
-                                <button
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
                                   type="button"
-                                  className="product-action-btn"
-                                  onClick={() => {
-                                    setSelectedProduct(row);
-                                    handleShowModalUpdate(true);
-                                  }}
-                                  aria-label={`Edit ${row.name}`}
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.name}`}
                                 >
-                                  <Edit size={15} />
-                                </button>
-                                <button
-                                  type="button"
-                                  className="product-action-btn delete"
-                                  onClick={() => {
-                                    setSelectedProduct(row);
-                                    handleCancelOpen();
-                                  }}
-                                  aria-label={`Delete ${row.name}`}
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  end
+                                  className="product-action-dropdown"
                                 >
-                                  <Trash size={15} />
-                                </button>
-                              </div>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => {
+                                      setSelectedProduct(row);
+                                      handleShowModalUpdate(true);
+                                    }}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      setSelectedProduct(row);
+                                      handleCancelOpen();
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
                             </td>
                           </tr>
                         ))
