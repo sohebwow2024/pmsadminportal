@@ -15,6 +15,10 @@ import {
   Row,
   Form,
   CardHeader,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
@@ -423,7 +427,7 @@ const Promocode = () => {
                         <th>Promo Code</th>
                         <th>Tenure Type</th>
                         <th>Unit Volume</th>
-                        <th>Actions</th>
+                        <th className="product-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -435,28 +439,39 @@ const Promocode = () => {
                             </td>
                             <td>{row.type}</td>
                             <td>{row.volume}</td>
-                            <td>
-                              <div className="promocode-action-group">
-                                <button
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
                                   type="button"
-                                  className="promocode-action-btn"
-                                  onClick={() => handleEditClick(row)}
-                                  aria-label={`Edit`}
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.promo}`}
                                 >
-                                  <Edit size={15} />
-                                </button>
-                                <button
-                                  type="button"
-                                  className="promocode-action-btn delete"
-                                  onClick={() => {
-                                    setSelectedPromoId(row.id);
-                                    handleCancelOpen();
-                                  }}
-                                  aria-label={`Delete`}
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  end
+                                  className="product-action-dropdown"
                                 >
-                                  <Trash size={15} />
-                                </button>
-                              </div>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => handleEditClick(row)}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      setSelectedPromoId(row.id);
+                                      handleCancelOpen();
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
                             </td>
                           </tr>
                         ))

@@ -15,6 +15,10 @@ import {
   Row,
   Form,
   CardHeader,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -404,7 +408,7 @@ const PlanPoint = () => {
                         <th>Plan Point Name</th>
                         <th>Plan Point Icon</th>
                         <th>Description</th>
-                        <th>Actions</th>
+                        <th className="product-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -416,28 +420,39 @@ const PlanPoint = () => {
                             </td>
                             <td>{row.icons}</td>
                             <td>{row.description || "-"}</td>
-                            <td>
-                              <div className="planpoint-action-group">
-                                <button
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
                                   type="button"
-                                  className="planpoint-action-btn"
-                                  onClick={() => handleEditClick(row)}
-                                  aria-label={`Edit`}
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.name}`}
                                 >
-                                  <Edit size={15} />
-                                </button>
-                                <button
-                                  type="button"
-                                  className="planpoint-action-btn delete"
-                                  onClick={() => {
-                                    setSelectedPlanPointId(row.id);
-                                    handleCancelOpen();
-                                  }}
-                                  aria-label={`Delete`}
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  end
+                                  className="product-action-dropdown"
                                 >
-                                  <Trash size={15} />
-                                </button>
-                              </div>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => handleEditClick(row)}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      setSelectedPlanPointId(row.id);
+                                      handleCancelOpen();
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
                             </td>
                           </tr>
                         ))

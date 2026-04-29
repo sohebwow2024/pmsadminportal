@@ -15,6 +15,10 @@ import {
   Row,
   Form,
   CardHeader,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
@@ -502,7 +506,7 @@ const PlanRate = () => {
                         <th>Dp Rate</th>
                         <th>Selling Price</th>
                         <th>isDiscountable</th>
-                        <th>Actions</th>
+                        <th className="product-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -519,36 +523,44 @@ const PlanRate = () => {
                                 {row.isdiscount ? "Yes" : "No"}
                               </span>
                             </td>
-                            <td>
-                              <div className="planrate-action-group">
-                                <button
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
                                   type="button"
-                                  className="planrate-action-btn"
-                                  onClick={() => {
-                                    setSelectedPlanRateId(row.id);
-                                    setTenureTypeValue(row.tenureType);
-                                    setDpRate(row.dprate);
-                                    setSellingPrice(row.sellingprice);
-                                    setIsDiscountable(row.isdiscount);
-                                    setDisplay(false);
-                                    setShowUpdate(true);
-                                  }}
-                                  aria-label={`Edit`}
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.tenureType?.label || 'plan rate'}`}
                                 >
-                                  <Edit size={15} />
-                                </button>
-                                <button
-                                  type="button"
-                                  className="planrate-action-btn delete"
-                                  onClick={() => {
-                                    setSelectedPlanRateId(row.id);
-                                    handleCancelOpen();
-                                  }}
-                                  aria-label={`Delete`}
-                                >
-                                  <Trash size={15} />
-                                </button>
-                              </div>
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu end className="product-action-dropdown">
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => {
+                                      setSelectedPlanRateId(row.id);
+                                      setTenureTypeValue(row.tenureType);
+                                      setDpRate(row.dprate);
+                                      setSellingPrice(row.sellingprice);
+                                      setIsDiscountable(row.isdiscount);
+                                      setDisplay(false);
+                                      setShowUpdate(true);
+                                    }}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      setSelectedPlanRateId(row.id);
+                                      handleCancelOpen();
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
                             </td>
                           </tr>
                         ))

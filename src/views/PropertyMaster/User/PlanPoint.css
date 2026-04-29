@@ -203,6 +203,98 @@
   color: #dc2626;
 }
 
+.product-action-cell {
+  text-align: center;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.product-action-menu {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.product-action-header {
+  text-align: center !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.product-action-trigger {
+  border: 0;
+  background: transparent;
+  color: #111827;
+  font-size: 1.35rem;
+  line-height: 1;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 8px;
+}
+
+.product-action-trigger::after {
+  display: none !important;
+}
+
+.product-action-trigger:hover,
+.product-action-trigger:focus {
+  background: #f8fafc;
+  color: #111827;
+  box-shadow: none !important;
+}
+
+.product-action-dropdown.dropdown-menu {
+  min-width: 0;
+  width: max-content;
+  padding: 0.45rem 0;
+  border: 1px solid #d7e1f0;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+}
+
+.product-action-dropdown-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.8rem 1.1rem;
+  font-weight: 500;
+  color: #7367f0;
+  white-space: nowrap;
+}
+
+.product-action-dropdown-item + .product-action-dropdown-item {
+  border-top: 0;
+}
+
+.product-action-dropdown-item + .product-action-dropdown-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  border-top: 1px solid #e9edf5;
+}
+
+.product-action-dropdown-item:hover,
+.product-action-dropdown-item:focus,
+.product-action-dropdown-item:active {
+  background: #f8fbff;
+  color: #7367f0;
+}
+
+.product-action-dropdown-item.delete {
+  color: #ef4444;
+}
+
+.product-action-dropdown-item.delete:hover,
+.product-action-dropdown-item.delete:focus,
+.product-action-dropdown-item.delete:active {
+  color: #dc2626;
+  background: #fff7f7;
+}
+
 .planpoint-empty-state {
   padding: 2.5rem 1rem;
   text-align: center;
@@ -285,6 +377,65 @@
 .dark-layout .planpoint-action-btn.delete:hover {
   background: #dc2626;
   color: #fff;
+}
+
+.dark-layout .product-action-trigger,
+.semi-dark-layout .product-action-trigger {
+  color: #f8fafc;
+}
+
+.dark-layout .product-action-trigger:hover,
+.dark-layout .product-action-trigger:focus,
+.semi-dark-layout .product-action-trigger:hover,
+.semi-dark-layout .product-action-trigger:focus {
+  background: #22293d;
+  color: #f8fafc;
+}
+
+.dark-layout .product-action-dropdown.dropdown-menu,
+.semi-dark-layout .product-action-dropdown.dropdown-menu {
+  background: #283046;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-layout .product-action-dropdown-item,
+.semi-dark-layout .product-action-dropdown-item {
+  color: #8fb4ff;
+}
+
+.dark-layout .product-action-dropdown-item + .product-action-dropdown-item,
+.semi-dark-layout .product-action-dropdown-item + .product-action-dropdown-item {
+  border-top-color: transparent;
+}
+
+.dark-layout .product-action-dropdown-item + .product-action-dropdown-item::before,
+.semi-dark-layout .product-action-dropdown-item + .product-action-dropdown-item::before {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-layout .product-action-dropdown-item:hover,
+.dark-layout .product-action-dropdown-item:focus,
+.dark-layout .product-action-dropdown-item:active,
+.semi-dark-layout .product-action-dropdown-item:hover,
+.semi-dark-layout .product-action-dropdown-item:focus,
+.semi-dark-layout .product-action-dropdown-item:active {
+  background: rgba(115, 103, 240, 0.14);
+  color: #b8cbff;
+}
+
+.dark-layout .product-action-dropdown-item.delete,
+.semi-dark-layout .product-action-dropdown-item.delete {
+  color: #ff8a8a;
+}
+
+.dark-layout .product-action-dropdown-item.delete:hover,
+.dark-layout .product-action-dropdown-item.delete:focus,
+.dark-layout .product-action-dropdown-item.delete:active,
+.semi-dark-layout .product-action-dropdown-item.delete:hover,
+.semi-dark-layout .product-action-dropdown-item.delete:focus,
+.semi-dark-layout .product-action-dropdown-item.delete:active {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ff9f9f;
 }
 
 .dark-layout .planpoint-empty-state {
