@@ -23,6 +23,74 @@ let currency = [
   { value: "USD", label: "USD" },
   { value: "EUR", label: "EUR" },
 ];
+
+const productModalHeaderStyles = {
+  display: "block",
+  position: "relative",
+  padding: "2.8rem 2.5rem 0.75rem",
+  borderBottom: 0,
+  textAlign: "center",
+};
+
+const productModalBodyStyles = {
+  maxWidth: "560px",
+  width: "100%",
+  margin: "0 auto",
+  padding: "0.25rem 1rem 1rem",
+};
+
+const productModalTitleStyles = {
+  margin: 0,
+  fontSize: "1.35rem",
+  fontWeight: 700,
+};
+
+const productModalSubtitleStyles = {
+  marginTop: "0.85rem",
+  marginBottom: 0,
+  color: "#6b6f82",
+  fontSize: "0.95rem",
+};
+
+const productModalFieldStyles = {
+  minHeight: "38px",
+  borderRadius: "0.357rem",
+};
+
+const productModalTextareaStyles = {
+  minHeight: "108px",
+  borderRadius: "0.357rem",
+};
+
+const productModalFooterStyles = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "0.75rem",
+  padding: "0.5rem 1rem 2.6rem",
+};
+
+const productModalFooterButtonStyles = {
+  minWidth: "108px",
+};
+
+const productModalCloseButtonStyles = {
+  position: "absolute",
+  top: "-0.45rem",
+  right: "-0.45rem",
+  width: "28px",
+  height: "28px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: 0,
+  borderRadius: "4px",
+  background: "#fff",
+  color: "#6e6b7b",
+  fontSize: "1.25rem",
+  lineHeight: 1,
+  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
+};
+
 const EditHotelModal = ({
   showEdit,
   handleEditModal,
@@ -416,137 +484,150 @@ const EditHotelModal = ({
         isOpen={showUpdate}
         toggle={handleCloseModal}
         className="modal-dialog-centered modal-lg"
+        contentClassName="border-0 rounded-3"
         backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleCloseModal}>
-          <span>
-            <h4>Update Product</h4>{" "}
-          </span>
-        </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 mx-50 pb-2">
-          <>
-            <Form>
-              <Row>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Product Name <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="text"
-                    name="hotel"
-                    id="hotel"
-                    value={hotelName}
-                    placeholder="Product Name"
-                    onChange={(e) => setHotelName(e.target.value)}
-                    invalid={display && hotelName === ""}
-                  />
-                  {display && !hotelName ? (
-                    <span className="error_msg_lbl">Enter Product Name </span>
-                  ) : null}
-                </Col>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Product Category <span className="text-danger">*</span>{" "}
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Product Category"
-                    options={productcategory}
-                    value={
-                      productcategory.find(
-                        (o) => o.label === productCategoryValue,
-                      ) || null
-                    }
-                    onChange={(e) => {
-                      setProductCategoryValue(e?.label || "");
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
-                    invalid={display && productCategoryValue === ""}
-                  />
-                  {display && !productCategoryValue ? (
-                    <span className="error_msg_lbl">
-                      Enter Product Category{" "}
-                    </span>
-                  ) : null}
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Industry Category <span className="text-danger">*</span>
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Industry Category"
-                    options={industryCategory}
-                    value={
-                      industryCategory.find(
-                        (o) => o.label === industryCategoryValue,
-                      ) || null
-                    }
-                    onChange={(e) => {
-                      setIndustryCategoryValue(e?.label || "");
-                      setCountryId(e.value);
-                      setCountryCode(e.CountryCode);
-                      setCountry(e.label);
-                    }}
-                    // invalid={display && country === ''}
-                  />
-                  {display && !industryCategoryValue ? (
-                    <span className="error_msg_lbl">
-                      Enter Industry Category{" "}
-                    </span>
-                  ) : null}
-                </Col>
-                <Col lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    Product Description{" "}
-                  </Label>
-                  <Input
-                    type="textarea"
-                    name="desc"
-                    id="desc"
-                    placeholder="Product Description"
-                    // value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    invalid={display && address === ""}
-                  />
-                  {display && !address ? (
-                    <span className="error_msg_lbl">
-                      Enter Product Description{" "}
-                    </span>
-                  ) : null}
-                </Col>
-              </Row>
-            </Form>
-          </>
-        </ModalBody>
-        <Row className={"px-1"}>
-          <hr className="mt-1"></hr>
-          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
-            <Button
-              className="btn btn-danger me-1"
-              color="secondary"
-              outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
+        <ModalHeader
+          className="bg-transparent"
+          close={
+            <button
+              type="button"
+              aria-label="Close"
               onClick={handleCloseModal}
+              style={productModalCloseButtonStyles}
             >
-              Cancel
-            </Button>
-            <Button color="primary" onClick={handleSubmit}>
-              Update
-            </Button>
-          </Col>
-        </Row>
+              ×
+            </button>
+          }
+          style={productModalHeaderStyles}
+        >
+          <h4 style={productModalTitleStyles}>Update Product</h4>
+          <p style={productModalSubtitleStyles}>
+            Update product details for this page
+          </p>
+        </ModalHeader>
+        <ModalBody style={productModalBodyStyles}>
+          <Form>
+            <Row>
+              <Col xs="12" className="mb-1">
+                <Label className="form-label" for="hotel">
+                  Product Name <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="text"
+                  name="hotel"
+                  id="hotel"
+                  value={hotelName}
+                  placeholder="Product Name"
+                  onChange={(e) => setHotelName(e.target.value)}
+                  invalid={display && hotelName === ""}
+                  style={productModalFieldStyles}
+                />
+                {display && !hotelName ? (
+                  <span className="error_msg_lbl">Enter Product Name </span>
+                ) : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" md="6" className="mb-1">
+                <Label className="form-label" for="address">
+                  Product Category <span className="text-danger">*</span>{" "}
+                </Label>
+                <Select
+                  theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  placeholder="Select Product Category"
+                  options={productcategory}
+                  value={
+                    productcategory.find(
+                      (o) => o.label === productCategoryValue,
+                    ) || null
+                  }
+                  onChange={(e) => {
+                    setProductCategoryValue(e?.label || "");
+                    setCountryId(e.value);
+                    setCountryCode(e.CountryCode);
+                    setCountry(e.label);
+                  }}
+                  invalid={display && productCategoryValue === ""}
+                />
+                {display && !productCategoryValue ? (
+                  <span className="error_msg_lbl">
+                    Enter Product Category{" "}
+                  </span>
+                ) : null}
+              </Col>
+              <Col xs="12" md="6" className="mb-1">
+                <Label className="form-label" for="edit-industry-category">
+                  Industry Category <span className="text-danger">*</span>
+                </Label>
+                <Select
+                  theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  inputId="edit-industry-category"
+                  placeholder="Select Industry Category"
+                  options={industryCategory}
+                  value={
+                    industryCategory.find(
+                      (o) => o.label === industryCategoryValue,
+                    ) || null
+                  }
+                  onChange={(e) => {
+                    setIndustryCategoryValue(e?.label || "");
+                    setCountryId(e.value);
+                    setCountryCode(e.CountryCode);
+                    setCountry(e.label);
+                  }}
+                />
+                {display && !industryCategoryValue ? (
+                  <span className="error_msg_lbl">
+                    Enter Industry Category{" "}
+                  </span>
+                ) : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" className="mb-0">
+                <Label className="form-label" for="desc">
+                  Product Description{" "}
+                </Label>
+                <Input
+                  type="textarea"
+                  name="desc"
+                  id="desc"
+                  placeholder="Product Description"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  invalid={display && address === ""}
+                  style={productModalTextareaStyles}
+                />
+                {display && !address ? (
+                  <span className="error_msg_lbl">
+                    Enter Product Description{" "}
+                  </span>
+                ) : null}
+              </Col>
+            </Row>
+          </Form>
+        </ModalBody>
+        <div style={productModalFooterStyles}>
+          <Button
+            color="primary"
+            onClick={handleSubmit}
+            style={productModalFooterButtonStyles}
+          >
+            Update
+          </Button>
+          <Button
+            color="secondary"
+            onClick={handleCloseModal}
+            style={productModalFooterButtonStyles}
+          >
+            Cancel
+          </Button>
+        </div>
       </Modal>
       {showUpdate ? <div className="modal-backdrop fade show"></div> : null}
     </>
