@@ -48,6 +48,52 @@ const statusOptions = [
   { value: false, label: 'INACTIVE' }
 ]
 
+const addPromoCodeModalHeaderStyles = {
+  display: 'block',
+  position: 'relative',
+  padding: '2.8rem 2.5rem 0.75rem',
+  borderBottom: 0,
+  textAlign: 'center'
+}
+
+const addPromoCodeModalBodyStyles = {
+  maxWidth: '760px',
+  width: '100%',
+  margin: '0 auto',
+  padding: '0.25rem 1rem 2.5rem'
+}
+
+const addPromoCodeTitleStyles = {
+  margin: 0,
+  fontSize: '1.35rem',
+  fontWeight: 700
+}
+
+const addPromoCodeSubtitleStyles = {
+  marginTop: '0.85rem',
+  marginBottom: 0,
+  color: '#6b6f82',
+  fontSize: '0.95rem'
+}
+
+const addPromoCodeCloseButtonStyles = {
+  position: 'absolute',
+  top: '-0.45rem',
+  right: '-0.45rem',
+  width: '28px',
+  height: '28px',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: 0,
+  borderRadius: '4px',
+  background: '#fff',
+  color: '#6e6b7b',
+  fontSize: '1.25rem',
+  lineHeight: 1,
+  boxShadow: '0 4px 12px rgba(34, 41, 47, 0.12)'
+}
+
 // let data
 // axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
 //   data = response.data
@@ -342,12 +388,29 @@ const PromoCode = () => {
           isOpen={show}
           toggle={handleModal}
           className='modal-dialog-centered modal-lg'
+          contentClassName='border-0 rounded-3'
           backdrop={false}
         >
-          <ModalHeader className='bg-transparent' toggle={handleModal}>
-            Promo Code Details
+          <ModalHeader
+            className='bg-transparent'
+            close={
+              <button
+                type='button'
+                aria-label='Close'
+                onClick={handleModal}
+                style={addPromoCodeCloseButtonStyles}
+              >
+                ×
+              </button>
+            }
+            style={addPromoCodeModalHeaderStyles}
+          >
+            <h4 style={addPromoCodeTitleStyles}>Add Promo Code</h4>
+            <p style={addPromoCodeSubtitleStyles}>
+              Add promo code details for this product
+            </p>
           </ModalHeader>
-          <ModalBody className='px-sm-2 mx-50 pb-5'>
+          <ModalBody className='px-sm-2 mx-50 pb-5' style={addPromoCodeModalBodyStyles}>
             <>
               <Form>
                 <Row>

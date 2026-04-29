@@ -75,6 +75,68 @@ const headerButtonStyles = {
   whiteSpace: "nowrap",
 };
 
+const addPromocodeModalHeaderStyles = {
+  display: "block",
+  position: "relative",
+  padding: "2.8rem 2.5rem 0.75rem",
+  borderBottom: 0,
+  textAlign: "center",
+};
+
+const addPromocodeModalBodyStyles = {
+  maxWidth: "560px",
+  width: "100%",
+  margin: "0 auto",
+  padding: "0.25rem 1rem 1rem",
+};
+
+const addPromocodeTitleStyles = {
+  margin: 0,
+  fontSize: "1.35rem",
+  fontWeight: 700,
+};
+
+const addPromocodeSubtitleStyles = {
+  marginTop: "0.85rem",
+  marginBottom: 0,
+  color: "#6b6f82",
+  fontSize: "0.95rem",
+};
+
+const addPromocodeFieldStyles = {
+  minHeight: "38px",
+  borderRadius: "0.357rem",
+};
+
+const addPromocodeFooterStyles = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "0.75rem",
+  padding: "0.5rem 1rem 2.6rem",
+};
+
+const addPromocodeFooterButtonStyles = {
+  minWidth: "78px",
+};
+
+const addPromocodeCloseButtonStyles = {
+  position: "absolute",
+  top: "-0.45rem",
+  right: "-0.45rem",
+  width: "28px",
+  height: "28px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: 0,
+  borderRadius: "4px",
+  background: "#fff",
+  color: "#6e6b7b",
+  fontSize: "1.25rem",
+  lineHeight: 1,
+  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
+};
+
 const Promocode = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -530,26 +592,42 @@ const Promocode = () => {
         isOpen={show}
         toggle={handleShowModal}
         className="modal-dialog-centered modal-md"
+        contentClassName="border-0 rounded-3"
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span>
-            <h4>Add Promocode</h4>
-          </span>
+        <ModalHeader
+          className="bg-transparent"
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleShowModal}
+              style={addPromocodeCloseButtonStyles}
+            >
+              ×
+            </button>
+          }
+          style={addPromocodeModalHeaderStyles}
+        >
+          <h4 style={addPromocodeTitleStyles}>Add Promocode</h4>
+          <p style={addPromocodeSubtitleStyles}>
+            Add promocode details for this product
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody style={addPromocodeModalBodyStyles}>
           <Form>
             <Row>
               <Col xs="12" className="mb-1">
-                <Label className="form-label">
+                <Label className="form-label" for="add-promocode-code">
                   Promo Code <span className="text-danger">*</span>
                 </Label>
                 <Input
+                  id="add-promocode-code"
                   type="text"
                   placeholder="Promo Code"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   invalid={display && promoCode.trim() === ""}
+                  style={addPromocodeFieldStyles}
                 />
                 {display && !promoCode.trim() ? (
                   <span className="error_msg_lbl">Enter Promo Code </span>
@@ -557,13 +635,14 @@ const Promocode = () => {
               </Col>
 
               <Col xs="12" className="mb-1">
-                <Label className="form-label">
+                <Label className="form-label" for="add-promocode-tenure">
                   Tenure Type <span className="text-danger">*</span>
                 </Label>
                 <Select
                   theme={selectThemeColors}
                   className="react-select"
                   classNamePrefix="select"
+                  inputId="add-promocode-tenure"
                   placeholder="Select Tenure Type"
                   options={tenureTypeOptions}
                   value={tenureType}
@@ -576,15 +655,17 @@ const Promocode = () => {
             </Row>
             <Row>
               <Col xs="12" className="mb-1">
-                <Label className="form-label">
+                <Label className="form-label" for="add-promocode-volume">
                   Unit Volume <span className="text-danger">*</span>
                 </Label>
                 <Input
+                  id="add-promocode-volume"
                   type="text"
                   placeholder="Unit Volume"
                   value={unitVolume}
                   onChange={(e) => setUnitVolume(e.target.value)}
                   invalid={display && unitVolume.trim() === ""}
+                  style={addPromocodeFieldStyles}
                 />
                 {display && !unitVolume.trim() ? (
                   <span className="error_msg_lbl">Enter Unit Volume </span>
@@ -593,30 +674,23 @@ const Promocode = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1 px-sm-2">
-          <hr className="mt-1" />
-          <Col xs="12" className="pb-2">
-            <div style={modalFooterStyles}>
-            <Button
-              className="btn btn-danger"
-              color="secondary"
-              outline
-              onClick={handleShowModal}
-              style={modalActionButtonStyles}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={handleAddPromocode}
-              disabled={!isPromocodeFormComplete}
-              style={modalActionButtonStyles}
-            >
-              Add Promocode
-            </Button>
-            </div>
-          </Col>
-        </Row>
+        <div style={addPromocodeFooterStyles}>
+          <Button
+            color="primary"
+            onClick={handleAddPromocode}
+            disabled={!isPromocodeFormComplete}
+            style={addPromocodeFooterButtonStyles}
+          >
+            Submit
+          </Button>
+          <Button
+            color="secondary"
+            onClick={handleShowModal}
+            style={addPromocodeFooterButtonStyles}
+          >
+            Cancel
+          </Button>
+        </div>
       </Modal>
 
       <Modal
