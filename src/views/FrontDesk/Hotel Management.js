@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
 import {
   Card,
@@ -18,6 +17,7 @@ import { Edit, Trash } from "react-feather";
 import { toast } from "react-hot-toast";
 import AddHotel from "./AddHotel";
 import UpdateHotel from "./UpdateHotel";
+import "./HotelManagement.css";
 
 const STORAGE_KEY = "frontdesk_client_manager_rows";
 
@@ -189,7 +189,7 @@ const HotelManagement = () => {
     {
       name: "Company Size",
       sortable: true,
-      width: "12rem",
+      width: "12rem", 
       selector: (row) => row.size,
       sortField: "size",
       selectorKey: "size",
@@ -381,7 +381,7 @@ const HotelManagement = () => {
     setRowsPerPage(Number(event.target.value));
     setCurrentPage(0);
   };
-
+3
   const handleSort = (column, direction) => {
     setSortField(column.sortField || column.selectorKey || "name");
     setSortDirection(direction);
@@ -417,19 +417,16 @@ const HotelManagement = () => {
 
   return (
     <>
-      <Card>
-        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
-          <CardTitle className="mb-0">
-            <h2 className="mb-0">Client Manager</h2>
+      <Card className="products-page-card">
+        <CardHeader>
+          <CardTitle>
+            <h2>Client Manage</h2>
           </CardTitle>
-          {/* {UserRole === "SuperAdmin" ? ( */}
           <Button
             color="primary"
             onClick={() => {
               setNewGuest(true);
             }}
-            className="flex-shrink-0"
-            style={headerButtonStyles}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -443,18 +440,16 @@ const HotelManagement = () => {
             </svg>
             Add Client
           </Button>
-          {/* ) : null} */}
         </CardHeader>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
-            <Col xs="12" md="6">
-              <div className="d-flex flex-wrap align-items-center gap-50">
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
+            <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px", minWidth: "90px" }}
+                style={{ width: "90px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
@@ -464,43 +459,108 @@ const HotelManagement = () => {
                 <option value={100}>100</option>
               </Input>
               <span className="ms-50">entries</span>
-              </div>
             </Col>
-            <Col xs="12" md="6">
-              <div className="d-flex flex-wrap align-items-center justify-content-md-end justify-content-start gap-50">
+            <Col md="6">
+              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
                 <span className="me-50">Search:</span>
                 <Input
                   type="text"
                   value={searchValue}
                   onChange={handleSearchChange}
-                  style={{ width: "100%", maxWidth: "340px", minWidth: "220px" }}
+                  style={{ maxWidth: "340px" }}
                 />
               </div>
             </Col>
           </Row>
           <Row className="my-1">
             <Col>
-              <div style={{ overflowX: "auto" }}>
-                <DataTable
-                  noHeader
-                  data={paginatedData}
-                  columns={Columns}
-                  keyField="id"
-                  className="react-dataTable"
-                  onSort={handleSort}
-                  sortServer
-                  responsive
-                />
+              <div className="products-table-shell">
+                <div className="products-table-wrap text-nowrap">
+                  <table className="products-table table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Company Type</th>
+                        <th>Company Size</th>
+                        <th>Company Industry</th>
+                        <th>Company Name</th>
+                        <th>Tax Info</th>
+                        <th>Email</th>
+                        <th>Phone No.</th>
+                        <th>Address</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Pincode</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.id}>
+                            <td>
+                              <span className="product-category-badge">{row.type}</span>
+                            </td>
+                            <td>{row.size}</td>
+                            <td>{row.industry}</td>
+                            <td>
+                              <div className="product-name-block">
+                                <div>
+                                  <span className="product-name-title">{row.name}</span>
+                                  <span className="product-name-subtitle">{row.tax}</span>
+                                </div>
+                              </div>
+                            </td>
+                            <td>{row.tax}</td>
+                            <td>{row.email}</td>
+                            <td>{row.phone}</td>
+                            <td>{row.address}</td>
+                            <td>{row.country}</td>
+                            <td>{row.state}</td>
+                            <td>{row.city}</td>
+                            <td>{row.pincode}</td>
+                            <td>
+                              <div className="product-action-group">
+                                <button
+                                  type="button"
+                                  className="product-action-btn"
+                                  onClick={() => handleEditClick(row)}
+                                  aria-label={`Edit ${row.name}`}
+                                >
+                                  <Edit size={15} />
+                                </button>
+                                <button
+                                  type="button"
+                                  className="product-action-btn delete"
+                                  onClick={() => handleDeleteClick(row)}
+                                  aria-label={`Delete ${row.name}`}
+                                >
+                                  <Trash size={15} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="13">
+                            <div className="products-empty-state">No clients found.</div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
-            <Col xs="12" md="6">
-              <div className="text-md-start text-center">
+          <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
+            <Col md="6">
+              <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
-            <Col xs="12" md="6">
+            <Col md="6">
               <CustomPagination />
             </Col>
           </Row>

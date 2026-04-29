@@ -1,26 +1,18 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
-import { Edit, RefreshCcw, Trash } from "react-feather";
 import {
-  Button,
   Card,
   CardBody,
-  CardText,
-  Input,
   CardTitle,
-  Col,
-  Label,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  Row,
-  Form,
-  FormFeedback,
   CardHeader,
+  Button,
+  Row,
+  Col,
+  Input,
 } from "reactstrap";
-import Category from "./Category";
-import ProductCategory from "./ProductCategory";
+import { Edit, Trash } from "react-feather";
+import "./ProductMaster.css";
+
 const ProductMaster = () => {
   const [activeTab, setActiveTab] = useState("active");
   const [searchValue, setSearchValue] = useState("");
@@ -262,40 +254,14 @@ const ProductMaster = () => {
 
   return (
     <>
-      <Card>
+      <Card className="products-page-card">
         <CardHeader>
           <CardTitle>
             <h2>Subscription Payment</h2>
-            {/* <div className="d-flex gap-1 mt-2">
-              <button
-                className={`btn rounded-pill px-1 ${activeTab === "active" ? "btn-primary" : "btn-white shadow-sm fw-medium"
-                }`}
-                onClick={() => setActiveTab("active")}
-              >
-                All Subscription (2)
-              </button>
-
-              <button
-                className={`btn rounded-pill px-1 ${activeTab === "archived" ? "btn-primary" : "btn-white shadow-sm fw-medium"
-                }`}
-                onClick={() => setActiveTab("archived")}
-              >
-                Active (0)
-              </button>
-
-              <button
-                className={`btn rounded-pill px-1 ${activeTab === "expired" ? "btn-primary" : "btn-white shadow-sm fw-medium"
-                }`}
-                onClick={() => setActiveTab("expired")}
-              >
-                Expired (0)
-              </button>
-            </div> */}
           </CardTitle>
         </CardHeader>
-
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
@@ -327,20 +293,51 @@ const ProductMaster = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={hotelTable}
-                className="react-dataTable"
-                keyField="id"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="products-table-shell">
+                <div className="products-table-wrap text-nowrap">
+                  <table className="products-table table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Subscription Pay Id</th>
+                        <th>Subscription Id</th>
+                        <th>Mode</th>
+                        <th>Amount</th>
+                        <th>Time</th>
+                        <th>Product Id</th>
+                        <th>Discount Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.id}>
+                            <td>
+                              <span className="product-category-badge">{row.name}</span>
+                            </td>
+                            <td>{row.type}</td>
+                            <td>{row.details}</td>
+                            <td>{row.dates}</td>
+                            <td>{row.applicability}</td>
+                            <td>{row.room}</td>
+                            <td>{row.disAmount}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7">
+                            <div className="products-empty-state">No records found.</div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col md="6">
-              <div className="text-md-start text-center">
+              <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
