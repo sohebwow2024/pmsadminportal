@@ -368,36 +368,36 @@ const PlanPoint = () => {
           ) : null}
         </CardHeader>
         <CardBody>
-          <Row className="planpoint-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
-            <Col md="6" className="d-flex align-items-center">
-              <span className="me-50">Show</span>
-              <Input
-                type="select"
-                value={rowsPerPage}
-                onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
-                className="mx-50"
-              >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </Input>
-              <span className="ms-50">entries</span>
-            </Col>
-            <Col md="6">
-              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
-                <span className="me-50">Search:</span>
-                <Input
-                  type="text"
-                  value={searchValue}
-                  onChange={handleSearchChange}
-                  style={{ maxWidth: "340px" }}
-                />
-              </div>
-            </Col>
-          </Row>
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
+                     <Col md="6" className="d-flex align-items-center">
+                       <span className="me-50">Show</span>
+                       <Input
+                         type="select"
+                         value={rowsPerPage}
+                         onChange={handleRowsPerPageChange}
+                         style={{ width: "80px" }}
+                         className="mx-50"
+                       >
+                         <option value={5}>5</option>
+                         <option value={10}>10</option>
+                         <option value={25}>25</option>
+                         <option value={50}>50</option>
+                         <option value={100}>100</option>
+                       </Input>
+                       <span className="ms-50">entries</span>
+                     </Col>
+                     <Col md="6">
+                       <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+                         <span className="me-50">Search:</span>
+                         <Input
+                           type="text"
+                           value={searchValue}
+                           onChange={handleSearchChange}
+                           style={{ maxWidth: "340px" }}
+                         />
+                       </div>
+                     </Col>
+                   </Row>
           <Row className="my-1">
             <Col>
               <div className="planpoint-table-shell">
@@ -408,7 +408,7 @@ const PlanPoint = () => {
                         <th>Plan Point Name</th>
                         <th>Plan Point Icon</th>
                         <th>Description</th>
-                        <th className="product-action-header">Actions</th>
+                        <th className="planpoint-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -420,29 +420,29 @@ const PlanPoint = () => {
                             </td>
                             <td>{row.icons}</td>
                             <td>{row.description || "-"}</td>
-                            <td className="product-action-cell">
-                              <UncontrolledDropdown className="product-action-menu">
+                            <td className="planpoint-action-cell">
+                              <UncontrolledDropdown className="planpoint-action-menu">
                                 <DropdownToggle
                                   tag="button"
                                   type="button"
-                                  className="product-action-trigger"
+                                  className="planpoint-action-trigger"
                                   aria-label={`Open actions for ${row.name}`}
                                 >
                                   ...
                                 </DropdownToggle>
                                 <DropdownMenu
                                   end
-                                  className="product-action-dropdown"
+                                  className="planpoint-action-dropdown"
                                 >
                                   <DropdownItem
-                                    className="product-action-dropdown-item"
+                                    className="planpoint-action-dropdown-item"
                                     onClick={() => handleEditClick(row)}
                                   >
                                     <Edit size={15} />
                                     <span>Edit</span>
                                   </DropdownItem>
                                   <DropdownItem
-                                    className="product-action-dropdown-item delete"
+                                    className="planpoint-action-dropdown-item delete"
                                     onClick={() => {
                                       setSelectedPlanPointId(row.id);
                                       handleCancelOpen();

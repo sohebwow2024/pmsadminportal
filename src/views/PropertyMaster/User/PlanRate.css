@@ -292,7 +292,7 @@
 .dark-layout .planrate-toolbar .form-select,
 .semi-dark-layout .planrate-toolbar .form-control,
 .semi-dark-layout .planrate-toolbar .form-select {
-  background-color: #22293d;
+  /* background-color: #22293d; */
   border-color: rgba(255, 255, 255, 0.12);
   color: #d0d2d6;
 }

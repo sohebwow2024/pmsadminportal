@@ -394,7 +394,7 @@ const Promocode = () => {
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
+                style={{ width: "80px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
@@ -427,7 +427,7 @@ const Promocode = () => {
                         <th>Promo Code</th>
                         <th>Tenure Type</th>
                         <th>Unit Volume</th>
-                        <th className="product-action-header">Actions</th>
+                        <th className="promocode-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -439,29 +439,29 @@ const Promocode = () => {
                             </td>
                             <td>{row.type}</td>
                             <td>{row.volume}</td>
-                            <td className="product-action-cell">
-                              <UncontrolledDropdown className="product-action-menu">
+                            <td className="promocode-action-cell">
+                              <UncontrolledDropdown className="promocode-action-menu">
                                 <DropdownToggle
                                   tag="button"
                                   type="button"
-                                  className="product-action-trigger"
+                                  className="promocode-action-trigger"
                                   aria-label={`Open actions for ${row.promo}`}
                                 >
                                   ...
                                 </DropdownToggle>
                                 <DropdownMenu
                                   end
-                                  className="product-action-dropdown"
+                                  className="promocode-action-dropdown"
                                 >
                                   <DropdownItem
-                                    className="product-action-dropdown-item"
+                                    className="promocode-action-dropdown-item"
                                     onClick={() => handleEditClick(row)}
                                   >
                                     <Edit size={15} />
                                     <span>Edit</span>
                                   </DropdownItem>
                                   <DropdownItem
-                                    className="product-action-dropdown-item delete"
+                                    className="promocode-action-dropdown-item delete"
                                     onClick={() => {
                                       setSelectedPromoId(row.id);
                                       handleCancelOpen();

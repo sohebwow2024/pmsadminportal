@@ -1,13 +1,14 @@
 .planpoint-page-card {
+  background: #fff;
   border: 0;
-  border-radius: 1.25rem;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
 
 .planpoint-page-card .card-header {
-  padding: 1.35rem 1.5rem 1rem;
-  border-bottom: 1px solid #eef2f7;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  padding: 1.2rem 1.4rem 1rem;
+  border-bottom: 1px solid #e9edf5;
+  background: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -16,66 +17,69 @@
 }
 
 .planpoint-toolbar {
-  padding: 1rem 0 0.25rem;
+  padding: 1rem 0 0.5rem;
 }
 
 .planpoint-toolbar .form-control,
 .planpoint-toolbar .form-select {
-  border-radius: 0.85rem;
-  border: 1px solid #d9e2f2;
-  min-height: 42px;
+  min-height: 40px;
+  border-radius: 0.357rem;
+  background: #fff;
+  color: #6b7280;
   box-shadow: none;
+  padding: 0.571rem 1rem 0.571rem 1rem;
 }
 
-.planpoint-toolbar .form-control:focus,
-.planpoint-toolbar .form-select:focus {
-  border-color: #7266ef;
-  box-shadow: 0 0 0 0.2rem rgba(114, 102, 239, 0.12);
+.planpoint-toolbar select.form-control,
+.planpoint-toolbar select.form-select {
+  padding: 0.571rem 2.4rem 0.571rem 1rem;
+  font-weight: 400;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-size: 15px;
+  background-position: right 0.9rem center;
+  background-repeat: no-repeat;
 }
 
 .planpoint-table-shell {
-  border: 1px solid #edf2f8;
-  border-radius: 1.1rem;
-  overflow: hidden;
+  overflow-x: auto;
+  border: 1px solid #e9edf5;
+  border-radius: 12px;
   background: #fff;
 }
 
 .planpoint-table-wrap {
-  overflow-x: auto;
+  width: 100%;
 }
 
 .planpoint-table {
   width: 100%;
   margin-bottom: 0;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.planpoint-table thead th {
-  border: 0;
-  padding: 1rem 1.15rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #6b7280;
-  background: #f8fafc;
-  white-space: nowrap;
+  table-layout: fixed;
   text-align: left;
 }
 
-.planpoint-table tbody td {
-  padding: 1rem 1.15rem;
-  border-top: 1px solid #eef2f7;
-  vertical-align: middle;
+.planpoint-table thead th {
+  padding: 0.95rem 1rem;
+  background: #f8fafc;
+  color: #6b7280;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0;
+  text-align: left;
+  white-space: normal !important;
 }
 
-.planpoint-table tbody tr {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background-color 0.25s ease;
-    text-align: left;
+.planpoint-table tbody td {
+  padding: 1rem;
+  border-top: 1px solid #e9edf5;
+  color: #111827;
+  vertical-align: middle;
+  text-align: left;
+  white-space: normal !important;
 }
 
 .planpoint-table tbody tr:hover {
@@ -110,12 +114,10 @@
 .planpoint-status-badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  padding: 0.45rem 0.85rem;
   font-size: 0.78rem;
   font-weight: 700;
-  white-space: nowrap;
 }
 
 .planpoint-category-badge {
@@ -169,59 +171,25 @@
   font-weight: 700;
 }
 
-.planpoint-action-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-}
-
-.planpoint-action-btn {
-  width: 34px;
-  height: 34px;
-  border: 0;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8fafc;
-  color: #475569;
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.planpoint-action-btn:hover {
-  transform: translateY(-2px);
-  background: #eef2ff;
-  color: #4f46e5;
-}
-
-.planpoint-action-btn.delete:hover {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.product-action-cell {
-  text-align: center;
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
-}
-
-.product-action-menu {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.product-action-header {
+.planpoint-action-cell {
   text-align: center !important;
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
 }
 
-.product-action-trigger {
+.planpoint-action-menu {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.planpoint-action-header {
+  text-align: center !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.planpoint-action-trigger {
   border: 0;
   background: transparent;
   color: #111827;
@@ -232,18 +200,18 @@
   border-radius: 8px;
 }
 
-.product-action-trigger::after {
+.planpoint-action-trigger::after {
   display: none !important;
 }
 
-.product-action-trigger:hover,
-.product-action-trigger:focus {
+.planpoint-action-trigger:hover,
+.planpoint-action-trigger:focus {
   background: #f8fafc;
   color: #111827;
   box-shadow: none !important;
 }
 
-.product-action-dropdown.dropdown-menu {
+.planpoint-action-dropdown.dropdown-menu {
   min-width: 0;
   width: max-content;
   padding: 0.45rem 0;
@@ -253,7 +221,7 @@
   overflow: hidden;
 }
 
-.product-action-dropdown-item {
+.planpoint-action-dropdown-item {
   position: relative;
   display: flex;
   align-items: center;
@@ -264,11 +232,11 @@
   white-space: nowrap;
 }
 
-.product-action-dropdown-item + .product-action-dropdown-item {
+.planpoint-action-dropdown-item + .planpoint-action-dropdown-item {
   border-top: 0;
 }
 
-.product-action-dropdown-item + .product-action-dropdown-item::before {
+.planpoint-action-dropdown-item + .planpoint-action-dropdown-item::before {
   content: "";
   position: absolute;
   top: 0;
@@ -277,26 +245,26 @@
   border-top: 1px solid #e9edf5;
 }
 
-.product-action-dropdown-item:hover,
-.product-action-dropdown-item:focus,
-.product-action-dropdown-item:active {
+.planpoint-action-dropdown-item:hover,
+.planpoint-action-dropdown-item:focus,
+.planpoint-action-dropdown-item:active {
   background: #f8fbff;
   color: #7367f0;
 }
 
-.product-action-dropdown-item.delete {
+.planpoint-action-dropdown-item.delete {
   color: #ef4444;
 }
 
-.product-action-dropdown-item.delete:hover,
-.product-action-dropdown-item.delete:focus,
-.product-action-dropdown-item.delete:active {
+.planpoint-action-dropdown-item.delete:hover,
+.planpoint-action-dropdown-item.delete:focus,
+.planpoint-action-dropdown-item.delete:active {
   color: #dc2626;
   background: #fff7f7;
 }
 
 .planpoint-empty-state {
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem;
   text-align: center;
   color: #6b7280;
 }
@@ -310,53 +278,62 @@
   font-weight: 500;
 }
 
-/* Dark mode styles */
-.dark-layout .planpoint-page-card {
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+.dark-layout .planpoint-page-card,
+.semi-dark-layout .planpoint-page-card {
+  background: #283046;
+  box-shadow: none;
 }
 
-.dark-layout .planpoint-page-card .card-header {
-  border-bottom: 1px solid #2d3748;
-  background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+.dark-layout .planpoint-page-card .card-header,
+.dark-layout .planpoint-table-shell,
+.semi-dark-layout .planpoint-page-card .card-header,
+.semi-dark-layout .planpoint-table-shell {
+  background: #283046;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .dark-layout .planpoint-toolbar .form-control,
-.dark-layout .planpoint-toolbar .form-select {
-  border-color: #4a5568;
-  background-color: #2d3748;
-  color: #e2e8f0;
+.dark-layout .planpoint-toolbar .form-select,
+.semi-dark-layout .planpoint-toolbar .form-control,
+.semi-dark-layout .planpoint-toolbar .form-select {
+  /* background-color: #22293d; */
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #d0d2d6;
 }
 
-.dark-layout .planpoint-toolbar .form-control:focus,
-.dark-layout .planpoint-toolbar .form-select:focus {
-  border-color: #7266ef;
+.dark-layout .planpoint-toolbar select.form-control,
+.dark-layout .planpoint-toolbar select.form-select,
+.semi-dark-layout .planpoint-toolbar select.form-control,
+.semi-dark-layout .planpoint-toolbar select.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23d0d2d6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
 }
 
-.dark-layout .planpoint-table-shell {
-  border-color: #4a5568;
-  background: #1a202c;
+.dark-layout .planpoint-table thead th,
+.semi-dark-layout .planpoint-table thead th {
+  background: #1f2638;
+  color: #b4bfd3;
 }
 
-.dark-layout .planpoint-table thead th {
-  color: #a0aec0;
-  background: #2d3748;
+.dark-layout .planpoint-table tbody td,
+.dark-layout .planpoint-name-title,
+.semi-dark-layout .planpoint-table tbody td,
+.semi-dark-layout .planpoint-name-title {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
-.dark-layout .planpoint-table tbody td {
-  border-top: 1px solid #4a5568;
-  color: #e2e8f0;
+.dark-layout .planpoint-name-subtitle,
+.dark-layout .planpoint-empty-state,
+.dark-layout .planpoint-footer-note,
+.semi-dark-layout .planpoint-name-subtitle,
+.semi-dark-layout .planpoint-empty-state,
+.semi-dark-layout .planpoint-footer-note {
+  color: #b4bfd3;
 }
 
-.dark-layout .planpoint-table tbody tr:hover {
-  background: #2d3748;
-}
-
-.dark-layout .planpoint-name-title {
-  color: #f7fafc;
-}
-
-.dark-layout .planpoint-name-subtitle {
-  color: #a0aec0;
+.dark-layout .planpoint-table tbody tr:hover,
+.semi-dark-layout .planpoint-table tbody tr:hover {
+  background: rgba(115, 103, 240, 0.12);
 }
 
 .dark-layout .planpoint-category-badge,
@@ -371,86 +348,63 @@
   color: #7ee2a8;
 }
 
-.dark-layout .planpoint-action-btn {
-  background: #4a5568;
-  color: #e2e8f0;
-}
-
-.dark-layout .planpoint-action-btn:hover {
-  background: #4f46e5;
-  color: #fff;
-}
-
-.dark-layout .planpoint-action-btn.delete:hover {
-  background: #dc2626;
-  color: #fff;
-}
-
-.dark-layout .product-action-trigger,
-.semi-dark-layout .product-action-trigger {
+.dark-layout .planpoint-action-trigger,
+.semi-dark-layout .planpoint-action-trigger {
   color: #f8fafc;
 }
 
-.dark-layout .product-action-trigger:hover,
-.dark-layout .product-action-trigger:focus,
-.semi-dark-layout .product-action-trigger:hover,
-.semi-dark-layout .product-action-trigger:focus {
+.dark-layout .planpoint-action-trigger:hover,
+.dark-layout .planpoint-action-trigger:focus,
+.semi-dark-layout .planpoint-action-trigger:hover,
+.semi-dark-layout .planpoint-action-trigger:focus {
   background: #22293d;
   color: #f8fafc;
 }
 
-.dark-layout .product-action-dropdown.dropdown-menu,
-.semi-dark-layout .product-action-dropdown.dropdown-menu {
+.dark-layout .planpoint-action-dropdown.dropdown-menu,
+.semi-dark-layout .planpoint-action-dropdown.dropdown-menu {
   background: #283046;
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.dark-layout .product-action-dropdown-item,
-.semi-dark-layout .product-action-dropdown-item {
+.dark-layout .planpoint-action-dropdown-item,
+.semi-dark-layout .planpoint-action-dropdown-item {
   color: #8fb4ff;
 }
 
-.dark-layout .product-action-dropdown-item + .product-action-dropdown-item,
-.semi-dark-layout .product-action-dropdown-item + .product-action-dropdown-item {
+.dark-layout .planpoint-action-dropdown-item + .planpoint-action-dropdown-item,
+.semi-dark-layout .planpoint-action-dropdown-item + .planpoint-action-dropdown-item {
   border-top-color: transparent;
 }
 
-.dark-layout .product-action-dropdown-item + .product-action-dropdown-item::before,
-.semi-dark-layout .product-action-dropdown-item + .product-action-dropdown-item::before {
+.dark-layout .planpoint-action-dropdown-item + .planpoint-action-dropdown-item::before,
+.semi-dark-layout .planpoint-action-dropdown-item + .planpoint-action-dropdown-item::before {
   border-top-color: rgba(255, 255, 255, 0.08);
 }
 
-.dark-layout .product-action-dropdown-item:hover,
-.dark-layout .product-action-dropdown-item:focus,
-.dark-layout .product-action-dropdown-item:active,
-.semi-dark-layout .product-action-dropdown-item:hover,
-.semi-dark-layout .product-action-dropdown-item:focus,
-.semi-dark-layout .product-action-dropdown-item:active {
+.dark-layout .planpoint-action-dropdown-item:hover,
+.dark-layout .planpoint-action-dropdown-item:focus,
+.dark-layout .planpoint-action-dropdown-item:active,
+.semi-dark-layout .planpoint-action-dropdown-item:hover,
+.semi-dark-layout .planpoint-action-dropdown-item:focus,
+.semi-dark-layout .planpoint-action-dropdown-item:active {
   background: rgba(115, 103, 240, 0.14);
   color: #b8cbff;
 }
 
-.dark-layout .product-action-dropdown-item.delete,
-.semi-dark-layout .product-action-dropdown-item.delete {
+.dark-layout .planpoint-action-dropdown-item.delete,
+.semi-dark-layout .planpoint-action-dropdown-item.delete {
   color: #ff8a8a;
 }
 
-.dark-layout .product-action-dropdown-item.delete:hover,
-.dark-layout .product-action-dropdown-item.delete:focus,
-.dark-layout .product-action-dropdown-item.delete:active,
-.semi-dark-layout .product-action-dropdown-item.delete:hover,
-.semi-dark-layout .product-action-dropdown-item.delete:focus,
-.semi-dark-layout .product-action-dropdown-item.delete:active {
+.dark-layout .planpoint-action-dropdown-item.delete:hover,
+.dark-layout .planpoint-action-dropdown-item.delete:focus,
+.dark-layout .planpoint-action-dropdown-item.delete:active,
+.semi-dark-layout .planpoint-action-dropdown-item.delete:hover,
+.semi-dark-layout .planpoint-action-dropdown-item.delete:focus,
+.semi-dark-layout .planpoint-action-dropdown-item.delete:active {
   background: rgba(239, 68, 68, 0.12);
   color: #ff9f9f;
-}
-
-.dark-layout .planpoint-empty-state {
-  color: #a0aec0;
-}
-
-.dark-layout .planpoint-footer-note {
-  color: #a0aec0;
 }
 
 @media (max-width: 767px) {
