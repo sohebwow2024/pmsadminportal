@@ -203,6 +203,24 @@
   color: #dc2626;
 }
 
+.product-action-cell {
+  text-align: center !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+.product-action-menu {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.product-action-header {
+  text-align: center !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
 .planrate-empty-state {
   padding: 2.5rem 1rem;
   text-align: center;
