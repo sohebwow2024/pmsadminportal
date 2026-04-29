@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
 import { Edit, Trash } from "react-feather";
 import {
@@ -21,6 +20,7 @@ import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import "./Promocode.css";
 
 const initialPromocodeData = [
   {
@@ -358,35 +358,32 @@ const Promocode = () => {
 
   return (
     <>
-      <Card>
+      <Card className="promocode-page-card">
         <CardHeader>
-          <div style={headerGroupStyles}>
-            <CardTitle className="mb-0">
-              <h2 className="mb-0">Promocode</h2>
-            </CardTitle>
-            {UserRole === "SuperAdmin" ? (
-              <Button
-                color="primary"
-                onClick={handleShowModal}
-                style={headerButtonStyles}
+          <CardTitle>
+            <h2>Promocode</h2>
+          </CardTitle>
+          {UserRole === "SuperAdmin" ? (
+            <Button
+              color="primary"
+              onClick={handleShowModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                className="me-1"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
-                  className="me-1"
-                >
-                  <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
-                </svg>
-                Add Promocode
-              </Button>
-            ) : null}
-          </div>
+                <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+              </svg>
+              Add Promocode
+            </Button>
+          ) : null}
         </CardHeader>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="promocode-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
@@ -418,20 +415,67 @@ const Promocode = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={hotelTable}
-                className="react-dataTable"
-                keyField="id"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="promocode-table-shell">
+                <div className="promocode-table-wrap text-nowrap">
+                  <table className="promocode-table table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Promo Code</th>
+                        <th>Tenure Type</th>
+                        <th>Unit Volume</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.id}>
+                            <td>
+                              <span className="promocode-category-badge">{row.promo}</span>
+                            </td>
+                            <td>{row.type}</td>
+                            <td>{row.volume}</td>
+                            <td>
+                              <div className="promocode-action-group">
+                                <button
+                                  type="button"
+                                  className="promocode-action-btn"
+                                  onClick={() => handleEditClick(row)}
+                                  aria-label={`Edit`}
+                                >
+                                  <Edit size={15} />
+                                </button>
+                                <button
+                                  type="button"
+                                  className="promocode-action-btn delete"
+                                  onClick={() => {
+                                    setSelectedPromoId(row.id);
+                                    handleCancelOpen();
+                                  }}
+                                  aria-label={`Delete`}
+                                >
+                                  <Trash size={15} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="4">
+                            <div className="promocode-empty-state">No promocodes found.</div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="promocode-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col md="6">
-              <div className="text-md-start text-center">
+              <div className="promocode-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>

@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
 import { Edit, Trash } from "react-feather";
 import {
@@ -22,6 +21,7 @@ import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 import axios from "../../../API/axios";
 import { useSelector } from "react-redux";
+import "./PlanRate.css";
 
 const initialPlanRateData = [
   {
@@ -436,17 +436,15 @@ const PlanRate = () => {
 
   return (
     <>
-      <Card>
-        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
-          <CardTitle className="mb-0">
-            <h2 className="mb-0">Plan Rate</h2>
+      <Card className="planrate-page-card">
+        <CardHeader>
+          <CardTitle>
+            <h2>Plan Rate</h2>
           </CardTitle>
           {UserRole === "SuperAdmin" ? (
             <Button
               color="primary"
               onClick={handleShowModal}
-              className="flex-shrink-0"
-              style={headerButtonStyles}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -463,7 +461,7 @@ const PlanRate = () => {
           ) : null}
         </CardHeader>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="planrate-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
@@ -495,20 +493,81 @@ const PlanRate = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={hotelTable}
-                className="react-dataTable"
-                keyField="id"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="planrate-table-shell">
+                <div className="planrate-table-wrap text-nowrap">
+                  <table className="planrate-table table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Tenure Type</th>
+                        <th>Dp Rate</th>
+                        <th>Selling Price</th>
+                        <th>isDiscountable</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.id}>
+                            <td>
+                              <span className="planrate-category-badge">{row.tenureType?.label || "-"}</span>
+                            </td>
+                            <td>{row.dprate}</td>
+                            <td>{row.sellingprice}</td>
+                            <td>
+                              <span className={row.isdiscount ? "planrate-status-badge" : "planrate-category-badge"}>
+                                {row.isdiscount ? "Yes" : "No"}
+                              </span>
+                            </td>
+                            <td>
+                              <div className="planrate-action-group">
+                                <button
+                                  type="button"
+                                  className="planrate-action-btn"
+                                  onClick={() => {
+                                    setSelectedPlanRateId(row.id);
+                                    setTenureTypeValue(row.tenureType);
+                                    setDpRate(row.dprate);
+                                    setSellingPrice(row.sellingprice);
+                                    setIsDiscountable(row.isdiscount);
+                                    setDisplay(false);
+                                    setShowUpdate(true);
+                                  }}
+                                  aria-label={`Edit`}
+                                >
+                                  <Edit size={15} />
+                                </button>
+                                <button
+                                  type="button"
+                                  className="planrate-action-btn delete"
+                                  onClick={() => {
+                                    setSelectedPlanRateId(row.id);
+                                    handleCancelOpen();
+                                  }}
+                                  aria-label={`Delete`}
+                                >
+                                  <Trash size={15} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="5">
+                            <div className="planrate-empty-state">No plan rates found.</div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="planrate-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col md="6">
-              <div className="text-md-start text-center">
+              <div className="planrate-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
