@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
 import {
   Button,
@@ -30,6 +29,7 @@ import { MdDateRange } from "react-icons/md";
 import axios from "../../API/axios";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import "../PropertyMaster/Hotel/Products.css";
 
 const SubscriptionHistory = () => {
   useEffect(() => {
@@ -102,80 +102,6 @@ const SubscriptionHistory = () => {
       // action: "btns",
     },
   ];
-  const basicColumns = [
-    {
-      name: "Subscription Id",
-      sortable: true,
-      // width: "22rem",
-      selector: (row) => row.subsid,
-      sortField: "subsid",
-      selectorKey: "subsid",
-      cell: (row) => <span>{row.subsid}</span>,
-    },
-    // {
-    //   name: "Purchase Plan",
-    //   sortable: true,
-    //   cell: (row) => <span>{row.type}</span>,
-    // },
-    {
-      name: "Client Id",
-      sortable: true,
-      // width: "22rem",
-      selector: (row) => row.clientid,
-      sortField: "clientid",
-      selectorKey: "clientid",
-      cell: (row) => <span>{row.clientid}</span>,
-    },
-    {
-      name: "Plan Rate Id",
-      sortable: true,
-      // width: "22rem",
-      selector: (row) => row.planrateid,
-      sortField: "planrateid",
-      selectorKey: "planrateid",
-      cell: (row) => <span>{row.planrateid}</span>,
-    },
-    {
-      name: "Creation Time",
-      sortable: true,
-      width: "22rem",
-      selector: (row) => row.creationtime,
-      sortField: "creationtime",
-      selectorKey: "creationtime",
-      cell: (row) => <span>{row.creationtime}</span>,
-    },
-    
-    // {
-    //   name: "Actions",
-    //   center: true,
-    //   //  minWidth: '150px',
-    //   selector: (row) => {
-    //     return (
-    //       <>
-    //         <Col>
-    //           <Edit
-    //             className="me-1 cursor-pointer"
-    //             size={15}
-    //             onClick={() => {
-    //               handleUpdateOpen();
-    //               setPromoId(row.promotionId);
-    //             }}
-    //           />
-    //           <Trash
-    //             className="me-1 cursor-pointer"
-    //             size={15}
-    //             onClick={() => {
-    //               // handleUpdateOpen();
-    //               setPromoId(row.promotionId);
-    //             }}
-    //           />
-    //         </Col>
-    //       </>
-    //     );
-    //   },
-    // },
-  ];
-
   const options = {
     filterType: "dropdown",
     download: true,
@@ -295,12 +221,6 @@ const SubscriptionHistory = () => {
     setCurrentPage(0);
   };
 
-  const handleSort = (column, direction) => {
-    setSortField(column.sortField || column.selectorKey || "subsid");
-    setSortDirection(direction);
-    setCurrentPage(0);
-  };
-
   const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
   const showingTo = Math.min(currentEndIndex, sortedData.length);
 
@@ -330,66 +250,64 @@ const SubscriptionHistory = () => {
 
   return (
     <>
-      <Card>
+      <Card className="products-page-card subscription-history-card">
         <CardHeader>
           <CardTitle>
             <h2>Subscription History</h2>
           </CardTitle>
         </CardHeader>
-        <Row className="align-items-end ms-2 me-2 gx-2 gy-1">
-          <Col xs="12" md="4" className="text-start">
-            <Label className="form-label" for="startDate">
-              From Date
-            </Label>
-
-            <Flatpickr
-              className="form-control"
-              value={fromDate}
-              onChange={(date) => {
-                setFromDate(moment(date[0]).format("YYYY-MM-DD"));
-              }}
-              id="startDate"
-              options={{
-                altInput: true,
-                dateFormat: "Y-m-d",
-              }}
-            />
-          </Col>
-          <Col xs="12" md="4" className="text-start">
-            <Label className="form-label" for="endDate">
-              To Date
-            </Label>
-
-            <Flatpickr
-              className="form-control"
-              value={toDate}
-              onChange={(date) => {
-                setToDate(moment(date[0]).format("YYYY-MM-DD"));
-              }}
-              id="endDate"
-              options={{
-                altInput: true,
-                dateFormat: "Y-m-d",
-              }}
-            />
-          </Col>
-          <Col xs="12" md="4">
-            <div className="d-flex flex-column flex-sm-row gap-1">
-              <Button
-                className="me-sm-1"
-                color="primary"
-                onClick={getBookingData}
-              >
-                Search
-              </Button>
-              <Button color="primary" onClick={handelReset}>
-                Reset
-              </Button>
-            </div>
-          </Col>
-        </Row>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="subscription-history-filters align-items-end gx-2 gy-1 mb-1">
+            <Col xs="12" md="4" className="text-start">
+              <Label className="form-label" for="startDate">
+                From Date
+              </Label>
+              <Flatpickr
+                className="form-control"
+                value={fromDate}
+                onChange={(date) => {
+                  setFromDate(moment(date[0]).format("YYYY-MM-DD"));
+                }}
+                id="startDate"
+                options={{
+                  altInput: true,
+                  dateFormat: "Y-m-d",
+                }}
+              />
+            </Col>
+            <Col xs="12" md="4" className="text-start">
+              <Label className="form-label" for="endDate">
+                To Date
+              </Label>
+              <Flatpickr
+                className="form-control"
+                value={toDate}
+                onChange={(date) => {
+                  setToDate(moment(date[0]).format("YYYY-MM-DD"));
+                }}
+                id="endDate"
+                options={{
+                  altInput: true,
+                  dateFormat: "Y-m-d",
+                }}
+              />
+            </Col>
+            <Col xs="12" md="4">
+              <div className="d-flex flex-column flex-sm-row gap-1">
+                <Button
+                  className="me-sm-1"
+                  color="primary"
+                  onClick={getBookingData}
+                >
+                  Search
+                </Button>
+                <Button color="primary" onClick={handelReset}>
+                  Reset
+                </Button>
+              </div>
+            </Col>
+          </Row>
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col
               xs="12"
               md="6"
@@ -425,22 +343,55 @@ const SubscriptionHistory = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <div className="table-responsive">
-                <DataTable
-                  noHeader
-                  data={paginatedData}
-                  columns={basicColumns}
-                  className="react-dataTable"
-                  keyField="subsid"
-                  onSort={handleSort}
-                  sortServer
-                />
+              <div className="products-table-shell">
+                <div className="products-table-wrap text-nowrap">
+                  <table className="products-table subscription-history-table table table-hover">
+                    <colgroup>
+                      <col className="subscription-history-column-id" />
+                      <col className="subscription-history-column-client" />
+                      <col className="subscription-history-column-plan" />
+                      <col className="subscription-history-column-time" />
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th>Subscription Id</th>
+                        <th>Client Id</th>
+                        <th>Plan Rate Id</th>
+                        <th>Creation Time</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.subsid}>
+                            <td>
+                              <span className="category-id-text">
+                                {row.subsid}
+                              </span>
+                            </td>
+                            <td>{row.clientid}</td>
+                            <td>{row.planrateid}</td>
+                            <td>{row.creationtime}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="4">
+                            <div className="products-empty-state">
+                              No records found.
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col xs="12" md="6">
-              <div className="text-md-start text-center">
+              <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>

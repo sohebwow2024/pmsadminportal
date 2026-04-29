@@ -12,11 +12,16 @@ import {
   ModalBody,
   ModalHeader,
   Input,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledDropdown,
 } from "reactstrap";
 import { Edit, Trash } from "react-feather";
 import { toast } from "react-hot-toast";
 import AddHotel from "./AddHotel";
 import UpdateHotel from "./UpdateHotel";
+import "../PropertyMaster/Hotel/Products.css";
 import "./HotelManagement.css";
 
 const STORAGE_KEY = "frontdesk_client_manager_rows";
@@ -177,130 +182,6 @@ const HotelManagement = () => {
     setSelectedClient(null);
   };
 
-  const Columns = [
-    {
-      name: "Company Type",
-      sortable: true,
-      width: "12rem",
-      selector: (row) => row.type,
-      sortField: "type",
-      selectorKey: "type",
-    },
-    {
-      name: "Company Size",
-      sortable: true,
-      width: "12rem", 
-      selector: (row) => row.size,
-      sortField: "size",
-      selectorKey: "size",
-    },
-    {
-      name: "Company Industry",
-      sortable: true,
-      width: "12rem",
-      selector: (row) => row.industry,
-      sortField: "industry",
-      selectorKey: "industry",
-    },
-    {
-      name: "Company Name",
-      sortable: true,
-      width: "12rem",
-      selector: (row) => row.name,
-      sortField: "name",
-      selectorKey: "name",
-    },
-    {
-      name: "Tax Info",
-      sortable: true,
-      width: "12rem",
-      selector: (row) => row.tax,
-      sortField: "tax",
-      selectorKey: "tax",
-    },
-    {
-      name: "Email",
-      sortable: true,
-      width: "13rem",
-      selector: (row) => row.email,
-      sortField: "email",
-      selectorKey: "email",
-    },
-    {
-      name: "Phone No.",
-      sortable: true,
-      width: "10rem",
-      selector: (row) => row.phone,
-      sortField: "phone",
-      selectorKey: "phone",
-    },
-    {
-      name: "Address",
-      sortable: true,
-      width: "12rem",
-      selector: (row) => row.address,
-      sortField: "address",
-      selectorKey: "address",
-    },
-    {
-      name: "Country",
-      sortable: true,
-      width: "7rem",
-      selector: (row) => row.country,
-      sortField: "country",
-      selectorKey: "country",
-    },
-    {
-      name: "State",
-      sortable: true,
-      width: "10rem",
-      selector: (row) => row.state,
-      sortField: "state",
-      selectorKey: "state",
-    },
-    {
-      name: "City",
-      sortable: true,
-      width: "10rem",
-      selector: (row) => row.city,
-      sortField: "city",
-      selectorKey: "city",
-    },
-    {
-      name: "Pincode",
-      sortable: true,
-      width: "8rem",
-      selector: (row) => row.pincode,
-      sortField: "pincode",
-      selectorKey: "pincode",
-    },
-    {
-      name: "Action",
-      sortable: false,
-      center: true,
-      width: "9rem",
-
-      selector: (row) => (
-        <>
-          <Edit
-            className="me-1 cursor-pointer"
-            onClick={() => {
-              handleEditClick(row);
-            }}
-            size={15}
-          />
-          <Trash
-            className="me-1 cursor-pointer"
-            size={15}
-            onClick={() => {
-              handleDeleteClick(row);
-            }}
-          />
-        </>
-      ),
-    },
-  ];
-
   const filteredData = useMemo(() => {
     const normalizedSearch = searchValue.trim().toLowerCase();
 
@@ -381,12 +262,6 @@ const HotelManagement = () => {
     setRowsPerPage(Number(event.target.value));
     setCurrentPage(0);
   };
-3
-  const handleSort = (column, direction) => {
-    setSortField(column.sortField || column.selectorKey || "name");
-    setSortDirection(direction);
-    setCurrentPage(0);
-  };
 
   const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
   const showingTo = Math.min(currentEndIndex, sortedData.length);
@@ -417,16 +292,19 @@ const HotelManagement = () => {
 
   return (
     <>
-      <Card className="products-page-card">
-        <CardHeader>
-          <CardTitle>
-            <h2>Client Manager</h2>
+      <Card className="products-page-card hotel-management-page-card">
+        <CardHeader className="d-flex flex-wrap justify-content-between align-items-center gap-1">
+          <CardTitle className="mb-0">
+            <h2 className="mb-0">Client Manager</h2>
           </CardTitle>
+          {/* {UserRole === "SuperAdmin" ? ( */}
           <Button
             color="primary"
             onClick={() => {
               setNewGuest(true);
             }}
+            className="flex-shrink-0"
+            style={headerButtonStyles}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -440,16 +318,18 @@ const HotelManagement = () => {
             </svg>
             Add Client
           </Button>
+          {/* ) : null} */}
         </CardHeader>
         <CardBody>
           <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
-            <Col md="6" className="d-flex align-items-center">
+            <Col xs="12" md="6">
+              <div className="d-flex flex-wrap align-items-center gap-50">
               <span className="me-50">Show</span>
               <Input
                 type="select"
                 value={rowsPerPage}
                 onChange={handleRowsPerPageChange}
-                style={{ width: "90px" }}
+                style={{ width: "90px", minWidth: "90px" }}
                 className="mx-50"
               >
                 <option value={5}>5</option>
@@ -459,15 +339,16 @@ const HotelManagement = () => {
                 <option value={100}>100</option>
               </Input>
               <span className="ms-50">entries</span>
+              </div>
             </Col>
-            <Col md="6">
-              <div className="d-flex align-items-center justify-content-md-end justify-content-start">
+            <Col xs="12" md="6">
+              <div className="d-flex flex-wrap align-items-center justify-content-md-end justify-content-start gap-50">
                 <span className="me-50">Search:</span>
                 <Input
                   type="text"
                   value={searchValue}
                   onChange={handleSearchChange}
-                  style={{ maxWidth: "340px" }}
+                  style={{ width: "100%", maxWidth: "340px", minWidth: "220px" }}
                 />
               </div>
             </Col>
@@ -476,7 +357,22 @@ const HotelManagement = () => {
             <Col>
               <div className="products-table-shell">
                 <div className="products-table-wrap text-nowrap">
-                  <table className="products-table table table-hover">
+                  <table className="products-table hotel-management-table table table-hover">
+                    <colgroup>
+                      <col className="hotel-management-column-type" />
+                      <col className="hotel-management-column-size" />
+                      <col className="hotel-management-column-industry" />
+                      <col className="hotel-management-column-name" />
+                      <col className="hotel-management-column-tax" />
+                      <col className="hotel-management-column-email" />
+                      <col className="hotel-management-column-phone" />
+                      <col className="hotel-management-column-address" />
+                      <col className="hotel-management-column-country" />
+                      <col className="hotel-management-column-state" />
+                      <col className="hotel-management-column-city" />
+                      <col className="hotel-management-column-pincode" />
+                      <col className="hotel-management-column-actions" />
+                    </colgroup>
                     <thead>
                       <tr>
                         <th>Company Type</th>
@@ -491,25 +387,20 @@ const HotelManagement = () => {
                         <th>State</th>
                         <th>City</th>
                         <th>Pincode</th>
-                        <th>Actions</th>
+                        <th className="product-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
                       {paginatedData.length ? (
                         paginatedData.map((row) => (
                           <tr key={row.id}>
-                            <td>
-                              <span className="product-category-badge">{row.type}</span>
-                            </td>
+                            <td>{row.type}</td>
                             <td>{row.size}</td>
                             <td>{row.industry}</td>
                             <td>
-                              <div className="product-name-block">
-                                <div>
-                                  <span className="product-name-title">{row.name}</span>
-                                  <span className="product-name-subtitle">{row.tax}</span>
-                                </div>
-                              </div>
+                              <span className="hotel-management-company-name">
+                                {row.name}
+                              </span>
                             </td>
                             <td>{row.tax}</td>
                             <td>{row.email}</td>
@@ -519,32 +410,49 @@ const HotelManagement = () => {
                             <td>{row.state}</td>
                             <td>{row.city}</td>
                             <td>{row.pincode}</td>
-                            <td>
-                              <div className="product-action-group">
-                                <button
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
                                   type="button"
-                                  className="product-action-btn"
-                                  onClick={() => handleEditClick(row)}
-                                  aria-label={`Edit ${row.name}`}
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.name}`}
                                 >
-                                  <Edit size={15} />
-                                </button>
-                                <button
-                                  type="button"
-                                  className="product-action-btn delete"
-                                  onClick={() => handleDeleteClick(row)}
-                                  aria-label={`Delete ${row.name}`}
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  end
+                                  className="product-action-dropdown"
                                 >
-                                  <Trash size={15} />
-                                </button>
-                              </div>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => {
+                                      handleEditClick(row);
+                                    }}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      handleDeleteClick(row);
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
                             </td>
                           </tr>
                         ))
                       ) : (
                         <tr>
                           <td colSpan="13">
-                            <div className="products-empty-state">No clients found.</div>
+                            <div className="products-empty-state">
+                              No clients found.
+                            </div>
                           </td>
                         </tr>
                       )}
@@ -555,12 +463,12 @@ const HotelManagement = () => {
             </Col>
           </Row>
           <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
-            <Col md="6">
+            <Col xs="12" md="6">
               <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
-            <Col md="6">
+            <Col xs="12" md="6">
               <CustomPagination />
             </Col>
           </Row>

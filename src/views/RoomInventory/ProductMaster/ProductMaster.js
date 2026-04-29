@@ -5,24 +5,19 @@ import {
   CardBody,
   CardTitle,
   CardHeader,
-  Button,
   Row,
   Col,
   Input,
 } from "reactstrap";
-import { Edit, Trash } from "react-feather";
+import "../../PropertyMaster/Hotel/Products.css";
 import "./ProductMaster.css";
 
 const ProductMaster = () => {
-  const [activeTab, setActiveTab] = useState("active");
   const [searchValue, setSearchValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
-
-  const [refresh, setRefresh] = useState(false);
-  const handleRefresh = () => setRefresh(!refresh);
   const data = [
     // {
     //   id: 1,
@@ -52,95 +47,6 @@ const ProductMaster = () => {
       room: "100",
       disAmount: "15%",
     },
-  ];
-
-  const hotelTable = [
-    {
-      name: "Subscription Pay Id",
-      sortable: true,
-      minWidth: "220px",
-      selector: (row) => row.name,
-      sortField: "name",
-      selectorKey: "name",
-      cell: (row) => <span>{row.name}</span>,
-    },
-    {
-      name: "Subscription Id",
-      sortable: true,
-      minWidth: "150px",
-      selector: (row) => row.type,
-      sortField: "type",
-      selectorKey: "type",
-      cell: (row) =>  <span>{row.type}</span>,
-    },
-    {
-      name: "Mode",
-      sortable: true,
-      minWidth: "250px",
-      selector: (row) => row.details,
-      sortField: "details",
-      selectorKey: "details",
-      cell: (row) => <span>{row.details}</span>,
-    },
-    {
-      name: "Amount",
-      sortable: true,
-      // minWidth: "50px",
-      selector: (row) => row.dates,
-      sortField: "dates",
-      selectorKey: "dates",
-      cell: (row) => <span>{row.dates}</span>,
-    },
-    {
-      name: "Time",
-      sortable: true,
-      // minWidth: "250px",
-      selector: (row) => row.applicability,
-      sortField: "applicability",
-      selectorKey: "applicability",
-      cell: (row) => <span>{row.applicability}</span>,
-    },
-    {
-      // name: 'Discount Amount',
-      name: "Product Id",
-      sortable: true,
-      // minWidth: "250px",
-      selector: (row) => row.room,
-      sortField: "room",
-      selectorKey: "room",
-      cell: (row) => <span>{row.room}</span>,
-    },
-    {
-      name: "Discount Amount",
-      sortable: true,
-      minWidth: "180px",
-      selector: (row) => row.disAmount,
-      sortField: "disAmount",
-      selectorKey: "disAmount",
-      cell: (row) => <span>{row.disAmount}</span>,
-    },
-
-    // {
-    //   name: "Actions",
-    //   center: true,
-    //   minWidth: "80px",
-    //   selector: (row) => {
-    //     return (
-    //       <>
-    //         <Col>
-    //           <Edit
-    //             className="me-1 cursor-pointer"
-    //             size={15}
-    //             onClick={() => {
-    //               handleUpdateOpen();
-    //             //   setPromoId(row.promotionId);
-    //             }}
-    //           />
-    //         </Col>
-    //       </>
-    //     );
-    //   },
-    // },
   ];
 
   const filteredData = useMemo(() => {
@@ -219,12 +125,6 @@ const ProductMaster = () => {
     setCurrentPage(0);
   };
 
-  const handleSort = (column, direction) => {
-    setSortField(column.sortField || column.selectorKey || "name");
-    setSortDirection(direction);
-    setCurrentPage(0);
-  };
-
   const showingFrom = sortedData.length === 0 ? 0 : currentStartIndex + 1;
   const showingTo = Math.min(currentEndIndex, sortedData.length);
 
@@ -295,7 +195,16 @@ const ProductMaster = () => {
             <Col>
               <div className="products-table-shell">
                 <div className="products-table-wrap text-nowrap">
-                  <table className="products-table table table-hover">
+                  <table className="products-table payment-table table table-hover">
+                    <colgroup>
+                      <col className="payment-column-payid" />
+                      <col className="payment-column-subscription" />
+                      <col className="payment-column-mode" />
+                      <col className="payment-column-amount" />
+                      <col className="payment-column-time" />
+                      <col className="payment-column-product" />
+                      <col className="payment-column-discount" />
+                    </colgroup>
                     <thead>
                       <tr>
                         <th>Subscription Pay Id</th>

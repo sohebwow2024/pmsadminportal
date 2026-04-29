@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import DataTable from "react-data-table-component";
 import ReactPaginate from "react-paginate";
 import { Edit, RefreshCcw, Trash, Archive } from "react-feather";
 import { AiOutlineCloudSync } from "react-icons/ai";
@@ -11,6 +10,9 @@ import {
   Input,
   CardTitle,
   Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Label,
   Modal,
   ModalBody,
@@ -19,6 +21,7 @@ import {
   Form,
   FormFeedback,
   CardHeader,
+  UncontrolledDropdown,
 } from "reactstrap";
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
@@ -34,6 +37,7 @@ import DeleteHotelModal from "./DeleteHotelModal";
 import HotelOTA from "./HotelOTA";
 import Avatar from "@components/avatar";
 import api from "../../../api";
+import "./Products.css";
 
 const ProductCategory = () => {
   useEffect(() => {
@@ -245,72 +249,6 @@ const ProductCategory = () => {
   //   // getAllState()
   // }, [categoryName])
 
-  const hotelTable = [
-    {
-      name: "Category Id",
-      sortable: true,
-      minWidth: "80px",
-      selector: (row) => row.id,
-      sortField: "id",
-      selectorKey: "id",
-      cell: (row) => <span>{row.id}</span>,
-    },
-    {
-      name: "Category Name",
-      sortable: true,
-      minWidth: "50px",
-      selector: (row) => row.name,
-      sortField: "name",
-      selectorKey: "name",
-      cell: (row) => <span>{row.name}</span>,
-    },
-    {
-      name: "Creation Time",
-      sortable: true,
-      minWidth: "180px",
-      selector: (row) => row.dates,
-      sortField: "dates",
-      selectorKey: "dates",
-      cell: (row) => <span>{row.dates}</span>,
-    },
-    // {
-    //   name: "Product Description",
-    //   sortable: true,
-    //   minWidth: "50px",
-    //   cell: (row) => <span>{row.dates}</span>,
-    // },
-    {
-      name: "Action",
-      sortable: false,
-      center: true,
-      width: "9rem",
-
-      selector: (row) => (
-        <>
-          <Edit
-            className="me-1 cursor-pointer"
-            onClick={() => {
-              setSelectedCategory(row);
-              setCategoryId(row.id);
-              setCategoryName(row.name);
-              handleShowModalUpdate(true);
-              // setGuestId(row.guestID);
-            }}
-            size={15}
-          />
-          <Trash
-            className="me-1 cursor-pointer"
-            size={15}
-            onClick={() => {
-              setSelectedCategory(row);
-              handleCancelOpen();
-              // setPromoId(row.promotionId);
-            }}
-          />
-        </>
-      ),
-    },
-  ];
   console.log("test");
 
   const filteredData = useMemo(() => {
@@ -378,12 +316,6 @@ const ProductCategory = () => {
 
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(Number(event.target.value));
-    setCurrentPage(0);
-  };
-
-  const handleSort = (column, direction) => {
-    setSortField(column.sortField || column.selectorKey || "name");
-    setSortDirection(direction);
     setCurrentPage(0);
   };
 
@@ -504,7 +436,7 @@ const ProductCategory = () => {
   };
   return (
     <>
-      <Card>
+      <Card className="products-page-card category-page-card">
         <CardHeader>
           <CardTitle>
             <h2>Category</h2>
@@ -533,7 +465,7 @@ const ProductCategory = () => {
           ) : null}
         </CardHeader>
         <CardBody>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mb-1">
+          <Row className="products-toolbar align-items-center justify-content-between gx-2 gy-1 mb-1">
             <Col md="6" className="d-flex align-items-center">
               <span className="me-50">Show</span>
               <Input
@@ -565,20 +497,99 @@ const ProductCategory = () => {
           </Row>
           <Row className="my-1">
             <Col>
-              <DataTable
-                noHeader
-                data={paginatedData}
-                columns={hotelTable}
-                keyField="id"
-                className="react-dataTable"
-                onSort={handleSort}
-                sortServer
-              />
+              <div className="products-table-shell">
+                <div className="products-table-wrap text-nowrap">
+                  <table className="products-table category-table table table-hover">
+                    <colgroup>
+                      <col className="category-column-id" />
+                      <col className="category-column-name" />
+                      <col className="category-column-date" />
+                      <col className="category-column-actions" />
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th className="text-start">Category Id</th>
+                        <th className="text-start">Category Name</th>
+                        <th className="text-start">Creation Time</th>
+                        <th className="product-action-header">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="table-border-bottom-0">
+                      {paginatedData.length ? (
+                        paginatedData.map((row) => (
+                          <tr key={row.id}>
+                            <td>
+                              <span className="category-id-text">{row.id}</span>
+                            </td>
+                            <td>
+                              <span className="category-name-title">
+                                {row.name}
+                              </span>
+                            </td>
+                            <td>
+                              <span className="category-date-text">
+                                {row.dates}
+                              </span>
+                            </td>
+                            <td className="product-action-cell">
+                              <UncontrolledDropdown className="product-action-menu">
+                                <DropdownToggle
+                                  tag="button"
+                                  type="button"
+                                  className="product-action-trigger"
+                                  aria-label={`Open actions for ${row.name}`}
+                                >
+                                  ...
+                                </DropdownToggle>
+                                <DropdownMenu
+                                  end
+                                  className="product-action-dropdown"
+                                >
+                                  <DropdownItem
+                                    className="product-action-dropdown-item"
+                                    onClick={() => {
+                                      setSelectedCategory(row);
+                                      setCategoryId(row.id);
+                                      setCategoryName(row.name);
+                                      handleShowModalUpdate(true);
+                                    }}
+                                  >
+                                    <Edit size={15} />
+                                    <span>Edit</span>
+                                  </DropdownItem>
+                                  <DropdownItem
+                                    className="product-action-dropdown-item delete"
+                                    onClick={() => {
+                                      setSelectedCategory(row);
+                                      handleCancelOpen();
+                                    }}
+                                  >
+                                    <Trash size={15} />
+                                    <span>Delete</span>
+                                  </DropdownItem>
+                                </DropdownMenu>
+                              </UncontrolledDropdown>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="4">
+                            <div className="products-empty-state">
+                              No categories found.
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row className="align-items-center justify-content-between gx-2 gy-1 mt-1">
+          <Row className="products-footer align-items-center justify-content-between gx-2 gy-1 mt-1">
             <Col md="6">
-              <div className="text-md-start text-center">
+              <div className="products-footer-note text-md-start text-center">
                 {`Showing ${showingFrom} to ${showingTo} of ${sortedData.length} entries`}
               </div>
             </Col>
