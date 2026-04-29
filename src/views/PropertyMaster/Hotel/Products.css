@@ -45,7 +45,32 @@
 .products-table {
   width: 100%;
   margin-bottom: 0;
-  text-align: center;
+  table-layout: fixed;
+  text-align: left;
+}
+
+.products-table-wrap {
+  width: 100%;
+}
+
+.product-column-main {
+  width: 30%;
+}
+
+.product-column-category {
+  width: 24%;
+}
+
+.product-column-users {
+  width: 9%;
+}
+
+.product-column-industry {
+  width: 27%;
+}
+
+.product-column-actions {
+  width: 10%;
 }
 
 .products-table thead th {
@@ -56,6 +81,8 @@
   font-weight: 700;
   text-transform: uppercase;
   border: 0;
+  text-align: left;
+  white-space: normal !important;
 }
 
 .products-table tbody td {
@@ -63,6 +90,8 @@
   border-top: 1px solid #e9edf5;
   color: #111827;
   vertical-align: middle;
+  text-align: left;
+  white-space: normal !important;
 }
 
 .products-table tbody tr:hover {
@@ -78,7 +107,7 @@
 
 .product-name-block {
   gap: 0.75rem;
-  min-width: 220px;
+  min-width: 0;
 }
 
 .product-icon-badge {
@@ -141,17 +170,26 @@
 }
 
 .product-action-group {
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.5rem;
 }
 
 .product-action-cell {
   text-align: center;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 
 .product-action-menu {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   justify-content: center;
+}
+
+.product-action-header {
+  text-align: center !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 
 .product-action-trigger {

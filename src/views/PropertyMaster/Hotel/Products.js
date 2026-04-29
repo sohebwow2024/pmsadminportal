@@ -491,14 +491,21 @@ const Products = () => {
               <div className="products-table-shell">
                 <div className="products-table-wrap text-nowrap">
                   <table className="products-table table table-hover">
+                    <colgroup>
+                      <col className="product-column-main" />
+                      <col className="product-column-category" />
+                      <col className="product-column-users" />
+                      <col className="product-column-industry" />
+                      <col className="product-column-actions" />
+                    </colgroup>
                     <thead>
                       <tr>
-                        <th>Product</th>
-                        <th>Product Category</th>
-                        <th>Users</th>
-                        <th>Industry</th>
-                        {/* <th>Status</th> */}
-                        <th>Actions</th>
+                        <th className="text-start">Product</th>
+                        <th className="text-start">Product Category</th>
+                        <th className="text-start">Users</th>
+                        <th className="text-start">Industry</th>
+                        {/* className="text-start" <th>Status</th> */}
+                        <th className="product-action-header">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="table-border-bottom-0">
@@ -507,11 +514,9 @@ const Products = () => {
                           <tr key={row.id}>
                             <td>
                               <div className="product-name-block">
-                                <span className="product-icon-badge">
-                                  {getInitials(row.name) || "PR"}
-                                </span>
+                               
                                 <div>
-                                  <span className="product-name-title">
+                                  <span className="product-name-title text-start">
                                     {row.name}
                                   </span>
                                   <span className="product-name-subtitle">
