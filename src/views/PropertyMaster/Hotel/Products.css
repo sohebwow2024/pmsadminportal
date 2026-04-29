@@ -45,6 +45,7 @@
 .products-table {
   width: 100%;
   margin-bottom: 0;
+  text-align: center;
 }
 
 .products-table thead th {
