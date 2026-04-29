@@ -420,7 +420,7 @@ const HotelManagement = () => {
       <Card className="products-page-card">
         <CardHeader>
           <CardTitle>
-            <h2>Client Manage</h2>
+            <h2>Client Manager</h2>
           </CardTitle>
           <Button
             color="primary"
