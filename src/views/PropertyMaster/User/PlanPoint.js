@@ -57,6 +57,68 @@ const headerButtonStyles = {
   whiteSpace: "nowrap",
 };
 
+const addPlanPointModalHeaderStyles = {
+  display: "block",
+  position: "relative",
+  padding: "2.8rem 2.5rem 0.75rem",
+  borderBottom: 0,
+  textAlign: "center",
+};
+
+const addPlanPointModalBodyStyles = {
+  maxWidth: "560px",
+  width: "100%",
+  margin: "0 auto",
+  padding: "0.25rem 1rem 1rem",
+};
+
+const addPlanPointTitleStyles = {
+  margin: 0,
+  fontSize: "1.35rem",
+  fontWeight: 700,
+};
+
+const addPlanPointSubtitleStyles = {
+  marginTop: "0.85rem",
+  marginBottom: 0,
+  color: "#6b6f82",
+  fontSize: "0.95rem",
+};
+
+const addPlanPointFieldStyles = {
+  minHeight: "38px",
+  borderRadius: "0.357rem",
+};
+
+const addPlanPointFooterStyles = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "0.75rem",
+  padding: "0.5rem 1rem 2.6rem",
+};
+
+const addPlanPointFooterButtonStyles = {
+  minWidth: "78px",
+};
+
+const addPlanPointCloseButtonStyles = {
+  position: "absolute",
+  top: "-0.45rem",
+  right: "-0.45rem",
+  width: "28px",
+  height: "28px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: 0,
+  borderRadius: "4px",
+  background: "#fff",
+  color: "#6e6b7b",
+  fontSize: "1.25rem",
+  lineHeight: 1,
+  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
+};
+
 const PlanPoint = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -594,26 +656,42 @@ const PlanPoint = () => {
         isOpen={show}
         toggle={handleShowModal}
         className="modal-dialog-centered modal-md"
+        contentClassName="border-0 rounded-3"
         backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span>
-            <h4>Add Plan Point</h4>
-          </span>
+        <ModalHeader
+          className="bg-transparent"
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleShowModal}
+              style={addPlanPointCloseButtonStyles}
+            >
+              ×
+            </button>
+          }
+          style={addPlanPointModalHeaderStyles}
+        >
+          <h4 style={addPlanPointTitleStyles}>Add Plan Point</h4>
+          <p style={addPlanPointSubtitleStyles}>
+            Add plan point details for this product
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody style={addPlanPointModalBodyStyles}>
           <Form>
             <Row>
               <Col xs="12" className="mb-1">
-                <Label className="form-label">
+                <Label className="form-label" for="add-plan-point-name">
                   Plan Point Name <span className="text-danger">*</span>
                 </Label>
                 <Input
+                  id="add-plan-point-name"
                   placeholder="Enter Plan Point Name"
                   value={pointName}
                   onChange={(e) => setPointName(e.target.value)}
                   invalid={display && pointName.trim() === ""}
+                  style={addPlanPointFieldStyles}
                 />
                 {display && !pointName.trim() ? (
                   <span className="error_msg_lbl">Enter Point Name</span>
@@ -638,41 +716,38 @@ const PlanPoint = () => {
             </Row>
             <Row>
               <Col xs="12" className="mb-1">
-                <Label className="form-label">Description</Label>
+                <Label className="form-label" for="add-plan-point-description">
+                  Description
+                </Label>
                 <Input
+                  id="add-plan-point-description"
                   type="textarea"
                   placeholder="Enter Description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  style={addPlanPointFieldStyles}
                 />
               </Col>
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1 px-sm-2">
-          <hr className="mt-2"></hr>
-          <Col xs="12" className="pb-2">
-            <div style={modalFooterStyles}>
-            <Button
-              className="btn btn-danger"
-              color="secondary"
-              outline
-              onClick={handleShowModal}
-              style={modalActionButtonStyles}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={handleAddPlanPoint}
-              disabled={!isFormValid}
-              style={modalActionButtonStyles}
-            >
-              Add Plan Point
-            </Button>
-            </div>
-          </Col>
-        </Row>
+        <div style={addPlanPointFooterStyles}>
+          <Button
+            color="primary"
+            onClick={handleAddPlanPoint}
+            disabled={!isFormValid}
+            style={addPlanPointFooterButtonStyles}
+          >
+            Submit
+          </Button>
+          <Button
+            color="secondary"
+            onClick={handleShowModal}
+            style={addPlanPointFooterButtonStyles}
+          >
+            Cancel
+          </Button>
+        </div>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
     </>
