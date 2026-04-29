@@ -62,6 +62,68 @@ const headerButtonStyles = {
   whiteSpace: "nowrap",
 };
 
+const addPlanRateModalHeaderStyles = {
+  display: "block",
+  position: "relative",
+  padding: "2.8rem 2.5rem 0.75rem",
+  borderBottom: 0,
+  textAlign: "center",
+};
+
+const addPlanRateModalBodyStyles = {
+  maxWidth: "560px",
+  width: "100%",
+  margin: "0 auto",
+  padding: "0.25rem 1rem 1rem",
+};
+
+const addPlanRateTitleStyles = {
+  margin: 0,
+  fontSize: "1.35rem",
+  fontWeight: 700,
+};
+
+const addPlanRateSubtitleStyles = {
+  marginTop: "0.85rem",
+  marginBottom: 0,
+  color: "#6b6f82",
+  fontSize: "0.95rem",
+};
+
+const addPlanRateFieldStyles = {
+  minHeight: "38px",
+  borderRadius: "0.357rem",
+};
+
+const addPlanRateFooterStyles = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "0.75rem",
+  padding: "0.5rem 1rem 2.6rem",
+};
+
+const addPlanRateFooterButtonStyles = {
+  minWidth: "78px",
+};
+
+const addPlanRateCloseButtonStyles = {
+  position: "absolute",
+  top: "-0.45rem",
+  right: "-0.45rem",
+  width: "28px",
+  height: "28px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  border: 0,
+  borderRadius: "4px",
+  background: "#fff",
+  color: "#6e6b7b",
+  fontSize: "1.25rem",
+  lineHeight: 1,
+  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
+};
+
 const PlanRate = () => {
   useEffect(() => {
     const prevTitle = document.title;
@@ -742,114 +804,123 @@ const PlanRate = () => {
         isOpen={show}
         toggle={handleShowModal}
         className="modal-dialog-centered modal-lg"
+        contentClassName="border-0 rounded-3"
         backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModal}>
-          <span>
-            <h4>Add Plan Rate</h4>
-          </span>
-        </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
-          <>
-            <Form>
-              <Row>
-                <Col xs="12" lg="6" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Tenure Type <span className="text-danger">*</span>
-                  </Label>
-                  <Select
-                    theme={selectThemeColors}
-                    className="react-select"
-                    classNamePrefix="select"
-                    placeholder="Select Tenure Type"
-                    options={tenureType}
-                    value={tenureTypeValue}
-                    onChange={setTenureTypeValue}
-                  />
-                  {display && !tenureTypeValue ? (
-                    <span className="error_msg_lbl">Enter Tenure Type </span>
-                  ) : null}
-                </Col>
-
-                <Col xs="12" lg="6" className="mb-1">
-                  <Label className="form-label" for="hotel">
-                    Dp Rate <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="number"
-                    placeholder="Dp Rate"
-                    id="dprate"
-                    value={dpRate}
-                    onChange={(e) => setDpRate(e.target.value)}
-                    invalid={display && dpRate === ""}
-                  />
-                  {display && !dpRate ? (
-                    <span className="error_msg_lbl">Enter Dp Rate </span>
-                  ) : null}
-                </Col>
-              </Row>
-              <Row>
-                <Col xs="12" lg="6" className="mb-1">
-                  <Label className="form-label" for="countries">
-                    Selling Price <span className="text-danger">*</span>
-                  </Label>
-                  <Input
-                    type="number"
-                    name="hotel"
-                    placeholder="Selling Price"
-                    id="selling"
-                    value={sellingPrice}
-                    onChange={(e) => setSellingPrice(e.target.value)}
-                    invalid={display && sellingPrice === ""}
-                  />
-                  {display && !sellingPrice ? (
-                    <span className="error_msg_lbl">Enter Selling Price </span>
-                  ) : null}
-                </Col>
-                <Col xs="12" lg="6" className="mb-1">
-                  <Label className="form-label" for="address">
-                    isDiscountable{" "}
-                  </Label>
-                  <Col>
-                    <Input
-                      type="checkbox"
-                      name="address"
-                      placeholder="isDiscountable"
-                      id="address"
-                      checked={isDiscountable}
-                      onChange={(e) => setIsDiscountable(e.target.checked)}
-                    />
-                  </Col>
-                </Col>
-              </Row>
-            </Form>
-          </>
-        </ModalBody>
-        <Row className="px-1 px-sm-2">
-          <hr></hr>
-          <Col xs="12" className="pb-2">
-            <div style={modalFooterStyles}>
-            <Button
-              className="btn btn-danger"
-              color="secondary"
-              outline
+        <ModalHeader
+          className="bg-transparent"
+          close={
+            <button
+              type="button"
+              aria-label="Close"
               onClick={handleShowModal}
-              style={modalActionButtonStyles}
+              style={addPlanRateCloseButtonStyles}
             >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={handleAddPlanRate}
-              disabled={!isPlanRateFormComplete}
-              style={modalActionButtonStyles}
-            >
-              Add Plan Rate
-            </Button>
-            </div>
-          </Col>
-        </Row>
+              ×
+            </button>
+          }
+          style={addPlanRateModalHeaderStyles}
+        >
+          <h4 style={addPlanRateTitleStyles}>Add Plan Rate</h4>
+          <p style={addPlanRateSubtitleStyles}>
+            Add plan rate details for this product
+          </p>
+        </ModalHeader>
+        <ModalBody style={addPlanRateModalBodyStyles}>
+          <Form>
+            <Row>
+              <Col xs="12" className="mb-1">
+                <Label className="form-label" for="add-plan-tenure">
+                  Tenure Type <span className="text-danger">*</span>
+                </Label>
+                <Select
+                  theme={selectThemeColors}
+                  className="react-select"
+                  classNamePrefix="select"
+                  inputId="add-plan-tenure"
+                  placeholder="Select Tenure Type"
+                  options={tenureType}
+                  value={tenureTypeValue}
+                  onChange={setTenureTypeValue}
+                />
+                {display && !tenureTypeValue ? (
+                  <span className="error_msg_lbl">Enter Tenure Type </span>
+                ) : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" md="6" className="mb-1">
+                <Label className="form-label" for="add-plan-dp-rate">
+                  Dp Rate <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="number"
+                  placeholder="Dp Rate"
+                  id="add-plan-dp-rate"
+                  value={dpRate}
+                  onChange={(e) => setDpRate(e.target.value)}
+                  invalid={display && dpRate === ""}
+                  style={addPlanRateFieldStyles}
+                />
+                {display && !dpRate ? (
+                  <span className="error_msg_lbl">Enter Dp Rate </span>
+                ) : null}
+              </Col>
+              <Col xs="12" md="6" className="mb-1">
+                <Label className="form-label" for="add-plan-selling-price">
+                  Selling Price <span className="text-danger">*</span>
+                </Label>
+                <Input
+                  type="number"
+                  name="hotel"
+                  placeholder="Selling Price"
+                  id="add-plan-selling-price"
+                  value={sellingPrice}
+                  onChange={(e) => setSellingPrice(e.target.value)}
+                  invalid={display && sellingPrice === ""}
+                  style={addPlanRateFieldStyles}
+                />
+                {display && !sellingPrice ? (
+                  <span className="error_msg_lbl">Enter Selling Price </span>
+                ) : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" className="mb-0">
+                <Label className="form-label" for="add-plan-discountable">
+                  isDiscountable{" "}
+                </Label>
+                <div>
+                  <Input
+                    type="checkbox"
+                    name="address"
+                    placeholder="isDiscountable"
+                    id="add-plan-discountable"
+                    checked={isDiscountable}
+                    onChange={(e) => setIsDiscountable(e.target.checked)}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </ModalBody>
+        <div style={addPlanRateFooterStyles}>
+          <Button
+            color="primary"
+            onClick={handleAddPlanRate}
+            disabled={!isPlanRateFormComplete}
+            style={addPlanRateFooterButtonStyles}
+          >
+            Submit
+          </Button>
+          <Button
+            color="secondary"
+            onClick={handleShowModal}
+            style={addPlanRateFooterButtonStyles}
+          >
+            Cancel
+          </Button>
+        </div>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
 
