@@ -17,6 +17,7 @@ import {
 import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
+import "./Plans.css";
 
 const defaultPlanTabs = ["PMS", "LLM", "CRM", "RESTAURANT"];
 
@@ -253,6 +254,9 @@ const getBillingText = (billingCycle, duration) => {
 };
 
 const normalizeProductName = (value) => value.trim();
+
+const getPlanBadgeText = (value) =>
+  normalizeProductName(value || "").charAt(0).toUpperCase() || "P";
 
 const getPlanTabs = (plans) => {
   const tabs = [...defaultPlanTabs];
@@ -656,113 +660,148 @@ const Plans = () => {
         </div>
       </div>
 
-      <div
-        className="d-flex flex-wrap justify-content-evenly align-items-stretch"
-        style={{ rowGap: "5px" }}
-      >
+      <div className="plans-grid d-flex flex-wrap justify-content-evenly align-items-stretch">
         {plans
           .filter((plan) => activeTab && plan.category === activeTab)
           .map((plan) => (
-          <Card
-            key={plan.id}
-            className="plan-card"
-            style={{
-              width: "24rem",
-              paddingTop: "20px",
-            }}
-          >
-            <div className="p-1">
-              <div className="d-flex justify-content-between">
-                <div className="mb-3">
-                  <h2>{plan.name}</h2>
-                </div>
-                <div>
-                  <span
-                    className="border rounded bg-primary text-light px-1"
-                    style={{ paddingTop: "2px", paddingBottom: "2px" }}
-                  >
-                    {plan.status}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <p className="fs-1 fw-bolder">
-                  {formatPrice(plan.price, plan.currency)}
-                </p>
-                <p>{plan.billingText}</p>
-              </div>
-              <div className="pt-2 border-top">
-                <div className="d-flex justify-content-between mb-1">
-                  <span>Duration</span>
-                  <span>{plan.duration} Days</span>
-                </div>
-                <div className="d-flex justify-content-between mb-1">
-                  <span>Product </span>
-                  <span>{plan.product}</span>
-                </div>
-                <div className="d-flex justify-content-between mb-1">
-                  <span>Description </span>
-                  <span>{plan.description}</span>
-                </div>
-              </div>
-              <div
-                className="pt-2 border-top mb-2"
-                style={{ minHeight: "140px" }}
+              <Card
+                key={plan.id}
+                className="plan-card border-0 h-100"
               >
-                <h4 className="fs-5 fw-bolder">Included Modules</h4>
-                <div className="d-flex gap-1 flex-wrap">
-                  {plan.includedModules.map((moduleName) => (
-                    <span key={moduleName} className="px-1 border rounded">
-                      {moduleName}
+                <div className="plan-card__content p-2 pb-1">
+                  <div className="plan-card__header d-flex justify-content-between align-items-start gap-1 mb-2">
+                    <div className="d-flex align-items-center gap-1">
+                      <div className="plan-card__badge">
+                        {getPlanBadgeText(plan.product)}
+                      </div>
+                      <div>
+                        <h3 className="plan-card__title mb-25">
+                          {plan.name}
+                        </h3>
+                        <p className="plan-card__subtitle mb-0 fw-semibold">
+                          Product: {plan.product}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="plan-card__status">
+                      {plan.status}
                     </span>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              <div className="d-flex justify-content-between plan-actions">
-                <Button color="primary" onClick={() => openEditPlan(plan)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-pencil-square me-1"
-                    viewBox="0 0 16 16"
+                  <div className="plan-card__price-panel mb-2">
+                    <div className="d-flex justify-content-between align-items-end flex-wrap gap-1">
+                      <div>
+                        <p className="plan-card__price mb-25 fw-bolder">
+                          {formatPrice(plan.price, plan.currency)}
+                        </p>
+                        <p className="plan-card__subtitle mb-0 fw-semibold">
+                          {plan.billingText}
+                        </p>
+                      </div>
+                      <div className="plan-card__duration-pill">
+                        {plan.duration} Days
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="plan-card__meta-grid d-flex flex-wrap gap-1 mb-2">
+                    <div className="plan-card__meta-box">
+                      <p className="plan-card__meta-label mb-25 fw-semibold">
+                        Product
+                      </p>
+                      <p className="plan-card__meta-value mb-0 fw-bold">
+                        {plan.product}
+                      </p>
+                    </div>
+                    <div className="plan-card__meta-box">
+                      <p className="plan-card__meta-label mb-25 fw-semibold">
+                        Duration
+                      </p>
+                      <p className="plan-card__meta-value mb-0 fw-bold">
+                        {plan.duration} Days
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="plan-card__description-box mb-2">
+                    <p className="plan-card__meta-label mb-50 fw-semibold">
+                      Description
+                    </p>
+                    <p className="plan-card__description mb-0">
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  <div className="plan-card__modules mb-1">
+                    <div className="d-flex justify-content-between align-items-center gap-1 mb-1">
+                      <h4 className="plan-card__modules-title mb-0 fs-5 fw-bolder">
+                        Included Modules
+                      </h4>
+                      <span className="plan-card__modules-count">
+                        {plan.includedModules.length} Modules
+                      </span>
+                    </div>
+                    <div className="plan-card__module-list d-flex gap-1 flex-wrap">
+                      {plan.includedModules.map((moduleName) => (
+                        <span key={moduleName} className="plan-card__module-pill">
+                          {moduleName}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="plan-card__footer d-flex align-items-center gap-1 p-2 pt-1">
+                  <Button
+                    color="primary"
+                    outline
+                    className="plan-card__action plan-card__action--edit"
+                    onClick={() => openEditPlan(plan)}
                   >
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                    />
-                  </svg>
-                  Edit
-                </Button>
-                <Button color="primary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
-                    className="me-1"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-pencil-square"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                      />
+                    </svg>
+                    Edit
+                  </Button>
+                  <Button
+                    color="primary"
+                    className="plan-card__action plan-card__action--clone"
                   >
-                    <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z" />
-                  </svg>
-                  Clone
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={() => {
-                    setSelectedPlanId(plan.id);
-                    setCancelOpen(true);
-                  }}
-                >
-                  <FaArchive />
-                </Button>
-              </div>
-            </div>
-          </Card>
-        ))}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z" />
+                    </svg>
+                    Clone
+                  </Button>
+                  <Button
+                    color="primary"
+                    className="plan-card__action plan-card__action--delete"
+                    onClick={() => {
+                      setSelectedPlanId(plan.id);
+                      setCancelOpen(true);
+                    }}
+                  >
+                    <FaArchive />
+                  </Button>
+                </div>
+              </Card>
+          ))}
       </div>
 
       {!activeTab ? (

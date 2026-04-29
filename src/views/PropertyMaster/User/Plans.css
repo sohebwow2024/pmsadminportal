@@ -1,0 +1,270 @@
+.plans-grid,
+.plan-card {
+  --plan-surface-radius: 0.428rem;
+}
+
+.plans-grid {
+  gap: 1.5rem;
+}
+
+.plan-card {
+  width: 24rem;
+  max-width: 100%;
+  min-height: 690px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--plan-surface-radius);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  box-shadow: 0 20px 45px rgba(31, 41, 55, 0.12);
+}
+
+.plan-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.plan-card__header {
+  min-height: 52px;
+}
+
+.plan-card__badge {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce0ff;
+  border-radius: var(--plan-surface-radius);
+  background: #eef0ff;
+  color: #5b5fef;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 10px 24px rgba(91, 95, 239, 0.13);
+}
+
+.plan-card__title {
+  color: #27304a;
+}
+
+.plan-card__subtitle,
+.plan-card__meta-label,
+.plan-card__modules-count {
+  color: #6b7280;
+}
+
+.plan-card__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #dce0ff;
+  border-radius: var(--plan-surface-radius);
+  background: #eef0ff;
+  color: #343658;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.plan-card__price-panel {
+  padding: 1rem;
+  border: 1px solid #dce0ff;
+  border-radius: var(--plan-surface-radius);
+  background: linear-gradient(135deg, #eef0ff 0%, #ffffff 100%);
+}
+
+.plan-card__price {
+  color: #20263a;
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.plan-card__duration-pill {
+  min-width: 108px;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #dce0ff;
+  border-radius: var(--plan-surface-radius);
+  background: #ffffff;
+  color: #343658;
+  font-weight: 700;
+  text-align: center;
+}
+
+.plan-card__meta-grid {
+  gap: 1rem;
+}
+
+.plan-card__meta-box {
+  flex: 1 1 130px;
+  min-width: 130px;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e8edf5;
+  border-radius: var(--plan-surface-radius);
+  background: #f8fafc;
+}
+
+.plan-card__meta-value {
+  color: #2b3348;
+}
+
+.plan-card__description-box {
+  min-height: 102px;
+  padding: 1rem;
+  border: 1px solid #e8edf5;
+  border-radius: var(--plan-surface-radius);
+  background: #ffffff;
+}
+
+.plan-card__description {
+  color: #4b5565;
+}
+
+.plan-card__modules {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 150px;
+  padding-top: 1rem;
+  border-top: 1px solid #edf1f7;
+}
+
+.plan-card__modules-title {
+  color: #d1d5db;
+}
+
+.plan-card__module-list {
+  min-height: 72px;
+  align-content: flex-start;
+}
+
+.plan-card__module-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  padding: 0.42rem 0.72rem;
+  border: 1px solid #dce0ff;
+  border-radius: var(--plan-surface-radius);
+  background: #eef0ff;
+  color: #343658;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.plan-card__footer {
+  margin-top: auto;
+  border-top: 1px solid #edf1f7;
+  background: #fcfdff;
+}
+
+.plan-card__action.btn {
+  height: 44px;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--plan-surface-radius);
+  font-weight: 600;
+}
+
+.plan-card__action--delete.btn {
+  flex: 0 0 88px;
+  min-width: 88px;
+  padding: 0.7rem;
+}
+
+.dark-layout .plan-card,
+.semi-dark-layout .plan-card {
+  background: linear-gradient(180deg, #283046 0%, #252c40 100%);
+  box-shadow: none;
+}
+
+.dark-layout .plan-card__title,
+.semi-dark-layout .plan-card__title,
+.dark-layout .plan-card__price,
+.semi-dark-layout .plan-card__price,
+.dark-layout .plan-card__meta-value,
+.semi-dark-layout .plan-card__meta-value,
+.dark-layout .plan-card__description,
+.semi-dark-layout .plan-card__description,
+.dark-layout .plan-card__modules-title,
+.semi-dark-layout .plan-card__modules-title {
+  color: #f8fafc;
+}
+
+.dark-layout .plan-card__subtitle,
+.semi-dark-layout .plan-card__subtitle,
+.dark-layout .plan-card__meta-label,
+.semi-dark-layout .plan-card__meta-label,
+.dark-layout .plan-card__modules-count,
+.semi-dark-layout .plan-card__modules-count {
+  color: #b4bfd3;
+}
+
+.dark-layout .plan-card__badge,
+.semi-dark-layout .plan-card__badge,
+.dark-layout .plan-card__status,
+.semi-dark-layout .plan-card__status,
+.dark-layout .plan-card__module-pill,
+.semi-dark-layout .plan-card__module-pill {
+  border-color: rgba(199, 210, 254, 0.22);
+  background: rgba(115, 103, 240, 0.16);
+  color: #c7d2fe;
+  box-shadow: none;
+}
+
+.dark-layout .plan-card__price-panel,
+.semi-dark-layout .plan-card__price-panel {
+  border-color: rgba(199, 210, 254, 0.2);
+  background: linear-gradient(135deg, rgba(115, 103, 240, 0.14) 0%, rgba(40, 48, 70, 0.92) 100%);
+}
+
+.dark-layout .plan-card__duration-pill,
+.semi-dark-layout .plan-card__duration-pill,
+.dark-layout .plan-card__meta-box,
+.semi-dark-layout .plan-card__meta-box,
+.dark-layout .plan-card__description-box,
+.semi-dark-layout .plan-card__description-box {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #22293d;
+}
+
+.dark-layout .plan-card__duration-pill,
+.semi-dark-layout .plan-card__duration-pill {
+  color: #c7d2fe;
+}
+
+.dark-layout .plan-card__modules,
+.semi-dark-layout .plan-card__modules,
+.dark-layout .plan-card__footer,
+.semi-dark-layout .plan-card__footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-layout .plan-card__footer,
+.semi-dark-layout .plan-card__footer {
+  background: #22293d;
+}
+
+@media (max-width: 576px) {
+  .plan-card {
+    min-height: auto;
+  }
+
+  .plan-card__footer {
+    flex-wrap: wrap;
+  }
+
+  .plan-card__action.btn,
+  .plan-card__action--delete.btn {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+}
