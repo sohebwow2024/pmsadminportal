@@ -558,19 +558,33 @@ const ProductCategory = () => {
       <Modal
         isOpen={showCategroy}
         toggle={handleCloseAddModal}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
       >
-        <ModalHeader className="bg-transparent" toggle={handleCloseAddModal}>
-          <span>
-            <h4>Add Category</h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={handleCloseAddModal}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleCloseAddModal}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">Add Industry Category</h4>
+          <p className="product-modal-subtitle">
+            Add industry category details for this page
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody className="product-modal-body">
           <>
             <Form>
               <Row>
-                <Col lg="6" className="mb-1">
+                <Col xs="12" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Category Name <span className="text-danger">*</span>
                   </Label>
@@ -591,30 +605,24 @@ const ProductCategory = () => {
             </Form>
           </>
         </ModalBody>
-        <Row className={"px-1"}>
-          <hr className="mt-1"></hr>
-          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
-            <Button
-              className="me-1 btn btn-danger"
-              color="secondary"
-              outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
-              onClick={handleCloseAddModal}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              type="button"
-              onClick={handleSubmit}
-              disabled={!hotelName.trim()}
-            >
-              Add Category
-            </Button>
-          </Col>
-        </Row>
+        <div className="product-modal-footer">
+          <Button
+            color="primary"
+            type="button"
+            onClick={handleSubmit}
+            disabled={!hotelName.trim()}
+            className="product-modal-action"
+          >
+            Add Category
+          </Button>
+          <button
+            type="button"
+            onClick={handleCloseAddModal}
+            className="btn product-modal-action product-modal-cancel"
+          >
+            Cancel
+          </button>
+        </div>
       </Modal>
 
       {/***** Delete Modal *****/}
@@ -652,16 +660,30 @@ const ProductCategory = () => {
       <Modal
         isOpen={showUpdate}
         toggle={handleCloseUpdateModal}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         // backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleCloseUpdateModal}>
-          <span className=" mb-1">
-            <h4>Update Industry Category</h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={handleCloseUpdateModal}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleCloseUpdateModal}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">Update Industry Category</h4>
+          <p className="product-modal-subtitle">
+            Update industry category details for this page
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody className="product-modal-body">
           <>
             <Form>
               <Row>
@@ -682,7 +704,7 @@ const ProductCategory = () => {
                     <span className="error_msg_lbl">Enter Category Id </span>
                   ) : null}
                 </Col> */}
-                <Col lg="6" className="mb-1">
+                <Col xs="12" className="mb-1">
                   <Label className="form-label" for="address">
                     Category Name <span className="text-danger">*</span>
                   </Label>
@@ -703,29 +725,24 @@ const ProductCategory = () => {
             </Form>
           </>
         </ModalBody>
-        <Row className={"px-1"}>
-          <hr className="mt-1"></hr>
-          <Col md="12 text-lg-end text-md-center mt-1 pb-2">
-            <Button
-              className="me-1 btn btn-danger"
-              color="secondary"
-              outline
-              // onClick={() => {
-              //     setShow(!show)
-              // }}
-              onClick={handleCloseUpdateModal}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={handleSubmit}
-              disabled={!address.trim()}
-            >
-              Submit
-            </Button>
-          </Col>
-        </Row>
+        <div className="product-modal-footer">
+          <Button
+            color="primary"
+            type="button"
+            onClick={handleSubmit}
+            disabled={!address.trim()}
+            className="product-modal-action"
+          >
+            Submit
+          </Button>
+          <button
+            type="button"
+            onClick={handleCloseUpdateModal}
+            className="btn product-modal-action product-modal-cancel"
+          >
+            Cancel
+          </button>
+        </div>
       </Modal>
       {show && (
         <NewHotelModal

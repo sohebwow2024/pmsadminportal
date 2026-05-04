@@ -6,7 +6,6 @@ import {
   Label,
   Modal,
   ModalBody,
-  ModalFooter,
   ModalHeader,
   Row,
 } from "reactstrap";
@@ -19,7 +18,8 @@ import {
   countryOptions,
   stateOptions,
 } from "./clientFormOptions";
-import Hotel from "../FrontDesk/Hotel.css";
+import "./Hotel.css";
+import "../PropertyMaster/Hotel/Products.css";
 
 const getInitialFormState = (selectedClient) => ({
   type: selectedClient?.type || "",
@@ -84,16 +84,31 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, selectedClient, onUpdateCl
       <Modal
         isOpen={showUpdate}
         toggle={handleUpdateHotel}
-        className="modal-dialog-centered modal-lg hotel-modal-header"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
       >
-        <ModalHeader className="bg-transparent" toggle={handleUpdateHotel}>
-          <span>
-            <h4>Update Client </h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={handleUpdateHotel}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleUpdateHotel}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">Update Client</h4>
+          <p className="product-modal-subtitle">
+            Update client details for this page
+          </p>
         </ModalHeader>
 
         <Form onSubmit={onSubmit}>
-          <ModalBody>
+          <ModalBody className="product-modal-body">
             {/* ---------- HOTEL NAME ---------- */}
             <Row className="mb-1">
               <Col md={12}>
@@ -323,15 +338,22 @@ const UpdateHotel = ({ showUpdate, handleUpdateHotel, selectedClient, onUpdateCl
           </ModalBody>
 
           {/* ---------- FOOTER ---------- */}
-          <ModalFooter className="justify-content-end">
-            <Button className="me-1 btn btn-danger" outline onClick={handleReset}>
-              Cancel
-            </Button>
-            <Button color="primary" type="submit">
+          <div className="product-modal-footer">
+            <Button
+              color="primary"
+              type="submit"
+              className="product-modal-action"
+            >
               Update
             </Button>
-            
-          </ModalFooter>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="btn product-modal-action product-modal-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </Form>
       </Modal>
 

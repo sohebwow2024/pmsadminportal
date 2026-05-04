@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import axios from "../../../API/axios";
 import { useSelector } from "react-redux";
 import "./PlanRate.css";
+import "../Hotel/Products.css";
 
 const initialPlanRateData = [
   {
@@ -44,17 +45,6 @@ const initialPlanRateData = [
   },
 ];
 
-const modalFooterStyles = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "0.75rem",
-  justifyContent: "flex-end",
-};
-
-const modalActionButtonStyles = {
-  flex: "1 1 160px",
-};
-
 const headerButtonStyles = {
   flex: "0 1 clamp(148px, 26vw, 210px)",
   padding: "clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.8vw, 1rem)",
@@ -62,66 +52,9 @@ const headerButtonStyles = {
   whiteSpace: "nowrap",
 };
 
-const addPlanRateModalHeaderStyles = {
-  display: "block",
-  position: "relative",
-  padding: "2.8rem 2.5rem 0.75rem",
-  borderBottom: 0,
-  textAlign: "center",
-};
-
-const addPlanRateModalBodyStyles = {
-  maxWidth: "560px",
-  width: "100%",
-  margin: "0 auto",
-  padding: "0.25rem 1rem 1rem",
-};
-
-const addPlanRateTitleStyles = {
-  margin: 0,
-  fontSize: "1.35rem",
-  fontWeight: 700,
-};
-
-const addPlanRateSubtitleStyles = {
-  marginTop: "0.85rem",
-  marginBottom: 0,
-  color: "#6b6f82",
-  fontSize: "0.95rem",
-};
-
 const addPlanRateFieldStyles = {
   minHeight: "38px",
   borderRadius: "0.357rem",
-};
-
-const addPlanRateFooterStyles = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "0.75rem",
-  padding: "0.5rem 1rem 2.6rem",
-};
-
-const addPlanRateFooterButtonStyles = {
-  minWidth: "78px",
-};
-
-const addPlanRateCloseButtonStyles = {
-  position: "absolute",
-  top: "-0.45rem",
-  right: "-0.45rem",
-  width: "28px",
-  height: "28px",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  border: 0,
-  borderRadius: "4px",
-  background: "#fff",
-  color: "#6e6b7b",
-  fontSize: "1.25rem",
-  lineHeight: 1,
-  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
 };
 
 const PlanRate = () => {
@@ -689,20 +622,34 @@ const PlanRate = () => {
       <Modal
         isOpen={showUpdate}
         toggle={handleShowModalUpdate}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         // backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={handleShowModalUpdate}>
-          <span>
-            <h4>Update Plan Rate</h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={handleShowModalUpdate}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleShowModalUpdate}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">Update Plan Rate</h4>
+          <p className="product-modal-subtitle">
+            Update plan rate details for this product
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody className="product-modal-body">
           <>
             <Form>
               <Row>
-                <Col xs="12" lg="6" className="mb-1">
+                <Col xs="12" className="mb-1">
                   <Label className="form-label" for="countries">
                     Tenure Type <span className="text-danger">*</span>
                   </Label>
@@ -719,8 +666,9 @@ const PlanRate = () => {
                     <span className="error_msg_lbl">Enter Tenure Type </span>
                   ) : null}
                 </Col>
-
-                <Col xs="12" lg="6" className="mb-1">
+              </Row>
+              <Row>
+                <Col xs="12" md="6" className="mb-1">
                   <Label className="form-label" for="hotel">
                     Dp Rate <span className="text-danger">*</span>
                   </Label>
@@ -731,14 +679,13 @@ const PlanRate = () => {
                     value={dpRate}
                     onChange={(e) => setDpRate(e.target.value)}
                     invalid={display && dpRate === ""}
+                    style={addPlanRateFieldStyles}
                   />
                   {display && !dpRate ? (
                     <span className="error_msg_lbl">Enter Dp Rate </span>
                   ) : null}
                 </Col>
-              </Row>
-              <Row>
-                <Col xs="12" lg="6" className="mb-1">
+                <Col xs="12" md="6" className="mb-1">
                   <Label className="form-label" for="countries">
                     Selling Price <span className="text-danger">*</span>
                   </Label>
@@ -750,12 +697,15 @@ const PlanRate = () => {
                     value={sellingPrice}
                     onChange={(e) => setSellingPrice(e.target.value)}
                     invalid={display && sellingPrice === ""}
+                    style={addPlanRateFieldStyles}
                   />
                   {display && !sellingPrice ? (
                     <span className="error_msg_lbl">Enter Selling Price </span>
                   ) : null}
                 </Col>
-                <Col xs="12" lg="6" className="mb-1">
+              </Row>
+              <Row>
+                <Col xs="12" className="mb-0">
                   <Label className="form-label" for="address">
                     isDiscountable{" "}
                   </Label>
@@ -774,59 +724,51 @@ const PlanRate = () => {
             </Form>
           </>
         </ModalBody>
-        <Row className="px-1 px-sm-2">
-          <hr></hr>
-          <Col xs="12" className="pb-2">
-            <div style={modalFooterStyles}>
-            <Button
-              className="btn btn-danger"
-              color="secondary"
-              outline
-              onClick={handleShowModalUpdate}
-              style={modalActionButtonStyles}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={handleUpdatePlanRate}
-              style={modalActionButtonStyles}
-            >
-              Submit
-            </Button>
-            </div>
-          </Col>
-        </Row>
+        <div className="product-modal-footer">
+          <Button
+            color="primary"
+            onClick={handleUpdatePlanRate}
+            className="product-modal-action"
+          >
+            Submit
+          </Button>
+          <button
+            type="button"
+            onClick={handleShowModalUpdate}
+            className="btn product-modal-action product-modal-cancel"
+          >
+            Cancel
+          </button>
+        </div>
       </Modal>
 
       {/********* Add Modal ********/}
       <Modal
         isOpen={show}
         toggle={handleShowModal}
-        className="modal-dialog-centered modal-lg"
-        contentClassName="border-0 rounded-3"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         backdrop={false}
       >
         <ModalHeader
-          className="bg-transparent"
+          className="product-modal-header bg-transparent"
           close={
             <button
               type="button"
               aria-label="Close"
               onClick={handleShowModal}
-              style={addPlanRateCloseButtonStyles}
+              className="product-modal-close"
             >
-              ×
+              x
             </button>
           }
-          style={addPlanRateModalHeaderStyles}
         >
-          <h4 style={addPlanRateTitleStyles}>Add Plan Rate</h4>
-          <p style={addPlanRateSubtitleStyles}>
+          <h4 className="product-modal-title">Add Plan Rate</h4>
+          <p className="product-modal-subtitle">
             Add plan rate details for this product
           </p>
         </ModalHeader>
-        <ModalBody style={addPlanRateModalBodyStyles}>
+        <ModalBody className="product-modal-body">
           <Form>
             <Row>
               <Col xs="12" className="mb-1">
@@ -904,22 +846,22 @@ const PlanRate = () => {
             </Row>
           </Form>
         </ModalBody>
-        <div style={addPlanRateFooterStyles}>
+        <div className="product-modal-footer">
           <Button
             color="primary"
             onClick={handleAddPlanRate}
             disabled={!isPlanRateFormComplete}
-            style={addPlanRateFooterButtonStyles}
+            className="product-modal-action"
           >
             Submit
           </Button>
-          <Button
-            color="secondary"
+          <button
+            type="button"
             onClick={handleShowModal}
-            style={addPlanRateFooterButtonStyles}
+            className="btn product-modal-action product-modal-cancel"
           >
             Cancel
-          </Button>
+          </button>
         </div>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}

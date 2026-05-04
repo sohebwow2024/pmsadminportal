@@ -7,7 +7,6 @@ import {
   Label,
   Modal,
   ModalBody,
-  ModalFooter,
   ModalHeader,
   Row,
 } from "reactstrap";
@@ -20,7 +19,8 @@ import {
   countryOptions,
   stateOptions,
 } from "./clientFormOptions";
-import Hotel from "../FrontDesk/Hotel.css";
+import "./Hotel.css";
+import "../PropertyMaster/Hotel/Products.css";
 
 const initialFormState = {
   type: "",
@@ -198,19 +198,33 @@ const AddHotel = ({ open, handleOpen, onAddClient }) => {
       <Modal
         isOpen={open}
         toggle={handleReset}
-        className="modal-dialog-centered modal-lg hotel-modal-header"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         backdrop={false}
       >
         {/* ---------- HEADER ---------- */}
 
-        <ModalHeader className="bg-transparent" toggle={handleReset}>
-          <span>
-            <h4>Add Client</h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={handleReset}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={handleReset}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">Add Client</h4>
+          <p className="product-modal-subtitle">
+            Add client details for this page
+          </p>
         </ModalHeader>
-        <hr className="m-0"></hr>
         <Form onSubmit={onSubmit}>
-          <ModalBody>
+          <ModalBody className="product-modal-body">
             {/* ---------- HOTEL NAME ---------- */}
             <Row className="mb-1">
               <Col md={12}>
@@ -443,14 +457,23 @@ const AddHotel = ({ open, handleOpen, onAddClient }) => {
           </ModalBody>
 
           {/* ---------- FOOTER ---------- */}
-          <ModalFooter className="justify-content-end">
-            <Button className="btn btn-danger" outline onClick={handleReset}>
-              Cancel
-            </Button>
-            <Button color="primary" type="submit" disabled={isAddDisabled}>
+          <div className="product-modal-footer">
+            <Button
+              color="primary"
+              type="submit"
+              disabled={isAddDisabled}
+              className="product-modal-action"
+            >
               Add Client
             </Button>
-          </ModalFooter>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="btn product-modal-action product-modal-cancel"
+            >
+              Cancel
+            </button>
+          </div>
         </Form>
       </Modal>
 

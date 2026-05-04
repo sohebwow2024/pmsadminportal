@@ -18,6 +18,7 @@ import Select from "react-select";
 import { selectThemeColors } from "@utils";
 import toast from "react-hot-toast";
 import "./Plans.css";
+import "../Hotel/Products.css";
 
 const defaultPlanTabs = ["PMS", "LLM", "CRM", "RESTAURANT"];
 
@@ -459,19 +460,35 @@ const Plans = () => {
       <Modal
         isOpen={isOpen}
         toggle={toggle}
-        className="modal-dialog-centered modal-lg"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         backdrop={false}
       >
-        <ModalHeader className="bg-transparent" toggle={toggle}>
-          <span>
-            <h4>{title}</h4>
-          </span>
+        <ModalHeader
+          className="product-modal-header bg-transparent"
+          toggle={toggle}
+          close={
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={toggle}
+              className="product-modal-close"
+            >
+              x
+            </button>
+          }
+        >
+          <h4 className="product-modal-title">{title}</h4>
+          <p className="product-modal-subtitle">
+            {title === "Add Plan"
+              ? "Add plan details for this product"
+              : "Update plan details for this product"}
+          </p>
         </ModalHeader>
-        <hr className="m-0" />
-        <ModalBody className="px-sm-2 pb-2">
+        <ModalBody className="product-modal-body">
           <Form>
             <Row>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-plan-name`}>
                   Plan Name <span className="text-danger">*</span>
                 </Label>
@@ -483,7 +500,7 @@ const Plans = () => {
                   onChange={(e) => onChange("name", e.target.value)}
                 />
               </Col>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-product-name`}>
                   Product Name <span className="text-danger">*</span>
                 </Label>
@@ -495,7 +512,7 @@ const Plans = () => {
                   onChange={(e) => onChange("product", e.target.value)}
                 />
               </Col>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-price`}>
                   Price <span className="text-danger">*</span>
                 </Label>
@@ -507,7 +524,7 @@ const Plans = () => {
                   onChange={(e) => onChange("price", e.target.value)}
                 />
               </Col>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-billing-cycle`}>
                   Billing Cycle <span className="text-danger">*</span>
                 </Label>
@@ -528,7 +545,7 @@ const Plans = () => {
                   }
                 />
               </Col>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-currency`}>
                   Currency <span className="text-danger">*</span>
                 </Label>
@@ -547,7 +564,7 @@ const Plans = () => {
                   onChange={(option) => onChange("currency", option?.value || "")}
                 />
               </Col>
-              <Col lg="6" className="mb-1">
+              <Col xs="12" md="6" className="mb-1">
                 <Label className="form-label" for={`${title}-duration`}>
                   Duration <span className="text-danger">*</span>
                 </Label>
@@ -559,7 +576,7 @@ const Plans = () => {
                   onChange={(e) => onChange("duration", e.target.value)}
                 />
               </Col>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-1">
                 <Label className="form-label" for={`${title}-modules`}>
                   Included Modules <span className="text-danger">*</span>
                 </Label>
@@ -582,7 +599,7 @@ const Plans = () => {
                   }
                 />
               </Col>
-              <Col lg="12" className="mb-1">
+              <Col xs="12" className="mb-0">
                 <Label className="form-label" for={`${title}-description`}>
                   Description
                 </Label>
@@ -597,26 +614,23 @@ const Plans = () => {
             </Row>
           </Form>
         </ModalBody>
-        <Row className="px-1">
-          <hr className="mt-2" />
-          <Col className="text-lg-end text-md-center mt-1 pb-2" xs={12}>
-            <Button
-              className="me-1 btn btn-danger"
-              color="secondary"
-              outline
-              onClick={toggle}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              onClick={onSubmit}
-              disabled={disableSubmit}
-            >
-              {submitLabel}
-            </Button>
-          </Col>
-        </Row>
+        <div className="product-modal-footer">
+          <Button
+            color="primary"
+            onClick={onSubmit}
+            disabled={disableSubmit}
+            className="product-modal-action"
+          >
+            {submitLabel}
+          </Button>
+          <button
+            type="button"
+            onClick={toggle}
+            className="btn product-modal-action product-modal-cancel"
+          >
+            Cancel
+          </button>
+        </div>
       </Modal>
       {isOpen ? <div className="modal-backdrop fade show"></div> : null}
     </>
@@ -640,6 +654,16 @@ const Plans = () => {
               setShowAdd(true);
             }}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              className="me-1"
+            >
+              <path d="M228,128a12,12,0,0,1-12,12H140v76a12,12,0,0,1-24,0V140H40a12,12,0,0,1,0-24h76V40a12,12,0,0,1,24,0v76h76A12,12,0,0,1,228,128Z"></path>
+            </svg>
             Add Plan
           </Button>
         </CardHeader>

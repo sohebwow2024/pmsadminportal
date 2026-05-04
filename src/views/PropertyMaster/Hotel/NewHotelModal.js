@@ -24,34 +24,6 @@ let currency = [
   { value: "EUR", label: "EUR" },
 ];
 
-const productModalHeaderStyles = {
-  display: "block",
-  position: "relative",
-  padding: "2.8rem 2.5rem 0.75rem",
-  borderBottom: 0,
-  textAlign: "center",
-};
-
-const productModalBodyStyles = {
-  maxWidth: "560px",
-  width: "100%",
-  margin: "0 auto",
-  padding: "0.25rem 1rem 1rem",
-};
-
-const productModalTitleStyles = {
-  margin: 0,
-  fontSize: "1.35rem",
-  fontWeight: 700,
-};
-
-const productModalSubtitleStyles = {
-  marginTop: "0.85rem",
-  marginBottom: 0,
-  color: "#6b6f82",
-  fontSize: "0.95rem",
-};
-
 const productModalFieldStyles = {
   minHeight: "38px",
   borderRadius: "0.357rem",
@@ -60,35 +32,6 @@ const productModalFieldStyles = {
 const productModalTextareaStyles = {
   minHeight: "108px",
   borderRadius: "0.357rem",
-};
-
-const productModalFooterStyles = {
-  display: "flex",
-  justifyContent: "center",
-  gap: "0.75rem",
-  padding: "0.5rem 1rem 2.6rem",
-};
-
-const productModalFooterButtonStyles = {
-  minWidth: "108px",
-};
-
-const productModalCloseButtonStyles = {
-  position: "absolute",
-  top: "-0.45rem",
-  right: "-0.45rem",
-  width: "28px",
-  height: "28px",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  border: 0,
-  borderRadius: "4px",
-  background: "#fff",
-  color: "#6e6b7b",
-  fontSize: "1.25rem",
-  lineHeight: 1,
-  boxShadow: "0 4px 12px rgba(34, 41, 47, 0.12)",
 };
 
 const NewHotelModal = ({
@@ -446,30 +389,29 @@ const NewHotelModal = ({
       <Modal
         isOpen={show}
         toggle={handleShowModal}
-        className="modal-dialog-centered modal-lg"
-        contentClassName="border-0 rounded-3"
+        className="modal-dialog-centered product-modal-dialog"
+        contentClassName="product-modal-content border-0"
         backdrop={false}
       >
         <ModalHeader
-          className="bg-transparent"
+          className="product-modal-header bg-transparent"
           close={
             <button
               type="button"
               aria-label="Close"
               onClick={handleShowModal}
-              style={productModalCloseButtonStyles}
+              className="product-modal-close"
             >
-              ×
+              x
             </button>
           }
-          style={productModalHeaderStyles}
         >
-          <h4 style={productModalTitleStyles}>Add Product</h4>
-          <p style={productModalSubtitleStyles}>
+          <h4 className="product-modal-title">Add Product</h4>
+          <p className="product-modal-subtitle">
             Add product details for this page
           </p>
         </ModalHeader>
-        <ModalBody style={productModalBodyStyles}>
+        <ModalBody className="product-modal-body">
           <Form>
             <Row>
               <Col xs="12" className="mb-1">
@@ -566,22 +508,22 @@ const NewHotelModal = ({
             </Row>
           </Form>
         </ModalBody>
-        <div style={productModalFooterStyles}>
+        <div className="product-modal-footer">
           <Button
             color="primary"
             onClick={handleSubmit}
             disabled={isAddDisabled}
-            style={productModalFooterButtonStyles}
+            className="product-modal-action"
           >
             Add Product
           </Button>
-          <Button
-            color="secondary"
+          <button
+            type="button"
             onClick={handleShowModal}
-            style={productModalFooterButtonStyles}
+            className="btn product-modal-action product-modal-cancel"
           >
             Cancel
-          </Button>
+          </button>
         </div>
       </Modal>
       {show ? <div className="modal-backdrop fade show"></div> : null}
